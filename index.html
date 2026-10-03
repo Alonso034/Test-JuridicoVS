@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Completo - Seguridad Privada (Ley 5/2014)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 26px;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .question-card {
+            background: #fdfdfd;
+            border: 1px solid #e1e4e8;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-weight: bold;
+            margin-bottom: 12px;
+            font-size: 16px;
+            color: #2c3e50;
+        }
+
+        .options label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+            .options label:hover {
+                background: #e9ecef;
+            }
+
+        .options input {
+            margin-right: 10px;
+        }
+
+        /* Clases de retroalimentación dinámicas */
+        .correct-answer {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+            color: #155724;
+            font-weight: bold;
+        }
+
+        .wrong-answer {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+            color: #721c24;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+            button:hover {
+                background: #0056b3;
+            }
+
+        #result {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Test de Autoevaluación: Seguridad Privada</h1>
+        <div class="subtitle">Basado en la Ley 5/2014, Reglamento, Orden INT/318/2011 y Temario Oficial[cite: 6]</div>
+
+        <div id="quiz-container">
+            <!-- Pregunta 1 -->
+            <div class="question-card" data-q="1">
+                <div class="question">1. Según la Ley 5/2014 de Seguridad Privada, ¿qué consideración tienen las actividades de seguridad privada respecto a la seguridad pública?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="wrong"> A) Sustitutivas e independientes</label>
+                    <label><input type="radio" name="q1" value="correct"> B) Complementarias y subordinadas[cite: 6]</label>
+                    <label><input type="radio" name="q1" value="wrong"> C) Superiores y prioritarias</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div class="question-card" data-q="2">
+                <div class="question">2. ¿Cuál es el arma reglamentaria principal de los vigilantes de seguridad en los servicios que deban prestarse con armas?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="wrong"> A) Escopeta de repetición calibre 12/70[cite: 6]</label>
+                    <label><input type="radio" name="q2" value="correct"> B) Revólver calibre treinta y ocho especial de cuatro pulgadas[cite: 6]</label>
+                    <label><input type="radio" name="q2" value="wrong"> C) Pistola semiautomática 9mm Parabellum</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="question-card" data-q="3">
+                <div class="question">3. ¿Qué defensa reglamentaria deben portar los vigilantes de seguridad uniformados durante su servicio?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="correct"> A) De color negro, goma semirrígida y 50 centímetros de longitud[cite: 6]</label>
+                    <label><input type="radio" name="q3" value="wrong"> B) De color marrón, madera y 60 centímetros</label>
+                    <label><input type="radio" name="q3" value="wrong"> C) Extensible metálica de 40 centímetros</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 4 -->
+            <div class="question-card" data-q="4">
+                <div class="question">4. Ante la comisión de un delito flagrante, el vigilante de seguridad debe:[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="wrong"> A) Interrogar al sospechoso durante 2 horas</label>
+                    <label><input type="radio" name="q4" value="correct"> B) Detener y poner inmediatamente a disposición de las Fuerzas y Cuerpos de Seguridad al delincuente[cite: 6]</label>
+                    <label><input type="radio" name="q4" value="wrong"> C) Juzgar los hechos y aplicar sanción económica</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 5 -->
+            <div class="question-card" data-q="5">
+                <div class="question">5. ¿Qué organismo expide con carácter general la Tarjeta de Identidad Profesional (TIP) del personal de seguridad privada?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="wrong"> A) El Ministerio de Justicia</label>
+                    <label><input type="radio" name="q5" value="correct"> B) La Dirección General de la Policía[cite: 6]</label>
+                    <label><input type="radio" name="q5" value="wrong"> C) El Ministerio de Defensa</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 6 -->
+            <div class="question-card" data-q="6">
+                <div class="question">6. ¿Qué tipos de grilletes pueden utilizar los vigilantes de seguridad si se los proporciona la empresa?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="correct"> A) Los denominados de manilla (cadenas, bisagra y rígidos)[cite: 6]</label>
+                    <label><input type="radio" name="q6" value="wrong"> B) Únicamente grilletes de cuerda de alta resistencia</label>
+                    <label><input type="radio" name="q6" value="wrong"> C) Ningún tipo de grillete está permitido</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 7 -->
+            <div class="question-card" data-q="7">
+                <div class="question">7. Según el artículo 78 del Reglamento de Seguridad Privada, ante el consumo ilegal de drogas en establecimientos, el vigilante debe:[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="wrong"> A) Permitirlo si es una cantidad muy pequeña</label>
+                    <label><input type="radio" name="q7" value="correct"> B) Impedir el consumo y comunicarlo con la mayor rapidez a las Fuerzas y Cuerpos de Seguridad[cite: 6]</label>
+                    <label><input type="radio" name="q7" value="wrong"> C) Multar directamente al infractor</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 8 -->
+            <div class="question-card" data-q="8">
+                <div class="question">8. ¿Cuál es el plazo de validez física de la Tarjeta de Identidad Profesional (TIP) como documento de acreditación?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="correct"> A) Caduca a los 10 años, o antes si hay causas tasadas (deterioro, pérdida)[cite: 6]</label>
+                    <label><input type="radio" name="q8" value="wrong"> B) Es vitalicia y no caduca nunca</label>
+                    <label><input type="radio" name="q8" value="wrong"> C) Se renueva obligatoriamente cada año</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 9 -->
+            <div class="question-card" data-q="9">
+                <div class="question">9. ¿Pueden los vigilantes de seguridad retener la documentación personal de un ciudadano en los controles de identidad?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="wrong"> A) Sí, durante un máximo de 24 horas</label>
+                    <label><input type="radio" name="q9" value="correct"> B) No, en ningún caso pueden retener la documentación personal[cite: 6]</label>
+                    <label><input type="radio" name="q9" value="wrong"> C) Sí, si el director de seguridad lo autoriza por escrito</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 10 -->
+            <div class="question-card" data-q="10">
+                <div class="question">10. ¿Cuál es la consecuencia de la omisión o abandono injustificado del servicio dentro de la jornada laboral?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="correct"> A) Constituye una infracción muy grave tipificada en la Ley de Seguridad Privada[cite: 6]</label>
+                    <label><input type="radio" name="q10" value="wrong"> B) Es una simple falta leve sin importancia</label>
+                    <label><input type="radio" name="q10" value="wrong"> C) No está regulado en la ley</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 11 -->
+            <div class="question-card" data-q="11">
+                <div class="question">11. ¿Qué arma larga utiliza el vigilante de seguridad cuando está dispuesto su uso en los servicios correspondientes?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="correct"> A) Escopeta de repetición del calibre 12/70[cite: 6]</label>
+                    <label><input type="radio" name="q11" value="wrong"> B) Fusil de asalto militar de 5.56 mm</label>
+                    <label><input type="radio" name="q11" value="wrong"> C) Carabina semiautomática del calibre 22</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 12 -->
+            <div class="question-card" data-q="12">
+                <div class="question">12. ¿Qué mínimo de disparos deben realizar los vigilantes de seguridad armados en cada ejercicio obligatorio de tiro semestral?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="wrong"> A) 10 disparos</label>
+                    <label><input type="radio" name="q12" value="correct"> B) Un mínimo de 25 disparos[cite: 6]</label>
+                    <label><input type="radio" name="q12" value="wrong"> C) 50 disparos</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 13 -->
+            <div class="question-card" data-q="13">
+                <div class="question">13. ¿Dónde debe llevarse permanentemente el distintivo del vigilante de seguridad en el uniforme?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q13" value="correct"> A) En la parte superior izquierda correspondiente al pecho[cite: 6]</label>
+                    <label><input type="radio" name="q13" value="wrong"> B) En la gorra o prenda de cabeza</label>
+                    <label><input type="radio" name="q13" value="wrong"> C) En la manga derecha obligatoriamente</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 14 -->
+            <div class="question-card" data-q="14">
+                <div class="question">14. ¿Qué color y texto lleva el distintivo oficial de los vigilantes de seguridad?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q14" value="correct"> A) Fondo blanco, letras rojas con la expresión "VIGILANTE DE SEGURIDAD" y número de habilitación[cite: 6]</label>
+                    <label><input type="radio" name="q14" value="wrong"> B) Fondo negro y letras doradas</label>
+                    <label><input type="radio" name="q14" value="wrong"> C) Fondo azul marino con letras blancas</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 15 -->
+            <div class="question-card" data-q="15">
+                <div class="question">15. ¿Cuál es el objeto principal de la Ley 5/2014 de Seguridad Privada?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q15" value="wrong"> A) Sustituciones totales de las Fuerzas y Cuerpos de Seguridad del Estado</label>
+                    <label><input type="radio" name="q15" value="correct"> B) Regular la prestación de actividades y servicios de seguridad privada complementarios y subordinados[cite: 6]</label>
+                    <label><input type="radio" name="q15" value="wrong"> C) Gestionar la seguridad militar del país</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 16 -->
+            <div class="question-card" data-q="16">
+                <div class="question">16. ¿Qué requisitos generales se exigen para obtener la habilitación como personal de seguridad privada?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q16" value="correct"> A) Nacionalidad UE, mayor de edad, aptitud física/psicológica, carecer de antecedentes penales por delitos dolosos[cite: 6]</label>
+                    <label><input type="radio" name="q16" value="wrong"> B) Ser menor de edad y tener permiso de conducir</label>
+                    <label><input type="radio" name="q16" value="wrong"> C) No tener ninguna formación previa obligatoria</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 17 -->
+            <div class="question-card" data-q="17">
+                <div class="question">17. ¿Pueden los detectives privados investigar delitos perseguibles de oficio?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q17" value="correct"> A) No, tienen prohibido investigar delitos perseguibles de oficio y deben denunciarlos inmediatamente[cite: 6]</label>
+                    <label><input type="radio" name="q17" value="wrong"> B) Sí, tienen total libertad para investigar cualquier clase de delito</label>
+                    <label><input type="radio" name="q17" value="wrong"> C) Sí, si el cliente paga una tasa especial</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 18 -->
+            <div class="question-card" data-q="18">
+                <div class="question">18. ¿Dónde se coloca el escudo-emblema de la empresa de seguridad en la uniformidad?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q18" value="correct"> A) En la parte alta de la manga izquierda de las prendas superiores[cite: 6]</label>
+                    <label><input type="radio" name="q18" value="wrong"> B) Se lleva colgado al cuello con una cadena</label>
+                    <label><input type="radio" name="q18" value="wrong"> C) Se sitúa en la espalda de la camisa</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 19 -->
+            <div class="question-card" data-q="19">
+                <div class="question">19. ¿Cuáles son los principios básicos de actuación del personal de seguridad privada?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q19" value="correct"> A) Legalidad, integridad, dignidad, protección, corrección, congruencia y proporcionalidad[cite: 6]</label>
+                    <label><input type="radio" name="q19" value="wrong"> B) Rapidez, improvisación y fuerza ilimitada</label>
+                    <label><input type="radio" name="q19" value="wrong"> C) Anonimato y neutralidad absoluta</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 20 -->
+            <div class="question-card" data-q="20">
+                <div class="question">20. ¿Qué se entiende por "consumo compartido" de drogas para que resulte atípico penalmente?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q20" value="correct"> A) Consumidores habituales agrupados, en lugar cerrado, grupo reducido y con cantidades reducidas[cite: 6]</label>
+                    <label><input type="radio" name="q20" value="wrong"> B) Vender drogas en la vía pública a cualquier persona</label>
+                    <label><input type="radio" name="q20" value="wrong"> C) Repartir estupefacientes en colegios e instituciones</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 21 -->
+            <div class="question-card" data-q="21">
+                <div class="question">21. ¿Qué consideración legal tiene el personal de seguridad privada cuando actúa en cooperación y bajo mando policial?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q21" value="correct"> A) Protección jurídica de agente de la autoridad frente a agresiones y desobediencias[cite: 6]</label>
+                    <label><input type="radio" name="q21" value="wrong"> B) Tienen la consideración de mandos militares</label>
+                    <label><input type="radio" name="q21" value="wrong"> C) No tienen ninguna protección especial</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 22 -->
+            <div class="question-card" data-q="22">
+                <div class="question">22. ¿Se permite a los vigilantes de seguridad realizar interrogatorios a los detenidos?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q22" value="correct"> A) No, está expresamente prohibido proceder al interrogatorio de los detenidos[cite: 6]</label>
+                    <label><input type="radio" name="q22" value="wrong"> B) Sí, pueden interrogarles durante las primeras 12 horas</label>
+                    <label><input type="radio" name="q22" value="wrong"> C) Sí, si la empresa privada lo exige por contrato</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 23 -->
+            <div class="question-card" data-q="23">
+                <div class="question">23. ¿Qué infracción supone el trato incorrecto o desconsiderado con los ciudadanos por parte del personal de seguridad?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q23" value="correct"> A) Infracción leve[cite: 6]</label>
+                    <label><input type="radio" name="q23" value="wrong"> B) Infracción muy grave</label>
+                    <label><input type="radio" name="q23" value="wrong"> C) Delito penal directo</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 24 -->
+            <div class="question-card" data-q="24">
+                <div class="question">24. ¿Quién expide las habilitaciones para los guardas rurales y sus especialidades?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q24" value="correct"> A) La Dirección General de la Guardia Civil[cite: 6]</label>
+                    <label><input type="radio" name="q24" value="wrong"> B) La Dirección General de la Policía</label>
+                    <label><input type="radio" name="q24" value="wrong"> C) El Ministerio de Trabajo</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 25 -->
+            <div class="question-card" data-q="25">
+                <div class="question">25. ¿Qué son los servicios de videovigilancia según la Ley de Seguridad Privada?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q25" value="correct"> A) Ejercicio de la vigilancia a través de sistemas de cámaras capaces de captar imágenes y sonidos[cite: 6]</label>
+                    <label><input type="radio" name="q25" value="wrong"> B) Únicamente la visualización de fotografías estáticas sin grabación</label>
+                    <label><input type="radio" name="q25" value="wrong"> C) Actividades reservadas exclusivamente a detectives privados</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 26 -->
+            <div class="question-card" data-q="26">
+                <div class="question">26. ¿Cuál es la duración máxima que puede tener una medida cautelar de suspensión de habilitación?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q26" value="correct"> A) No podrá tener una duración superior a un año[cite: 6]</label>
+                    <label><input type="radio" name="q26" value="wrong"> B) Máximo 5 años</label>
+                    <label><input type="radio" name="q26" value="wrong"> C) Indefinida hasta el juicio final</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 27 -->
+            <div class="question-card" data-q="27">
+                <div class="question">27. ¿Qué se requiere para que los contratos de servicios de seguridad privada sean válidos y legales?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q27" value="correct"> A) Formalizarse por escrito y comunicarse previamente al Ministerio del Interior u órgano autonómico[cite: 6]</label>
+                    <label><input type="radio" name="q27" value="wrong"> B) Únicamente un acuerdo verbal entre las partes</label>
+                    <label><input type="radio" name="q27" value="wrong"> C) No es necesario ningún trámite formal</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 28 -->
+            <div class="question-card" data-q="28">
+                <div class="question">28. ¿Qué sanción máxima económica se contempla por infracciones muy graves en materia de seguridad privada para el personal?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q28" value="correct"> A) Multa de 6.001 a 30.000 euros y extinción de la habilitación[cite: 6]</label>
+                    <label><input type="radio" name="q28" value="wrong"> B) Hasta 500 euros</label>
+                    <label><input type="radio" name="q28" value="wrong"> C) No conllevan multas económicas</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 29 -->
+            <div class="question-card" data-q="29">
+                <div class="question">29. ¿Qué establece la Instrucción sobre el protocolo de denuncias "in situ"?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q29" value="correct"> A) Un procedimiento con apoyo telemático para presentar denuncias por delitos leves en establecimientos sin ir a comisaría[cite: 6]</label>
+                    <label><input type="radio" name="q29" value="wrong"> B) La prohibición de denunciar delitos menores</label>
+                    <label><input type="radio" name="q29" value="wrong"> C) La obligación de cerrar los comercios por la noche</label>
+                </div>
+            </div>
+
+            <!-- Pregunta 30 -->
+            <div class="question-card" data-q="30">
+                <div class="question">30. ¿Pueden los vigilantes de seguridad realizar cacheos superficiales a los asistentes en espectáculos públicos?[cite: 6]</div>
+                <div class="options">
+                    <label><input type="radio" name="q30" value="correct"> A) Sí, para evitar la entrada de objetos peligrosos o prohibidos al recinto[cite: 6]</label>
+                    <label><input type="radio" name="q30" value="wrong"> B) No, está totalmente prohibido bajo cualquier circunstancia</label>
+                    <label><input type="radio" name="q30" value="wrong"> C) Solo si son agentes de policía nacional</label>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="calcularResultado()">Comprobar Resultados y Ver Nota</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calcularResultado() {
+            let aciertos = 0;
+            let fallos = 0;
+            let noContestadas = 0;
+            let total = 30;
+
+            for (let i = 1; i <= total; i++) {
+                const card = document.querySelector(`[data-q="${i}"]`);
+                const labels = card.querySelectorAll('label');
+
+                // Limpiar estilos anteriores
+                labels.forEach(l => {
+                    l.classList.remove('correct-answer', 'wrong-answer');
+                });
+
+                const selected = card.querySelector(`input[name="q${i}"]:checked`);
+                const correctInput = card.querySelector(`input[name="q${i}"][value="correct"]`);
+
+                if (selected) {
+                    if (selected.value === "correct") {
+                        aciertos++;
+                        selected.parentElement.classList.add('correct-answer');
+                    } else {
+                        fallos++;
+                        selected.parentElement.classList.add('wrong-answer');
+                        if (correctInput) {
+                            correctInput.parentElement.classList.add('correct-answer');
+                        }
+                    }
+                } else {
+                    noContestadas++;
+                    // Si no contestó, marcar la correcta para que se vea
+                    if (correctInput) {
+                        correctInput.parentElement.classList.add('correct-answer');
+                    }
+                }
+            }
+
+            // Cálculo de puntos: +1 por acierto, -0.5 por fallo
+            let puntosTotales = (aciertos * 1) - (fallos * 0.5);
+            // Nota final sobre 10
+            let notaFinal = (puntosTotales / total) * 10;
+            if (notaFinal < 0) notaFinal = 0; // Evitar notas negativas
+
+            const resultadoDiv = document.getElementById('result');
+
+            if (notaFinal >= 5) {
+                resultadoDiv.style.backgroundColor = "#d4edda";
+                resultadoDiv.style.color = "#155724";
+                resultadoDiv.innerHTML = `¡Aprobado! Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
+            } else {
+                resultadoDiv.style.backgroundColor = "#f8d7da";
+                resultadoDiv.style.color = "#721c24";
+                resultadoDiv.innerHTML = `Suspenso. Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
+            }
+        }
+    </script>
+
+</body>
+</html>
