@@ -18,6 +18,9 @@
         .test-section { display: none; }
         .test-section.active { display: block; }
 
+        .rules-box { background: #e9ecef; border-left: 4px solid #007bff; padding: 12px 15px; margin-bottom: 20px; border-radius: 4px; font-size: 14px; color: #495057; }
+        .rules-box ul { margin: 5px 0 0 20px; padding: 0; }
+
         .question-card { background: #fdfdfd; border: 1px solid #e1e4e8; padding: 20px; border-radius: 6px; margin-bottom: 20px; }
         .question { font-weight: bold; margin-bottom: 12px; font-size: 16px; color: #2c3e50; }
         .options label { display: block; margin: 8px 0; cursor: pointer; padding: 10px; background: #f8f9fa; border-radius: 4px; border: 1px solid #ddd; font-size: 14px; transition: background 0.2s; }
@@ -51,6 +54,14 @@
     <!-- SECCIÓN 1: TEST JURÍDICO -->
     <div id="seccion-juridico" class="test-section active">
         <h2>Módulo: Área Jurídica</h2>
+        <div class="rules-box">
+            <strong>Sistema de Puntuación:</strong>
+            <ul>
+                <li>Acentadas / acertadas = 1 punto</li>
+                <li>Falladas = resta 0,5 puntos</li>
+                <li>Total puntos (tras resta falladas) / total preguntas * 10 = nota</li>
+            </ul>
+        </div>
         <div id="quiz-container-juridico">
             
             <div class="question-card" data-q="j1">
@@ -332,13 +343,21 @@
     <!-- SECCIÓN 2: TEST PSICOLOGÍA (Temas 3 y 4) -->
     <div id="seccion-psicologia" class="test-section">
         <h2>Módulo: Psicología y Ámbito Socioprofesional (Temas 3 y 4)</h2>
+        <div class="rules-box">
+            <strong>Sistema de Puntuación:</strong>
+            <ul>
+                <li>Acentadas / acertadas = 1 punto</li>
+                <li>Falladas = resta 0,5 puntos</li>
+                <li>Total puntos (tras resta falladas) / total preguntas * 10 = nota</li>
+            </ul>
+        </div>
         <div id="quiz-container-psicologia">
             
             <div class="question-card" data-q="p1">
                 <div class="question">1. ¿Qué define el Código de Ética según el material de estudio?</div>
                 <div class="options">
                     <label><input type="radio" name="p1" value="wrong"> A) Una rama de la psicología clínica orientada a trastornos mentales</label>
-                    <label><input type="radio" name="p1" value="correct"> B) Una ciencia normativa que estudia los deberes y los derechos de cada profesión[cite: 8]</label>
+                    <label><input type="radio" name="p1" value="correct"> B) Una ciencia normativa que estudia los deberes y los derechos de cada profesión</label>
                     <label><input type="radio" name="p1" value="wrong"> C) Un conjunto de leyes estrictamente penales y penitenciarias</label>
                 </div>
             </div>
@@ -347,43 +366,43 @@
                 <div class="question">2. ¿Cuál es una de las diferencias clave entre moral y ética según el Tema 3?</div>
                 <div class="options">
                     <label><input type="radio" name="p2" value="wrong"> A) La moral surge en la interioridad y la ética tiene base social</label>
-                    <label><input type="radio" name="p2" value="correct"> B) La moral tiene base social y la ética surge en la interioridad de la persona[cite: 7]</label>
+                    <label><input type="radio" name="p2" value="correct"> B) La moral tiene base social y la ética surge en la interioridad de la persona</label>
                     <label><input type="radio" name="p2" value="wrong"> C) No existe ninguna diferencia conceptual entre ambos términos</label>
                 </div>
             </div>
 
             <div class="question-card" data-q="p3">
-                <div class="question">3. ¿Qué capacidad social se define como expresar lo que se piensa y se siente de forma adecuada y sin ansiedad?[cite: 41]</div>
+                <div class="question">3. ¿Qué capacidad social se define como expresar lo que se piensa y se siente de forma adecuada y sin ansiedad?</div>
                 <div class="options">
                     <label><input type="radio" name="p3" value="wrong"> A) Agresividad</label>
                     <label><input type="radio" name="p3" value="wrong"> B) Pasividad</label>
-                    <label><input type="radio" name="p3" value="correct"> C) Asertividad[cite: 41]</label>
+                    <label><input type="radio" name="p3" value="correct"> C) Asertividad</label>
                 </div>
             </div>
 
             <div class="question-card" data-q="p4">
-                <div class="question">4. ¿Cómo se denomina la técnica asertiva en la que se repite el propio punto de vista con tranquilidad y sin dejarse ganar por aspectos irrelevantes?[cite: 42]</div>
+                <div class="question">4. ¿Cómo se denomina la técnica asertiva en la que se repite el propio punto de vista con tranquilidad y sin dejarse ganar por aspectos irrelevantes?</div>
                 <div class="options">
-                    <label><input type="radio" name="p4" value="correct"> A) Técnica del disco roto[cite: 42]</label>
+                    <label><input type="radio" name="p4" value="correct"> A) Técnica del disco roto</label>
                     <label><input type="radio" name="p4" value="wrong"> B) Técnica del banco de niebla</label>
                     <label><input type="radio" name="p4" value="wrong"> C) Técnica de ignorar</label>
                 </div>
             </div>
 
-            <div class="question-card" data-q="5">
-                <div class="question">5. En la pirámide de necesidades de Maslow, ¿qué necesidades se encuentran en la base (nivel inferior)?[cite: 33, 34]</div>
+            <div class="question-card" data-q="p5">
+                <div class="question">5. En la pirámide de necesidades de Maslow, ¿qué necesidades se encuentran en la base (nivel inferior)?</div>
                 <div class="options">
-                    <label><input type="radio" name="p5" value="correct"> A) Necesidades fisiológicas (respiración, alimentación, descanso)[cite: 34]</label>
+                    <label><input type="radio" name="p5" value="correct"> A) Necesidades fisiológicas (respiración, alimentación, descanso)</label>
                     <label><input type="radio" name="p5" value="wrong"> B) Necesidades de autorrealización</label>
                     <label><input type="radio" name="p5" value="wrong"> C) Necesidades de reconocimiento y éxito</label>
                 </div>
             </div>
 
             <div class="question-card" data-q="p6">
-                <div class="question">6. ¿Qué tipo de estructura en la empresa está formada por personas que actúan espontáneamente buscando la satisfacción personal?[cite: 32]</div>
+                <div class="question">6. ¿Qué tipo de estructura en la empresa está formada por personas que actúan espontáneamente buscando la satisfacción personal?</div>
                 <div class="options">
                     <label><input type="radio" name="p6" value="wrong"> A) Estructura formal</label>
-                    <label><input type="radio" name="p6" value="correct"> B) Estructura informal[cite: 32]</label>
+                    <label><input type="radio" name="p6" value="correct"> B) Estructura informal</label>
                     <label><input type="radio" name="p6" value="wrong"> C) Estructura jerárquica rígida</label>
                 </div>
             </div>
@@ -391,79 +410,79 @@
             <div class="question-card" data-q="p7">
                 <div class="question">7. ¿Qué es el autocontrol emocional?</div>
                 <div class="options">
-                    <label><input type="radio" name="p7" value="correct"> A) La capacidad que nos permite controlar nuestras emociones y no que estas nos controlen a nosotros[cite: 52]</label>
+                    <label><input type="radio" name="p7" value="correct"> A) La capacidad que nos permite controlar nuestras emociones y no que estas nos controlen a nosotros</label>
                     <label><input type="radio" name="p7" value="wrong"> B) La represión total de cualquier sentimiento o pensamiento</label>
                     <label><input type="radio" name="p7" value="wrong"> C) La habilidad de influir en las decisiones de los superiores</label>
                 </div>
             </div>
 
             <div class="question-card" data-q="p8">
-                <div class="question">8. Según el esquema cognitivo del autocontrol, ¿cuál es la reacción física directa de un pensamiento?[cite: 55]</div>
+                <div class="question">8. Según el esquema cognitivo del autocontrol, ¿cuál es la reacción física directa de un pensamiento?</div>
                 <div class="options">
-                    <label><input type="radio" name="p8" value="correct"> A) El sentimiento[cite: 55]</label>
+                    <label><input type="radio" name="p8" value="correct"> A) El sentimiento</label>
                     <label><input type="radio" name="p8" value="wrong"> B) La conducta motora externa</label>
                     <label><input type="radio" name="p8" value="wrong"> C) La memoria a largo plazo</label>
                 </div>
             </div>
 
             <div class="question-card" data-q="p9">
-                <div class="question">9. ¿Cuál es la diferencia principal entre el miedo y la fobia?[cite: 62]</div>
+                <div class="question">9. ¿Cuál es la diferencia principal entre el miedo y la fobia?</div>
                 <div class="options">
                     <label><input type="radio" name="p9" value="wrong"> A) El miedo es permanente en el tiempo y la fobia es transitoria</label>
-                    <label><input type="radio" name="p9" value="correct"> B) El miedo es una respuesta normal y transitoria; la fobia es una reacción desproporcionada, irracional y persistente[cite: 62]</label>
+                    <label><input type="radio" name="p9" value="correct"> B) El miedo es una respuesta normal y transitoria; la fobia es una reacción desproporcionada, irracional y persistente</label>
                     <label><input type="radio" name="p9" value="wrong"> C) No hay diferencias clínicas entre ambos conceptos</label>
                 </div>
             </div>
 
             <div class="question-card" data-q="p10">
-                <div class="question">10. ¿Cómo se denomina el miedo a las alturas o vértigo patológico según el temario de fobias?[cite: 63]</div>
+                <div class="question">10. ¿Cómo se denomina el miedo a las alturas o vértigo patológico según el temario de fobias?</div>
                 <div class="options">
-                    <label><input type="radio" name="p10" value="correct"> A) Acrofobia[cite: 63]</label>
+                    <label><input type="radio" name="p10" value="correct"> A) Acrofobia</label>
                     <label><input type="radio" name="p10" value="wrong"> B) Agorafobia</label>
                     <label><input type="radio" name="p10" value="wrong"> C) Claustrofobia</label>
                 </div>
             </div>
 
             <div class="question-card" data-q="p11">
-                <div class="question">11. ¿Cuáles son las fases del proceso adaptativo del estrés (síndrome general de adaptación)?[cite: 70]</div>
+                <div class="question">11. ¿Cuáles son las fases del proceso adaptativo del estrés (síndrome general de adaptación)?</div>
                 <div class="options">
-                    <label><input type="radio" name="p11" value="correct"> A) Fase de alarma, fase de resistencia y fase de agotamiento[cite: 70]</label>
+                    <label><input type="radio" name="p11" value="correct"> A) Fase de alarma, fase de resistencia y fase de agotamiento</label>
                     <label><input type="radio" name="p11" value="wrong"> B) Fase inicial, fase intermedia y fase crítica</label>
                     <label><input type="radio" name="p11" value="wrong"> C) Fase de pánico, fase de asfixia y fase de recuperación</label>
                 </div>
             </div>
 
             <div class="question-card" data-q="p12">
-                <div class="question">12. ¿Qué tipo de respiración es la más adecuada para proporcionar una mayor calma al sistema nervioso y aprovechar la capacidad pulmonar?[cite: 79, 80]</div>
+                <div class="question">12. ¿Qué tipo de respiración es la más adecuada para proporcionar una mayor calma al sistema nervioso y aprovechar la capacidad pulmonar?</div>
                 <div class="options">
                     <label><input type="radio" name="p12" value="wrong"> A) Respiración clavicular (alta)</label>
-                    <label><input type="radio" name="p12" value="correct"> B) Respiración diafragmática o abdominal[cite: 79, 80]</label>
+                    <label><input type="radio" name="p12" value="correct"> B) Respiración diafragmática o abdominal</label>
                     <label><input type="radio" name="p12" value="wrong"> C) Respiración torácica o intercostal media</label>
                 </div>
             </div>
 
             <div class="question-card" data-q="p13">
-                <div class="question">13. ¿Qué técnica fisiológica de relajación consiste en adiestrar a la persona en ejercicios de contracción y relajación muscular voluntaria?[cite: 78]</div>
+                <div class="question">13. ¿Qué técnica fisiológica de relajación consiste en adiestrar a la persona en ejercicios de contracción y relajación muscular voluntaria?</div>
                 <div class="options">
-                    <label><input type="radio" name="p13" value="correct"> A) Relajación progresiva de Jacobson[cite: 78]</label>
+                    <label><input type="radio" name="p13" value="correct"> A) Relajación progresiva de Jacobson</label>
                     <label><input type="radio" name="p13" value="wrong"> B) Desensibilización sistemática</label>
                     <label><input type="radio" name="p13" value="wrong"> C) Inoculación de estrés</label>
                 </div>
             </div>
 
             <div class="question-card" data-q="p14">
-                <div class="question">14. ¿Qué es el pánico dentro de la escala de miedos?[cite: 65]</div>
+                <div class="question">14. ¿Qué es el pánico dentro de la escala de miedos?</div>
                 <div class="options">
-                    <label><input type="radio" name="p14" value="correct"> A) El nivel de gradación más elevado del miedo, totalmente incapacitante y que provoca huida[cite: 65]</label>
+                    <label><input type="radio" name="p14" value="correct"> A) El nivel de gradación más elevado del miedo, totalmente incapacitante y que provoca huida</label>
                     <label><input type="radio" name="p14" value="wrong"> B) Una simple alerta preventiva ante situaciones de baja intensidad</label>
                     <label><input type="radio" name="p14" value="wrong"> C) Un estado de relajación mental inducido</label>
                 </div>
             </div>
 
             <div class="question-card" data-q="p15">
-                <div class="question">15. ¿Cuál es una recomendación fundamental para el Vigilante de Seguridad frente a situaciones de pánico colectivo?[cite: 68]</div>
+                <div class="question">15. ¿Cuál es una recomendación fundamental para el Vigilante de Seguridad frente a situaciones de pánico colectivo?</div>
                 <div class="options">
-                    <label><input type="radio" name="p15" value="correct"> A) Mantener la calma, ayudar a escapar del peligro y colaborar en los servicios de rescate[cite: 68]</label>
+                    <label><input type="radio" name="p15" value="correct"> A) Mantener la calma, ayudar a escapar del peligro y colaborar en los servicios de rescate</label>
                     <label><input type="radio" name="p15" value="wrong"> B) Abandonar el puesto inmediatamente sin avisar a nadie</label>
                     <label><input type="radio" name="p15" value="wrong"> C) Gritar junto con la masa para integrarse</label>
                 </div>
@@ -548,9 +567,9 @@
 
     function reiniciarTest(tipo) {
         let prefix = (tipo === 'juridico') ? 'j' : 'p';
-        let total = (tipo === 'juridico') ? 30 : 15;
+        let total = (tipo === 'juridico') ? '30' : '15';
 
-        for (let i = 1; i <= total; i++) {
+        for (let i = 1; i <= parseInt(total); i++) {
             const inputs = document.querySelectorAll(`input[name="${prefix}${i}"]`);
             inputs.forEach(input => input.checked = false);
         }
