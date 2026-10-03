@@ -21,7 +21,7 @@
         .rules-box { background: #e9ecef; border-left: 4px solid #007bff; padding: 12px 15px; margin-bottom: 20px; border-radius: 4px; font-size: 14px; color: #495057; }
         .rules-box ul { margin: 5px 0 0 20px; padding: 0; }
 
-        .question-card { background: #fdfdfd; border: 1px solid #e1e4e8; padding: 20px; border-radius: 6px; margin-bottom: 20px; }
+        .question-card { background: #fdfdfd; border: 1px solid #e1e4e8; padding: 20px; border-radius: 6px; margin-bottom: 20px; position: relative; }
         .question { font-weight: bold; margin-bottom: 12px; font-size: 16px; color: #2c3e50; }
         .options label { display: block; margin: 8px 0; cursor: pointer; padding: 10px; background: #f8f9fa; border-radius: 4px; border: 1px solid #ddd; font-size: 14px; transition: background 0.2s; }
         .options label:hover { background: #e9ecef; }
@@ -29,6 +29,13 @@
         
         .correct-answer { background-color: #d4edda !important; border-color: #c3e6cb !important; color: #155724; font-weight: bold; }
         .wrong-answer { background-color: #f8d7da !important; border-color: #f5c6cb !important; color: #721c24; }
+
+        /* Indicador de estado y explicación */
+        .status-badge { display: none; font-weight: bold; font-size: 13px; margin-top: 10px; padding: 4px 8px; border-radius: 4px; width: fit-content; }
+        .status-badge.correct { background-color: #d4edda; color: #155724; display: inline-block; }
+        .status-badge.wrong { background-color: #f8d7da; color: #721c24; display: inline-block; }
+
+        .explanation { display: none; margin-top: 10px; padding: 10px; background-color: #fff3cd; border: 1px solid #ffeeba; border-radius: 4px; font-size: 13px; color: #856404; }
 
         button { background: #007bff; color: white; border: none; padding: 14px 20px; font-size: 16px; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 20px; font-weight: bold; }
         button:hover { background: #0056b3; }
@@ -71,6 +78,8 @@
                     <label><input type="radio" name="j1" value="correct"> B) Complementarias y subordinadas</label>
                     <label><input type="radio" name="j1" value="wrong"> C) Superiores y prioritarias</label>
                 </div>
+                <div class="status-badge" id="badge-j1"></div>
+                <div class="explanation" id="exp-j1">Explicación: La seguridad privada ejerce un papel complementario y subordinado respecto a la seguridad pública, colaborando en la protección de personas y bienes.</div>
             </div>
 
             <div class="question-card" data-q="j2">
@@ -80,6 +89,8 @@
                     <label><input type="radio" name="j2" value="correct"> B) Revólver calibre treinta y ocho especial de cuatro pulgadas</label>
                     <label><input type="radio" name="j2" value="wrong"> C) Pistola semiautomática 9mm Parabellum</label>
                 </div>
+                <div class="status-badge" id="badge-j2"></div>
+                <div class="explanation" id="exp-j2">Explicación: El revólver calibre 38 especial de 4 pulgadas es el arma corta reglamentaria principal asignada a los vigilantes en servicios armados.</div>
             </div>
 
             <div class="question-card" data-q="j3">
@@ -89,6 +100,8 @@
                     <label><input type="radio" name="j3" value="wrong"> B) De color marrón, madera y 60 centímetros</label>
                     <label><input type="radio" name="j3" value="wrong"> C) Extensible metálica de 40 centímetros</label>
                 </div>
+                <div class="status-badge" id="badge-j3"></div>
+                <div class="explanation" id="exp-j3">Explicación: La defensa reglamentaria es la porra de color negro, fabricada en goma semirrígida y con una longitud exacta de 50 centímetros.</div>
             </div>
 
             <div class="question-card" data-q="j4">
@@ -98,6 +111,8 @@
                     <label><input type="radio" name="j4" value="correct"> B) Detener y poner inmediatamente a disposición de las Fuerzas y Cuerpos de Seguridad al delincuente</label>
                     <label><input type="radio" name="j4" value="wrong"> C) Juzgar los hechos y aplicar sanción económica</label>
                 </div>
+                <div class="status-badge" id="badge-j4"></div>
+                <div class="explanation" id="exp-j4">Explicación: Los vigilantes pueden retener y detener en caso de delito flagrante, debiendo poner al infractor de inmediato a disposición policial.</div>
             </div>
 
             <div class="question-card" data-q="j5">
@@ -107,6 +122,8 @@
                     <label><input type="radio" name="j5" value="correct"> B) La Dirección General de la Policía</label>
                     <label><input type="radio" name="j5" value="wrong"> C) El Ministerio de Defensa</label>
                 </div>
+                <div class="status-badge" id="badge-j5"></div>
+                <div class="explanation" id="exp-j5">Explicación: La Dirección General de la Policía es el órgano competente para expedir la TIP a los vigilantes y demás personal habilitado.</div>
             </div>
 
             <div class="question-card" data-q="j6">
@@ -116,6 +133,8 @@
                     <label><input type="radio" name="j6" value="wrong"> B) Únicamente grilletes de cuerda de alta resistencia</label>
                     <label><input type="radio" name="j6" value="wrong"> C) Ningún tipo de grillete está permitido</label>
                 </div>
+                <div class="status-badge" id="badge-j6"></div>
+                <div class="explanation" id="exp-j6">Explicación: Los grilletes autorizados son los de manilla, abarcando los modelos de cadena, de bisagra y los rígidos.</div>
             </div>
 
             <div class="question-card" data-q="j7">
@@ -125,6 +144,8 @@
                     <label><input type="radio" name="j7" value="correct"> B) Impedir el consumo y comunicarlo con la mayor rapidez a las Fuerzas y Cuerpos de Seguridad</label>
                     <label><input type="radio" name="j7" value="wrong"> C) Multar directamente al infractor</label>
                 </div>
+                <div class="status-badge" id="badge-j7"></div>
+                <div class="explanation" id="exp-j7">Explicación: Ante consumo o tenencia ilícita de drogas, el vigilante debe impedirlo y dar aviso urgente a las Fuerzas y Cuerpos de Seguridad.</div>
             </div>
 
             <div class="question-card" data-q="j8">
@@ -134,6 +155,8 @@
                     <label><input type="radio" name="j8" value="wrong"> B) Es vitalicia y no caduca nunca</label>
                     <label><input type="radio" name="j8" value="wrong"> C) Se renueva obligatoriamente cada año</label>
                 </div>
+                <div class="status-badge" id="badge-j8"></div>
+                <div class="explanation" id="exp-j8">Explicación: La validez del soporte físico de la TIP se establece generalmente en 10 años, sin perjuicio de renovación por deterioro o pérdida.</div>
             </div>
 
             <div class="question-card" data-q="j9">
@@ -143,6 +166,8 @@
                     <label><input type="radio" name="j9" value="correct"> B) No, en ningún caso pueden retener la documentación personal</label>
                     <label><input type="radio" name="j9" value="wrong"> C) Sí, si el director de seguridad lo autoriza por escrito</label>
                 </div>
+                <div class="status-badge" id="badge-j9"></div>
+                <div class="explanation" id="exp-j9">Explicación: Está prohibido retener documentos de identidad personales; solo se pueden realizar comprobaciones visuales de acceso.</div>
             </div>
 
             <div class="question-card" data-q="j10">
@@ -152,6 +177,8 @@
                     <label><input type="radio" name="j10" value="wrong"> B) Es una simple falta leve sin importancia</label>
                     <label><input type="radio" name="j10" value="wrong"> C) No está regulado en la ley</label>
                 </div>
+                <div class="status-badge" id="badge-j10"></div>
+                <div class="explanation" id="exp-j10">Explicación: El abandono o la omisión injustificada del puesto de trabajo constituye legalmente una infracción muy grave.</div>
             </div>
 
             <div class="question-card" data-q="j11">
@@ -161,6 +188,8 @@
                     <label><input type="radio" name="j11" value="wrong"> B) Fusil de asalto militar de 5.56 mm</label>
                     <label><input type="radio" name="j11" value="wrong"> C) Carabina semiautomática del calibre 22</label>
                 </div>
+                <div class="status-badge" id="badge-j11"></div>
+                <div class="explanation" id="exp-j11">Explicación: La escopeta de repetición del calibre 12/70 es el arma larga reglamentaria autorizada en los servicios específicos que lo requieran.</div>
             </div>
 
             <div class="question-card" data-q="j12">
@@ -170,6 +199,8 @@
                     <label><input type="radio" name="j12" value="correct"> B) Un mínimo de 25 disparos</label>
                     <label><input type="radio" name="j12" value="wrong"> C) 50 disparos</label>
                 </div>
+                <div class="status-badge" id="badge-j12"></div>
+                <div class="explanation" id="exp-j12">Explicación: Los ejercicios obligatorios de tiro se realizan con periodicidad semestral, exigiendo un mínimo de 25 disparos por cada sesión.</div>
             </div>
 
             <div class="question-card" data-q="j13">
@@ -179,6 +210,8 @@
                     <label><input type="radio" name="j13" value="wrong"> B) En la gorra o prenda de cabeza</label>
                     <label><input type="radio" name="j13" value="wrong"> C) En la manga derecha obligatoriamente</label>
                 </div>
+                <div class="status-badge" id="badge-j13"></div>
+                <div class="explanation" id="exp-j13">Explicación: El distintivo oficial de vigilante se coloca permanentemente en la parte superior izquierda de la camisa o prenda superior.</div>
             </div>
 
             <div class="question-card" data-q="j14">
@@ -188,6 +221,8 @@
                     <label><input type="radio" name="j14" value="wrong"> B) Fondo negro y letras doradas</label>
                     <label><input type="radio" name="j14" value="wrong"> C) Fondo azul marino con letras blancas</label>
                 </div>
+                <div class="status-badge" id="badge-j14"></div>
+                <div class="explanation" id="exp-j14">Explicación: El distintivo es de fondo blanco con caracteres en rojo, mostrando la leyenda correspondiente y el número de habilitación.</div>
             </div>
 
             <div class="question-card" data-q="j15">
@@ -197,6 +232,8 @@
                     <label><input type="radio" name="j15" value="correct"> B) Regular la prestación de actividades y servicios de seguridad privada complementarios y subordinados</label>
                     <label><input type="radio" name="j15" value="wrong"> C) Gestionar la seguridad militar del país</label>
                 </div>
+                <div class="status-badge" id="badge-j15"></div>
+                <div class="explanation" id="exp-j15">Explicación: La ley regula la seguridad privada como un sector complementario y subordinado que coadyuva a la seguridad pública.</div>
             </div>
 
             <div class="question-card" data-q="j16">
@@ -204,8 +241,10 @@
                 <div class="options">
                     <label><input type="radio" name="j16" value="correct"> A) Nacionalidad UE, mayor de edad, aptitud física/psicológica, carecer de antecedentes penales por delitos dolosos</label>
                     <label><input type="radio" name="j16" value="wrong"> B) Ser menor de edad y tener permiso de conducir</label>
-                    <label><input type="radio" name="j16" value="wrong"> C) No tener ninguna formación previa obligatoria</label>
+                    <label><input type="radio" name="j16" value="wrong"> C) Cero formación previa obligatoria</label>
                 </div>
+                <div class="status-badge" id="badge-j16"></div>
+                <div class="explanation" id="exp-j16">Explicación: Se exigen criterios de nacionalidad, mayoría de edad, aptitudes psicofísicas y carecer de antecedentes penales dolosos.</div>
             </div>
 
             <div class="question-card" data-q="j17">
@@ -215,6 +254,8 @@
                     <label><input type="radio" name="j17" value="wrong"> B) Sí, tienen total libertad para investigar cualquier clase de delito</label>
                     <label><input type="radio" name="j17" value="wrong"> C) Sí, si el cliente paga una tasa especial</label>
                 </div>
+                <div class="status-badge" id="badge-j17"></div>
+                <div class="explanation" id="exp-j17">Explicación: Los detectives privados no pueden indagar en delitos perseguibles de oficio; su ámbito se restringe al ámbito de parte legítima.</div>
             </div>
 
             <div class="question-card" data-q="j18">
@@ -224,6 +265,8 @@
                     <label><input type="radio" name="j18" value="wrong"> B) Se lleva colgado al cuello con una cadena</label>
                     <label><input type="radio" name="j18" value="wrong"> C) Se sitúa en la espalda de la camisa</label>
                 </div>
+                <div class="status-badge" id="badge-j18"></div>
+                <div class="explanation" id="exp-j18">Explicación: El emblema o escudo identificativo de la empresa de seguridad privada se sitúa obligatoriamente en la manga izquierda.</div>
             </div>
 
             <div class="question-card" data-q="j19">
@@ -233,6 +276,8 @@
                     <label><input type="radio" name="j19" value="wrong"> B) Rapidez, improvisación y fuerza ilimitada</label>
                     <label><input type="radio" name="j19" value="wrong"> C) Anonimato y neutralidad absoluta</label>
                 </div>
+                <div class="status-badge" id="badge-j19"></div>
+                <div class="explanation" id="exp-j19">Explicación: El personal debe basar su actuación estrictamente en principios como legalidad, integridad, proporcionalidad y congruencia.</div>
             </div>
 
             <div class="question-card" data-q="j20">
@@ -242,6 +287,8 @@
                     <label><input type="radio" name="j20" value="wrong"> B) Vender drogas en la vía pública a cualquier persona</label>
                     <label><input type="radio" name="j20" value="wrong"> C) Repartir estupefacientes en colegios e instituciones</label>
                 </div>
+                <div class="status-badge" id="badge-j20"></div>
+                <div class="explanation" id="exp-j20">Explicación: El consumo compartido requiere un grupo reducido de adictos en espacio privado y dosis mínimas para consumo inmediato.</div>
             </div>
 
             <div class="question-card" data-q="j21">
@@ -251,6 +298,8 @@
                     <label><input type="radio" name="j21" value="wrong"> B) Tienen la consideración de mandos militares</label>
                     <label><input type="radio" name="j21" value="wrong"> C) No tienen ninguna protección especial</label>
                 </div>
+                <div class="status-badge" id="badge-j21"></div>
+                <div class="explanation" id="exp-j21">Explicación: En supuestos de cooperación bajo mando de las Fuerzas y Cuerpos de Seguridad, disfrutan de protección de agente de autoridad.</div>
             </div>
 
             <div class="question-card" data-q="j22">
@@ -260,6 +309,8 @@
                     <label><input type="radio" name="j22" value="wrong"> B) Sí, pueden interrogarles durante las primeras 12 horas</label>
                     <label><input type="radio" name="j22" value="wrong"> C) Sí, si la empresa privada lo exige por contrato</label>
                 </div>
+                <div class="status-badge" id="badge-j22"></div>
+                <div class="explanation" id="exp-j22">Explicación: El interrogatorio de detenidos es competencia exclusiva policial y judicial; los vigilantes tienen prohibido interrogar.</div>
             </div>
 
             <div class="question-card" data-q="j23">
@@ -269,6 +320,8 @@
                     <label><input type="radio" name="j23" value="wrong"> B) Infracción muy grave</label>
                     <label><input type="radio" name="j23" value="wrong"> C) Delito penal directo</label>
                 </div>
+                <div class="status-badge" id="badge-j23"></div>
+                <div class="explanation" id="exp-j23">Explicación: La falta de corrección o el trato desconsiderado hacia los ciudadanos se tipifica administrativamente como infracción leve.</div>
             </div>
 
             <div class="question-card" data-q="j24">
@@ -278,6 +331,8 @@
                     <label><input type="radio" name="j24" value="wrong"> B) La Dirección General de la Policía</label>
                     <label><input type="radio" name="j24" value="wrong"> C) El Ministerio de Trabajo</label>
                 </div>
+                <div class="status-badge" id="badge-j24"></div>
+                <div class="explanation" id="exp-j24">Explicación: La Guardia Civil asume las competencias de expedición de habilitación y control para los guardas rurales y especialidades.</div>
             </div>
 
             <div class="question-card" data-q="j25">
@@ -287,6 +342,8 @@
                     <label><input type="radio" name="j25" value="wrong"> B) Únicamente la visualización de fotografías estáticas sin grabación</label>
                     <label><input type="radio" name="j25" value="wrong"> C) Actividades reservadas exclusivamente a detectives privados</label>
                 </div>
+                <div class="status-badge" id="badge-j25"></div>
+                <div class="explanation" id="exp-j25">Explicación: La videovigilancia implica el uso de sistemas técnicos de captación y registro de imágenes y sonidos para protección.</div>
             </div>
 
             <div class="question-card" data-q="j26">
@@ -296,6 +353,8 @@
                     <label><input type="radio" name="j26" value="wrong"> B) Máximo 5 años</label>
                     <label><input type="radio" name="j26" value="wrong"> C) Indefinida hasta el juicio final</label>
                 </div>
+                <div class="status-badge" id="badge-j26"></div>
+                <div class="explanation" id="exp-j26">Explicación: Como garantía del procedimiento sancionador, la suspensión cautelar de la habilitación no puede exceder de un año.</div>
             </div>
 
             <div class="question-card" data-q="j27">
@@ -305,6 +364,8 @@
                     <label><input type="radio" name="j27" value="wrong"> B) Únicamente un acuerdo verbal entre las partes</label>
                     <label><input type="radio" name="j27" value="wrong"> C) No es necesario ningún trámite formal</label>
                 </div>
+                <div class="status-badge" id="badge-j27"></div>
+                <div class="explanation" id="exp-j27">Explicación: Los contratos de prestación de seguridad exigen forma escrita y su preceptiva comunicación a la administración competente.</div>
             </div>
 
             <div class="question-card" data-q="j28">
@@ -314,6 +375,8 @@
                     <label><input type="radio" name="j28" value="wrong"> B) Hasta 500 euros</label>
                     <label><input type="radio" name="j28" value="wrong"> C) No conllevan multas económicas</label>
                 </div>
+                <div class="status-badge" id="badge-j28"></div>
+                <div class="explanation" id="exp-j28">Explicación: Las infracciones muy graves cometidas por el personal conllevan multas de 6.001 a 30.000 euros y posible extinción de TIP.</div>
             </div>
 
             <div class="question-card" data-q="j29">
@@ -323,6 +386,8 @@
                     <label><input type="radio" name="j29" value="wrong"> B) La prohibición de denunciar delitos menores</label>
                     <label><input type="radio" name="j29" value="wrong"> C) La obligación de cerrar los comercios por la noche</label>
                 </div>
+                <div class="status-badge" id="badge-j29"></div>
+                <div class="explanation" id="exp-j29">Explicación: El protocolo in situ facilita la tramitación telemática de denuncias de delitos leves directamente desde el establecimiento.</div>
             </div>
 
             <div class="question-card" data-q="j30">
@@ -332,9 +397,10 @@
                     <label><input type="radio" name="j30" value="wrong"> B) No, está totalmente prohibido bajo cualquier circunstancia</label>
                     <label><input type="radio" name="j30" value="wrong"> C) Solo si son agentes de policía nacional</label>
                 </div>
+                <div class="status-badge" id="badge-j30"></div>
+                <div class="explanation" id="exp-j30">Explicación: Se pueden realizar controles superficiales preventivos de efectos y bolsos para impedir armas y objetos prohibidos.</div>
             </div>
 
-            <!-- Preguntas adicionales del 31 al 50 para completar el Test Jurídico -->
             <div class="question-card" data-q="j31">
                 <div class="question">31. ¿A quién corresponde la inspección y control de las empresas de seguridad privada y de su personal?</div>
                 <div class="options">
@@ -342,6 +408,8 @@
                     <label><input type="radio" name="j31" value="wrong"> B) A los propios directores de seguridad de cada empresa cliente</label>
                     <label><input type="radio" name="j31" value="wrong"> C) A los sindicatos de trabajadores del sector</label>
                 </div>
+                <div class="status-badge" id="badge-j31"></div>
+                <div class="explanation" id="exp-j31">Explicación: Las funciones de inspección y control corresponden en exclusiva a las unidades especializadas de Policía Nacional y Guardia Civil.</div>
             </div>
 
             <div class="question-card" data-q="j32">
@@ -351,6 +419,8 @@
                     <label><input type="radio" name="j32" value="wrong"> B) Un año</label>
                     <label><input type="radio" name="j32" value="correct"> C) Dos años</label>
                 </div>
+                <div class="status-badge" id="badge-j32"></div>
+                <div class="explanation" id="exp-j32">Explicación: Las infracciones muy graves prescriben a los dos años, las graves al año y las leves a los seis meses.</div>
             </div>
 
             <div class="question-card" data-q="j33">
@@ -360,6 +430,8 @@
                     <label><input type="radio" name="j33" value="wrong"> B) Guarda particular de campo</label>
                     <label><input type="radio" name="j33" value="wrong"> C) Escolta privado exclusivo</label>
                 </div>
+                <div class="status-badge" id="badge-j33"></div>
+                <div class="explanation" id="exp-j33">Explicación: Para la protección de buques frente a ataques de piratería se requiere la especialidad específica de seguridad marítima.</div>
             </div>
 
             <div class="question-card" data-q="j34">
@@ -369,6 +441,8 @@
                     <label><input type="radio" name="j34" value="correct"> B) No, está terminantemente prohibido portar armas de la empresa fuera del servicio</label>
                     <label><input type="radio" name="j34" value="wrong"> C) Sí, si el director de seguridad les autoriza por escrito</label>
                 </div>
+                <div class="status-badge" id="badge-j34"></div>
+                <div class="explanation" id="exp-j34">Explicación: Las armas de empresa deben quedar custodiadas en el centro de trabajo; está prohibido su porte fuera del horario laboral.</div>
             </div>
 
             <div class="question-card" data-q="j35">
@@ -378,6 +452,8 @@
                     <label><input type="radio" name="j35" value="wrong"> B) Una oficina de atención al cliente de la empresa</label>
                     <label><input type="radio" name="j35" value="wrong"> C) Un almacén de armas reglamentarias</label>
                 </div>
+                <div class="status-badge" id="badge-j35"></div>
+                <div class="explanation" id="exp-j35">Explicación: Las CRA son centros especializados encargados de recibir, analizar y verificar las alarmas para avisar a la policía.</div>
             </div>
 
             <div class="question-card" data-q="j36">
@@ -387,6 +463,8 @@
                     <label><input type="radio" name="j36" value="wrong"> B) No, el personal privado nunca tiene obligación de auxilio</label>
                     <label><input type="radio" name="j36" value="wrong"> C) Es una mera falta disciplinaria interna de la empresa</label>
                 </div>
+                <div class="status-badge" id="badge-j36"></div>
+                <div class="explanation" id="exp-j36">Explicación: Negarse a auxiliar a las autoridades en calamidades públicas o catástrofes está sancionado como infracción grave.</div>
             </div>
 
             <div class="question-card" data-q="j37">
@@ -396,6 +474,8 @@
                     <label><input type="radio" name="j37" value="wrong"> B) 21 años cumplidos</label>
                     <label><input type="radio" name="j37" value="correct"> C) Mayor de edad (18 años)</label>
                 </div>
+                <div class="status-badge" id="badge-j37"></div>
+                <div class="explanation" id="exp-j37">Explicación: El aspirante a vigilante de seguridad debe haber cumplido la mayoría de edad (18 años) en el momento de la solicitud.</div>
             </div>
 
             <div class="question-card" data-q="j38">
@@ -405,6 +485,8 @@
                     <label><input type="radio" name="j38" value="wrong"> B) El ayuntamiento de la localidad</label>
                     <label><input type="radio" name="j38" value="wrong"> C) Los propios clientes sin intervención estatal</label>
                 </div>
+                <div class="status-badge" id="badge-j38"></div>
+                <div class="explanation" id="exp-j38">Explicación: Los planes de seguridad preceptivos deben ser aprobados por la administración de seguridad pública competente.</div>
             </div>
 
             <div class="question-card" data-q="j39">
@@ -414,6 +496,8 @@
                     <label><input type="radio" name="j39" value="wrong"> B) Pueden difundirse libremente en redes sociales si hay un altercado</label>
                     <label><input type="radio" name="j39" value="wrong"> C) Se guardan indefinidamente sin restricciones</label>
                 </div>
+                <div class="status-badge" id="badge-j39"></div>
+                <div class="explanation" id="exp-j39">Explicación: Por protección de datos, las imágenes captadas deben cancelarse y destruirse en el plazo máximo de 30 días.</div>
             </div>
 
             <div class="question-card" data-q="j40">
@@ -423,6 +507,8 @@
                     <label><input type="radio" name="j40" value="correct"> B) No, sus funciones se limitan al perímetro o interior de los inmuebles objeto de protección</label>
                     <label><input type="radio" name="j40" value="wrong"> C) Sí, si llevan puesto el uniforme de gala</label>
                 </div>
+                <div class="status-badge" id="badge-j40"></div>
+                <div class="explanation" id="exp-j40">Explicación: La actuación del vigilante está circunscrita al interior y puntos de acceso de los edificios o polígonos encomendados.</div>
             </div>
 
             <div class="question-card" data-q="j41">
@@ -432,6 +518,8 @@
                     <label><input type="radio" name="j41" value="wrong"> B) Título universitario de Grado</label>
                     <label><input type="radio" name="j41" value="wrong"> C) Ninguna titulación académica</label>
                 </div>
+                <div class="status-badge" id="badge-j41"></div>
+                <div class="explanation" id="exp-j41">Explicación: Se requiere como mínimo estar en posesión del título de Graduado en ESO, Formación Profesional básica o equivalente.</div>
             </div>
 
             <div class="question-card" data-q="j42">
@@ -441,6 +529,8 @@
                     <label><input type="radio" name="j42" value="wrong"> B) Una simple amonestación verbal</label>
                     <label><input type="radio" name="j42" value="wrong"> C) Una sanción económica de 50 euros</label>
                 </div>
+                <div class="status-badge" id="badge-j42"></div>
+                <div class="explanation" id="exp-j42">Explicación: Si el titular deja de cumplir los requisitos legales exigidos, se procede a revocar formalmente su habilitación.</div>
             </div>
 
             <div class="question-card" data-q="j43">
@@ -450,15 +540,19 @@
                     <label><input type="radio" name="j43" value="wrong"> B) Está prohibida de manera absoluta en todos los casos</label>
                     <label><input type="radio" name="j43" value="wrong"> C) Solo si se hace de forma clandestina</label>
                 </div>
+                <div class="status-badge" id="badge-j43"></div>
+                <div class="explanation" id="exp-j43">Explicación: La ley permite la subcontratación entre empresas autorizadas siempre que se cumplan las garantías y requisitos formales.</div>
             </div>
 
             <div class="question-card" data-q="j44">
                 <div class="question">44. ¿Qué son los escoltas privados según la Ley de Seguridad Privada?</div>
                 <div class="options">
-                    <label><input type="correct" name="j44" value="correct"> A) Personal de seguridad encargado de la acompañamiento, defensa y protección de personas determinadas</label>
+                    <label><input type="radio" name="j44" value="correct"> A) Personal de seguridad encargado del acompañamiento, defensa y protección de personas determinadas</label>
                     <label><input type="radio" name="j44" value="wrong"> B) Vigilantes destinados exclusivamente al control de accesos de polígonos industriales</label>
                     <label><input type="radio" name="j44" value="wrong"> C) Conductores de vehículos blindados de fondos</label>
                 </div>
+                <div class="status-badge" id="badge-j44"></div>
+                <div class="explanation" id="exp-j44">Explicación: La función específica del escolta privado es la protección directa de personas físicas amenazadas o determinadas.</div>
             </div>
 
             <div class="question-card" data-q="j45">
@@ -468,6 +562,8 @@
                     <label><input type="radio" name="j45" value="wrong"> B) Organismos públicos dependientes directamente de los ministerios de defensa</label>
                     <label><input type="radio" name="j45" value="wrong"> C) Asociaciones sin ánimo de lucro de carácter benéfico</label>
                 </div>
+                <div class="status-badge" id="badge-j45"></div>
+                <div class="explanation" id="exp-j45">Explicación: Operan como entidades mercantiles privadas que requieren obligatoriamente autorización ministerial e inscripción registral.</div>
             </div>
 
             <div class="question-card" data-q="j46">
@@ -477,6 +573,8 @@
                     <label><input type="radio" name="j46" value="wrong"> B) No, está totalmente prohibido el uso de animales en la seguridad privada</label>
                     <label><input type="radio" name="j46" value="wrong"> C) Únicamente en domicilios particulares</label>
                 </div>
+                <div class="status-badge" id="badge-j46"></div>
+                <div class="explanation" id="exp-j46">Explicación: El empleo de perros adiestrados está permitido con guías caninos habilitados en las modalidades de vigilancia autorizadas.</div>
             </div>
 
             <div class="question-card" data-q="j47">
@@ -486,6 +584,8 @@
                     <label><input type="radio" name="j47" value="wrong"> B) Entregarlas a cualquier transeúnte que las solicite por la noche</label>
                     <label><input type="radio" name="j47" value="wrong"> C) Dejarlas siempre puestas en la cerradura exterior</label>
                 </div>
+                <div class="status-badge" id="badge-j47"></div>
+                <div class="explanation" id="exp-j47">Explicación: Las llaves deben guardarse bajo estrictas medidas de seguridad y control, evitando que caigan en manos ajenas.</div>
             </div>
 
             <div class="question-card" data-q="j48">
@@ -495,6 +595,8 @@
                     <label><input type="radio" name="j48" value="wrong"> B) Un mes sin trabajar</label>
                     <label><input type="radio" name="j48" value="wrong"> C) Diez años exactos</label>
                 </div>
+                <div class="status-badge" id="badge-j48"></div>
+                <div class="explanation" id="exp-j48">Explicación: La superación de cursos de actualización y reciclaje es obligatoria ante periodos prolongados sin ejercer funciones.</div>
             </div>
 
             <div class="question-card" data-q="j49">
@@ -504,6 +606,8 @@
                     <label><input type="radio" name="j49" value="wrong"> B) Ignorarlo hasta que finalice su turno de trabajo</label>
                     <label><input type="radio" name="j49" value="wrong"> C) Desmontar el sistema por su cuenta para repararlo</label>
                 </div>
+                <div class="status-badge" id="badge-j49"></div>
+                <div class="explanation" id="exp-j49">Explicación: Las deficiencias en seguridad contra incendios deben comunicarse urgentemente para su pronta subsanación.</div>
             </div>
 
             <div class="question-card" data-q="j50">
@@ -513,6 +617,8 @@
                     <label><input type="radio" name="j50" value="correct"> B) No, carecen por completo de potestad sancionadora; su labor es preventiva e informativa</label>
                     <label><input type="radio" name="j50" value="wrong"> C) Sí, si el cliente del establecimiento lo autoriza</label>
                 </div>
+                <div class="status-badge" id="badge-j50"></div>
+                <div class="explanation" id="exp-j50">Explicación: Los vigilantes no tienen autoridad sancionadora; su labor se orienta a la prevención, disuasión y auxilio ciudadano.</div>
             </div>
 
         </div>
@@ -542,6 +648,8 @@
                     <label><input type="radio" name="p1" value="correct"> B) Una ciencia normativa que estudia los deberes y los derechos de cada profesión</label>
                     <label><input type="radio" name="p1" value="wrong"> C) Un conjunto de leyes estrictamente penales y penitenciarias</label>
                 </div>
+                <div class="status-badge" id="badge-p1"></div>
+                <div class="explanation" id="exp-p1">Explicación: El Código de Ética se define formalmente como la ciencia normativa que estudia los deberes y derechos profesionales.</div>
             </div>
 
             <div class="question-card" data-q="p2">
@@ -551,6 +659,8 @@
                     <label><input type="radio" name="p2" value="correct"> B) La moral tiene base social y la ética surge en la interioridad de la persona</label>
                     <label><input type="radio" name="p2" value="wrong"> C) No existe ninguna diferencia conceptual entre ambos términos</label>
                 </div>
+                <div class="status-badge" id="badge-p2"></div>
+                <div class="explanation" id="exp-p2">Explicación: La moral se apoya en una base social colectiva, mientras que la ética surge fundamentalmente de la interioridad personal.</div>
             </div>
 
             <div class="question-card" data-q="p3">
@@ -560,6 +670,8 @@
                     <label><input type="radio" name="p3" value="wrong"> B) Pasividad</label>
                     <label><input type="radio" name="p3" value="correct"> C) Asertividad</label>
                 </div>
+                <div class="status-badge" id="badge-p3"></div>
+                <div class="explanation" id="exp-p3">Explicación: La asertividad es la conducta que permite defender los propios derechos respetando los ajenos y sin ansiedad.</div>
             </div>
 
             <div class="question-card" data-q="p4">
@@ -569,6 +681,8 @@
                     <label><input type="radio" name="p4" value="wrong"> B) Técnica del banco de niebla</label>
                     <label><input type="radio" name="p4" value="wrong"> C) Técnica de ignorar</label>
                 </div>
+                <div class="status-badge" id="badge-p4"></div>
+                <div class="explanation" id="exp-p4">Explicación: La técnica del disco roto consiste en insistir calmadamente en nuestro argumento sin desviarnos por distracciones.</div>
             </div>
 
             <div class="question-card" data-q="p5">
@@ -578,6 +692,8 @@
                     <label><input type="radio" name="p5" value="wrong"> B) Necesidades de autorrealización</label>
                     <label><input type="radio" name="p5" value="wrong"> C) Necesidades de reconocimiento y éxito</label>
                 </div>
+                <div class="status-badge" id="badge-p5"></div>
+                <div class="explanation" id="exp-p5">Explicación: En la base de la pirámide de Maslow se sitúan las necesidades fisiológicas primarias para la supervivencia humana.</div>
             </div>
 
             <div class="question-card" data-q="p6">
@@ -587,6 +703,8 @@
                     <label><input type="radio" name="p6" value="correct"> B) Estructura informal</label>
                     <label><input type="radio" name="p6" value="wrong"> C) Estructura jerárquica rígida</label>
                 </div>
+                <div class="status-badge" id="badge-p6"></div>
+                <div class="explanation" id="exp-p6">Explicación: La estructura informal surge de manera espontánea entre los miembros priorizando la satisfacción y relaciones personales.</div>
             </div>
 
             <div class="question-card" data-q="p7">
@@ -596,6 +714,8 @@
                     <label><input type="radio" name="p7" value="wrong"> B) La represión total de cualquier sentimiento o pensamiento</label>
                     <label><input type="radio" name="p7" value="wrong"> C) La habilidad de influir en las decisiones de los superiores</label>
                 </div>
+                <div class="status-badge" id="badge-p7"></div>
+                <div class="explanation" id="exp-p7">Explicación: El autocontrol otorga la facultad de regular los impulsos emocionales eligiendo la respuesta adecuada en cada instante.</div>
             </div>
 
             <div class="question-card" data-q="p8">
@@ -605,6 +725,8 @@
                     <label><input type="radio" name="p8" value="wrong"> B) La conducta motora externa</label>
                     <label><input type="radio" name="p8" value="wrong"> C) La memoria a largo plazo</label>
                 </div>
+                <div class="status-badge" id="badge-p8"></div>
+                <div class="explanation" id="exp-p8">Explicación: Cada pensamiento genera una reacción fisiológica interna que se traduce directamente en un sentimiento o emoción.</div>
             </div>
 
             <div class="question-card" data-q="p9">
@@ -614,6 +736,8 @@
                     <label><input type="radio" name="p9" value="correct"> B) El miedo es una respuesta normal y transitoria; la fobia es una reacción desproporcionada, irracional y persistente</label>
                     <label><input type="radio" name="p9" value="wrong"> C) No hay diferencias clínicas entre ambos conceptos</label>
                 </div>
+                <div class="status-badge" id="badge-p9"></div>
+                <div class="explanation" id="exp-p9">Explicación: El miedo es una alerta normal y transitoria, mientras que la fobia constituye un temor irracional, persistente y desproporcionado.</div>
             </div>
 
             <div class="question-card" data-q="p10">
@@ -623,6 +747,8 @@
                     <label><input type="radio" name="p10" value="wrong"> B) Agorafobia</label>
                     <label><input type="radio" name="p10" value="wrong"> C) Claustrofobia</label>
                 </div>
+                <div class="status-badge" id="badge-p10"></div>
+                <div class="explanation" id="exp-p10">Explicación: La acrofobia se define específicamente como el miedo intenso o vértigo patológico ante las alturas.</div>
             </div>
 
             <div class="question-card" data-q="p11">
@@ -632,6 +758,8 @@
                     <label><input type="radio" name="p11" value="wrong"> B) Fase inicial, fase intermedia y fase crítica</label>
                     <label><input type="radio" name="p11" value="wrong"> C) Fase de pánico, fase de asfixia y fase de recuperación</label>
                 </div>
+                <div class="status-badge" id="badge-p11"></div>
+                <div class="explanation" id="exp-p11">Explicación: El síndrome de adaptación comprende secuencialmente la alarma, la resistencia sostenida y el posterior agotamiento.</div>
             </div>
 
             <div class="question-card" data-q="p12">
@@ -641,6 +769,8 @@
                     <label><input type="radio" name="p12" value="correct"> B) Respiración diafragmática o abdominal</label>
                     <label><input type="radio" name="p12" value="wrong"> C) Respiración torácica o intercostal media</label>
                 </div>
+                <div class="status-badge" id="badge-p12"></div>
+                <div class="explanation" id="exp-p12">Explicación: La respiración diafragmática moviliza el aire en la zona baja pulmonar, maximizando la oxigenación y relajando el sistema nervioso.</div>
             </div>
 
             <div class="question-card" data-q="p13">
@@ -650,6 +780,8 @@
                     <label><input type="radio" name="p13" value="wrong"> B) Desensibilización sistemática</label>
                     <label><input type="radio" name="p13" value="wrong"> C) Inoculación de estrés</label>
                 </div>
+                <div class="status-badge" id="badge-p13"></div>
+                <div class="explanation" id="exp-p13">Explicación: Jacobson ideó un método físico basado en tensar y relajar metódicamente diferentes grupos musculares para eliminar la tensión.</div>
             </div>
 
             <div class="question-card" data-q="p14">
@@ -659,6 +791,8 @@
                     <label><input type="radio" name="p14" value="wrong"> B) Una simple alerta preventiva ante situaciones de baja intensidad</label>
                     <label><input type="radio" name="p14" value="wrong"> C) Un estado de relajación mental inducido</label>
                 </div>
+                <div class="status-badge" id="badge-p14"></div>
+                <div class="explanation" id="exp-p14">Explicación: El pánico representa el grado máximo de miedo, caracterizado por la pérdida de control y conductas de huida precipitada.</div>
             </div>
 
             <div class="question-card" data-q="p15">
@@ -668,9 +802,10 @@
                     <label><input type="radio" name="p15" value="wrong"> B) Abandonar el puesto inmediatamente sin avisar a nadie</label>
                     <label><input type="radio" name="p15" value="wrong"> C) Gritar junto con la masa para integrarse</label>
                 </div>
+                <div class="status-badge" id="badge-p15"></div>
+                <div class="explanation" id="exp-p15">Explicación: El vigilante debe mantener la templanza, guiar a las personas fuera del riesgo y colaborar con los equipos de emergencia.</div>
             </div>
 
-            <!-- Preguntas adicionales de psicología del 16 al 50 -->
             <div class="question-card" data-q="p16">
                 <div class="question">16. ¿Qué técnica asertiva consiste en aparentar ceder terreno sin cederlo realmente, estando de acuerdo con parte del argumento de la otra persona?</div>
                 <div class="options">
@@ -678,6 +813,8 @@
                     <label><input type="radio" name="p16" value="wrong"> B) Técnica del disco roto</label>
                     <label><input type="radio" name="p16" value="wrong"> C) Técnica de procesar el cambio</label>
                 </div>
+                <div class="status-badge" id="badge-p16"></div>
+                <div class="explanation" id="exp-p16">Explicación: El banco de niebla permite dar la razón en lo verosímil al interlocutor sin renunciar al criterio u opinión propia.</div>
             </div>
 
             <div class="question-card" data-q="p17">
@@ -687,6 +824,8 @@
                     <label><input type="radio" name="p17" value="wrong"> B) Persona que defiende sus derechos avasallando a los demás y gritando</label>
                     <label><input type="radio" name="p17" value="wrong"> C) Persona que empatiza perfectamente y mantiene contacto visual</label>
                 </div>
+                <div class="status-badge" id="badge-p17"></div>
+                <div class="explanation" id="exp-p17">Explicación: El perfil pasivo denota inseguridad, evitación visual y vulnerabilidad ante la presión de los demás.</div>
             </div>
 
             <div class="question-card" data-q="p18">
@@ -696,6 +835,8 @@
                     <label><input type="radio" name="p18" value="wrong"> B) Componentes paralingüísticos</label>
                     <label><input type="radio" name="p18" value="wrong"> C) Componentes verbales</label>
                 </div>
+                <div class="status-badge" id="badge-p18"></div>
+                <div class="explanation" id="exp-p18">Explicación: Los gestos, la postura y las expresiones faciales integran el lenguaje corporal o conjunto de componentes no verbales.</div>
             </div>
 
             <div class="question-card" data-q="p19">
@@ -705,6 +846,8 @@
                     <label><input type="radio" name="p19" value="wrong"> B) El vocabulario y el contenido escrito</label>
                     <label><input type="radio" name="p19" value="wrong"> C) Los movimientos de las manos y la distancia física</label>
                 </div>
+                <div class="status-badge" id="badge-p19"></div>
+                <div class="explanation" id="exp-p19">Explicación: La paralingüística estudia cómo se dice el mensaje, abarcando parámetros como el tono, el volumen y la velocidad verbal.</div>
             </div>
 
             <div class="question-card" data-q="p20">
@@ -714,6 +857,8 @@
                     <label><input type="radio" name="p20" value="wrong"> B) Oír sin prestar atención mientras se realizan otras tareas</label>
                     <label><input type="radio" name="p20" value="wrong"> C) Responder inmediatamente con críticas a la otra persona</label>
                 </div>
+                <div class="status-badge" id="badge-p20"></div>
+                <div class="explanation" id="exp-p20">Explicación: La escucha activa implica atención plena, retroalimentación y comprensión sincera del mensaje del interlocutor.</div>
             </div>
 
             <div class="question-card" data-q="p21">
@@ -723,6 +868,8 @@
                     <label><input type="radio" name="p21" value="wrong"> B) Compartir exactamente las mismas opiniones políticas que el cliente</label>
                     <label><input type="radio" name="p21" value="wrong"> C) Juzgar rápidamente el comportamiento ajeno</label>
                 </div>
+                <div class="status-badge" id="badge-p21"></div>
+                <div class="explanation" id="exp-p21">Explicación: Ser empático significa sintonizar con los sentimientos, perspectivas y necesidades emocionales de las personas.</div>
             </div>
 
             <div class="question-card" data-q="p22">
@@ -732,6 +879,8 @@
                     <label><input type="radio" name="p22" value="wrong"> B) Se adquiere únicamente mediante la lectura de libros de terror</label>
                     <label><input type="radio" name="p22" value="wrong"> C) Aparece solo en la edad adulta por aprendizaje social</label>
                 </div>
+                <div class="status-badge" id="badge-p22"></div>
+                <div class="explanation" id="exp-p22">Explicación: El miedo innato es una respuesta instintiva y universal de preservación ante estímulos de riesgo vital.</div>
             </div>
 
             <div class="question-card" data-q="p23">
@@ -741,6 +890,8 @@
                     <label><input type="radio" name="p23" value="wrong"> B) Estrés, ansiedad y fobia</label>
                     <label><input type="radio" name="p23" value="wrong"> C) Pánico, shock y bloqueo</label>
                 </div>
+                <div class="status-badge" id="badge-p23"></div>
+                <div class="explanation" id="exp-p23">Explicación: El temario clasifica el miedo adquirido en tres niveles progresivos: estado de alerta, precaución y temor.</div>
             </div>
 
             <div class="question-card" data-q="p24">
@@ -750,6 +901,8 @@
                     <label><input type="radio" name="p24" value="wrong"> B) Claustrofobia</label>
                     <label><input type="radio" name="p24" value="wrong"> C) Acrofobia</label>
                 </div>
+                <div class="status-badge" id="badge-p24"></div>
+                <div class="explanation" id="exp-p24">Explicación: La agorafobia se identifica como la angustia o temor anormal ante espacios abiertos o aglomeraciones públicas.</div>
             </div>
 
             <div class="question-card" data-q="p25">
@@ -759,6 +912,8 @@
                     <label><input type="radio" name="p25" value="wrong"> B) Hematofobia</label>
                     <label><input type="radio" name="p25" value="wrong"> C) Nictofobia</label>
                 </div>
+                <div class="status-badge" id="badge-p25"></div>
+                <div class="explanation" id="exp-p25">Explicación: La glosofobia es el término clínico que designa el miedo persistente e irracional a disertar o hablar ante auditorios.</div>
             </div>
 
             <div class="question-card" data-q="p26">
@@ -768,15 +923,19 @@
                     <label><input type="radio" name="p26" value="wrong"> B) Miedo a la oscuridad o a la noche</label>
                     <label><input type="radio" name="p26" value="wrong"> C) Aversión hacia los extranjeros</label>
                 </div>
+                <div class="status-badge" id="badge-p26"></div>
+                <div class="explanation" id="exp-p26">Explicación: La hematofobia engloba la reacción fóbica y de desmayo ante la visión de sangre, cortes o intervenciones con heridas.</div>
             </div>
 
-            <div class="question-card" data-q="27">
+            <div class="question-card" data-q="p27">
                 <div class="question">27. ¿Qué efectos físicos produce el miedo en el organismo humano?</div>
                 <div class="options">
                     <label><input type="radio" name="p27" value="correct"> A) Incremento de la frecuencia cardíaca, capacidad respiratoria y dilatación de pupilas</label>
                     <label><input type="radio" name="p27" value="wrong"> B) Descenso absoluto del ritmo cardíaco y sueño profundo</label>
                     <label><input type="radio" name="p27" value="wrong"> C) Paralización total del sistema circulatorio</label>
                 </div>
+                <div class="status-badge" id="badge-p27"></div>
+                <div class="explanation" id="exp-p27">Explicación: El miedo activa respuestas neurovegetativas acelerando el pulso, dilatando pupilas y redistribuyendo sangre a músculos.</div>
             </div>
 
             <div class="question-card" data-q="p28">
@@ -786,15 +945,19 @@
                     <label><input type="radio" name="p28" value="wrong"> B) Una enfermedad mental incurable originada en la infancia</label>
                     <label><input type="radio" name="p28" value="wrong"> C) Un estado de felicidad absoluta y relajación</label>
                 </div>
+                <div class="status-badge" id="badge-p28"></div>
+                <div class="explanation" id="exp-p28">Explicación: El estrés opera como un mecanismo natural de adaptación biológica ante exigencias o presiones del entorno.</div>
             </div>
 
-            <div class="question-card" data-q="29">
+            <div class="question-card" data-q="p29">
                 <div class="question">29. ¿Qué fase del estrés se caracteriza por el consumo de los recursos del organismo debido a una fuerte activación fisiológica continuada?</div>
                 <div class="options">
                     <label><input type="radio" name="p29" value="correct"> A) Fase de resistencia</label>
                     <label><input type="radio" name="p29" value="wrong"> B) Fase de alarma inicial</label>
                     <label><input type="radio" name="p29" value="wrong"> C) Fase de distensión</label>
                 </div>
+                <div class="status-badge" id="badge-p29"></div>
+                <div class="explanation" id="exp-p29">Explicación: Durante la resistencia, el cuerpo intenta mantener el equilibrio soportando la tensión a costa de desgastar sus reservas.</div>
             </div>
 
             <div class="question-card" data-q="p30">
@@ -804,6 +967,8 @@
                     <label><input type="radio" name="p30" value="wrong"> B) El cuerpo recupera instantáneamente toda su energía</label>
                     <label><input type="radio" name="p30" value="wrong"> C) Desaparece cualquier rastro de cansancio</label>
                 </div>
+                <div class="status-badge" id="badge-p30"></div>
+                <div class="explanation" id="exp-p30">Explicación: Al quebrarse las defensas por prolongación del estrés, se entra en agotamiento con consecuencias lesivas para la salud.</div>
             </div>
 
             <div class="question-card" data-q="p31">
@@ -813,6 +978,8 @@
                     <label><input type="radio" name="p31" value="wrong"> B) Teóricas, prácticas y económicas</label>
                     <label><input type="radio" name="p31" value="wrong"> C) Individuales y colectivas</label>
                 </div>
+                <div class="status-badge" id="badge-p31"></div>
+                <div class="explanation" id="exp-p31">Explicación: Las estrategias de autocontrol se agrupan en tres grandes bloques: cognitivas, fisiológicas y conductuales.</div>
             </div>
 
             <div class="question-card" data-q="p32">
@@ -822,15 +989,19 @@
                     <label><input type="radio" name="p32" value="wrong"> B) Reducir la tensión muscular mediante masajes</label>
                     <label><input type="radio" name="p32" value="wrong"> C) Modificar la dieta alimenticia</label>
                 </div>
+                <div class="status-badge" id="badge-p32"></div>
+                <div class="explanation" id="exp-p32">Explicación: Las técnicas cognitivas buscan modificar los patrones de pensamiento y la evaluación subjetiva ante los estresores.</div>
             </div>
 
-            <div class="question-card" data-q="33">
+            <div class="question-card" data-q="p33">
                 <div class="question">33. ¿Qué técnica cognitiva intenta reorganizar la forma en que una persona percibe una situación sustituyendo interpretaciones inadecuadas?</div>
                 <div class="options">
                     <label><input type="radio" name="p33" value="correct"> A) Reorganización cognitiva</label>
                     <label><input type="radio" name="p33" value="wrong"> B) Relajación de Jacobson</label>
                     <label><input type="radio" name="p33" value="wrong"> C) Entrenamiento autógeno</label>
                 </div>
+                <div class="status-badge" id="badge-p33"></div>
+                <div class="explanation" id="exp-p33">Explicación: La reorganización cognitiva reestructura la perspectiva mental, cambiando valoraciones erróneas por enfoques constructivos.</div>
             </div>
 
             <div class="question-card" data-q="p34">
@@ -840,6 +1011,8 @@
                     <label><input type="radio" name="p34" value="wrong"> B) Respiración clavicular alta</label>
                     <label><input type="radio" name="p34" value="wrong"> C) Respiración superficial rápida</label>
                 </div>
+                <div class="status-badge" id="badge-p34"></div>
+                <div class="explanation" id="exp-p34">Explicación: La respiración abdominal o diafragmática estimula la relajación profunda al activar el área pulmonar inferior.</div>
             </div>
 
             <div class="question-card" data-q="p35">
@@ -849,6 +1022,8 @@
                     <label><input type="radio" name="p35" value="wrong"> B) Relajación profunda y sueño reparador</label>
                     <label><input type="radio" name="p35" value="wrong"> C) Mejora de la capacidad pulmonar total</label>
                 </div>
+                <div class="status-badge" id="badge-p35"></div>
+                <div class="explanation" id="exp-p35">Explicación: Respirar exclusivamente con la parte alta genera hiperventilación, alterando el intercambio gaseoso y potenciando la angustia.</div>
             </div>
 
             <div class="question-card" data-q="p36">
@@ -858,24 +1033,30 @@
                     <label><input type="radio" name="p36" value="wrong"> B) Desensibilización sistemática</label>
                     <label><input type="radio" name="p36" value="wrong"> C) Banco de niebla</label>
                 </div>
+                <div class="status-badge" id="badge-p36"></div>
+                <div class="explanation" id="exp-p36">Explicación: El role-playing o dramatización permite ensayar conductas y adquirir soltura en entornos controlados antes de la realidad.</div>
             </div>
 
-            <div class="question-card" data-q="37">
+            <div class="question-card" data-q="p37">
                 <div class="question">37. ¿Qué factores psicosociales pueden desencadenar estrés laboral en el vigilante de seguridad?</div>
                 <div class="options">
                     <label><input type="radio" name="p37" value="correct"> A) Exceso de trabajo, falta de tiempo, responsabilidad múltiple y exposición a amenazas o violencia</label>
                     <label><input type="radio" name="p37" value="wrong"> B) Descansos excesivos y sueldo elevado</label>
                     <label><input type="radio" name="p37" value="wrong"> C) Ausencia total de tareas asignadas</label>
                 </div>
+                <div class="status-badge" id="badge-p37"></div>
+                <div class="explanation" id="exp-p37">Explicación: La sobrecarga, la presión temporal, el riesgo físico y la ambigüedad de roles fungen como detonantes de estrés laboral.</div>
             </div>
 
-            <div class="question-card" data-q="38">
+            <div class="question-card" data-q="p38">
                 <div class="question">38. ¿Qué relación existe entre pensamiento, emoción y conducta según la psicología aplicada al autocontrol?</div>
                 <div class="options">
                     <label><input type="radio" name="p38" value="correct"> A) Están interconectados: lo que pensamos genera una emoción (sentimiento) y esta influye en nuestra conducta</label>
                     <label><input type="radio" name="p38" value="wrong"> B) Son tres elementos totalmente independientes sin relación entre sí</label>
                     <label><input type="radio" name="p38" value="wrong"> C) La conducta no depende en ningún caso de los pensamientos</label>
                 </div>
+                <div class="status-badge" id="badge-p38"></div>
+                <div class="explanation" id="exp-p38">Explicación: El triángulo cognitivo demuestra que cognición, afecto y acción se retroalimentan recíprocamente de manera constante.</div>
             </div>
 
             <div class="question-card" data-q="p39">
@@ -885,15 +1066,19 @@
                     <label><input type="radio" name="p39" value="wrong"> B) Mostrar superioridad y firmeza agresiva ante cualquier ciudadano</label>
                     <label><input type="radio" name="p39" value="wrong"> C) Evitar hablar con las personas bajo cualquier circunstancia</label>
                 </div>
+                <div class="status-badge" id="badge-p39"></div>
+                <div class="explanation" id="exp-p39">Explicación: La educación, la cortesía y la flexibilidad discurren como herramientas indispensables en la atención ciudadana.</div>
             </div>
 
-            <div class="question-card" data-q="40">
+            <div class="question-card" data-q="p40">
                 <div class="question">40. ¿Cómo debe actuar el vigilante de seguridad en sus relaciones profesionales con los medios de comunicación?</div>
                 <div class="options">
                     <label><input type="radio" name="p40" value="correct"> A) Manteniendo la compostura, siendo respetuoso pero escrupulosamente discreto sin revelar información</label>
                     <label><input type="radio" name="p40" value="wrong"> B) Conceder exclusivas y entrevistas detalladas sobre los investigados</label>
                     <label><input type="radio" name="p40" value="wrong"> C) Expulsarles violentamente del recinto</label>
                 </div>
+                <div class="status-badge" id="badge-p40"></div>
+                <div class="explanation" id="exp-p40">Explicación: Se exige compostura y máxima discreción con la prensa, recordando el deber de sigilo y secreto profesional.</div>
             </div>
 
             <div class="question-card" data-q="p41">
@@ -903,6 +1088,8 @@
                     <label><input type="radio" name="p41" value="wrong"> B) Involucrarse en los problemas familiares del protegido</label>
                     <label><input type="radio" name="p41" value="wrong"> C) Desatender la seguridad para conversar sobre temas triviales</label>
                 </div>
+                <div class="status-badge" id="badge-p41"></div>
+                <div class="explanation" id="exp-p41">Explicación: El escolta debe preservar la distancia profesional, evitando inmiscuirse en la vida íntima del protegido.</div>
             </div>
 
             <div class="question-card" data-q="p42">
@@ -912,6 +1099,8 @@
                     <label><input type="radio" name="p42" value="wrong"> B) Hay que obedecer absolutamente todas las órdenes sin importar si son ilegales</label>
                     <label><input type="radio" name="p42" value="wrong"> C) El vigilante puede desobedecer cualquier orden de sus jefes libremente</label>
                 </div>
+                <div class="status-badge" id="badge-p42"></div>
+                <div class="explanation" id="exp-p42">Explicación: La subordinación está limitada por la legalidad; cumplir órdenes delictivas acarrea responsabilidad penal compartida.</div>
             </div>
 
             <div class="question-card" data-q="p43">
@@ -921,6 +1110,8 @@
                     <label><input type="radio" name="p43" value="wrong"> B) Diálogo calmado, escucha activa y respeto mutuo</label>
                     <label><input type="radio" name="p43" value="wrong"> C) Sumisión y evitación del contacto visual</label>
                 </div>
+                <div class="status-badge" id="badge-p43"></div>
+                <div class="explanation" id="exp-p43">Explicación: El estilo agresivo se manifiesta mediante imposición física, gritos, gestos amenazantes e invasión del espacio ajeno.</div>
             </div>
 
             <div class="question-card" data-q="p44">
@@ -930,6 +1121,8 @@
                     <label><input type="radio" name="p44" value="wrong"> B) Técnica del disco roto</label>
                     <label><input type="radio" name="p44" value="wrong"> C) Técnica del aplazamiento asertivo</label>
                 </div>
+                <div class="status-badge" id="badge-p44"></div>
+                <div class="explanation" id="exp-p44">Explicación: El quebrantamiento del proceso desactiva la provocación respondiendo con mínimos verbales escuetos.</div>
             </div>
 
             <div class="question-card" data-q="p45">
@@ -939,6 +1132,8 @@
                     <label><input type="radio" name="p45" value="wrong"> B) Demostrar superioridad y desprecio hacia el interlocutor</label>
                     <label><input type="radio" name="p45" value="wrong"> C) Huir permanentemente del lugar de trabajo</label>
                 </div>
+                <div class="status-badge" id="badge-p45"></div>
+                <div class="explanation" id="exp-p45">Explicación: Postergar la réplica evita reacciones viscerales en momentos de alta alteración emocional o crispación.</div>
             </div>
 
             <div class="question-card" data-q="p46">
@@ -948,6 +1143,8 @@
                     <label><input type="radio" name="p46" value="wrong"> B) Produce un desgaste físico innecesario</label>
                     <label><input type="radio" name="p46" value="wrong"> C) No tiene ninguna vinculación con la psicología laboral</label>
                 </div>
+                <div class="status-badge" id="badge-p46"></div>
+                <div class="explanation" id="exp-p46">Explicación: Una condición física óptima y hábitos saludables fortalecen la resiliencia orgánica frente a cargas de estrés continuo.</div>
             </div>
 
             <div class="question-card" data-q="p47">
@@ -957,6 +1154,8 @@
                     <label><input type="radio" name="p47" value="wrong"> B) Que la primera impresión no importa en absoluto</label>
                     <label><input type="radio" name="p47" value="wrong"> C) Que siempre se debe generar temor inicial</label>
                 </div>
+                <div class="status-badge" id="badge-p47"></div>
+                <div class="explanation" id="exp-p47">Explicación: Cuidar la apariencia y la acogida inicial previene confrontaciones y predispone favorablemente al interlocutor.</div>
             </div>
 
             <div class="question-card" data-q="p48">
@@ -966,6 +1165,8 @@
                     <label><input type="radio" name="p48" value="wrong"> B) Que la empresa asume siempre todas las culpas legales del trabajador</label>
                     <label><input type="radio" name="p48" value="wrong"> C) Que está exento de cumplir las leyes ordinarias</label>
                 </div>
+                <div class="status-badge" id="badge-p48"></div>
+                <div class="explanation" id="exp-p48">Explicación: Cada profesional asume la responsabilidad directa de sus acciones u omisiones ante la ley penal y administrativa.</div>
             </div>
 
             <div class="question-card" data-q="p49">
@@ -975,6 +1176,8 @@
                     <label><input type="radio" name="p49" value="wrong"> B) Demuestran falta de profesionalidad y rigor laboral</label>
                     <label><input type="radio" name="p49" value="wrong"> C) Incrementan drásticamente los niveles de cortisol</label>
                 </div>
+                <div class="status-badge" id="badge-p49"></div>
+                <div class="explanation" id="exp-p49">Explicación: El humor y la distracción funcional desdramatizan los contratiempos cotidianos, previniendo estados de ansiedad.</div>
             </div>
 
             <div class="question-card" data-q="p50">
@@ -984,6 +1187,8 @@
                     <label><input type="radio" name="p50" value="wrong"> B) Rellenar horas lectivas obligatorias sin utilidad práctica</label>
                     <label><input type="radio" name="p50" value="wrong"> C) Capacitarles exclusivamente para el manejo de armas de fuego</label>
                 </div>
+                <div class="status-badge" id="badge-p50"></div>
+                <div class="explanation" id="exp-p50">Explicación: La formación socioprofesional busca dotar de recursos prácticos de conducta, comunicación y autocontrol profesional.</div>
             </div>
 
         </div>
@@ -1011,7 +1216,7 @@
     }
 
     function calcularResultado(tipo) {
-        let total = 50; // Ambos tests tienen ahora 50 preguntas
+        let total = 50;
         let prefix = (tipo === 'juridico') ? 'j' : 'p';
         let aciertos = 0;
         let fallos = 0;
@@ -1020,6 +1225,8 @@
             const card = document.querySelector(`[data-q="${prefix}${i}"]`);
             if (!card) continue;
             const labels = card.querySelectorAll('label');
+            const badge = document.getElementById(`badge-${prefix}${i}`);
+            const explanation = document.getElementById(`exp-${prefix}${i}`);
             
             labels.forEach(l => {
                 l.classList.remove('correct-answer', 'wrong-answer');
@@ -1032,18 +1239,28 @@
                 if (selected.value === "correct") {
                     aciertos++;
                     selected.parentElement.classList.add('correct-answer');
+                    badge.className = "status-badge correct";
+                    badge.innerHTML = "¡Correcto!";
                 } else {
                     fallos++;
                     selected.parentElement.classList.add('wrong-answer');
                     if (correctInput) {
                         correctInput.parentElement.classList.add('correct-answer');
                     }
+                    badge.className = "status-badge wrong";
+                    badge.innerHTML = "Incorrecto";
                 }
             } else {
+                fallos++; // Si no se responde, cuenta como no acertada/fallada para el sistema
                 if (correctInput) {
                     correctInput.parentElement.classList.add('correct-answer');
                 }
+                badge.className = "status-badge wrong";
+                badge.innerHTML = "No respondida";
             }
+            
+            badge.style.display = "block";
+            explanation.style.display = "block";
         }
 
         let puntosTotales = (aciertos * 1) - (fallos * 0.5);
@@ -1070,6 +1287,12 @@
         for (let i = 1; i <= total; i++) {
             const inputs = document.querySelectorAll(`input[name="${prefix}${i}"]`);
             inputs.forEach(input => input.checked = false);
+
+            const badge = document.getElementById(`badge-${prefix}${i}`);
+            if (badge) { badge.style.display = "none"; badge.innerHTML = ""; }
+
+            const explanation = document.getElementById(`exp-${prefix}${i}`);
+            if (explanation) { explanation.style.display = "none"; }
         }
 
         const container = document.getElementById(`quiz-container-${tipo}`);
