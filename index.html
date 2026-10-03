@@ -11,7 +11,7 @@
         .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 30px; }
         
         /* Selector de Secciones */
-        .section-selector { display: flex; gap: 10px; margin-bottom: 30px; justify-content: center; }
+        .section-selector { display: flex; gap: 10px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap; }
         .btn-section { background: #6c757d; color: white; border: none; padding: 12px 20px; font-size: 15px; border-radius: 6px; cursor: pointer; font-weight: bold; width: auto; margin-top: 0; }
         .btn-section.active { background: #007bff; }
         
@@ -47,11 +47,11 @@
     
     <!-- Botones para alternar entre secciones -->
     <div class="section-selector">
-        <button class="btn-section active" onclick="cambiarSeccion('juridico')">Test Jurídico</button>
-        <button class="btn-section" onclick="cambiarSeccion('psicologia')">Test Psicología (Temas 3 y 4)</button>
+        <button class="btn-section active" onclick="cambiarSeccion('juridico')">Test Jurídico (50 Preguntas)</button>
+        <button class="btn-section" onclick="cambiarSeccion('psicologia')">Test Psicología (50 Preguntas)</button>
     </div>
 
-    <!-- SECCIÓN 1: TEST JURÍDICO -->
+    <!-- SECCIÓN 1: TEST JURÍDICO (50 PREGUNTAS) -->
     <div id="seccion-juridico" class="test-section active">
         <h2>Módulo: Área Jurídica</h2>
         <div class="rules-box">
@@ -333,6 +333,188 @@
                     <label><input type="radio" name="j30" value="wrong"> C) Solo si son agentes de policía nacional</label>
                 </div>
             </div>
+
+            <!-- Preguntas adicionales del 31 al 50 para completar el Test Jurídico -->
+            <div class="question-card" data-q="j31">
+                <div class="question">31. ¿A quién corresponde la inspección y control de las empresas de seguridad privada y de su personal?</div>
+                <div class="options">
+                    <label><input type="radio" name="j31" value="correct"> A) A los Cuerpos de Seguridad del Estado (Policía Nacional y Guardia Civil)</label>
+                    <label><input type="radio" name="j31" value="wrong"> B) A los propios directores de seguridad de cada empresa cliente</label>
+                    <label><input type="radio" name="j31" value="wrong"> C) A los sindicatos de trabajadores del sector</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j32">
+                <div class="question">32. ¿Qué plazo de prescripción tienen las infracciones muy graves cometidas por el personal de seguridad privada?</div>
+                <div class="options">
+                    <label><input type="radio" name="j32" value="wrong"> A) Seis meses</label>
+                    <label><input type="radio" name="j32" value="wrong"> B) Un año</label>
+                    <label><input type="radio" name="j32" value="correct"> C) Dos años</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j33">
+                <div class="question">33. ¿Cuál es la habilitación específica necesaria para prestar servicios en buques mercantes o pesqueros frente a actos de piratería?</div>
+                <div class="options">
+                    <label><input type="radio" name="j33" value="correct"> A) Vigilante de seguridad con la especialidad de seguridad marítima</label>
+                    <label><input type="radio" name="j33" value="wrong"> B) Guarda particular de campo</label>
+                    <label><input type="radio" name="j33" value="wrong"> C) Escolta privado exclusivo</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j34">
+                <div class="question">34. ¿Pueden los vigilantes de seguridad portar armas de fuego fuera de las horas y lugares de prestación del servicio?</div>
+                <div class="options">
+                    <label><input type="radio" name="j34" value="wrong"> A) Sí, siempre que lleven la TIP visible</label>
+                    <label><input type="radio" name="j34" value="correct"> B) No, está terminantemente prohibido portar armas de la empresa fuera del servicio</label>
+                    <label><input type="radio" name="j34" value="wrong"> C) Sí, si el director de seguridad les autoriza por escrito</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j35">
+                <div class="question">35. ¿Qué se entiende por central receptora de alarmas (CRA)?</div>
+                <div class="options">
+                    <label><input type="radio" name="j35" value="correct"> A) Un establecimiento destinado a recoger, verificar y retransmitir las señales de alarma a las Fuerzas de Seguridad</label>
+                    <label><input type="radio" name="j35" value="wrong"> B) Una oficina de atención al cliente de la empresa</label>
+                    <label><input type="radio" name="j35" value="wrong"> C) Un almacén de armas reglamentarias</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j36">
+                <div class="question">36. ¿Constituye infracción grave la negativa a prestar auxilio a las Fuerzas y Cuerpos de Seguridad en situaciones de grave riesgo o catástrofe?</div>
+                <div class="options">
+                    <label><input type="radio" name="j36" value="correct"> A) Sí, es una infracción grave tipificada en la normativa de seguridad privada</label>
+                    <label><input type="radio" name="j36" value="wrong"> B) No, el personal privado nunca tiene obligación de auxilio</label>
+                    <label><input type="radio" name="j36" value="wrong"> C) Es una mera falta disciplinaria interna de la empresa</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j37">
+                <div class="question">37. ¿Qué requisito de edad mínima se exige para obtener la habilitación como vigilante de seguridad?</div>
+                <div class="options">
+                    <label><input type="radio" name="j37" value="wrong"> A) 16 años cumplidos</label>
+                    <label><input type="radio" name="j37" value="wrong"> B) 21 años cumplidos</label>
+                    <label><input type="radio" name="j37" value="correct"> C) Mayor de edad (18 años)</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j38">
+                <div class="question">38. ¿Quién debe aprobar los planes de seguridad de obligatoria implantación en determinadas infraestructuras críticas o establecimientos?</div>
+                <div class="options">
+                    <label><input type="radio" name="j38" value="correct"> A) El Ministerio del Interior u órgano autonómico competente</label>
+                    <label><input type="radio" name="j38" value="wrong"> B) El ayuntamiento de la localidad</label>
+                    <label><input type="radio" name="j38" value="wrong"> C) Los propios clientes sin intervención estatal</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j39">
+                <div class="question">39. ¿Cuál es el tratamiento legal de las grabaciones de videovigilancia obtenidas por los servicios privados?</div>
+                <div class="options">
+                    <label><input type="radio" name="j39" value="correct"> A) Deben ser custodiadas con medidas de seguridad y destruidas en el plazo máximo legal (generalmente 30 días)</label>
+                    <label><input type="radio" name="j39" value="wrong"> B) Pueden difundirse libremente en redes sociales si hay un altercado</label>
+                    <label><input type="radio" name="j39" value="wrong"> C) Se guardan indefinidamente sin restricciones</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j40">
+                <div class="question">40. ¿Pueden los vigilantes de seguridad realizar controles de identidad en la vía pública de manera general?</div>
+                <div class="options">
+                    <label><input type="radio" name="j40" value="wrong"> A) Sí, en cualquier calle o plaza pública colindante al objetivo</label>
+                    <label><input type="radio" name="j40" value="correct"> B) No, sus funciones se limitan al perímetro o interior de los inmuebles objeto de protección</label>
+                    <label><input type="radio" name="j40" value="wrong"> C) Sí, si llevan puesto el uniforme de gala</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j41">
+                <div class="question">41. ¿Qué titulación académica mínima se exige con carácter general para presentarse a las pruebas de habilitación de vigilante de seguridad?</div>
+                <div class="options">
+                    <label><input type="radio" name="j41" value="correct"> A) Graduado en Educación Secundaria Obligatoria (ESO) o equivalente</label>
+                    <label><input type="radio" name="j41" value="wrong"> B) Título universitario de Grado</label>
+                    <label><input type="radio" name="j41" value="wrong"> C) Ninguna titulación académica</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j42">
+                <div class="question">42. ¿Qué sanción conlleva la pérdida definitiva de los requisitos para la habilitación profesional?</div>
+                <div class="options">
+                    <label><input type="radio" name="j42" value="correct"> A) La revocación o anulación de la habilitación profesional</label>
+                    <label><input type="radio" name="j42" value="wrong"> B) Una simple amonestación verbal</label>
+                    <label><input type="radio" name="j42" value="wrong"> C) Una sanción económica de 50 euros</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j43">
+                <div class="question">43. ¿Está permitida la subcontratación de servicios de seguridad privada entre diferentes empresas registradas?</div>
+                <div class="options">
+                    <label><input type="radio" name="j43" value="correct"> A) Sí, bajo estrictos requisitos legales y con la autorización o comunicación prevista en la ley</label>
+                    <label><input type="radio" name="j43" value="wrong"> B) Está prohibida de manera absoluta en todos los casos</label>
+                    <label><input type="radio" name="j43" value="wrong"> C) Solo si se hace de forma clandestina</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j44">
+                <div class="question">44. ¿Qué son los escoltas privados según la Ley de Seguridad Privada?</div>
+                <div class="options">
+                    <label><input type="correct" name="j44" value="correct"> A) Personal de seguridad encargado de la acompañamiento, defensa y protección de personas determinadas</label>
+                    <label><input type="radio" name="j44" value="wrong"> B) Vigilantes destinados exclusivamente al control de accesos de polígonos industriales</label>
+                    <label><input type="radio" name="j44" value="wrong"> C) Conductores de vehículos blindados de fondos</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j45">
+                <div class="question">45. ¿Cuál es la naturaleza jurídica de las empresas de seguridad privada?</div>
+                <div class="options">
+                    <label><input type="radio" name="j45" value="correct"> A) Sociedades mercantiles privadas debidamente autorizadas e inscritas en el Registro de Empresas de Seguridad</label>
+                    <label><input type="radio" name="j45" value="wrong"> B) Organismos públicos dependientes directamente de los ministerios de defensa</label>
+                    <label><input type="radio" name="j45" value="wrong"> C) Asociaciones sin ánimo de lucro de carácter benéfico</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j46">
+                <div class="question">46. ¿Se puede utilizar perros adiestrados en los servicios de seguridad privada?</div>
+                <div class="options">
+                    <label><input type="radio" name="j46" value="correct"> A) Sí, en determinados servicios de vigilancia y protección, cumpliendo la normativa específica de guías caninos</label>
+                    <label><input type="radio" name="j46" value="wrong"> B) No, está totalmente prohibido el uso de animales en la seguridad privada</label>
+                    <label><input type="radio" name="j46" value="wrong"> C) Únicamente en domicilios particulares</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j47">
+                <div class="question">47. ¿Qué obligaciones tiene el vigilante de seguridad respecto a la custodia de las llaves de los inmuebles vigilados?</div>
+                <div class="options">
+                    <label><input type="radio" name="j47" value="correct"> A) Custodiarlas con la máxima diligencia y responsabilidad, impidiendo su acceso a personas no autorizadas</label>
+                    <label><input type="radio" name="j47" value="wrong"> B) Entregarlas a cualquier transeúnte que las solicite por la noche</label>
+                    <label><input type="radio" name="j47" value="wrong"> C) Dejarlas siempre puestas en la cerradura exterior</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j48">
+                <div class="question">48. ¿Qué plazo máximo de inactividad profesional conlleva la obligación de superar pruebas de reciclaje o nueva habilitación según los casos?</div>
+                <div class="options">
+                    <label><input type="radio" name="j48" value="correct"> A) Los periodos de inactividad prolongados estipulados reglamentariamente en la normativa vigente</label>
+                    <label><input type="radio" name="j48" value="wrong"> B) Un mes sin trabajar</label>
+                    <label><input type="radio" name="j48" value="wrong"> C) Diez años exactos</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j49">
+                <div class="question">49. ¿Qué debe hacer un vigilante si observa una avería grave en los sistemas contra incendios del edificio?</div>
+                <div class="options">
+                    <label><input type="radio" name="j49" value="correct"> A) Comunicarlo inmediatamente al responsable o superior y adoptar medidas preventivas</label>
+                    <label><input type="radio" name="j49" value="wrong"> B) Ignorarlo hasta que finalice su turno de trabajo</label>
+                    <label><input type="radio" name="j49" value="wrong"> C) Desmontar el sistema por su cuenta para repararlo</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="j50">
+                <div class="question">50. ¿Pueden los vigilantes de seguridad imponer multas o sanciones administrativas a los infractores?</div>
+                <div class="options">
+                    <label><input type="radio" name="j50" value="wrong"> A) Sí, multas de hasta 150 euros</label>
+                    <label><input type="radio" name="j50" value="correct"> B) No, carecen por completo de potestad sancionadora; su labor es preventiva e informativa</label>
+                    <label><input type="radio" name="j50" value="wrong"> C) Sí, si el cliente del establecimiento lo autoriza</label>
+                </div>
+            </div>
+
         </div>
             
         <button onclick="calcularResultado('juridico')">Comprobar Test Jurídico</button>
@@ -340,7 +522,7 @@
         <div id="result-juridico" class="result"></div>
     </div>
 
-    <!-- SECCIÓN 2: TEST PSICOLOGÍA (Temas 3 y 4) -->
+    <!-- SECCIÓN 2: TEST PSICOLOGÍA (50 PREGUNTAS) -->
     <div id="seccion-psicologia" class="test-section">
         <h2>Módulo: Psicología y Ámbito Socioprofesional (Temas 3 y 4)</h2>
         <div class="rules-box">
@@ -488,6 +670,322 @@
                 </div>
             </div>
 
+            <!-- Preguntas adicionales de psicología del 16 al 50 -->
+            <div class="question-card" data-q="p16">
+                <div class="question">16. ¿Qué técnica asertiva consiste en aparentar ceder terreno sin cederlo realmente, estando de acuerdo con parte del argumento de la otra persona?</div>
+                <div class="options">
+                    <label><input type="radio" name="p16" value="correct"> A) Técnica de la claudicación simulada (Banco de niebla)</label>
+                    <label><input type="radio" name="p16" value="wrong"> B) Técnica del disco roto</label>
+                    <label><input type="radio" name="p16" value="wrong"> C) Técnica de procesar el cambio</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p17">
+                <div class="question">17. ¿Cómo se define el estilo de comunicación pasivo?</div>
+                <div class="options">
+                    <label><input type="radio" name="p17" value="correct"> A) Persona insegura, se cree inferior, sufre estrés, no mira a los ojos y se lamenta</label>
+                    <label><input type="radio" name="p17" value="wrong"> B) Persona que defiende sus derechos avasallando a los demás y gritando</label>
+                    <label><input type="radio" name="p17" value="wrong"> C) Persona que empatiza perfectamente y mantiene contacto visual</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p18">
+                <div class="question">18. ¿Qué componentes de la comunicación interpersonal incluyen la mirada, la sonrisa, los gestos y la postura corporal?</div>
+                <div class="options">
+                    <label><input type="radio" name="p18" value="correct"> A) Componentes no verbales</label>
+                    <label><input type="radio" name="p18" value="wrong"> B) Componentes paralingüísticos</label>
+                    <label><input type="radio" name="p18" value="wrong"> C) Componentes verbales</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p19">
+                <div class="question">19. ¿Qué elementos forman parte de los componentes paralingüísticos de la comunicación?</div>
+                <div class="options">
+                    <label><input type="radio" name="p19" value="correct"> A) Volumen, entonación, fluidez, claridad y velocidad de la voz</label>
+                    <label><input type="radio" name="p19" value="wrong"> B) El vocabulario y el contenido escrito</label>
+                    <label><input type="radio" name="p19" value="wrong"> C) Los movimientos de las manos y la distancia física</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p20">
+                <div class="question">20. ¿Qué se entiende por escucha activa en el ámbito de las habilidades sociales?</div>
+                <div class="options">
+                    <label><input type="radio" name="p20" value="correct"> A) Saber escuchar, formular preguntas adecuadas, permanecer receptivo, comprender y no interrumpir</label>
+                    <label><input type="radio" name="p20" value="wrong"> B) Oír sin prestar atención mientras se realizan otras tareas</label>
+                    <label><input type="radio" name="p20" value="wrong"> C) Responder inmediatamente con críticas a la otra persona</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p21">
+                <div class="question">21. ¿Qué es la empatía según el manual de formación?</div>
+                <div class="options">
+                    <label><input type="radio" name="p21" value="correct"> A) Darse cuenta de lo que sienten los demás, de sus necesidades y preocupaciones</label>
+                    <label><input type="radio" name="p21" value="wrong"> B) Compartir exactamente las mismas opiniones políticas que el cliente</label>
+                    <label><input type="radio" name="p21" value="wrong"> C) Juzgar rápidamente el comportamiento ajeno</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p22">
+                <div class="question">22. ¿Qué caracteriza al miedo innato?</div>
+                <div class="options">
+                    <label><input type="radio" name="p22" value="correct"> A) Es común a todas las personas y animales como instinto de supervivencia ante peligros reales</label>
+                    <label><input type="radio" name="p22" value="wrong"> B) Se adquiere únicamente mediante la lectura de libros de terror</label>
+                    <label><input type="radio" name="p22" value="wrong"> C) Aparece solo en la edad adulta por aprendizaje social</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p23">
+                <div class="question">23. ¿Cuáles son las graduaciones del miedo adquirido descritas en el temario?</div>
+                <div class="options">
+                    <label><input type="radio" name="p23" value="correct"> A) Alerta, precaución y temor</label>
+                    <label><input type="radio" name="p23" value="wrong"> B) Estrés, ansiedad y fobia</label>
+                    <label><input type="radio" name="p23" value="wrong"> C) Pánico, shock y bloqueo</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p24">
+                <div class="question">24. ¿Qué nombre recibe la fobia o miedo patológico a los espacios abiertos, calles o plazas amplias?</div>
+                <div class="options">
+                    <label><input type="radio" name="p24" value="correct"> A) Agorafobia</label>
+                    <label><input type="radio" name="p24" value="wrong"> B) Claustrofobia</label>
+                    <label><input type="radio" name="p24" value="wrong"> C) Acrofobia</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p25">
+                <div class="question">25. ¿Cómo se denomina el miedo irracional a hablar en público?</div>
+                <div class="options">
+                    <label><input type="radio" name="p25" value="correct"> A) Glosofobia</label>
+                    <label><input type="radio" name="p25" value="wrong"> B) Hematofobia</label>
+                    <label><input type="radio" name="p25" value="wrong"> C) Nictofobia</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p26">
+                <div class="question">26. ¿Qué es la hematofobia?</div>
+                <div class="options">
+                    <label><input type="radio" name="p26" value="correct"> A) Miedo a la sangre y a las heridas</label>
+                    <label><input type="radio" name="p26" value="wrong"> B) Miedo a la oscuridad o a la noche</label>
+                    <label><input type="radio" name="p26" value="wrong"> C) Aversión hacia los extranjeros</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="27">
+                <div class="question">27. ¿Qué efectos físicos produce el miedo en el organismo humano?</div>
+                <div class="options">
+                    <label><input type="radio" name="p27" value="correct"> A) Incremento de la frecuencia cardíaca, capacidad respiratoria y dilatación de pupilas</label>
+                    <label><input type="radio" name="p27" value="wrong"> B) Descenso absoluto del ritmo cardíaco y sueño profundo</label>
+                    <label><input type="radio" name="p27" value="wrong"> C) Paralización total del sistema circulatorio</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p28">
+                <div class="question">28. ¿Qué es el estrés según el enfoque del síndrome general de adaptación?</div>
+                <div class="options">
+                    <label><input type="radio" name="p28" value="correct"> A) Una respuesta adaptativa del organismo ante situaciones de tensión o demanda externa</label>
+                    <label><input type="radio" name="p28" value="wrong"> B) Una enfermedad mental incurable originada en la infancia</label>
+                    <label><input type="radio" name="p28" value="wrong"> C) Un estado de felicidad absoluta y relajación</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="29">
+                <div class="question">29. ¿Qué fase del estrés se caracteriza por el consumo de los recursos del organismo debido a una fuerte activación fisiológica continuada?</div>
+                <div class="options">
+                    <label><input type="radio" name="p29" value="correct"> A) Fase de resistencia</label>
+                    <label><input type="radio" name="p29" value="wrong"> B) Fase de alarma inicial</label>
+                    <label><input type="radio" name="p29" value="wrong"> C) Fase de distensión</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p30">
+                <div class="question">30. ¿Qué ocurre en la fase de agotamiento del estrés?</div>
+                <div class="options">
+                    <label><input type="radio" name="p30" value="correct"> A) El organismo pierde sus defensas y aparecen síntomas que repercuten negativamente en la salud</label>
+                    <label><input type="radio" name="p30" value="wrong"> B) El cuerpo recupera instantáneamente toda su energía</label>
+                    <label><input type="radio" name="p30" value="wrong"> C) Desaparece cualquier rastro de cansancio</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p31">
+                <div class="question">31. ¿Cuáles son los tipos principales en los que se clasifican las técnicas de autocontrol?</div>
+                <div class="options">
+                    <label><input type="radio" name="p31" value="correct"> A) Cognitivas, fisiológicas y conductuales</label>
+                    <label><input type="radio" name="p31" value="wrong"> B) Teóricas, prácticas y económicas</label>
+                    <label><input type="radio" name="p31" value="wrong"> C) Individuales y colectivas</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p32">
+                <div class="question">32. ¿Qué persiguen las técnicas cognitivas de autocontrol?</div>
+                <div class="options">
+                    <label><input type="radio" name="p32" value="correct"> A) Cambiar la forma de ver la situación, manejando la percepción y la interpretación del problema</label>
+                    <label><input type="radio" name="p32" value="wrong"> B) Reducir la tensión muscular mediante masajes</label>
+                    <label><input type="radio" name="p32" value="wrong"> C) Modificar la dieta alimenticia</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="33">
+                <div class="question">33. ¿Qué técnica cognitiva intenta reorganizar la forma en que una persona percibe una situación sustituyendo interpretaciones inadecuadas?</div>
+                <div class="options">
+                    <label><input type="radio" name="p33" value="correct"> A) Reorganización cognitiva</label>
+                    <label><input type="radio" name="p33" value="wrong"> B) Relajación de Jacobson</label>
+                    <label><input type="radio" name="p33" value="wrong"> C) Entrenamiento autógeno</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p34">
+                <div class="question">34. ¿Qué tipo de respiración utiliza principalmente el movimiento del diafragma y proporciona mayor calma al sistema nervioso?</div>
+                <div class="options">
+                    <label><input type="radio" name="p34" value="correct"> A) Respiración diafragmática o abdominal</label>
+                    <label><input type="radio" name="p34" value="wrong"> B) Respiración clavicular alta</label>
+                    <label><input type="radio" name="p34" value="wrong"> C) Respiración superficial rápida</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p35">
+                <div class="question">35. ¿Qué problema puede provocar una respiración clavicular (alta) mantenida durante mucho tiempo?</div>
+                <div class="options">
+                    <label><input type="radio" name="p35" value="correct"> A) Hiperventilación, con pérdida de dióxido de carbono y aumento de la ansiedad</label>
+                    <label><input type="radio" name="p35" value="wrong"> B) Relajación profunda y sueño reparador</label>
+                    <label><input type="radio" name="p35" value="wrong"> C) Mejora de la capacidad pulmonar total</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p36">
+                <div class="question">36. ¿Qué técnica conductual de entrenamiento en habilidades sociales utiliza la escenificación y simulación de situaciones reales?</div>
+                <div class="options">
+                    <label><input type="radio" name="p36" value="correct"> A) Role-playing</label>
+                    <label><input type="radio" name="p36" value="wrong"> B) Desensibilización sistemática</label>
+                    <label><input type="radio" name="p36" value="wrong"> C) Banco de niebla</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="37">
+                <div class="question">37. ¿Qué factores psicosociales pueden desencadenar estrés laboral en el vigilante de seguridad?</div>
+                <div class="options">
+                    <label><input type="radio" name="p37" value="correct"> A) Exceso de trabajo, falta de tiempo, responsabilidad múltiple y exposición a amenazas o violencia</label>
+                    <label><input type="radio" name="p37" value="wrong"> B) Descansos excesivos y sueldo elevado</label>
+                    <label><input type="radio" name="p37" value="wrong"> C) Ausencia total de tareas asignadas</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="38">
+                <div class="question">38. ¿Qué relación existe entre pensamiento, emoción y conducta según la psicología aplicada al autocontrol?</div>
+                <div class="options">
+                    <label><input type="radio" name="p38" value="correct"> A) Están interconectados: lo que pensamos genera una emoción (sentimiento) y esta influye en nuestra conducta</label>
+                    <label><input type="radio" name="p38" value="wrong"> B) Son tres elementos totalmente independientes sin relación entre sí</label>
+                    <label><input type="radio" name="p38" value="wrong"> C) La conducta no depende en ningún caso de los pensamientos</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p39">
+                <div class="question">39. ¿Qué recomendación se indica para el trato con el público en general por parte del personal de seguridad?</div>
+                <div class="options">
+                    <label><input type="radio" name="p39" value="correct"> A) Trato cortés, agradable, educado, utilizando un lenguaje correcto y actitud flexible</label>
+                    <label><input type="radio" name="p39" value="wrong"> B) Mostrar superioridad y firmeza agresiva ante cualquier ciudadano</label>
+                    <label><input type="radio" name="p39" value="wrong"> C) Evitar hablar con las personas bajo cualquier circunstancia</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="40">
+                <div class="question">40. ¿Cómo debe actuar el vigilante de seguridad en sus relaciones profesionales con los medios de comunicación?</div>
+                <div class="options">
+                    <label><input type="radio" name="p40" value="correct"> A) Manteniendo la compostura, siendo respetuoso pero escrupulosamente discreto sin revelar información</label>
+                    <label><input type="radio" name="p40" value="wrong"> B) Conceder exclusivas y entrevistas detalladas sobre los investigados</label>
+                    <label><input type="radio" name="p40" value="wrong"> C) Expulsarles violentamente del recinto</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p41">
+                <div class="question">41. ¿Qué pauta debe seguirse en la relación con el personal protegido en servicios de escolta?</div>
+                <div class="options">
+                    <label><input type="radio" name="p41" value="correct"> A) No entrar en asuntos personales, mantener la discreción y cuidar la buena imagen</label>
+                    <label><input type="radio" name="p41" value="wrong"> B) Involucrarse en los problemas familiares del protegido</label>
+                    <label><input type="radio" name="p41" value="wrong"> C) Desatender la seguridad para conversar sobre temas triviales</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p42">
+                <div class="question">42. ¿Qué se establece respecto a la jerarquía y cumplimiento de órdenes en la empresa?</div>
+                <div class="options">
+                    <label><input type="radio" name="p42" value="correct"> A) Se deben ejecutar las órdenes del superior siempre que sean legales; si son constitutivas de delito, hay responsabilidad</label>
+                    <label><input type="radio" name="p42" value="wrong"> B) Hay que obedecer absolutamente todas las órdenes sin importar si son ilegales</label>
+                    <label><input type="radio" name="p42" value="wrong"> C) El vigilante puede desobedecer cualquier orden de sus jefes libremente</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p43">
+                <div class="question">43. ¿Qué caracteriza al estilo de comunicación agresivo?</div>
+                <div class="options">
+                    <label><input type="radio" name="p43" value="correct"> A) Intimidación verbal, tono de voz alto, gritos, señalar con el dedo y postura rígida</label>
+                    <label><input type="radio" name="p43" value="wrong"> B) Diálogo calmado, escucha activa y respeto mutuo</label>
+                    <label><input type="radio" name="p43" value="wrong"> C) Sumisión y evitación del contacto visual</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p44">
+                <div class="question">44. ¿Qué técnica asertiva consiste en responder a una crítica intentando provocar con una sola palabra o frases lacónicas (Sí... no... quizá)?</div>
+                <div class="options">
+                    <label><input type="radio" name="p44" value="correct"> A) Técnica del quebrantamiento del proceso</label>
+                    <label><input type="radio" name="p44" value="wrong"> B) Técnica del disco roto</label>
+                    <label><input type="radio" name="p44" value="wrong"> C) Técnica del aplazamiento asertivo</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p45">
+                <div class="question">45. ¿Cuál es el objetivo de la técnica asertiva de ignorar o aplazamiento asertivo ante un conflicto?</div>
+                <div class="options">
+                    <label><input type="radio" name="p45" value="correct"> A) Aplazar la respuesta hasta que ambas partes estén tranquilas y capaces de razonar</label>
+                    <label><input type="radio" name="p45" value="wrong"> B) Demostrar superioridad y desprecio hacia el interlocutor</label>
+                    <label><input type="radio" name="p45" value="wrong"> C) Huir permanentemente del lugar de trabajo</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p46">
+                <div class="question">46. ¿Qué función cumple el hábito de una buena alimentación y ejercicio físico frente al estrés?</div>
+                <div class="options">
+                    <label><input type="radio" name="p46" value="correct"> A) Mejora el funcionamiento orgánico y aumenta la resistencia y capacidad de reacción ante la tensión</label>
+                    <label><input type="radio" name="p46" value="wrong"> B) Produce un desgaste físico innecesario</label>
+                    <label><input type="radio" name="p46" value="wrong"> C) No tiene ninguna vinculación con la psicología laboral</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p47">
+                <div class="question">47. ¿Qué se destaca acerca de la primera impresión en la resolución de conflictos según el material?</div>
+                <div class="options">
+                    <label><input type="radio" name="p47" value="correct"> A) Que muchas situaciones conflictivas se solventan si la tarjeta de presentación y primera impresión son agradables</label>
+                    <label><input type="radio" name="p47" value="wrong"> B) Que la primera impresión no importa en absoluto</label>
+                    <label><input type="radio" name="p47" value="wrong"> C) Que siempre se debe generar temor inicial</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p48">
+                <div class="question">48. ¿Qué implica la responsabilidad personal del vigilante de seguridad en sus actuaciones?</div>
+                <div class="options">
+                    <label><input type="radio" name="p48" value="correct"> A) Que responde personalmente, tanto en el ámbito penal como administrativo, por sus actos profesionales</label>
+                    <label><input type="radio" name="p48" value="wrong"> B) Que la empresa asume siempre todas las culpas legales del trabajador</label>
+                    <label><input type="radio" name="p48" value="wrong"> C) Que está exento de cumplir las leyes ordinarias</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p49">
+                <div class="question">49. ¿Qué papel juega la distracción y el buen humor como medida preventiva frente a la ansiedad?</div>
+                <div class="options">
+                    <label><input type="radio" name="p49" value="correct"> A) Facilitan el desplazamiento de la atención de los problemas y ayudan a relativizar su importancia</label>
+                    <label><input type="radio" name="p49" value="wrong"> B) Demuestran falta de profesionalidad y rigor laboral</label>
+                    <label><input type="radio" name="p49" value="wrong"> C) Incrementan drásticamente los niveles de cortisol</label>
+                </div>
+            </div>
+
+            <div class="question-card" data-q="p50">
+                <div class="question">50. ¿Cuál es la finalidad principal de la formación en el ámbito socioprofesional para los vigilantes?</div>
+                <div class="options">
+                    <label><input type="radio" name="p50" value="correct"> A) Dotarles de herramientas psicológicas, éticas y comunicativas para resolver conflictos con eficacia y seguridad</label>
+                    <label><input type="radio" name="p50" value="wrong"> B) Rellenar horas lectivas obligatorias sin utilidad práctica</label>
+                    <label><input type="radio" name="p50" value="wrong"> C) Capacitarles exclusivamente para el manejo de armas de fuego</label>
+                </div>
+            </div>
+
         </div>
             
         <button onclick="calcularResultado('psicologia')">Comprobar Test Psicología</button>
@@ -513,7 +1011,7 @@
     }
 
     function calcularResultado(tipo) {
-        let total = (tipo === 'juridico') ? 30 : 15;
+        let total = 50; // Ambos tests tienen ahora 50 preguntas
         let prefix = (tipo === 'juridico') ? 'j' : 'p';
         let aciertos = 0;
         let fallos = 0;
@@ -567,9 +1065,9 @@
 
     function reiniciarTest(tipo) {
         let prefix = (tipo === 'juridico') ? 'j' : 'p';
-        let total = (tipo === 'juridico') ? '30' : '15';
+        let total = 50;
 
-        for (let i = 1; i <= parseInt(total); i++) {
+        for (let i = 1; i <= total; i++) {
             const inputs = document.querySelectorAll(`input[name="${prefix}${i}"]`);
             inputs.forEach(input => input.checked = false);
         }
