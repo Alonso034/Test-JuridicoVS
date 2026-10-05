@@ -60,7 +60,7 @@
 
     <!-- SECCIÓN 1: TEST JURÍDICO -->
     <div id="seccion-juridico" class="test-section active">
-        <h2>Módulo: Área Jurídica</h2>
+        <h2>Módulo: Área Jurídica (Derecho Constitucional y Seguridad)</h2>
         <div class="rules-box">
             <strong>Sistema de Puntuación (sobre 10 preguntas):</strong>
             <ul>
@@ -97,8 +97,9 @@
 </div>
 
 <script>
-    // Banco de preguntas de Área Jurídica (ampliado hacia las 100 preguntas)
+    // Banco de preguntas de Área Jurídica (Preguntas de Seguridad Privada + 43 Preguntas de Derecho Constitucional)
     const bancoJuridico = [
+        // --- Preguntas de Seguridad Privada (Ley 5/2014 y RSP) ---
         { q: "Según la Ley 5/2014 de Seguridad Privada, ¿qué consideración tienen las actividades de seguridad privada respecto a la seguridad pública?", options: [{text: "A) Sustitutivas e independientes", val: "wrong"}, {text: "B) Complementarias y subordinadas", val: "correct"}, {text: "C) Superiores y prioritarias", val: "wrong"}], exp: "La seguridad privada ejerce un papel complementario y subordinado respecto a la seguridad pública." },
         { q: "¿Cuál es el arma reglamentaria principal de los vigilantes de seguridad en los servicios que deban prestarse con armas?", options: [{text: "A) Escopeta de repetición calibre 12/70", val: "wrong"}, {text: "B) Revólver calibre treinta y ocho especial de cuatro pulgadas", val: "correct"}, {text: "C) Pistola semiautomática 9mm Parabellum", val: "wrong"}], exp: "El revólver calibre 38 especial de 4 pulgadas es el arma corta reglamentaria principal." },
         { q: "¿Qué defensa reglamentaria deben portar los vigilantes de seguridad uniformados durante su servicio?", options: [{text: "A) De color negro, goma semirrígida y 50 centímetros de longitud", val: "correct"}, {text: "B) De color marrón, madera y 60 centímetros", val: "wrong"}, {text: "C) Extensible metálica de 40 centímetros", val: "wrong"}], exp: "La defensa reglamentaria es la porra de color negro, goma semirrígida y 50 centímetros de longitud." },
@@ -118,167 +119,15 @@
         { q: "¿Pueden los detectives privados investigar delitos perseguibles de oficio?", options: [{text: "A) No, tienen prohibido investigar delitos perseguibles de oficio y deben denunciarlos", val: "correct"}, {text: "B) Sí, total libertad", val: "wrong"}, {text: "C) Sí, pagando tasas", val: "wrong"}], exp: "Tienen prohibida la investigación de delitos perseguibles de oficio." },
         { q: "¿Dónde se coloca el escudo-emblema de la empresa de seguridad en la uniformidad?", options: [{text: "A) En la parte alta de la manga izquierda de las prendas superiores", val: "correct"}, {text: "B) Al cuello con cadena", val: "wrong"}, {text: "C) En la espalda", val: "wrong"}], exp: "El emblema de la empresa se coloca obligatoriamente en la manga izquierda." },
         { q: "¿Cuáles son los principios básicos de actuación del personal de seguridad privada?", options: [{text: "A) Legalidad, integridad, dignidad, protección, corrección, congruencia y proporcionalidad", val: "correct"}, {text: "B) Rapidez e improvisación", val: "wrong"}, {text: "C) Anonimato absoluto", val: "wrong"}], exp: "Se rigen por legalidad, integridad, dignidad, congruencia y proporcionalidad." },
-        { q: "¿Qué consideración legal tiene el personal de seguridad privada cuando actúa en cooperación y bajo mando policial?", options: [{text: "A) Protección jurídica de agente de la autoridad frente a agresiones y desobediencias", val: "correct"}, {text: "B) Consideración militar", val: "wrong"}, {text: "C) Ninguna protección", val: "wrong"}], exp: "Disfrutan de protección jurídica de agente de la autoridad." }
-    ];
+        { q: "¿Qué consideración legal tiene el personal de seguridad privada cuando actúa en cooperación y bajo mando policial?", options: [{text: "A) Protección jurídica de agente de la autoridad frente a agresiones y desobediencias", val: "correct"}, {text: "B) Consideración militar", val: "wrong"}, {text: "C) Ninguna protección", val: "wrong"}], exp: "Disfrutan de protección jurídica de agente de la autoridad." },
 
-    // Banco de preguntas de Psicología (ampliado hacia las 100 preguntas)
-    const bancoPsicologia = [
-        { q: "¿Qué define el Código de Ética según el material de estudio?", options: [{text: "A) Una rama de la psicología clínica", val: "wrong"}, {text: "B) Una ciencia normativa que estudia los deberes y los derechos de cada profesión", val: "correct"}, {text: "C) Un conjunto de leyes penales", val: "wrong"}], exp: "El Código de Ética se define como la ciencia normativa de deberes y derechos profesionales." },
-        { q: "¿Cuál es una de las diferencias clave entre moral y ética según el Tema 3?", options: [{text: "A) La moral surge en la interioridad y la ética tiene base social", val: "wrong"}, {text: "B) La moral tiene base social y la ética surge en la interioridad de la persona", val: "correct"}, {text: "C) No hay diferencia", val: "wrong"}], exp: "La moral tiene base social colectiva y la ética brota de la interioridad y conciencia individual." },
-        { q: "¿Qué capacidad social se define como expresar lo que se piensa y se siente de forma adecuada y sin ansiedad?", options: [{text: "A) Agresividad", val: "wrong"}, {text: "B) Pasividad", val: "wrong"}, {text: "C) Asertividad", val: "correct"}], exp: "La asertividad permite defender los propios derechos de forma adecuada y sin generar ansiedad." },
-        { q: "¿Cómo se denomina la técnica asertiva en la que se repite el propio punto de vista con tranquilidad y sin dejarse ganar por aspectos irrelevantes?", options: [{text: "A) Técnica del disco roto", val: "correct"}, {text: "B) Técnica del banco de niebla", val: "wrong"}, {text: "C) Técnica de ignorar", val: "wrong"}], exp: "La técnica del disco roto consiste en insistir calmadamente en nuestro argumento." },
-        { q: "En la pirámide de necesidades de Maslow, ¿qué necesidades se encuentran en la base (nivel inferior)?", options: [{text: "A) Necesidades fisiológicas (respiración, alimentación, descanso)", val: "correct"}, {text: "B) Autorrealización", val: "wrong"}, {text: "C) Reconocimiento y éxito", val: "wrong"}], exp: "En la base se sitúan las necesidades fisiológicas primarias para la supervivencia." },
-        { q: "¿Qué tipo de estructura en la empresa está formada por personas que actúan espontáneamente buscando la satisfacción personal?", options: [{text: "A) Estructura formal", val: "wrong"}, {text: "B) Estructura informal", val: "correct"}, {text: "C) Estructura jerárquica", val: "wrong"}], exp: "La estructura informal surge de forma espontánea priorizando las relaciones personales." },
-        { q: "¿Qué es el autocontrol emocional?", options: [{text: "A) La capacidad que nos permite controlar nuestras emociones y no que estas nos controlen a nosotros", val: "correct"}, {text: "B) La represión total", val: "wrong"}, {text: "C) Influir en los superiores", val: "wrong"}], exp: "Otorga la facultad de regular los impulsos emocionales de forma consciente." },
-        { q: "Según el esquema cognitivo del autocontrol, ¿cuál es la reacción física directa de un pensamiento?", options: [{text: "A) El sentimiento", val: "correct"}, {text: "B) La conducta motora", val: "wrong"}, {text: "C) La memoria", val: "wrong"}], exp: "Cada pensamiento genera una reacción fisiológica interna traducida en un sentimiento." },
-        { q: "¿Cuál es la diferencia principal entre el miedo y la fobia?", options: [{text: "A) El miedo es permanente y la fobia transitoria", val: "wrong"}, {text: "B) El miedo es una respuesta normal y transitoria; la fobia es una reacción desproporcionada, irracional y persistente", val: "correct"}, {text: "C) No hay diferencias", val: "wrong"}], exp: "El miedo es normal y transitorio; la fobia es un temor irracional, persistente y desproporcionado." },
-        { q: "¿Cómo se denomina el miedo a las alturas o vértigo patológico según el temario de fobias?", options: [{text: "A) Acrofobia", val: "correct"}, {text: "B) Agorafobia", val: "wrong"}, {text: "C) Claustrofobia", val: "wrong"}], exp: "La acrofobia es el miedo intenso o vértigo patológico ante las alturas." },
-        { q: "¿Cuáles son las fases del proceso adaptativo del estrés (síndrome general de adaptación)?", options: [{text: "A) Fase de alarma, fase de resistencia y fase de agotamiento", val: "correct"}, {text: "B) Fase inicial e intermedia", val: "wrong"}, {text: "C) Fase de pánico y shock", val: "wrong"}], exp: "Comprende secuencialmente alarma, resistencia sostenida y agotamiento." },
-        { q: "¿Qué tipo de respiración es la más adecuada para proporcionar una mayor calma al sistema nervioso y aprovechar la capacidad pulmonar?", options: [{text: "A) Respiración clavicular", val: "wrong"}, {text: "B) Respiración diafragmática o abdominal", val: "correct"}, {text: "C) Respiración torácica", val: "wrong"}], exp: "La respiración diafragmática maximiza la oxigenación y relaja profundamente." },
-        { q: "¿Qué técnica fisiológica de relajación consiste en adiestrar a la persona en ejercicios de contracción y relajación muscular voluntaria?", options: [{text: "A) Relajación progresiva de Jacobson", val: "correct"}, {text: "B) Desensibilización sistemática", val: "wrong"}, {text: "C) Inoculación de estrés", val: "wrong"}], exp: "Jacobson ideó el método físico de tensar y relajar grupos musculares." },
-        { q: "¿Qué es el pánico dentro de la escala de miedos?", options: [{text: "A) El nivel de gradación más elevado del miedo, totalmente incapacitante y que provoca huida", val: "correct"}, {text: "B) Una simple alerta preventiva", val: "wrong"}, {text: "C) Relajación mental", val: "wrong"}], exp: "El pánico representa el grado máximo de miedo con pérdida de control." },
-        { q: "¿Cuál es una recomendación fundamental para el Vigilante de Seguridad frente a situaciones de pánico colectivo?", options: [{text: "A) Mantener la calma, ayudar a escapar del peligro y colaborar en los servicios de rescate", val: "correct"}, {text: "B) Abandonar el puesto", val: "wrong"}, {text: "C) Gritar con la masa", val: "wrong"}], exp: "Se debe mantener la templanza, guiar a las personas y colaborar con emergencias." },
-        { q: "¿Qué técnica asertiva consiste en aparentar ceder terreno sin cederlo realmente, estando de acuerdo con parte del argumento?", options: [{text: "A) Técnica de la claudicación simulada (Banco de niebla)", val: "correct"}, {text: "B) Disco roto", val: "wrong"}, {text: "C) Procesar el cambio", val: "wrong"}], exp: "El banco de niebla permite dar la razón en lo verosímil sin renunciar al criterio propio." },
-        { q: "¿Cómo se define el estilo de comunicación pasivo?", options: [{text: "A) Persona insegura, se cree inferior, sufre estrés, no mira a los ojos y se lamenta", val: "correct"}, {text: "B) Persona agresiva y dominante", val: "wrong"}, {text: "C) Persona asertiva", val: "wrong"}], exp: "El perfil pasivo denota inseguridad y vulnerabilidad ante la presión." },
-        { q: "¿Qué componentes de la comunicación interpersonal incluyen la mirada, la sonrisa, los gestos y la postura corporal?", options: [{text: "A) Componentes no verbales", val: "correct"}, {text: "B) Componentes paralingüísticos", val: "wrong"}, {text: "C) Componentes verbales", val: "wrong"}], exp: "Gestos y posturas integran el lenguaje corporal o componentes no verbales." },
-        { q: "¿Qué elementos forman parte de los componentes paralingüísticos de la comunicación?", options: [{text: "A) Volumen, entonación, fluidez, claridad y velocidad de la voz", val: "correct"}, {text: "B) Contenido escrito", val: "wrong"}, {text: "C) Movimientos de manos", val: "wrong"}], exp: "La paralingüística estudia el tono, el volumen y la velocidad verbal." },
-        { q: "¿Qué se entiende por escucha activa en el ámbito de las habilidades sociales?", options: [{text: "A) Saber escuchar, formular preguntas adecuadas, permanecer receptivo, comprender y no interrumpir", val: "correct"}, {text: "B) Oír sin prestar atención", val: "wrong"}, {text: "C) Responder con críticas", val: "wrong"}], exp: "La escucha activa implica atención plena y comprensión sincera." }
-    ];
-
-    let preguntasActualesJuridico = [];
-    let preguntasActualesPsicologia = [];
-
-    function seleccionarAleatorias(banco, cantidad) {
-        let mezclado = [...banco].sort(() => 0.5 - Math.random());
-        return mezclado.slice(0, cantidad);
-    }
-
-    function renderizarTest(tipo) {
-        let container = document.getElementById(`quiz-container-${tipo}`);
-        container.innerHTML = "";
-        let banco = (tipo === 'juridico') ? bancoJuridico : bancoPsicologia;
-        let prefijo = (tipo === 'juridico') ? 'j' : 'p';
-
-        // Seleccionamos 10 preguntas aleatorias del banco
-        let seleccion = seleccionarAleatorias(banco, 10);
-        if (tipo === 'juridico') preguntasActualesJuridico = seleccion;
-        else preguntasActualesPsicologia = seleccion;
-
-        seleccion.forEach((item, index) => {
-            let numQ = index + 1;
-            let cardHTML = `
-                <div class="question-card" data-q="${prefijo}${numQ}" data-orig-index="${banco.indexOf(item)}">
-                    <div class="question">${numQ}. ${item.q}</div>
-                    <div class="options">
-            `;
-
-            item.options.forEach((opt, optIndex) => {
-                cardHTML += `<label><input type="radio" name="${prefijo}${numQ}" value="${opt.val}"> ${opt.text}</label>`;
-            });
-
-            cardHTML += `
-                    </div>
-                    <div class="status-badge" id="badge-${prefijo}${numQ}"></div>
-                    <div class="explanation" id="exp-${prefijo}${numQ}">Explicación: ${item.exp}</div>
-                </div>
-            `;
-            container.innerHTML += cardHTML;
-        });
-
-        document.getElementById(`result-${tipo}`).innerHTML = "";
-        document.getElementById(`result-${tipo}`).style.backgroundColor = "transparent";
-    }
-
-    function iniciarTest(tipo) {
-        renderizarTest(tipo);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function cambiarSeccion(seccion) {
-        document.querySelectorAll('.test-section').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.btn-section').forEach(el => el.classList.remove('active'));
-        
-        if (seccion === 'juridico') {
-            document.getElementById('seccion-juridico').classList.add('active');
-            event.target.classList.add('active');
-        } else if (seccion === 'psicologia') {
-            document.getElementById('seccion-psicologia').classList.add('active');
-            event.target.classList.add('active');
-        }
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function calcularResultado(tipo) {
-        let total = 10; // Ahora son 10 preguntas por examen
-        let prefix = (tipo === 'juridico') ? 'j' : 'p';
-        let aciertos = 0;
-        let fallos = 0;
-
-        for (let i = 1; i <= total; i++) {
-            const card = document.querySelector(`[data-q="${prefix}${i}"]`);
-            if (!card) continue;
-            const labels = card.querySelectorAll('label');
-            const badge = document.getElementById(`badge-${prefix}${i}`);
-            const explanation = document.getElementById(`exp-${prefix}${i}`);
-            
-            labels.forEach(l => {
-                l.classList.remove('correct-answer', 'wrong-answer');
-            });
-
-            const selected = card.querySelector(`input[name="${prefix}${i}"]:checked`);
-            const correctInput = card.querySelector(`input[name="${prefix}${i}"][value="correct"]`);
-
-            if (selected) {
-                if (selected.value === "correct") {
-                    aciertos++;
-                    selected.parentElement.classList.add('correct-answer');
-                    badge.className = "status-badge correct";
-                    badge.innerHTML = "¡Correcto!";
-                } else {
-                    fallos++;
-                    selected.parentElement.classList.add('wrong-answer');
-                    if (correctInput) {
-                        correctInput.parentElement.classList.add('correct-answer');
-                    }
-                    badge.className = "status-badge wrong";
-                    badge.innerHTML = "Incorrecto";
-                }
-            } else {
-                fallos++;
-                if (correctInput) {
-                    correctInput.parentElement.classList.add('correct-answer');
-                }
-                badge.className = "status-badge wrong";
-                badge.innerHTML = "No respondida";
-            }
-            
-            badge.style.display = "block";
-            explanation.style.display = "block";
-        }
-
-        let puntosTotales = (aciertos * 1) - (fallos * 0.5);
-        let notaFinal = (puntosTotales / total) * 10;
-        if (notaFinal < 0) notaFinal = 0;
-
-        const resultadoDiv = document.getElementById(`result-${tipo}`);
-        
-        if (notaFinal >= 5) {
-            resultadoDiv.style.backgroundColor = "#d4edda";
-            resultadoDiv.style.color = "#155724";
-            resultadoDiv.innerHTML = `¡Aprobado! Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
-        } else {
-            resultadoDiv.style.backgroundColor = "#f8d7da";
-            resultadoDiv.style.color = "#721c24";
-            resultadoDiv.innerHTML = `Suspenso. Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
-        }
-    }
-
-    // Inicializar los tests al cargar la página por primera vez
-    window.onload = function() {
-        renderizarTest('juridico');
-        renderizarTest('psicologia');
-    };
-</script>
-
-</body>
-</html>
+        // --- Nuevas Preguntas Integradas: Test de Derecho Constitucional ---
+        { q: "¿Quién sanciona, promulga y ordena la publicación en el BOE de las leyes aprobadas por las Cortes Generales?", options: [{text: "A) El Rey", val: "correct"}, {text: "B) El Presidente del Gobierno", val: "wrong"}, {text: "C) El Presidente del Congreso", val: "wrong"}, {text: "D) El Consejo de Ministros", val: "wrong"}], exp: "Corresponde al Rey sancionar y promulgar las leyes según el art. 62 y 91 de la Constitución." },
+        { q: "¿Qué es el rango jurídico de una norma?", options: [{text: "A) Su posición dentro del ordenamiento jurídico", val: "correct"}, {text: "B) Su posición dentro del BOE", val: "wrong"}, {text: "C) El número de la norma que viene determinado por la fecha en que se aprueba", val: "wrong"}, {text: "D) El número de la norma que viene determinado por la fecha en el que el Rey la sanciona", val: "wrong"}], exp: "El rango normativo determina la jerarquía y posición de una norma frente a las demás." },
+        { q: "La derogación tácita de una norma se produce cuando:", options: [{text: "A) La norma nueva dice exactamente la que está modificando", val: "wrong"}, {text: "B) La norma antigua dice exactamente las normas nuevas que está modificando", val: "wrong"}, {text: "C) De la norma nueva se desprende la existencia de una contradicción con la norma antigua", val: "correct"}, {text: "D) De la norma nueva no se desprende la existencia de una contradicción con la norma antigua", val: "wrong"}], exp: "La derogación tácita ocurre cuando la materia regulada en una norma posterior es incompatible con la anterior." },
+        { q: "¿Quién puede iniciar el procedimiento de elaboración de una ley ordinaria estatal?", options: [{text: "A) Las Cortes Generales y las Asambleas Legislativas de las Comunidades Autónomas", val: "wrong"}, {text: "B) El Rey y el Presidente del Gobierno", val: "wrong"}, {text: "C) El Gobierno estatal y el Gobierno autonómico, el Congreso, el Senado, las Asambleas legislativas de las Comunidades Autónomas y los ciudadanos", val: "wrong"}, {text: "D) El Gobierno Estatal, el Congreso, el Senado, las Asambleas legislativas de las Comunidades Autónomas y los ciudadanos", val: "correct"}], exp: "La iniciativa legislativa corresponde al Gobierno, Congreso, Senado, Asambleas autonómicas e iniciativa popular (art. 87 CE)." },
+        { q: "¿En cuántas partes básicas se divide la Constitución Española?", options: [{text: "A) 2, la parte inicial o preámbulo y la parte articulada", val: "wrong"}, {text: "B) 2, la parte articulada y la parte final", val: "wrong"}, {text: "C) 3, la parte inicial o preámbulo, la parte articulada y la parte final", val: "correct"}, {text: "D) 4, la parte inicial, el preámbulo, la parte articulada y la parte final", val: "wrong"}], exp: "Se divide doctrinalmente en preámbulo/inicial, articulado y parte final." },
+        { q: "La constitucionalidad de las leyes se controla por:", options: [{text: "A) El Tribunal Supremo mediante el recurso de amparo y de inconstitucionalidad", val: "wrong"}, {text: "B) El Tribunal Constitucional mediante el recurso de amparo y de inconstitucionalidad", val: "wrong"}, {text: "C) El Tribunal Supremo mediante el recurso de inconstitucionalidad y la cuestión de inconstitucionalidad", val: "wrong"}, {text: "D) El Tribunal Constitucional mediante el recurso de inconstitucionalidad y la cuestión de inconstitucionalidad", val: "correct"}], exp: "El Tribunal Constitucional es el competente para vigilar la adecuación de las leyes a la CE mediante recurso y cuestión." },
+        { q: "¿Cuál de las siguientes afirmaciones es falsa?", options: [{text: "A) La Constitución sólo se ha modificado en tres ocasiones", val: "wrong"}, {text: "B) La Constitución goza de fuerza pasiva frente las otras normas", val: "wrong"}, {text: "C) Un Tratado Internacional pude ser modificado o derogado por una ley", val: "correct"}, {text: "D) La Constitución goza de fuerza activa frente las otras normas", val: "wrong"}], exp: "Es falsa la C: las disposiciones de un tratado internacional no pueden ser modificadas o derogadas por una ley ordinaria estatal." },
+        { q: "¿Qué mayoría es necesaria en el Congreso para la aprobación global de una ley orgánica?", options: [{text: "A) Simple", val: "wrong"}, {text: "B) Absoluta", val: "correct"}, {text: "C) Cualificada de 2/3", val: "wrong"}, {text: "D) Cualificada de 3/5", val: "wrong"}], exp: "La aprobación de una Ley Orgánica requiere mayoría absoluta del Congreso de los Diputados en votación final (art. 81.2 CE)." },
+        { q: "¿Cuántos títulos tiene la Constitución?", options: [{text: "A) 10", val: "wrong"}, {text: "B) 10 más el preliminar", val: "correct"}, {text: "C) 12", val: "wrong"}, {text: "D) 9", val: "wrong"}], exp: "La Constitución Española consta de un Título Preliminar y 10 Títulos
