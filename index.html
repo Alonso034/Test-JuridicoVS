@@ -118,6 +118,99 @@
         .btn-reset:hover { background: #5a6268; }
 
         .result { text-align: center; font-size: 20px; font-weight: bold; margin-top: 25px; padding: 15px; border-radius: 6px; }
+
+        /* Estilos del Analizador de Partes de Servicio */
+        .case-simulator-box {
+            background: #ffffff;
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 40px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+        }
+
+        .case-simulator-box h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .case-scenario {
+            background-color: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #14532d;
+            line-height: 1.5;
+        }
+
+        .parte-textarea {
+            width: 100%;
+            height: 160px;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 14px;
+            line-height: 1.4;
+            resize: vertical;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+
+        .parte-textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .parte-feedback-card {
+            display: none;
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 8px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feedback-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .rubric-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 8px 0;
+            font-size: 13.5px;
+        }
+
+        .rubric-icon {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .rubric-icon.ok { color: #16a34a; }
+        .rubric-icon.warn { color: #dc2626; }
+
+        .subjectivity-alert {
+            margin-top: 12px;
+            padding: 10px;
+            border-radius: 6px;
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
@@ -142,7 +235,7 @@
         <!-- Tarjeta Psicología -->
         <div class="module-summary-card">
             <div class="module-title">PSICOLOGÍA Y SOCIAL</div>
-            <div class="module-subtitle">Habilidades sociales, ética profesional, autocontrol y manejo del pánico.</div>
+            <div class="module-subtitle">Habilidades sociales, ética profesional, autocontrol y redacción de partes.</div>
             <div class="badges-wrapper">
                 <span class="info-pill" id="badge-total-psicologia">0 preguntas</span>
                 <span class="info-pill">Examen aleatorio: 10</span>
@@ -191,6 +284,36 @@
         <button onclick="calcularResultado('psicologia')">Comprobar Test Psicología</button>
         <button class="btn-reset" onclick="iniciarTest('psicologia')">Generar Nuevas 10 Preguntas (Rotar)</button>
         <div id="result-psicologia" class="result"></div>
+
+        <!-- SIMULADOR PRÁCTICO: AUDITORÍA DE PARTES DE NOVEDADES -->
+        <div class="case-simulator-box">
+            <h3>Taller Práctico: Redacción y Auditoría de Parte de Novedades</h3>
+            <p style="font-size: 13.5px; color: #475569;">
+                Como Vigilante de Seguridad debes redactar el parte con absoluta objetividad, cronología, sin suposiciones personales y reflejando las comunicaciones de servicio.
+            </p>
+
+            <div class="case-scenario">
+                <strong>Supuesto práctico de guardia:</strong><br>
+                Durante tu turno de noche en un centro comercial, observas a las 02:40 h por el circuito cerrado de televisión (CCTV) a un individuo forzando una puerta de salida de emergencias en la zona de muelles. Describe los hechos, tu intervención técnica, las comprobaciones físicas y la comunicación con el Centro de Control o Policía.
+            </div>
+
+            <textarea id="texto-parte" class="parte-textarea" placeholder="Ejemplo de estructura:
+A las 02:40 horas del 15/10/2026, el Vigilante con TIP 000.000 de servicio en el Centro Comercial..."></textarea>
+
+            <div style="display: flex; gap: 10px;">
+                <button type="button" onclick="analizarParteServicio()" style="background-color: #2563eb;">Auditar Redacción del Parte</button>
+                <button type="button" onclick="limpiarParte()" class="btn-reset" style="width: auto; padding: 14px 20px;">Limpiar</button>
+            </div>
+
+            <div id="parte-feedback" class="parte-feedback-card">
+                <div class="feedback-header">
+                    <span id="feedback-titulo">Resultado de la Auditoría</span>
+                    <span id="feedback-nota" style="font-size: 18px;"></span>
+                </div>
+                <div id="feedback-rubricas"></div>
+                <div id="feedback-subjetividad" class="subjectivity-alert" style="display:none;"></div>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -426,6 +549,142 @@
             resultadoDiv.style.color = "#721c24";
             resultadoDiv.innerHTML = `Suspenso. Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
         }
+    }
+
+    // ==========================================
+    // MOTOR DE AUDITORÍA DE PARTES DE NOVEDADES
+    // ==========================================
+    function analizarParteServicio() {
+        const texto = document.getElementById("texto-parte").value.trim();
+        const feedbackCard = document.getElementById("parte-feedback");
+        const feedbackRubricas = document.getElementById("feedback-rubricas");
+        const feedbackNota = document.getElementById("feedback-nota");
+        const feedbackSubj = document.getElementById("feedback-subjetividad");
+
+        if (texto.length < 25) {
+            alert("El parte es demasiado breve. Por favor redacta la descripción completa del servicio.");
+            return;
+        }
+
+        const textoLower = texto.toLowerCase();
+
+        // 1. Criterios de evaluación técnica (ponderados sobre 10)
+        const rubricas = [
+            {
+                nombre: "Identificación profesional (TIP o puesto de servicio)",
+                puntos: 1.5,
+                cumple: /\b(tip|vigilante|vs|puesto|servicio|turno)\b/i.test(textoLower),
+                descOk: "Identificación del actuante o servicio reflejada.",
+                descFalla: "Falta identificar formalmente al Vigilante actuante (TIP o puesto asignado)."
+            },
+            {
+                nombre: "Referencia temporal precisa (Fecha y horas HH:MM)",
+                puntos: 2.0,
+                cumple: /(\b\d{1,2}:\d{2}\b|\bhoras\b|\b\d{1,2}\/\d{1,2}\b|\bfecha\b)/i.test(textoLower),
+                descOk: "Consta referencia horaria y temporal precisa.",
+                descFalla: "No se especifican horas exactas de los hechos (ej. 02:40 h)."
+            },
+            {
+                nombre: "Ubicación espacial clara",
+                puntos: 1.5,
+                cumple: /\b(muelle|puerta|salida|emergencia|zona|planta|sector|cctv|camara|pasillo)\b/i.test(textoLower),
+                descOk: "Localización del incidente detallada.",
+                descFalla: "Se debe concretar con exactitud el lugar físico del suceso (muelles, salida de emergencias, etc.)."
+            },
+            {
+                nombre: "Descripción fáctica de la intervención física",
+                puntos: 2.0,
+                cumple: /\b(comprob|inspeccion|person|acud|verific|observ|detect|cerrad|cerrar|forzad|dañ)/i.test(textoLower),
+                descOk: "Acción operativa y comprobaciones físicas descritas correctamente.",
+                descFalla: "Falta describir las comprobaciones o acciones físicas ejecutadas por el vigilante."
+            },
+            {
+                nombre: "Canal de comunicación y coordinación de seguridad",
+                puntos: 2.0,
+                cumple: /\b(polic|091|092|112|mossos|guardia civil|cra|central|jefe de seguridad|coordinad|aviso|comunic)/i.test(textoLower),
+                descOk: "Se refleja el aviso a Central/Mandos o Fuerzas y Cuerpos de Seguridad.",
+                descFalla: "No consta aviso ni comunicación con la Central Receptora, Jefe de Seguridad o FFCCSS."
+            },
+            {
+                nombre: "Extensión técnica y nivel de detalle",
+                puntos: 1.0,
+                cumple: texto.split(/\s+/).length >= 40,
+                descOk: "Extensión y desglose descriptivo suficiente.",
+                descFalla: "Redacción demasiado escueta. Un parte oficial requiere mayor desarrollo de los acontecimientos."
+            }
+        ];
+
+        // 2. Detección de juicios de valor y subjetividad (Penalización deontológica)
+        const palabrasSubjetivas = [
+            "me pareció", "creo que", "sospechoso", "pinta de", "cara de", 
+            "obviamente quería", "seguro que era", "mala pinta", "delincuente", "odio", "me dio miedo"
+        ];
+        
+        let subjetividadesDetectadas = [];
+        palabrasSubjetivas.forEach(term => {
+            if (textoLower.includes(term)) {
+                subjetividadesDetectadas.push(`"${term}"`);
+            }
+        });
+
+        // 3. Cálculo de nota
+        let nota = 0;
+        let htmlRubricas = "";
+
+        rubricas.forEach(r => {
+            if (r.cumple) {
+                nota += r.puntos;
+                htmlRubricas += `
+                    <div class="rubric-item">
+                        <span class="rubric-icon ok">✓</span>
+                        <div><strong>${r.nombre}:</strong> <span style="color:#16a34a;">${r.descOk}</span></div>
+                    </div>
+                `;
+            } else {
+                htmlRubricas += `
+                    <div class="rubric-item">
+                        <span class="rubric-icon warn">✗</span>
+                        <div><strong>${r.nombre}:</strong> <span style="color:#dc2626;">${r.descFalla}</span></div>
+                    </div>
+                `;
+            }
+        });
+
+        // Penalización por subjetividad (-1.5 puntos por cada apreciación subjetiva)
+        let penalizacion = subjetividadesDetectadas.length * 1.5;
+        nota = Math.max(0, nota - penalizacion);
+
+        // 4. Pintar informe
+        feedbackRubricas.innerHTML = htmlRubricas;
+        feedbackNota.innerHTML = `Nota: <strong>${nota.toFixed(1)} / 10</strong>`;
+
+        if (subjetividadesDetectadas.length > 0) {
+            feedbackSubj.style.display = "block";
+            feedbackSubj.innerHTML = `
+                ⚠️ <strong>Aviso de Falta de Objetividad (Penalización: -${penalizacion.toFixed(1)} pts):</strong><br>
+                Se han detectado términos u opiniones subjetivas: <em>${subjetividadesDetectadas.join(", ")}</em>.<br>
+                En seguridad privada debes describir hechos observables (ejemplo: <em>"individuo encapuchado manipulando la cerradura"</em> en vez de <em>"tipo con mala pinta que parecía un ladrón"</em>).
+            `;
+        } else {
+            feedbackSubj.style.display = "none";
+        }
+
+        if (nota >= 5) {
+            feedbackNota.style.color = "#155724";
+            document.getElementById("feedback-titulo").textContent = "Parte Aprobado - Redacción Conforme";
+            feedbackCard.style.borderColor = "#86efac";
+        } else {
+            feedbackNota.style.color = "#b91c1c";
+            document.getElementById("feedback-titulo").textContent = "Parte Requiere Corrección - No Conforme";
+            feedbackCard.style.borderColor = "#fca5a5";
+        }
+
+        feedbackCard.style.display = "block";
+    }
+
+    function limpiarParte() {
+        document.getElementById("texto-parte").value = "";
+        document.getElementById("parte-feedback").style.display = "none";
     }
 
     // Inicializar contadores y tests al cargar
