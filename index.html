@@ -1,567 +1,440 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Plataforma de Tests - Seguridad Privada</title>
-
     <style>
-
         body { font-family: Arial, sans-serif; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; }
-
         .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-
         h1 { color: #2c3e50; font-size: 26px; text-align: center; margin-bottom: 5px; }
-
-        .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 30px; }
-
+        .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 25px; }
         
+        /* Grid de Tarjetas Informativas de Módulos (Estilo Dashboard) */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .module-summary-card {
+            background: #ffffff;
+            border: 1px solid #e1e8ed;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .module-summary-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+        }
+
+        .module-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .module-subtitle {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        .badges-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            margin: 6px 0;
+        }
+
+        .info-pill {
+            display: inline-block;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+
+        .btn-enter-module {
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            align-self: flex-start;
+            width: auto;
+            margin-top: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-enter-module:hover {
+            background-color: #1d4ed8;
+        }
 
         /* Selector de Secciones */
-
-        .section-selector { display: flex; gap: 10px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap; }
-
+        .section-selector { display: flex; gap: 10px; margin-bottom: 25px; justify-content: center; flex-wrap: wrap; }
         .btn-section { background: #6c757d; color: white; border: none; padding: 12px 20px; font-size: 15px; border-radius: 6px; cursor: pointer; font-weight: bold; width: auto; margin-top: 0; }
-
         .btn-section.active { background: #007bff; }
-
         
-
         .test-section { display: none; }
-
         .test-section.active { display: block; }
 
-
-
         .rules-box { background: #e9ecef; border-left: 4px solid #007bff; padding: 12px 15px; margin-bottom: 20px; border-radius: 4px; font-size: 14px; color: #495057; }
-
         .rules-box ul { margin: 5px 0 0 20px; padding: 0; }
 
-
-
         .question-card { background: #fdfdfd; border: 1px solid #e1e4e8; padding: 20px; border-radius: 6px; margin-bottom: 20px; position: relative; }
-
         .question { font-weight: bold; margin-bottom: 12px; font-size: 16px; color: #2c3e50; }
-
         .options label { display: block; margin: 8px 0; cursor: pointer; padding: 10px; background: #f8f9fa; border-radius: 4px; border: 1px solid #ddd; font-size: 14px; transition: background 0.2s; }
-
         .options label:hover { background: #e9ecef; }
-
         .options input { margin-right: 10px; }
-
         
-
         .correct-answer { background-color: #d4edda !important; border-color: #c3e6cb !important; color: #155724; font-weight: bold; }
-
         .wrong-answer { background-color: #f8d7da !important; border-color: #f5c6cb !important; color: #721c24; }
 
-
-
-        /* Indicador de estado y explicación */
-
+        /* Indicador de estado y explicacion */
         .status-badge { display: none; font-weight: bold; font-size: 13px; margin-top: 10px; padding: 4px 8px; border-radius: 4px; width: fit-content; }
-
         .status-badge.correct { background-color: #d4edda; color: #155724; display: inline-block; }
-
         .status-badge.wrong { background-color: #f8d7da; color: #721c24; display: inline-block; }
-
-
 
         .explanation { display: none; margin-top: 10px; padding: 10px; background-color: #fff3cd; border: 1px solid #ffeeba; border-radius: 4px; font-size: 13px; color: #856404; }
 
-
-
         button { background: #007bff; color: white; border: none; padding: 14px 20px; font-size: 16px; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 20px; font-weight: bold; }
-
         button:hover { background: #0056b3; }
-
         
-
         .btn-reset { background: #6c757d; margin-top: 10px; }
-
         .btn-reset:hover { background: #5a6268; }
 
-
-
         .result { text-align: center; font-size: 20px; font-weight: bold; margin-top: 25px; padding: 15px; border-radius: 6px; }
-
     </style>
-
 </head>
-
 <body>
 
-
-
 <div class="container">
-
     <h1>Plataforma de Autoevaluación: Seguridad Privada</h1>
+    <div class="subtitle">Banco oficial de preguntas para aspirantes a Vigilante de Seguridad</div>
 
-    <div class="subtitle">Selecciona el módulo que deseas realizar (Examen aleatorio de 10 preguntas)</div>
+    <!-- TARJETAS SUPERIORES CON EL TOTAL DE PREGUNTAS DISPONIBLES -->
+    <div class="modules-grid">
+        <!-- Tarjeta Jurídica -->
+        <div class="module-summary-card">
+            <div class="module-title">ÁREA JURÍDICA</div>
+            <div class="module-subtitle">Derecho Constitucional, Ley 5/2014 de Seguridad Privada y Reglamento.</div>
+            <div class="badges-wrapper">
+                <span class="info-pill" id="badge-total-juridico">0 preguntas</span>
+                <span class="info-pill">Examen aleatorio: 10</span>
+            </div>
+            <button class="btn-enter-module" onclick="cambiarSeccion('juridico')">Entrar</button>
+        </div>
 
-    
-
-    <!-- Botones para alternar entre secciones -->
-
-    <div class="section-selector">
-
-        <button class="btn-section active" onclick="cambiarSeccion('juridico')">Test Jurídico</button>
-
-        <button class="btn-section" onclick="cambiarSeccion('psicologia')">Test Psicología</button>
-
+        <!-- Tarjeta Psicología -->
+        <div class="module-summary-card">
+            <div class="module-title">PSICOLOGÍA Y SOCIAL</div>
+            <div class="module-subtitle">Habilidades sociales, ética profesional, autocontrol y manejo del pánico.</div>
+            <div class="badges-wrapper">
+                <span class="info-pill" id="badge-total-psicologia">0 preguntas</span>
+                <span class="info-pill">Examen aleatorio: 10</span>
+            </div>
+            <button class="btn-enter-module" onclick="cambiarSeccion('psicologia')">Entrar</button>
+        </div>
     </div>
-
-
+    
+    <!-- Botones para alternar entre secciones -->
+    <div class="section-selector">
+        <button id="btn-tab-juridico" class="btn-section active" onclick="cambiarSeccion('juridico')">Test Jurídico</button>
+        <button id="btn-tab-psicologia" class="btn-section" onclick="cambiarSeccion('psicologia')">Test Psicología</button>
+    </div>
 
     <!-- SECCIÓN 1: TEST JURÍDICO -->
-
     <div id="seccion-juridico" class="test-section active">
-
         <h2>Módulo: Área Jurídica</h2>
-
         <div class="rules-box">
-
             <strong>Sistema de Puntuación (sobre 10 preguntas):</strong>
-
             <ul>
-
                 <li>Acertadas = 1 punto</li>
-
                 <li>Falladas = resta 0,5 puntos</li>
-
                 <li>Total puntos / 10 * 10 = nota final</li>
-
             </ul>
-
         </div>
-
         <div id="quiz-container-juridico"></div>
-
             
-
         <button onclick="calcularResultado('juridico')">Comprobar Test Jurídico</button>
-
         <button class="btn-reset" onclick="iniciarTest('juridico')">Generar Nuevas 10 Preguntas (Rotar)</button>
-
         <div id="result-juridico" class="result"></div>
-
     </div>
-
-
 
     <!-- SECCIÓN 2: TEST PSICOLOGÍA -->
-
     <div id="seccion-psicologia" class="test-section">
-
         <h2>Módulo: Psicología y Ámbito Socioprofesional</h2>
-
         <div class="rules-box">
-
             <strong>Sistema de Puntuación (sobre 10 preguntas):</strong>
-
             <ul>
-
                 <li>Acertadas = 1 punto</li>
-
                 <li>Falladas = resta 0,5 puntos</li>
-
                 <li>Total puntos / 10 * 10 = nota final</li>
-
             </ul>
-
         </div>
-
         <div id="quiz-container-psicologia"></div>
-
             
-
         <button onclick="calcularResultado('psicologia')">Comprobar Test Psicología</button>
-
         <button class="btn-reset" onclick="iniciarTest('psicologia')">Generar Nuevas 10 Preguntas (Rotar)</button>
-
         <div id="result-psicologia" class="result"></div>
-
     </div>
-
-
 
 </div>
 
-
-
 <script>
-
-    // Banco de preguntas de Área Jurídica (ampliado hacia las 100 preguntas)
-
+    // Banco de preguntas de Área Jurídica (20 iniciales + 43 del test de examen)
     const bancoJuridico = [
-
         { q: "Según la Ley 5/2014 de Seguridad Privada, ¿qué consideración tienen las actividades de seguridad privada respecto a la seguridad pública?", options: [{text: "A) Sustitutivas e independientes", val: "wrong"}, {text: "B) Complementarias y subordinadas", val: "correct"}, {text: "C) Superiores y prioritarias", val: "wrong"}], exp: "La seguridad privada ejerce un papel complementario y subordinado respecto a la seguridad pública." },
-
         { q: "¿Cuál es el arma reglamentaria principal de los vigilantes de seguridad en los servicios que deban prestarse con armas?", options: [{text: "A) Escopeta de repetición calibre 12/70", val: "wrong"}, {text: "B) Revólver calibre treinta y ocho especial de cuatro pulgadas", val: "correct"}, {text: "C) Pistola semiautomática 9mm Parabellum", val: "wrong"}], exp: "El revólver calibre 38 especial de 4 pulgadas es el arma corta reglamentaria principal." },
-
         { q: "¿Qué defensa reglamentaria deben portar los vigilantes de seguridad uniformados durante su servicio?", options: [{text: "A) De color negro, goma semirrígida y 50 centímetros de longitud", val: "correct"}, {text: "B) De color marrón, madera y 60 centímetros", val: "wrong"}, {text: "C) Extensible metálica de 40 centímetros", val: "wrong"}], exp: "La defensa reglamentaria es la porra de color negro, goma semirrígida y 50 centímetros de longitud." },
-
         { q: "Ante la comisión de un delito flagrante, el vigilante de seguridad debe:", options: [{text: "A) Interrogar al sospechoso durante 2 horas", val: "wrong"}, {text: "B) Detener y poner inmediatamente a disposición de las Fuerzas y Cuerpos de Seguridad al delincuente", val: "correct"}, {text: "C) Juzgar los hechos y aplicar sanción económica", val: "wrong"}], exp: "Los vigilantes pueden detener en caso de delito flagrante, poniendo al infractor de inmediato a disposición policial." },
-
         { q: "¿Qué organismo expide con carácter general la Tarjeta de Identidad Profesional (TIP) del personal de seguridad privada?", options: [{text: "A) El Ministerio de Justicia", val: "wrong"}, {text: "B) La Dirección General de la Policía", val: "correct"}, {text: "C) El Ministerio de Defensa", val: "wrong"}], exp: "La Dirección General de la Policía es el órgano competente para expedir la TIP." },
-
         { q: "¿Qué tipos de grilletes pueden utilizar los vigilantes de seguridad si se los proporciona la empresa?", options: [{text: "A) Los denominados de manilla (cadenas, bisagra y rígidos)", val: "correct"}, {text: "B) Únicamente grilletes de cuerda de alta resistencia", val: "wrong"}, {text: "C) Ningún tipo de grillete está permitido", val: "wrong"}], exp: "Los grilletes autorizados son los de manilla (cadena, bisagra y rígidos)." },
-
         { q: "Según el artículo 78 del Reglamento de Seguridad Privada, ante el consumo ilegal de drogas en establecimientos, el vigilante debe:", options: [{text: "A) Permitirlo si es una cantidad muy pequeña", val: "wrong"}, {text: "B) Impedir el consumo y comunicarlo con la mayor rapidez a las Fuerzas y Cuerpos de Seguridad", val: "correct"}, {text: "C) Multar directamente al infractor", val: "wrong"}], exp: "Se debe impedir el consumo y dar aviso urgente a las autoridades policiales." },
-
         { q: "¿Cuál es el plazo de validez física de la Tarjeta de Identidad Profesional (TIP) como documento de acreditación?", options: [{text: "A) Caduca a los 10 años, o antes si hay causas tasadas", val: "correct"}, {text: "B) Es vitalicia y no caduca nunca", val: "wrong"}, {text: "C) Se renueva obligatoriamente cada año", val: "wrong"}], exp: "La validez del soporte físico de la TIP se establece generalmente en 10 años." },
-
         { q: "¿Pueden los vigilantes de seguridad retener la documentación personal de un ciudadano en los controles de identidad?", options: [{text: "A) Sí, durante un máximo de 24 horas", val: "wrong"}, {text: "B) No, en ningún caso pueden retener la documentación personal", val: "correct"}, {text: "C) Sí, si el director de seguridad lo autoriza", val: "wrong"}], exp: "Está prohibido retener documentos de identidad personales; solo comprobación visual." },
-
         { q: "¿Cuál es la consecuencia de la omisión o abandono injustificado del servicio dentro de la jornada laboral?", options: [{text: "A) Constituye una infracción muy grave tipificada en la Ley de Seguridad Privada", val: "correct"}, {text: "B) Es una simple falta leve sin importancia", val: "wrong"}, {text: "C) No está regulado en la ley", val: "wrong"}], exp: "El abandono injustificado del servicio se tipifica como infracción muy grave." },
-
         { q: "¿Qué arma larga utiliza el vigilante de seguridad cuando está dispuesto su uso?", options: [{text: "A) Escopeta de repetición del calibre 12/70", val: "correct"}, {text: "B) Fusil de asalto militar de 5.56 mm", val: "wrong"}, {text: "C) Carabina del calibre 22", val: "wrong"}], exp: "La escopeta de repetición del calibre 12/70 es el arma larga reglamentaria." },
-
         { q: "¿Qué mínimo de disparos deben realizar los vigilantes de seguridad armados en cada ejercicio obligatorio de tiro semestral?", options: [{text: "A) 10 disparos", val: "wrong"}, {text: "B) Un mínimo de 25 disparos", val: "correct"}, {text: "C) 50 disparos", val: "wrong"}], exp: "Se exige un mínimo de 25 disparos por cada ejercicio obligatorio semestral." },
-
         { q: "¿Dónde debe llevarse permanentemente el distintivo del vigilante de seguridad en el uniforme?", options: [{text: "A) En la parte superior izquierda correspondiente al pecho", val: "correct"}, {text: "B) En la gorra o prenda de cabeza", val: "wrong"}, {text: "C) En la manga derecha", val: "wrong"}], exp: "El distintivo oficial se sitúa en la parte superior izquierda de la camisa." },
-
         { q: "¿Qué color y texto lleva el distintivo oficial de los vigilantes de seguridad?", options: [{text: "A) Fondo blanco, letras rojas con la expresión 'VIGILANTE DE SEGURIDAD' y número", val: "correct"}, {text: "B) Fondo negro y letras doradas", val: "wrong"}, {text: "C) Fondo azul marino", val: "wrong"}], exp: "Es de fondo blanco con caracteres rojos y número de habilitación." },
-
         { q: "¿Cuál es el objeto principal de la Ley 5/2014 de Seguridad Privada?", options: [{text: "A) Sustituciones totales de las Fuerzas del Estado", val: "wrong"}, {text: "B) Regular la prestación de actividades y servicios de seguridad privada complementarios", val: "correct"}, {text: "C) Gestionar la seguridad militar", val: "wrong"}], exp: "Regula la seguridad privada como actividad complementaria y subordinada." },
-
         { q: "¿Qué requisitos generales se exigen para obtener la habilitación como personal de seguridad privada?", options: [{text: "A) Nacionalidad UE, mayor de edad, aptitud física/psicológica, carecer de antecedentes penales dolosos", val: "correct"}, {text: "B) Ser menor de edad", val: "wrong"}, {text: "C) Cero formación", val: "wrong"}], exp: "Se exigen criterios de nacionalidad, mayoría de edad, aptitudes y ausencia de antecedentes penales dolosos." },
-
         { q: "¿Pueden los detectives privados investigar delitos perseguibles de oficio?", options: [{text: "A) No, tienen prohibido investigar delitos perseguibles de oficio y deben denunciarlos", val: "correct"}, {text: "B) Sí, total libertad", val: "wrong"}, {text: "C) Sí, pagando tasas", val: "wrong"}], exp: "Tienen prohibida la investigación de delitos perseguibles de oficio." },
-
         { q: "¿Dónde se coloca el escudo-emblema de la empresa de seguridad en la uniformidad?", options: [{text: "A) En la parte alta de la manga izquierda de las prendas superiores", val: "correct"}, {text: "B) Al cuello con cadena", val: "wrong"}, {text: "C) En la espalda", val: "wrong"}], exp: "El emblema de la empresa se coloca obligatoriamente en la manga izquierda." },
-
         { q: "¿Cuáles son los principios básicos de actuación del personal de seguridad privada?", options: [{text: "A) Legalidad, integridad, dignidad, protección, corrección, congruencia y proporcionalidad", val: "correct"}, {text: "B) Rapidez e improvisación", val: "wrong"}, {text: "C) Anonimato absoluto", val: "wrong"}], exp: "Se rigen por legalidad, integridad, dignidad, congruencia y proporcionalidad." },
+        { q: "¿Qué consideración legal tiene el personal de seguridad privada cuando actúa en cooperación y bajo mando policial?", options: [{text: "A) Protección jurídica de agente de la autoridad frente a agresiones y desobediencias", val: "correct"}, {text: "B) Consideración militar", val: "wrong"}, {text: "C) Ninguna protección", val: "wrong"}], exp: "Disfrutan de protección jurídica de agente de la autoridad." },
 
-        { q: "¿Qué consideración legal tiene el personal de seguridad privada cuando actúa en cooperación y bajo mando policial?", options: [{text: "A) Protección jurídica de agente de la autoridad frente a agresiones y desobediencias", val: "correct"}, {text: "B) Consideración militar", val: "wrong"}, {text: "C) Ninguna protección", val: "wrong"}], exp: "Disfrutan de protección jurídica de agente de la autoridad." }
-
+        // --- 43 Preguntas del Test de Repaso: Derecho Constitucional ---
+        { q: "¿Quién sanciona, promulga y ordena la publicación en el BOE de las leyes aprobadas por las Cortes Generales?", options: [{text: "a) El Rey", val: "correct"}, {text: "b) El Presidente del Gobierno", val: "wrong"}, {text: "c) El Presidente del Congreso", val: "wrong"}, {text: "d) El Consejo de Ministros", val: "wrong"}], exp: "Art. 91 de la CE: El Rey sancionará en el plazo de quince días las leyes aprobadas por las Cortes Generales, y las promulgará y ordenará su inmediata publicación." },
+        { q: "¿Qué es el rango jurídico de una norma?", options: [{text: "a) Su posición dentro del ordenamiento jurídico", val: "correct"}, {text: "b) Su posición dentro del BOE", val: "wrong"}, {text: "c) El número de la norma que viene determinado por la fecha en que se aprueba", val: "wrong"}, {text: "d) El número de la norma que viene determinado por la fecha en el que el Rey la sanciona", val: "wrong"}], exp: "El rango jurídico define la categoría, fuerza y posición jerárquica de una norma dentro de la pirámide normativa." },
+        { q: "La derogación tácita de una norma se produce cuando:", options: [{text: "a) La norma nueva dice exactamente la que está modificando", val: "wrong"}, {text: "b) La norma antigua dice exactamente las normas nuevas que está modificando", val: "wrong"}, {text: "c) De la norma nueva se desprende la existencia de una contradicción con la norma antigua", val: "correct"}, {text: "d) De la norma nueva no se desprende la existencia de una contradicción con la norma antigua", val: "wrong"}], exp: "Código Civil, art. 2.2: La derogación tácita tiene lugar cuando una norma posterior resulta incompatible o contradictoria con la anterior sobre la misma materia." },
+        { q: "¿Quién puede iniciar el procedimiento de elaboración de una ley ordinaria estatal?", options: [{text: "a) Las Cortes Generales y las Asambleas Legislativas de las Comunidades Autónomas", val: "wrong"}, {text: "b) El Rey y el Presidente del Gobierno", val: "wrong"}, {text: "c) El Gobierno estatal y el Gobierno autonómico, el Congreso, el Senado, las Asambleas legislativas de las Comunidades Autónomas y los ciudadanos", val: "wrong"}, {text: "d) El Gobierno Estatal, el Congreso, el Senado, las Asambleas legislativas de las Comunidades Autónomas y los ciudadanos", val: "correct"}], exp: "Art. 87 de la CE: La iniciativa legislativa corresponde al Gobierno, al Congreso y al Senado, a las Asambleas de las CC.AA. y a la iniciativa popular de los ciudadanos." },
+        { q: "¿En cuántas partes básicas se divide la Constitución Española?", options: [{text: "a) 2, la parte inicial o preámbulo y la parte articulada", val: "wrong"}, {text: "b) 2, la parte articulada y la parte final", val: "wrong"}, {text: "c) 3, la parte inicial o preámbulo, la parte articulada y la parte final", val: "correct"}, {text: "d) 4, la parte inicial, el preámbulo, la parte articulada y la parte final", val: "wrong"}], exp: "La estructura formal básica de la Constitución comprende: parte inicial (preámbulo), parte articulada (Título Preliminar a Título X) y parte final (disposiciones adicionales, transitorias, derogatoria y final)." },
+        { q: "La constitucionalidad de las leyes se controla por:", options: [{text: "a) El Tribunal Supremo mediante el recurso de amparo y de inconstitucionalidad", val: "wrong"}, {text: "b) El Tribunal Constitucional mediante el recurso de amparo y de inconstitucionalidad", val: "wrong"}, {text: "c) El Tribunal Supremo mediante el recurso de inconstitucionalidad y la cuestión de inconstitucionalidad", val: "wrong"}, {text: "d) El Tribunal Constitucional mediante el recurso de inconstitucionalidad y la cuestión de inconstitucionalidad", val: "correct"}], exp: "Art. 161 y 163 de la CE: El Tribunal Constitucional controla la adecuación de las leyes a través del recurso de inconstitucionalidad y de la cuestión de inconstitucionalidad." },
+        { q: "¿Cuál de las siguientes afirmaciones es falsa?", options: [{text: "a) La Constitución sólo se ha modificado en tres ocasiones", val: "wrong"}, {text: "b) La Constitución goza de fuerza pasiva frente las otras normas", val: "wrong"}, {text: "c) Un Tratado Internacional pude ser modificado o derogado por una ley", val: "correct"}, {text: "d) La Constitución goza de fuerza activa frente las otras normas", val: "wrong"}], exp: "Es falsa la c) porque el art. 96.1 CE estipula que las disposiciones de un Tratado sólo podrán ser derogadas, modificadas o suspendidas en la forma prevista en los propios tratados o de acuerdo con el derecho internacional, nunca por una ley interna unilateral." },
+        { q: "¿Qué mayoría es necesaria en el Congreso para la aprobación global de una ley orgánica?", options: [{text: "a) Simple", val: "wrong"}, {text: "b) Absoluta", val: "correct"}, {text: "c) Cualificada de 2/3", val: "wrong"}, {text: "d) Cualificada de 3/5", val: "wrong"}], exp: "Art. 81.2 de la CE: La aprobación, modificación o derogación de las leyes orgánicas exigirá mayoría absoluta del Congreso, en una votación final sobre el conjunto del proyecto." },
+        { q: "¿Cuántos títulos tiene la Constitución?", options: [{text: "a) 10", val: "wrong"}, {text: "b) 10 más el preliminar", val: "correct"}, {text: "c) 12", val: "wrong"}, {text: "d) 9", val: "wrong"}], exp: "La Constitución Española consta de un Título Preliminar y 10 Títulos numerados del I al X." },
+        { q: "La Constitución se puede reformar:", options: [{text: "a) Mediante una ley orgánica", val: "wrong"}, {text: "b) Mediante una ley ordinaria", val: "wrong"}, {text: "c) Mediante una norma con rango de ley", val: "wrong"}, {text: "d) En la forma que prevé la propia Constitución", val: "correct"}], exp: "Título X de la CE (artículos 166 a 169): La reforma solo puede efectuarse por los procedimientos de reforma ordinario o agravado regulados en el propio texto constitucional." },
+        { q: "Los Derechos Fundamentales y las Libertades Públicas están regulados:", options: [{text: "a) En el Título I de la Constitución", val: "correct"}, {text: "b) En el Título II de la Constitución", val: "wrong"}, {text: "c) En el Título Preliminar de la Constitución", val: "wrong"}, {text: "d) En el Título III de la Constitución", val: "wrong"}], exp: "El Título I se titula 'De los derechos y deberes fundamentales' (arts. 10 a 55)." },
+        { q: "Las pruebas obtenidas con vulneración del derecho a la inviolabilidad del domicilio son:", options: [{text: "a) Inválidas y no pueden ser utilizadas en un proceso", val: "correct"}, {text: "b) Válidas sólo cuando están relacionadas con un homicidio o asesinato", val: "wrong"}, {text: "c) Válidas si las partes se ponen de acuerdo", val: "wrong"}, {text: "d) Válidas cualquiera que sea el delito con el que están relacionadas", val: "wrong"}], exp: "Art. 11.1 de la Ley Orgánica del Poder Judicial (LOPJ): No surtirán efecto las pruebas obtenidas, directa o indirectamente, violentando los derechos o libertades fundamentales." },
+        { q: "¿Cómo tiene que ser un delito para justificar la entrada legal en un domicilio particular sin autorización?", options: [{text: "a) Es suficiente con que sea evidente, entendiéndose por evidencia como percepción directa", val: "wrong"}, {text: "b) Flagrante", val: "correct"}, {text: "c) La Constitución no permite en ningún caso la entrada legal en un domicilio por la comisión de un delito", val: "wrong"}, {text: "d) La Constitución sólo permite la entrada legal en un domicilio si hay autorización legal", val: "wrong"}], exp: "Art. 18.2 de la CE: El domicilio es inviolable. Ninguna entrada o registro podrá hacerse en él sin consentimiento del titular o resolución judicial, salvo en caso de flagrante delito." },
+        { q: "¿De qué año es la Declaración Universal de los Derechos Humanos?", options: [{text: "a) 1945", val: "wrong"}, {text: "b) 1946", val: "wrong"}, {text: "c) 1950", val: "wrong"}, {text: "d) 1948", val: "correct"}], exp: "La Asamblea General de las Naciones Unidas proclamó la Declaración Universal de Derechos Humanos el 10 de diciembre de 1948 en París." },
+        { q: "¿Cuál de los siguientes derechos está conceptuado como derecho de participación de los ciudadanos?", options: [{text: "a) La Libertad religiosa", val: "wrong"}, {text: "b) El Derecho a la vida", val: "wrong"}, {text: "c) El Derecho a la inviolabilidad del domicilio", val: "wrong"}, {text: "d) El Derecho de asociación", val: "correct"}], exp: "El derecho de asociación (art. 22 CE) y el derecho de sufragio/participación en asuntos públicos (art. 23 CE) canalizan la participación política y colectiva del ciudadano." },
+        { q: "El derecho a la tutela judicial efectiva, incluye el derecho a:", options: [{text: "a) Obtener una decisión judicial motivada", val: "wrong"}, {text: "b) Obtener una resolución judicial que dé la razón al demandante", val: "wrong"}, {text: "c) Recurrir la decisión judicial siempre que la ley prevea la posibilidad de interponer recurso", val: "wrong"}, {text: "d) Son correctas la a) y la c)", val: "correct"}], exp: "Art. 24 CE: La tutela judicial garantiza una resolución fundada en derecho y motivada, así como el acceso a los recursos legales previstos, pero no garantiza obtener una sentencia favorable." },
+        { q: "¿Cómo se configura el derecho al honor?", options: [{text: "a) Como derecho cultural", val: "wrong"}, {text: "b) Como derecho personal", val: "correct"}, {text: "c) Como derecho económico", val: "wrong"}, {text: "d) Cómo derecho de participación", val: "wrong"}], exp: "Art. 18.1 de la CE: Es un derecho personalísimo fundamental inherente a la dignidad de la persona." },
+        { q: "¿Puede un ciudadano extranjero votar en las elecciones autonómicas?", options: [{text: "a) Sí, siempre", val: "wrong"}, {text: "b) No, nunca", val: "correct"}, {text: "c) Sí, si hay una ley o tratado que le reconozca ese derecho", val: "wrong"}, {text: "d) Sí, si hay una ley o un tratado que le reconozca ese derecho atendiendo a criterios de reciprocidad", val: "wrong"}], exp: "Art. 13.2 de la CE: Los extranjeros solo pueden tener derecho de sufragio activo y pasivo en las elecciones municipales por tratado o ley atendiendo a criterios de reciprocidad, nunca en elecciones autonómicas ni generales." },
+        { q: "Según el art. 13 de la Constitución, los extranjeros en España, como regla general no gozan de:", options: [{text: "a) El derecho a la inviolabilidad del domicilio", val: "wrong"}, {text: "b) El derecho al sufragio", val: "wrong"}, {text: "c) El derecho a acceder a funciones y cargos públicos", val: "wrong"}, {text: "d) Son correctas b) y c)", val: "correct"}], exp: "Art. 13.2 de la CE: Solamente los españoles serán titulares de los derechos reconocidos en el artículo 23 (sufragio y acceso a cargos públicos), salvo reciprocidad municipal." },
+        { q: "Según el artículo 17.2 de la Constitución, ¿cuál es la duración máxima de la detención preventiva?", options: [{text: "a) 72 horas", val: "correct"}, {text: "b) 5 días", val: "wrong"}, {text: "c) 10 días", val: "wrong"}, {text: "d) 24 horas", val: "wrong"}], exp: "Art. 17.2 de la CE: En el plazo máximo de setenta y dos horas, el detenido deberá ser puesto en libertad o a disposición de la autoridad judicial." },
+        { q: "¿Pueden regularse los derechos fundamentales y las libertades públicas por Decreto-ley?", options: [{text: "a) Sí, ya que cualquier norma puede regular un derecho fundamental o libertad pública", val: "wrong"}, {text: "b) No, nunca", val: "correct"}, {text: "c) Sí, si se trata de derechos económicos, sociales o culturales", val: "wrong"}, {text: "d) Sí, si se trata de derechos de participación", val: "wrong"}], exp: "Art. 86.1 de la CE: Los Decretos-leyes no podrán afectar al ordenamiento de las instituciones básicas del Estado, a los derechos, deberes y libertades de los ciudadanos regulados en el Título I..." },
+        { q: "La autorización judicial para entrar en un domicilio, se puede otorgar:", options: [{text: "a) Porque se está realizando una investigación criminal en que es necesaria registrar un domicilio", val: "wrong"}, {text: "b) Porque se quiere detener a alguien que está dentro del domicilio", val: "wrong"}, {text: "c) Para ejecutar una resolución judicial", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "El auto judicial motivado legitima el acceso para fines de inspección/registro procesal, captura o ejecución forzosa." },
+        { q: "El procedimiento de habeas corpus tiene por finalidad:", options: [{text: "a) Decidir si el detenido es culpable", val: "wrong"}, {text: "b) Valorar las pruebas que se utilizarán en un juicio posterior", val: "wrong"}, {text: "c) Decidir si hay una situación de detención ilegal", val: "correct"}, {text: "d) Decidir el régimen de visitas del condenado a prisión", val: "wrong"}], exp: "Art. 17.4 de la CE: Tiene por objeto poner a disposición judicial inmediata a toda persona detenida ilegalmente para que determine si procede su libertad o continuidad legal." },
+        { q: "¿Quién puede declarar el estado de sitio?", options: [{text: "a) El Gobierno sin autorización de nadie", val: "wrong"}, {text: "b) El Gobierno con la autorización del Congreso", val: "wrong"}, {text: "c) El Gobierno con la autorización del Senado", val: "wrong"}, {text: "d) El Congreso por mayoría absoluta a propuesta del Gobierno", val: "correct"}], exp: "Art. 116.4 de la CE: El estado de sitio será declarado por la mayoría absoluta del Congreso de los Diputados, a propuesta exclusiva del Gobierno." },
+        { q: "¿Cuál de los siguientes derechos podría ser suspendido durante el estado de excepción?", options: [{text: "a) La inviolabilidad del domicilio", val: "wrong"}, {text: "b) La libertad", val: "wrong"}, {text: "c) La Reunión y la manifestación", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "Art. 55.1 de la CE: Cuando se declare el estado de excepción podrán ser suspendidos los derechos de los arts. 17 (libertad), 18.2 (domicilio), 18.3 (comunicaciones), 19, 20.1.a y d, 20.5, 21 (reunión) y 28.2." },
+        { q: "¿Cuál de los siguientes cargos goza de la prerrogativa de la inviolabilidad?", options: [{text: "a) Los Ministros, siempre", val: "wrong"}, {text: "b) Los Diputados", val: "wrong"}, {text: "c) Los Senadores", val: "wrong"}, {text: "d) Son correctas b) y c)", val: "correct"}], exp: "Art. 71.1 de la CE: Los Diputados y Senadores gozarán de inviolabilidad por las opiniones manifestadas y por los votos emitidos en el ejercicio de sus funciones." },
+        { q: "¿Quién escoge o designa a los Ministros?", options: [{text: "a) El rey", val: "wrong"}, {text: "b) El Presidente del Gobierno", val: "correct"}, {text: "c) El Presidente del Gobierno y del Congreso", val: "wrong"}, {text: "d) El Presidente del Gobierno y el Rey", val: "wrong"}], exp: "Art. 100 de la CE: Los demás miembros del Gobierno serán nombrados y separados por el Rey, a propuesta de su Presidente (la decisión de designación es del Presidente)." },
+        { q: "Las Cortes Generales puede:", options: [{text: "a) Aprobar leyes orgánicas", val: "wrong"}, {text: "b) Aprobar los presupuestos del Estado", val: "wrong"}, {text: "c) Aprobar leyes ordinarias", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "Art. 66.2 de la CE: Las Cortes Generales ejercen la potestad legislativa del Estado y aprueban sus Presupuestos." },
+        { q: "¿Cuál es, según la Constitución, el número mínimo y máximo de diputados que puede tener el Congreso?", options: [{text: "a) 200 – 400", val: "wrong"}, {text: "b) 250 – 400", val: "wrong"}, {text: "c) 300 – 400", val: "correct"}, {text: "d) 350 – 400", val: "wrong"}], exp: "Art. 68.1 de la CE: El Congreso se compone de un mínimo de 300 y un máximo de 400 Diputados." },
+        { q: "¿Cuál de las siguientes afirmaciones es correcta?", options: [{text: "a) Las Cortes Generales tienen una estructura bicameral", val: "wrong"}, {text: "b) Las Cortes Generales se escogen por los ciudadanos", val: "wrong"}, {text: "c) Las Cortes Generales tienen autonomía orgánica y funcional", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "Todas son afirmaciones constitucionales sobre las Cortes Generales (bicameralismo en art. 66.1, sufragio en art. 68/69 y autonomía en art. 72)." },
+        { q: "Marca la afirmación correcta:", options: [{text: "a) El Gobierno se encarga de la dirección de la política interior y exterior del Estado", val: "wrong"}, {text: "b) El Gobierno tiene la potestad reglamentaria", val: "wrong"}, {text: "c) El gobierno está dotado de una administración civil y militar", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "Art. 97 de la CE: El Gobierno dirige la política interior y exterior, la Administración civil y militar y la defensa del Estado. Ejerce la función ejecutiva y la potestad reglamentaria." },
+        { q: "¿Qué órgano puede exigir la responsabilidad penal a los miembros del Gobierno?", options: [{text: "a) El Tribunal Constitucional", val: "wrong"}, {text: "b) El Tribunal Supremo", val: "correct"}, {text: "c) La Audiencia Nacional", val: "wrong"}, {text: "d) El Tribunal Superior de Justicia que corresponda", val: "wrong"}], exp: "Art. 102.1 de la CE: La responsabilidad criminal del Presidente y los demás miembros del Gobierno será exigible, en su caso, ante la Sala de lo Penal del Tribunal Supremo." },
+        { q: "La persona del Rey:", options: [{text: "a) Es inviolable", val: "wrong"}, {text: "b) Es políticamente irresponsable", val: "wrong"}, {text: "c) Encarna la Jefatura del Estado", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "Art. 56 de la CE: El Rey es el Jefe del Estado y su persona es inviolable y no está sujeta a responsabilidad." },
+        { q: "El presidente del Gobierno es elegido:", options: [{text: "a) Por los diputados", val: "wrong"}, {text: "b) Por el Congreso", val: "wrong"}, {text: "c) Por el Senado", val: "wrong"}, {text: "d) Son correctas a) y b)", val: "correct"}], exp: "Art. 99 de la CE: El Presidente es elegido por votación de investidura en el Congreso por los Diputados miembros de la Cámara Baja." },
+        { q: "¿Cuál de las siguientes no es una función constitucional del Rey?", options: [{text: "a) Convocar y disolver las Cortes", val: "wrong"}, {text: "b) Proponer candidato a Presidente del Gobierno", val: "wrong"}, {text: "c) Sancionar y promulgar las leyes del Estado", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "La opción 'Todas son correctas' responde a la formulación de la pregunta porque a), b) y c) son funciones del Rey atribuidas explícitamente en el art. 62 de la CE." },
+        { q: "Los diputados son elegidos por:", options: [{text: "a) 3 años", val: "wrong"}, {text: "b) 5 años", val: "wrong"}, {text: "c) 4 años", val: "correct"}, {text: "d) 2 años", val: "wrong"}], exp: "Art. 68.4 de la CE: El Congreso es elegido por cuatro años. El mandato de los Diputados termina cuatro años después de su elección o el día de la disolución de la Cámara." },
+        { q: "De los senadores escogidos directamente por los ciudadanos, ¿cuántos se escogen en cada Provincia?", options: [{text: "a) Mínimo 2 y el resto según la población", val: "wrong"}, {text: "b) Mínimo 4 y el resto según la población", val: "wrong"}, {text: "c) 2", val: "wrong"}, {text: "d) 4", val: "correct"}], exp: "Art. 69.2 de la CE: En cada provincia se elegirán cuatro Senadores por sufragio universal, libre, igual, directo y secreto." },
+        { q: "Un diputado goza:", options: [{text: "a) Inmunidad", val: "wrong"}, {text: "b) Inviolabilidad", val: "wrong"}, {text: "c) Integridad", val: "wrong"}, {text: "d) Son correctas a) y b)", val: "correct"}], exp: "Art. 71 de la CE: Los Diputados y Senadores gozan tanto de inviolabilidad por sus votos/opiniones como de inmunidad procesal durante su mandato." },
+        { q: "¿Cuántos senadores se escogen por los parlamentos de las Comunidades Autónomas?", options: [{text: "a) Cada Comunidad Autónoma tiene que elegir un senador, más uno por cada millón de habitantes", val: "correct"}, {text: "b) Cada Comunidad Autónoma tiene que elegir un senador, más dos por cada millón de habitantes", val: "wrong"}, {text: "c) Cada Comunidad Autónoma tiene que elegir un senador, más tres por cada millón de habitantes", val: "wrong"}, {text: "d) Cada Comunidad Autónoma tiene que elegir un senador, más cuatro por cada millón de habitantes", val: "wrong"}], exp: "Art. 69.5 de la CE: Las Comunidades Autónomas designarán además un Senador y otro más por cada millón de habitantes de su respectivo territorio." },
+        { q: "¿Cómo se llama la sesión en la que se elige al Presidente del Gobierno?", options: [{text: "a) Votación del Presidente", val: "wrong"}, {text: "b) Moción de confianza", val: "wrong"}, {text: "c) Investidura", val: "correct"}, {text: "d) Investimento", val: "wrong"}], exp: "Art. 99 de la CE: El debate y votación del programa del candidato propuesto para recibir la confianza del Congreso se denomina sesión de investidura." },
+        { q: "¿Qué garantías prevé la Constitución para que los miembros de las Cortes Generales puedan desarrollar sus funciones de forma libre e independiente?", options: [{text: "a) La inviolabilidad", val: "wrong"}, {text: "b) La inmunidad", val: "wrong"}, {text: "c) La falta de responsabilidad", val: "wrong"}, {text: "d) Son correctas la a) y la b)", val: "correct"}], exp: "El art. 71 de la CE consagra expresamente las prerrogativas de inviolabilidad parlamentaria e inmunidad." },
+        { q: "¿Cuál de las siguientes afirmaciones es falsa?", options: [{text: "a) El Gobierno no actúa bajo el principio de jerarquía", val: "correct"}, {text: "b) El Gobierno tiene carácter colegiado", val: "wrong"}, {text: "c) La figura del vicepresidente del Gobierno no es obligatoria", val: "wrong"}, {text: "d) El jefe del Gobierno es el Presidente", val: "wrong"}], exp: "Es falsa la a) porque la Administración Pública y los órganos de gobierno sí actúan conforme al principio de jerarquía (art. 103.1 CE y Ley del Gobierno)." },
+        { q: "Según la Constitución, la forma política del Estado es:", options: [{text: "a) La República parlamentaria", val: "wrong"}, {text: "b) El Estado autonómico", val: "wrong"}, {text: "c) La Monarquía parlamentaria", val: "correct"}, {text: "d) Ninguna es correcta", val: "wrong"}], exp: "Art. 1.3 de la CE: La forma política del Estado español es la Monarquía parlamentaria." }
     ];
 
-
-
-    // Banco de preguntas de Psicología (ampliado hacia las 100 preguntas)
-
+    // Banco de preguntas de Psicología
     const bancoPsicologia = [
-
         { q: "¿Qué define el Código de Ética según el material de estudio?", options: [{text: "A) Una rama de la psicología clínica", val: "wrong"}, {text: "B) Una ciencia normativa que estudia los deberes y los derechos de cada profesión", val: "correct"}, {text: "C) Un conjunto de leyes penales", val: "wrong"}], exp: "El Código de Ética se define como la ciencia normativa de deberes y derechos profesionales." },
-
         { q: "¿Cuál es una de las diferencias clave entre moral y ética según el Tema 3?", options: [{text: "A) La moral surge en la interioridad y la ética tiene base social", val: "wrong"}, {text: "B) La moral tiene base social y la ética surge en la interioridad de la persona", val: "correct"}, {text: "C) No hay diferencia", val: "wrong"}], exp: "La moral tiene base social colectiva y la ética brota de la interioridad y conciencia individual." },
-
         { q: "¿Qué capacidad social se define como expresar lo que se piensa y se siente de forma adecuada y sin ansiedad?", options: [{text: "A) Agresividad", val: "wrong"}, {text: "B) Pasividad", val: "wrong"}, {text: "C) Asertividad", val: "correct"}], exp: "La asertividad permite defender los propios derechos de forma adecuada y sin generar ansiedad." },
-
         { q: "¿Cómo se denomina la técnica asertiva en la que se repite el propio punto de vista con tranquilidad y sin dejarse ganar por aspectos irrelevantes?", options: [{text: "A) Técnica del disco roto", val: "correct"}, {text: "B) Técnica del banco de niebla", val: "wrong"}, {text: "C) Técnica de ignorar", val: "wrong"}], exp: "La técnica del disco roto consiste en insistir calmadamente en nuestro argumento." },
-
         { q: "En la pirámide de necesidades de Maslow, ¿qué necesidades se encuentran en la base (nivel inferior)?", options: [{text: "A) Necesidades fisiológicas (respiración, alimentación, descanso)", val: "correct"}, {text: "B) Autorrealización", val: "wrong"}, {text: "C) Reconocimiento y éxito", val: "wrong"}], exp: "En la base se sitúan las necesidades fisiológicas primarias para la supervivencia." },
-
         { q: "¿Qué tipo de estructura en la empresa está formada por personas que actúan espontáneamente buscando la satisfacción personal?", options: [{text: "A) Estructura formal", val: "wrong"}, {text: "B) Estructura informal", val: "correct"}, {text: "C) Estructura jerárquica", val: "wrong"}], exp: "La estructura informal surge de forma espontánea priorizando las relaciones personales." },
-
         { q: "¿Qué es el autocontrol emocional?", options: [{text: "A) La capacidad que nos permite controlar nuestras emociones y no que estas nos controlen a nosotros", val: "correct"}, {text: "B) La represión total", val: "wrong"}, {text: "C) Influir en los superiores", val: "wrong"}], exp: "Otorga la facultad de regular los impulsos emocionales de forma consciente." },
-
         { q: "Según el esquema cognitivo del autocontrol, ¿cuál es la reacción física directa de un pensamiento?", options: [{text: "A) El sentimiento", val: "correct"}, {text: "B) La conducta motora", val: "wrong"}, {text: "C) La memoria", val: "wrong"}], exp: "Cada pensamiento genera una reacción fisiológica interna traducida en un sentimiento." },
-
         { q: "¿Cuál es la diferencia principal entre el miedo y la fobia?", options: [{text: "A) El miedo es permanente y la fobia transitoria", val: "wrong"}, {text: "B) El miedo es una respuesta normal y transitoria; la fobia es una reacción desproporcionada, irracional y persistente", val: "correct"}, {text: "C) No hay diferencias", val: "wrong"}], exp: "El miedo es normal y transitorio; la fobia es un temor irracional, persistente y desproporcionado." },
-
         { q: "¿Cómo se denomina el miedo a las alturas o vértigo patológico según el temario de fobias?", options: [{text: "A) Acrofobia", val: "correct"}, {text: "B) Agorafobia", val: "wrong"}, {text: "C) Claustrofobia", val: "wrong"}], exp: "La acrofobia es el miedo intenso o vértigo patológico ante las alturas." },
-
         { q: "¿Cuáles son las fases del proceso adaptativo del estrés (síndrome general de adaptación)?", options: [{text: "A) Fase de alarma, fase de resistencia y fase de agotamiento", val: "correct"}, {text: "B) Fase inicial e intermedia", val: "wrong"}, {text: "C) Fase de pánico y shock", val: "wrong"}], exp: "Comprende secuencialmente alarma, resistencia sostenida y agotamiento." },
-
         { q: "¿Qué tipo de respiración es la más adecuada para proporcionar una mayor calma al sistema nervioso y aprovechar la capacidad pulmonar?", options: [{text: "A) Respiración clavicular", val: "wrong"}, {text: "B) Respiración diafragmática o abdominal", val: "correct"}, {text: "C) Respiración torácica", val: "wrong"}], exp: "La respiración diafragmática maximiza la oxigenación y relaja profundamente." },
-
         { q: "¿Qué técnica fisiológica de relajación consiste en adiestrar a la persona en ejercicios de contracción y relajación muscular voluntaria?", options: [{text: "A) Relajación progresiva de Jacobson", val: "correct"}, {text: "B) Desensibilización sistemática", val: "wrong"}, {text: "C) Inoculación de estrés", val: "wrong"}], exp: "Jacobson ideó el método físico de tensar y relajar grupos musculares." },
-
         { q: "¿Qué es el pánico dentro de la escala de miedos?", options: [{text: "A) El nivel de gradación más elevado del miedo, totalmente incapacitante y que provoca huida", val: "correct"}, {text: "B) Una simple alerta preventiva", val: "wrong"}, {text: "C) Relajación mental", val: "wrong"}], exp: "El pánico representa el grado máximo de miedo con pérdida de control." },
-
         { q: "¿Cuál es una recomendación fundamental para el Vigilante de Seguridad frente a situaciones de pánico colectivo?", options: [{text: "A) Mantener la calma, ayudar a escapar del peligro y colaborar en los servicios de rescate", val: "correct"}, {text: "B) Abandonar el puesto", val: "wrong"}, {text: "C) Gritar con la masa", val: "wrong"}], exp: "Se debe mantener la templanza, guiar a las personas y colaborar con emergencias." },
-
         { q: "¿Qué técnica asertiva consiste en aparentar ceder terreno sin cederlo realmente, estando de acuerdo con parte del argumento?", options: [{text: "A) Técnica de la claudicación simulada (Banco de niebla)", val: "correct"}, {text: "B) Disco roto", val: "wrong"}, {text: "C) Procesar el cambio", val: "wrong"}], exp: "El banco de niebla permite dar la razón en lo verosímil sin renunciar al criterio propio." },
-
         { q: "¿Cómo se define el estilo de comunicación pasivo?", options: [{text: "A) Persona insegura, se cree inferior, sufre estrés, no mira a los ojos y se lamenta", val: "correct"}, {text: "B) Persona agresiva y dominante", val: "wrong"}, {text: "C) Persona asertiva", val: "wrong"}], exp: "El perfil pasivo denota inseguridad y vulnerabilidad ante la presión." },
-
         { q: "¿Qué componentes de la comunicación interpersonal incluyen la mirada, la sonrisa, los gestos y la postura corporal?", options: [{text: "A) Componentes no verbales", val: "correct"}, {text: "B) Componentes paralingüísticos", val: "wrong"}, {text: "C) Componentes verbales", val: "wrong"}], exp: "Gestos y posturas integran el lenguaje corporal o componentes no verbales." },
-
         { q: "¿Qué elementos forman parte de los componentes paralingüísticos de la comunicación?", options: [{text: "A) Volumen, entonación, fluidez, claridad y velocidad de la voz", val: "correct"}, {text: "B) Contenido escrito", val: "wrong"}, {text: "C) Movimientos de manos", val: "wrong"}], exp: "La paralingüística estudia el tono, el volumen y la velocidad verbal." },
-
         { q: "¿Qué se entiende por escucha activa en el ámbito de las habilidades sociales?", options: [{text: "A) Saber escuchar, formular preguntas adecuadas, permanecer receptivo, comprender y no interrumpir", val: "correct"}, {text: "B) Oír sin prestar atención", val: "wrong"}, {text: "C) Responder con críticas", val: "wrong"}], exp: "La escucha activa implica atención plena y comprensión sincera." }
-
     ];
-
-
 
     let preguntasActualesJuridico = [];
-
     let preguntasActualesPsicologia = [];
 
-
+    function actualizarContadores() {
+        const badgeJur = document.getElementById("badge-total-juridico");
+        const badgePsi = document.getElementById("badge-total-psicologia");
+        if (badgeJur) badgeJur.textContent = `${bancoJuridico.length} preguntas`;
+        if (badgePsi) badgePsi.textContent = `${bancoPsicologia.length} preguntas`;
+    }
 
     function seleccionarAleatorias(banco, cantidad) {
-
         let mezclado = [...banco].sort(() => 0.5 - Math.random());
-
         return mezclado.slice(0, cantidad);
-
     }
-
-
 
     function renderizarTest(tipo) {
-
         let container = document.getElementById(`quiz-container-${tipo}`);
-
         container.innerHTML = "";
-
         let banco = (tipo === 'juridico') ? bancoJuridico : bancoPsicologia;
-
         let prefijo = (tipo === 'juridico') ? 'j' : 'p';
 
-
-
         // Seleccionamos 10 preguntas aleatorias del banco
-
         let seleccion = seleccionarAleatorias(banco, 10);
-
         if (tipo === 'juridico') preguntasActualesJuridico = seleccion;
-
         else preguntasActualesPsicologia = seleccion;
 
-
-
         seleccion.forEach((item, index) => {
-
             let numQ = index + 1;
-
             let cardHTML = `
-
                 <div class="question-card" data-q="${prefijo}${numQ}" data-orig-index="${banco.indexOf(item)}">
-
                     <div class="question">${numQ}. ${item.q}</div>
-
                     <div class="options">
-
             `;
 
-
-
-            item.options.forEach((opt, optIndex) => {
-
+            item.options.forEach((opt) => {
                 cardHTML += `<label><input type="radio" name="${prefijo}${numQ}" value="${opt.val}"> ${opt.text}</label>`;
-
             });
-
-
 
             cardHTML += `
-
                     </div>
-
                     <div class="status-badge" id="badge-${prefijo}${numQ}"></div>
-
                     <div class="explanation" id="exp-${prefijo}${numQ}">Explicación: ${item.exp}</div>
-
                 </div>
-
             `;
-
             container.innerHTML += cardHTML;
-
         });
 
-
-
         document.getElementById(`result-${tipo}`).innerHTML = "";
-
         document.getElementById(`result-${tipo}`).style.backgroundColor = "transparent";
-
     }
-
-
 
     function iniciarTest(tipo) {
-
         renderizarTest(tipo);
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
+        const sectionEl = document.getElementById(`seccion-${tipo}`);
+        if (sectionEl) {
+            sectionEl.scrollIntoView({ behavior: 'smooth' });
+        }
     }
-
-
 
     function cambiarSeccion(seccion) {
-
         document.querySelectorAll('.test-section').forEach(el => el.classList.remove('active'));
-
         document.querySelectorAll('.btn-section').forEach(el => el.classList.remove('active'));
-
         
+        const targetSection = document.getElementById(`seccion-${seccion}`);
+        const targetBtn = document.getElementById(`btn-tab-${seccion}`);
+        
+        if (targetSection) targetSection.classList.add('active');
+        if (targetBtn) targetBtn.classList.add('active');
 
-        if (seccion === 'juridico') {
-
-            document.getElementById('seccion-juridico').classList.add('active');
-
-            event.target.classList.add('active');
-
-        } else if (seccion === 'psicologia') {
-
-            document.getElementById('seccion-psicologia').classList.add('active');
-
-            event.target.classList.add('active');
-
+        if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
         }
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
     }
-
-
 
     function calcularResultado(tipo) {
-
-        let total = 10; // Ahora son 10 preguntas por examen
-
+        let total = 10;
         let prefix = (tipo === 'juridico') ? 'j' : 'p';
-
         let aciertos = 0;
-
         let fallos = 0;
 
-
-
         for (let i = 1; i <= total; i++) {
-
             const card = document.querySelector(`[data-q="${prefix}${i}"]`);
-
             if (!card) continue;
-
             const labels = card.querySelectorAll('label');
-
             const badge = document.getElementById(`badge-${prefix}${i}`);
-
             const explanation = document.getElementById(`exp-${prefix}${i}`);
-
             
-
             labels.forEach(l => {
-
                 l.classList.remove('correct-answer', 'wrong-answer');
-
             });
 
-
-
             const selected = card.querySelector(`input[name="${prefix}${i}"]:checked`);
-
             const correctInput = card.querySelector(`input[name="${prefix}${i}"][value="correct"]`);
 
-
-
             if (selected) {
-
                 if (selected.value === "correct") {
-
                     aciertos++;
-
                     selected.parentElement.classList.add('correct-answer');
-
                     badge.className = "status-badge correct";
-
                     badge.innerHTML = "¡Correcto!";
-
                 } else {
-
                     fallos++;
-
                     selected.parentElement.classList.add('wrong-answer');
-
                     if (correctInput) {
-
                         correctInput.parentElement.classList.add('correct-answer');
-
                     }
-
                     badge.className = "status-badge wrong";
-
                     badge.innerHTML = "Incorrecto";
-
                 }
-
             } else {
-
                 fallos++;
-
                 if (correctInput) {
-
                     correctInput.parentElement.classList.add('correct-answer');
-
                 }
-
                 badge.className = "status-badge wrong";
-
                 badge.innerHTML = "No respondida";
-
             }
-
             
-
             badge.style.display = "block";
-
             explanation.style.display = "block";
-
         }
-
-
 
         let puntosTotales = (aciertos * 1) - (fallos * 0.5);
-
         let notaFinal = (puntosTotales / total) * 10;
-
         if (notaFinal < 0) notaFinal = 0;
 
-
-
         const resultadoDiv = document.getElementById(`result-${tipo}`);
-
         
-
         if (notaFinal >= 5) {
-
             resultadoDiv.style.backgroundColor = "#d4edda";
-
             resultadoDiv.style.color = "#155724";
-
             resultadoDiv.innerHTML = `¡Aprobado! Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
-
         } else {
-
             resultadoDiv.style.backgroundColor = "#f8d7da";
-
             resultadoDiv.style.color = "#721c24";
-
             resultadoDiv.innerHTML = `Suspenso. Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
-
         }
-
     }
 
-
-
-    // Inicializar los tests al cargar la página por primera vez
-
+    // Inicializar contadores y tests al cargar
     window.onload = function() {
-
+        actualizarContadores();
         renderizarTest('juridico');
-
         renderizarTest('psicologia');
-
     };
-
 </script>
 
-
-
 </body>
-
 </html>
