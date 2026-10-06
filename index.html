@@ -222,7 +222,7 @@
     <div class="modules-grid">
         <div class="module-summary-card">
             <div class="module-title">ÁREA JURÍDICA</div>
-            <div class="module-subtitle">Derecho Constitucional, Ley 5/2014 de Seguridad Privada y Reglamentación.</div>
+            <div class="module-subtitle">Derecho Constitucional, Ley 5/2014, Principios de Actuación, Art. 32 y Régimen Sancionador (Art. 68).</div>
             <div class="badges-wrapper">
                 <span class="info-pill" id="badge-total-juridico">0 preguntas</span>
                 <span class="info-pill">Examen aleatorio: 10</span>
@@ -260,7 +260,7 @@
 
     <!-- SECCIÓN 1: TEST JURÍDICO -->
     <div id="seccion-juridico" class="test-section active">
-        <h2>Módulo: Área Jurídica</h2>
+        <h2>Módulo: Área Jurídica (Normativa, Art. 32, Principios y Régimen Sancionador Art. 68)</h2>
         <div class="rules-box">
             <strong>Sistema de Puntuación (sobre 10 preguntas):</strong>
             <ul>
@@ -310,7 +310,6 @@
                 Usted presta servicio como vigilante de seguridad en una gran estación de transportes con gran afluencia de viajeros, zonas comerciales, consignas automáticas de equipaje, taquillas de venta de billetes y andenes de alta velocidad. El Responsable de Seguridad le solicita un estudio de riesgos para optimizar el dispositivo de vigilancia.
             </div>
 
-            <!-- Tabla Interactiva -->
             <div style="overflow-x:auto;">
                 <table class="risk-table">
                     <thead>
@@ -323,9 +322,7 @@
                             <th style="width: 23%;">Medidas de Seguridad Propuestas</th>
                         </tr>
                     </thead>
-                    <tbody id="filas-evaluacion-riesgo">
-                        <!-- Las 5 filas se generan e interactúan por JS -->
-                    </tbody>
+                    <tbody id="filas-evaluacion-riesgo"></tbody>
                 </table>
             </div>
 
@@ -443,10 +440,11 @@
 </div>
 
 <script>
-    // ==========================================
-    // BANCO 1: ÁREA JURÍDICA (63 preguntas)
-    // ==========================================
+    // =========================================================================
+    // BANCO 1: ÁREA JURÍDICA (113 preguntas: Constitucional, Seguridad y Sanciones)
+    // =========================================================================
     const bancoJuridico = [
+        // --- 20 Preguntas iniciales de Seguridad Privada ---
         { q: "Según la Ley 5/2014 de Seguridad Privada, ¿qué consideración tienen las actividades de seguridad privada respecto a la seguridad pública?", options: [{text: "A) Sustitutivas e independientes", val: "wrong"}, {text: "B) Complementarias y subordinadas", val: "correct"}, {text: "C) Superiores y prioritarias", val: "wrong"}], exp: "La seguridad privada ejerce un papel complementario y subordinado respecto a la seguridad pública." },
         { q: "¿Cuál es el arma reglamentaria principal de los vigilantes de seguridad en los servicios que deban prestarse con armas?", options: [{text: "A) Escopeta de repetición calibre 12/70", val: "wrong"}, {text: "B) Revólver calibre treinta y ocho especial de cuatro pulgadas", val: "correct"}, {text: "C) Pistola semiautomática 9mm Parabellum", val: "wrong"}], exp: "El revólver calibre 38 especial de 4 pulgadas es el arma corta reglamentaria principal." },
         { q: "¿Qué defensa reglamentaria deben portar los vigilantes de seguridad uniformados durante su servicio?", options: [{text: "A) De color negro, goma semirrígida y 50 centímetros de longitud", val: "correct"}, {text: "B) De color marrón, madera y 60 centímetros", val: "wrong"}, {text: "C) Extensible metálica de 40 centímetros", val: "wrong"}], exp: "La defensa reglamentaria es la porra de color negro, goma semirrígida y 50 centímetros de longitud." },
@@ -467,6 +465,8 @@
         { q: "¿Dónde se coloca el escudo-emblema de la empresa de seguridad en la uniformidad?", options: [{text: "A) En la parte alta de la manga izquierda de las prendas superiores", val: "correct"}, {text: "B) Al cuello con cadena", val: "wrong"}, {text: "C) En la espalda", val: "wrong"}], exp: "El emblema de la empresa se coloca obligatoriamente en la manga izquierda." },
         { q: "¿Cuáles son los principios básicos de actuación del personal de seguridad privada?", options: [{text: "A) Legalidad, integridad, dignidad, protección, corrección, congruencia y proporcionalidad", val: "correct"}, {text: "B) Rapidez e improvisación", val: "wrong"}, {text: "C) Anonimato absoluto", val: "wrong"}], exp: "Se rigen por legalidad, integridad, dignidad, congruencia y proporcionalidad." },
         { q: "¿Qué consideración legal tiene el personal de seguridad privada cuando actúa en cooperación y bajo mando policial?", options: [{text: "A) Protección jurídica de agente de la autoridad frente a agresiones y desobediencias", val: "correct"}, {text: "B) Consideración militar", val: "wrong"}, {text: "C) Ninguna protección", val: "wrong"}], exp: "Disfrutan de protección jurídica de agente de la autoridad." },
+
+        // --- 43 Preguntas de Derecho Constitucional ---
         { q: "¿Quién sanciona, promulga y ordena la publicación en el BOE de las leyes aprobadas por las Cortes Generales?", options: [{text: "a) El Rey", val: "correct"}, {text: "b) El Presidente del Gobierno", val: "wrong"}, {text: "c) El Presidente del Congreso", val: "wrong"}, {text: "d) El Consejo de Ministros", val: "wrong"}], exp: "Art. 91 de la CE: El Rey sancionará en el plazo de quince días las leyes aprobadas por las Cortes Generales, y las promulgará y ordenará su inmediata publicación." },
         { q: "¿Qué es el rango jurídico de una norma?", options: [{text: "a) Su posición dentro del ordenamiento jurídico", val: "correct"}, {text: "b) Su posición dentro del BOE", val: "wrong"}, {text: "c) El número de la norma que viene determinado por la fecha en que se aprueba", val: "wrong"}, {text: "d) El número de la norma que viene determinado por la fecha en el que el Rey la sanciona", val: "wrong"}], exp: "El rango jurídico define la categoría, fuerza y posición jerárquica de una norma dentro de la pirámide normativa." },
         { q: "La derogación tácita de una norma se produce cuando:", options: [{text: "a) La norma nueva dice exactamente la que está modificando", val: "wrong"}, {text: "b) La norma antigua dice exactamente las normas nuevas que está modificando", val: "wrong"}, {text: "c) De la norma nueva se desprende la existencia de una contradicción con la norma antigua", val: "correct"}, {text: "d) De la norma nueva no se desprende la existencia de una contradicción con la norma antigua", val: "wrong"}], exp: "Código Civil, art. 2.2: La derogación tácita tiene lugar cuando una norma posterior resulta incompatible o contradictoria con la anterior sobre la misma materia." },
@@ -509,7 +509,59 @@
         { q: "¿Cómo se llama la sesión en la que se elige al Presidente del Gobierno?", options: [{text: "a) Votación del Presidente", val: "wrong"}, {text: "b) Moción de confianza", val: "wrong"}, {text: "c) Investidura", val: "correct"}, {text: "d) Investimento", val: "wrong"}], exp: "Art. 99 de la CE: El debate y votación del programa del candidato propuesto para recibir la confianza del Congreso se denomina sesión de investidura." },
         { q: "¿Qué garantías prevé la Constitución para que los miembros de las Cortes Generales puedan desarrollar sus funciones de forma libre e independiente?", options: [{text: "a) La inviolabilidad", val: "wrong"}, {text: "b) La inmunidad", val: "wrong"}, {text: "c) La falta de responsabilidad", val: "wrong"}, {text: "d) Son correctas la a) y la b)", val: "correct"}], exp: "El art. 71 de la CE consagra expresamente las prerrogativas de inviolabilidad parlamentaria e inmunidad." },
         { q: "¿Cuál de las siguientes afirmaciones es falsa?", options: [{text: "a) El Gobierno no actúa bajo el principio de jerarquía", val: "correct"}, {text: "b) El Gobierno tiene carácter colegiado", val: "wrong"}, {text: "c) La figura del vicepresidente del Gobierno no es obligatoria", val: "wrong"}, {text: "d) El jefe del Gobierno es el Presidente", val: "wrong"}], exp: "Es falsa la a) porque la Administración Pública y los órganos de gobierno sí actúan conforme al principio de jerarquía (art. 103.1 CE y Ley del Gobierno)." },
-        { q: "Según la Constitución, la forma política del Estado es:", options: [{text: "a) La República parlamentaria", val: "wrong"}, {text: "b) El Estado autonómico", val: "wrong"}, {text: "c) La Monarquía parlamentaria", val: "correct"}, {text: "d) Ninguna es correcta", val: "wrong"}], exp: "Art. 1.3 de la CE: La forma política del Estado español es la Monarquía parlamentaria." }
+        { q: "Según la Constitución, la forma política del Estado es:", options: [{text: "a) La República parlamentaria", val: "wrong"}, {text: "b) El Estado autonómico", val: "wrong"}, {text: "c) La Monarquía parlamentaria", val: "correct"}, {text: "d) Ninguna es correcta", val: "wrong"}], exp: "Art. 1.3 de la CE: La forma política del Estado español es la Monarquía parlamentaria." },
+
+        // --- 50 Nuevas Preguntas Específicas: Principios de Actuación, Art. 32 y Régimen Sancionador (Art. 58 y Art. 68 LSP) ---
+        { q: "Según el artículo 8 de la Ley 5/2014, el personal de seguridad privada actuará con sujeción a los principios de:", options: [{text: "A) Legalidad, integridad, dignidad, corrección y proporcionalidad", val: "correct"}, {text: "B) Autonomía, secretismo y autoridad propia", val: "wrong"}, {text: "C) Jerarquía policial y subordinación judicial exclusiva", val: "wrong"}], exp: "Art. 8.1 LSP: El personal de seguridad privada se atendrá a los principios de legalidad, integridad, dignidad en el trato, corrección, congruencia y proporcionalidad." },
+        { q: "El principio de proporcionalidad impone al vigilante de seguridad que el uso de la fuerza debe ser:", options: [{text: "A) El medio ordinario de disuasión ante cualquier sospecha", val: "wrong"}, {text: "B) Exclusivamente el mínimo indispensable y proporcionado a la gravedad de la agresión", val: "correct"}, {text: "C) Delegado en el cliente contratante", val: "wrong"}], exp: "Art. 8.1 LSP: La utilización de la fuerza sólo será admisible cuando resulte estrictamente necesaria e idónea a la situación." },
+        { q: "Según el artículo 30 de la LSP, los principios que rigen las funciones del personal de seguridad son:", options: [{text: "A) Exclusividad, especialidad y subordinación a las FFCCSS", val: "correct"}, {text: "B) Inmunidad judicial y libre intervención", val: "wrong"}, {text: "C) Territorialidad comunitaria y discrecionalidad", val: "wrong"}], exp: "Art. 30 LSP: El personal únicamente podrá ejercer las funciones para las que esté expresamente habilitado, respetando las competencias de las FFCCSS." },
+        { q: "Según el artículo 32.1.a de la LSP, es función propia de los vigilantes de seguridad:", options: [{text: "A) Efectuar controles de identidad en la vía pública sin relación con su puesto", val: "wrong"}, {text: "B) Ejercer la vigilancia y protección de bienes, establecimientos, lugares y eventos, tanto públicos como privados", val: "correct"}, {text: "C) Investigar delitos perseguibles a instancia de parte", val: "wrong"}], exp: "Art. 32.1.a LSP: Vigilar y proteger bienes, establecimientos, lugares y eventos, tanto públicos como privados, y proteger a las personas que se encuentren en los mismos." },
+        { q: "En los controles de acceso en el interior de inmuebles (art. 32.1.b LSP), el vigilante de seguridad está facultado para:", options: [{text: "A) Efectuar comprobaciones, registros y prevenciones necesarias para impedir la entrada de armas o sustancias peligrosas", val: "correct"}, {text: "B) Retener el DNI durante toda la estancia", val: "wrong"}, {text: "C) Interrogar al visitante bajo juramento", val: "wrong"}], exp: "Art. 32.1.b LSP: Comprobar las identidades y realizar los registros de personas y efectos estrictamente necesarios para la seguridad del inmueble." },
+        { q: "Si una persona se niega al control de acceso o registro de bolsos en la entrada de un recinto privado, el vigilante debe (art. 32.1.b LSP):", options: [{text: "A) Detenerla inmediatamente por desobediencia grave", val: "wrong"}, {text: "B) Impedirle el acceso al inmueble", val: "correct"}, {text: "C) Registrarla empleando la fuerza física", val: "wrong"}], exp: "Art. 32.1.b LSP: La negativa al control de acceso faculta al vigilante para impedir la entrada al recinto." },
+        { q: "Respecto a la detención, el artículo 32.1.d de la LSP establece que los vigilantes de seguridad deben:", options: [{text: "A) Evitar la comisión de delitos y poner inmediatamente a disposición de las FFCCSS a los delincuentes e instrumentos", val: "correct"}, {text: "B) Trasladar al detenido en su propio vehículo a la comisaría", val: "wrong"}, {text: "C) Tomar declaración jurada antes de avisar a la policía", val: "wrong"}], exp: "Art. 32.1.d LSP: Evitar delitos e infracciones y poner inmediatamente a disposición policial a los autores y pruebas." },
+        { q: "Según el artículo 32.2 de la LSP, las funciones de seguridad se prestarán:", options: [{text: "A) En cualquier calle del municipio si hay sospechas", val: "wrong"}, {text: "B) En el interior de los edificios o de las instalaciones objeto de protección", val: "correct"}, {text: "C) Sin limitación espacial", val: "wrong"}], exp: "Art. 32.2 LSP: Con carácter general, los servicios se prestan en el interior de los inmuebles objeto de protección, salvo excepciones regladas." },
+        { q: "¿En cuál de los siguientes casos puede prestarse servicio en vías públicas o espacios abiertos según el art. 32.2 y art. 41 de la LSP?", options: [{text: "A) Patrullas vecinales no autorizadas", val: "wrong"}, {text: "B) Polígonos industriales, urbanizaciones y recintos comerciales delimitados, previa autorización", val: "correct"}, {text: "C) Detención rutinaria de tráfico urbano", val: "wrong"}], exp: "Art. 41 LSP: Servicios en polígonos, urbanizaciones y eventos pueden realizarse en vías públicas con la preceptiva autorización." },
+        { q: "El artículo 58 de la Ley 5/2014 tipifica las infracciones cometidas por el personal de seguridad privada en:", options: [{text: "A) Graves y de escasa cuantía", val: "wrong"}, {text: "B) Leves, graves y muy graves", val: "correct"}, {text: "C) Penales y civiles", val: "wrong"}], exp: "Art. 58 LSP: Las infracciones se clasifican en leves, graves y muy graves." },
+        { q: "Según el artículo 68.1.a de la LSP, la comisión de delitos dolosos en el ejercicio de sus funciones constituye infracción:", options: [{text: "A) Muy grave", val: "correct"}, {text: "B) Grave", val: "wrong"}, {text: "C) Leve", val: "wrong"}], exp: "Art. 68.1.a LSP: La comisión de delitos dolosos cometidos en el ejercicio de las funciones constituye infracción muy grave." },
+        { q: "El abandono del servicio por parte del vigilante sin causa justificada y dentro de su jornada laboral (art. 68.1.b LSP) es una infracción:", options: [{text: "A) Leve", val: "wrong"}, {text: "B) Grave", val: "wrong"}, {text: "C) Muy grave", val: "correct"}], exp: "Art. 68.1.b LSP: El abandono del servicio sin causa justificada es infracción muy grave." },
+        { q: "Prestar servicios de seguridad privada a terceros sin estar habilitado con la TIP reglamentaria (art. 68.1.c LSP) constituye infracción:", options: [{text: "A) Leve", val: "wrong"}, {text: "B) Muy grave", val: "correct"}, {text: "C) Grave", val: "wrong"}], exp: "Art. 68.1.c LSP: El ejercicio de funciones sin contar con la correspondiente habilitación es infracción muy grave." },
+        { q: "La negativa a colaborar con las Fuerzas y Cuerpos de Seguridad del Estado en situaciones de emergencia (art. 68.1.e LSP) se califica como:", options: [{text: "A) Muy grave", val: "correct"}, {text: "B) Grave", val: "wrong"}, {text: "C) Leve", val: "wrong"}], exp: "Art. 68.1.e LSP: La negativa injustificada a prestar auxilio o colaboración policial requerida es infracción muy grave." },
+        { q: "Portar armas no reglamentarias o prestar con armas un servicio no autorizado por la Delegación del Gobierno (art. 68.1.f LSP) es:", options: [{text: "A) Infracción muy grave", val: "correct"}, {text: "B) Falta de tráfico", val: "wrong"}, {text: "C) Infracción leve", val: "wrong"}], exp: "Art. 68.1.f LSP: La prestación de servicios con armas no autorizadas o indebidas constituye infracción muy grave." },
+        { q: "La vulneración deliberada del deber de secreto profesional sobre datos conocidos por el servicio (art. 68.1.g LSP) se tipifica como:", options: [{text: "A) Infracción leve", val: "wrong"}, {text: "B) Infracción muy grave", val: "correct"}, {text: "C) Infracción grave", val: "wrong"}], exp: "Art. 68.1.g LSP: La revelación o uso indebido de secretos profesionales que cause grave perjuicio es infracción muy grave." },
+        { q: "Según el artículo 68.2 de la LSP, la falta de respeto o trato incorrecto grave a los ciudadanos durante la intervención es infracción:", options: [{text: "A) Grave", val: "correct"}, {text: "B) Muy grave", val: "wrong"}, {text: "C) Leve", val: "wrong"}], exp: "Art. 68.2.a LSP: La falta de respeto al honor de las personas o trato desconsiderado grave es infracción grave." },
+        { q: "Realizar funciones que excedan de la habilitación obtenida (por ejemplo, funciones de escolta siendo vigilante) es infracción (art. 68.2.c LSP):", options: [{text: "A) Leve", val: "wrong"}, {text: "B) Grave", val: "correct"}, {text: "C) Muy grave", val: "wrong"}], exp: "Art. 68.2.c LSP: El ejercicio de funciones distintas a las que autoriza la habilitación profesional es infracción grave." },
+        { q: "La retención indebida del documento de identidad personal de un ciudadano en un control (art. 68.2.d LSP) es:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Conducta obligatoria", val: "wrong"}, {text: "C) Infracción leve", val: "wrong"}], exp: "Art. 68.2.d LSP: La retención no autorizada de documentación personal constituye infracción grave." },
+        { q: "El incumplimiento de la obligación de portar visible el distintivo del vigilante durante el servicio (art. 68.3.a LSP) constituye:", options: [{text: "A) Infracción leve", val: "correct"}, {text: "B) Infracción grave", val: "wrong"}, {text: "C) Infracción muy grave", val: "wrong"}], exp: "Art. 68.3.a LSP: Prestar el servicio sin portar visible el distintivo oficial homologado es infracción leve." },
+        { q: "La falta de puntualidad injustificada al servicio cuando no cause grave perturbación (art. 68.3.b LSP) es considerada infracción:", options: [{text: "A) Muy grave", val: "wrong"}, {text: "B) Leve", val: "correct"}, {text: "C) Grave", val: "wrong"}], exp: "Art. 68.3.b LSP: La falta de puntualidad o incorrección no grave se tipifica como leve." },
+        { q: "No comunicar a la empresa o a la Policía el cambio de domicilio profesional dentro del plazo establecido (art. 68.3.c LSP) es:", options: [{text: "A) Infracción leve", val: "correct"}, {text: "B) Infracción muy grave", val: "wrong"}, {text: "C) Infracción grave", val: "wrong"}], exp: "Art. 68.3.c LSP: La omisión de comunicar datos de contacto o cambios de domicilio es infracción leve." },
+        { q: "Extraviar negligentemente la Tarjeta de Identidad Profesional (TIP) sin comunicarlo de inmediato es:", options: [{text: "A) Infracción leve", val: "correct"}, {text: "B) Falta penal", val: "wrong"}, {text: "C) Infracción muy grave", val: "wrong"}], exp: "Art. 68.3.d LSP: La negligencia en la custodia de documentos profesionales acreditativos constituye infracción leve." },
+        { q: "El uso de la fuerza cuando no resulte estrictamente necesario, sin llegar a causar lesiones constitutivas de delito grave (art. 68.2.b LSP), es infracción:", options: [{text: "A) Grave", val: "correct"}, {text: "B) Muy grave", val: "wrong"}, {text: "C) Leve", val: "wrong"}], exp: "Art. 68.2.b LSP: El uso desproporcionado o no justificado de la fuerza es infracción grave." },
+        { q: "La negativa a identificarse mostrando la TIP a los agentes policiales en el curso de una inspección (art. 68.2.e LSP) es infracción:", options: [{text: "A) Grave", val: "correct"}, {text: "B) Leve", val: "wrong"}, {text: "C) Muy grave", val: "wrong"}], exp: "Art. 68.2.e LSP: La negativa a identificarse ante las FFCCSS competentes es infracción grave." },
+        { q: "Por la comisión de infracciones muy graves, el artículo 68 de la LSP prevé la sanción de:", options: [{text: "A) Multa de 6.001 a 30.000 euros y/o extinción o suspensión de la habilitación de 1 a 2 años", val: "correct"}, {text: "B) Amonestación escrita privada", val: "wrong"}, {text: "C) Multa máxima de 100 euros", val: "wrong"}], exp: "Art. 68.1 LSP: Las infracciones muy graves acarrean multas de 6.001 a 30.000 € y/o suspensión o cancelación de la TIP." },
+        { q: "Por infracciones graves cometidas por el personal de seguridad (art. 68.2 LSP), la sanción económica es de:", options: [{text: "A) Multa de 1.001 a 6.000 euros y/o suspensión de la TIP de hasta 1 año", val: "correct"}, {text: "B) Multa de 100 a 500 euros", val: "wrong"}, {text: "C) Prisión militar", val: "wrong"}], exp: "Art. 68.2 LSP: Las faltas graves conllevan multas de 1.001 a 6.000 € y/o suspensión temporal de la TIP de hasta un año." },
+        { q: "Por infracciones leves cometidas por el personal de seguridad (art. 68.3 LSP), la sanción aplicable es de:", options: [{text: "A) Apercibimiento y/o multa de hasta 1.000 euros", val: "correct"}, {text: "B) Retirada permanente de la TIP", val: "wrong"}, {text: "C) 10.000 euros de fianza", val: "wrong"}], exp: "Art. 68.3 LSP: Las faltas leves se sancionan con apercibimiento o multa pecuniaria de hasta 1.000 €." },
+        { q: "Según la Ley de Seguridad Privada, las infracciones muy graves prescriben a los:", options: [{text: "A) 3 años", val: "correct"}, {text: "B) 6 meses", val: "wrong"}, {text: "C) 1 año", val: "wrong"}], exp: "Régimen general de prescripción administrativa: las infracciones muy graves prescriben a los 3 años." },
+        { q: "Las infracciones graves cometidas por el personal de seguridad privada prescriben a los:", options: [{text: "A) 2 años", val: "correct"}, {text: "B) 5 años", val: "wrong"}, {text: "C) 3 meses", val: "wrong"}], exp: "Las infracciones graves prescriben transcurridos 2 años desde su comisión." },
+        { q: "Las infracciones leves de la Ley de Seguridad Privada prescriben a los:", options: [{text: "A) 6 meses", val: "correct"}, {text: "B) 1 año", val: "wrong"}, {text: "C) 3 años", val: "wrong"}], exp: "Las infracciones leves prescriben al transcurrir 6 meses." },
+        { q: "El cómputo de la prescripción de una infracción continuada se inicia el día en que:", options: [{text: "A) Se incoa el expediente disciplinario", val: "wrong"}, {text: "B) Finalice la conducta infractora", val: "correct"}, {text: "C) Lo decide el instructor policial", val: "wrong"}], exp: "En infracciones continuadas, el plazo computa desde la consumación o cese de la conducta continuada." },
+        { q: "¿Qué órgano tiene competencia sancionadora para imponer la extinción de la habilitación por falta muy grave a nivel estatal?", options: [{text: "A) El Ministro del Interior", val: "correct"}, {text: "B) El vigilante jefe de servicio", val: "wrong"}, {text: "C) El Alcalde del municipio", val: "wrong"}], exp: "La extinción de la habilitación profesional por infracción muy grave es competencia del Ministro del Interior." },
+        { q: "La suspensión cautelar de la TIP durante la tramitación de un expediente sancionador por falta muy grave (art. 67 LSP) tiene por fin:", options: [{text: "A) Garantizar la seguridad pública y la eficacia de la resolución", val: "correct"}, {text: "B) Ahorrar gastos a la empresa", val: "wrong"}, {text: "C) Sustituir la sentencia penal", val: "wrong"}], exp: "Art. 67 LSP: Las medidas cautelares evitan la reiteración de riesgos graves y aseguran el procedimiento." },
+        { q: "Prestar servicios con armas reglamentarias bajo los efectos del alcohol o drogas tóxicas constituye infracción:", options: [{text: "A) Muy grave", val: "correct"}, {text: "B) Leve", val: "wrong"}, {text: "C) Falta administrativa no sancionable", val: "wrong"}], exp: "Art. 68.1 LSP: Prestar servicios con armas bajo sustancias psicotrópicas o alcohol es infracción muy grave." },
+        { q: "La negativa a someterse a pruebas de alcoholemia o drogas legalmente requeridas durante el servicio con armas es:", options: [{text: "A) Infracción muy grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Falta interna sin trascendencia legal", val: "wrong"}], exp: "La negativa a control de sustancias en servicio armado constituye infracción muy grave." },
+        { q: "Participar en huelgas o paros de seguridad sin respetar los servicios mínimos esenciales decretados es infracción:", options: [{text: "A) Muy grave", val: "correct"}, {text: "B) Grave", val: "wrong"}, {text: "C) Leve", val: "wrong"}], exp: "El incumplimiento de servicios mínimos en servicios esenciales se califica como infracción muy grave." },
+        { q: "No comunicar inmediatamente a las FFCCSS la comisión de un delito del que se tenga conocimiento en el servicio es:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Conducta potestativa", val: "wrong"}], exp: "Art. 68.2 LSP: La falta de comunicación inmediata a la policía de hechos delictivos es infracción grave." },
+        { q: "Prestar un servicio sin vestir el uniforme reglamentario cuando sea preceptivo según el contrato y la ley es:", options: [{text: "A) Infracción leve", val: "correct"}, {text: "B) Delito de usurpación", val: "wrong"}, {text: "C) Infracción muy grave", val: "wrong"}], exp: "Art. 68.3 LSP: La infracción de las normas de uniformidad se considera infracción leve salvo dispensa autorizada." },
+        { q: "Usar prendas de uniformidad o distintivos fuera del lugar y horario de servicio sin causa justificada es:", options: [{text: "A) Infracción leve", val: "correct"}, {text: "B) Falta de tráfico", val: "wrong"}, {text: "C) Infracción muy grave", val: "wrong"}], exp: "Portar el uniforme fuera del servicio sin justificación reglada constituye infracción leve." },
+        { q: "La pérdida o extravío negligente del arma de fuego reglamentaria asignada al servicio se considera infracción:", options: [{text: "A) Muy grave", val: "correct"}, {text: "B) Leve", val: "wrong"}, {text: "C) Administrativa no punible", val: "wrong"}], exp: "La negligencia grave que origine el extravío de un arma de fuego es infracción muy grave." },
+        { q: "Desobedecer las instrucciones específicas dictadas por la Policía Nacional o Guardia Civil en auxilio del servicio es:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) No sancionable si la empresa ordena lo contrario", val: "wrong"}], exp: "La desobediencia a las órdenes e instrucciones policiales directas constituye infracción grave." },
+        { q: "En caso de reincidencia en faltas graves dentro del plazo de 1 año, la conducta puede sancionarse como:", options: [{text: "A) Infracción muy grave", val: "correct"}, {text: "B) Falta leve", val: "wrong"}, {text: "C) No influye en la calificación", val: "wrong"}], exp: "La reincidencia temporal en infracciones graves permite tipificar la conducta como muy grave." },
+        { q: "Interrogar al detenido sobre los motivos o circunstancias del delito cometido sin limitarse a su custodia es:", options: [{text: "A) Infracción grave por extralimitación de funciones", val: "correct"}, {text: "B) Una obligación del vigilante", val: "wrong"}, {text: "C) Conducta recomendada", val: "wrong"}], exp: "Art. 32 LSP: El vigilante pone al infractor a disposición policial; no puede instruir interrogatorios ni pesquisas judiciales." },
+        { q: "Ejercer funciones de seguridad privada vistiendo uniformes o insignias que puedan confundirse con los de las FFCCSS es:", options: [{text: "A) Infracción muy grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Lícito si lo aprueba el cliente", val: "wrong"}], exp: "Art. 68.1 LSP: El uso de uniformes o emblemas que causen confusión con las fuerzas policiales es infracción muy grave." },
+        { q: "La graduación de las sanciones impuestas por la Dirección General de la Policía atiende a criterios de:", options: [{text: "A) Intencionalidad, gravedad del daño, reincidencia y perjuicio a terceros", val: "correct"}, {text: "B) Suerte o criterio exclusivo del vigilante", val: "wrong"}, {text: "C) Edad del infractor exclusivamente", val: "wrong"}], exp: "Principio de proporcionalidad sancionadora: se valora la culpabilidad, reincidencia y daño causado." },
+        { q: "Según el art. 32 de la LSP, ¿puede un vigilante de seguridad oponerse a una orden policial legítima alegando instrucciones de su empresa?", options: [{text: "A) No, las órdenes de las FFCCSS competentes prevalecen en materia de seguridad pública", val: "correct"}, {text: "B) Sí, la empresa privada manda siempre sobre el vigilante", val: "wrong"}, {text: "C) Sí, si el cliente paga el servicio", val: "wrong"}], exp: "Principio de subordinación: el personal de seguridad privada colabora y se subordina al mando policial." },
+        { q: "El deber de auxilio del personal de seguridad privada a las Fuerzas y Cuerpos de Seguridad (art. 14 LSP) implica:", options: [{text: "A) Facilitar información, auxilio operativo y prestar colaboración activa cuando sea requerido", val: "correct"}, {text: "B) Sustituir a los policías en sus rondas urbanas", val: "wrong"}, {text: "C) Prestar ayuda solo si hay retribución económica", val: "wrong"}], exp: "Art. 14 LSP: El auxilio y colaboración con las FFCCSS es un deber legal ineludible." },
+        { q: "El consumo de bebidas alcohólicas durante el servicio sin llegar a estado de embriaguez evidente es infracción:", options: [{text: "A) Leve", val: "correct"}, {text: "B) Muy grave", val: "wrong"}, {text: "C) No sancionable", val: "wrong"}], exp: "El consumo indebido de alcohol sin trascendencia grave se sanciona como infracción leve." },
+        { q: "No portar consigo la Tarjeta de Identidad Profesional (TIP) durante la prestación del servicio estando en posesión de ella es:", options: [{text: "A) Infracción leve", val: "correct"}, {text: "B) Infracción muy grave", val: "wrong"}, {text: "C) Infracción grave", val: "wrong"}], exp: "Art. 68.3 LSP: La no posesión material de la TIP en el puesto de trabajo constituye infracción leve." }
     ];
 
     // ==========================================
@@ -568,550 +620,4 @@
         { q: "La memoria sensorial retiene los estímulos ambientales durante:", options: [{text: "A) Hasta 1 segundo aproximadamente", val: "correct"}, {text: "B) 3 horas", val: "wrong"}, {text: "C) Varios días", val: "wrong"}], exp: "La memoria sensorial es ultracorta (milisegundos a un segundo)[cite: 43]." },
         { q: "¿Cuánto tiempo retiene la información la memoria a corto plazo (MCP)?", options: [{text: "A) De un segundo a varios minutos si no se repasa", val: "correct"}, {text: "B) Toda la vida sin esfuerzo", val: "wrong"}, {text: "C) Exactamente 24 horas", val: "wrong"}], exp: "La MCP opera como memoria de trabajo temporal (segundos a escasos minutos)[cite: 49]." },
         { q: "La atención selectiva se define como:", options: [{text: "A) Intentar atender a diez pantallas de CCTV a la vez sin mirar ninguna", val: "wrong"}, {text: "B) La capacidad de concentrarse en un estímulo específico ignorando los distractores", val: "correct"}, {text: "C) Un estado de adormecimiento", val: "wrong"}], exp: "Focaliza los recursos cognitivos en el estímulo relevante[cite: 46]." },
-        { q: "En la descripción técnica de personas, ¿por qué es obligatorio seguir un orden descendente?", options: [{text: "A) Para no olvidar detalles y permitir un informe completo, claro y estandarizado", val: "correct"}, {text: "B) Porque lo exige el Código de Comercio", val: "wrong"}, {text: "C) Solo para personas que llevan sombrero", val: "wrong"}], exp: "El orden metódico de arriba hacia abajo garantiza precisión técnica sin omisiones[cite: 42, 43]." },
-        { q: "¿Qué datos básicos deben describirse en la identificación de un vehículo?", options: [{text: "A) Marca, modelo, color, matrícula y rasgos singulares o número de ocupantes", val: "correct"}, {text: "B) El precio del seguro y los caballos fiscales", val: "wrong"}, {text: "C) La música que lleva encendida", val: "wrong"}], exp: "Marca, modelo, color, placa de matrícula y características singulares[cite: 20, 45]." },
-        { q: "En psicología social, ¿qué es la conformidad según los experimentos clásicos?", options: [{text: "A) Modificar la opinión o conducta para coincidir con la mayoría y no sufrir rechazo", val: "correct"}, {text: "B) Liderar una huelga", val: "wrong"}, {text: "C) Negarse a cumplir el reglamento", val: "wrong"}], exp: "La presión del grupo empuja al individuo a conformarse con el juicio colectivo[cite: 44]." },
-        { q: "Según Herbert Kelman, el 'cumplimiento' o sumisión manifiesta implica:", options: [{text: "A) Creer ciegamente en lo que dice el grupo", val: "wrong"}, {text: "B) Mostrar acuerdo público externo con el grupo manteniendo en privado el desacuerdo", val: "correct"}, {text: "C) Desobedecer inmediatamente", val: "wrong"}], exp: "El cumplimiento es público, pero sin convicción interna[cite: 46]." },
-        { q: "La 'internalización' en la influencia social significa:", options: [{text: "A) Asumir e interiorizar las normas o valores del grupo como convicciones propias", val: "correct"}, {text: "B) Fingir aprobación para evitar castigos", val: "wrong"}, {text: "C) Aislarse del grupo", val: "wrong"}], exp: "La persona adopta la creencia porque concuerda intrínsecamente con sus valores[cite: 48, 49]." },
-        { q: "¿Qué caracteriza al miedo innato frente al aprendido?", options: [{text: "A) El innato es un reflejo de supervivencia biológico no condicionado por aprendizaje previo", val: "correct"}, {text: "B) El innato se adquiere leyendo libros", val: "wrong"}, {text: "C) El innato solo aparece en personas ancianas", val: "wrong"}], exp: "El miedo innato (ruidos fuertes, precipicios) es una respuesta biológica adaptativa[cite: 50]." },
-        { q: "En la fase de alarma del Síndrome General de Adaptación (Selye), el cuerpo:", options: [{text: "A) Se agota y desfallece de inmediato", val: "wrong"}, {text: "B) Activa la respuesta simpática preparando la lucha o huida (taquicardia, dilatación pupilar)", val: "correct"}, {text: "C) Entra en relajación profunda", val: "wrong"}], exp: "La fase de alarma moviliza energía y activa el sistema neurovegetativo[cite: 50]." },
-        { q: "Un síntoma fisiológico habitual del estrés operativo es:", options: [{text: "A) Bradicardia extrema", val: "wrong"}, {text: "B) Aumento de la frecuencia cardíaca y redistribución sanguínea a grandes músculos", val: "correct"}, {text: "C) Sueño placentero inmediato", val: "wrong"}], exp: "La activación simpática incrementa el pulso cardíaco para oxigenar tejidos[cite: 44, 48]." },
-        { q: "¿Qué define a la delincuencia organizada según los criterios internacionales de Europol?", options: [{text: "A) Un robo aislado ejecutado por dos personas ebrias", val: "wrong"}, {text: "B) Colaboración concertada de 3 o más personas, jerarquía, continuidad temporal y búsqueda de beneficio grave", val: "correct"}, {text: "C) Faltas leves cometidas por jóvenes", val: "wrong"}], exp: "Requiere pluralidad concertada, jerarquía estructurada y finalidad delictiva sistemática[cite: 51, 52]." },
-        { q: "¿Qué caracteriza al delincuente primario u ocasional?", options: [{text: "A) Vive del crimen como profesión", val: "wrong"}, {text: "B) Comete un delito motivado por una circunstancia excepcional o puntual sin trayectoria previa", val: "correct"}, {text: "C) Es líder de un cártel internacional", val: "wrong"}], exp: "Comete el delito sin arraigo criminal previo[cite: 51]." },
-        { q: "En la criminología de Vicente Garrido, la delincuencia instrumental busca:", options: [{text: "A) Descargar una emoción de ira exclusivamente", val: "wrong"}, {text: "B) Un fin práctico y tangible, generalmente económico o material", val: "correct"}, {text: "C) Un delirio psicótico", val: "wrong"}], exp: "El delito es un instrumento o herramienta para obtener un botín o beneficio[cite: 53]." },
-        { q: "La delincuencia expresiva se distingue porque:", options: [{text: "A) Es calculada financieramente por directivos", val: "wrong"}, {text: "B) Nace del descontrol emocional, la hostilidad, el odio o pulsiones personales", val: "correct"}, {text: "C) Busca evadir impuestos", val: "wrong"}], exp: "El delito expresa una emoción, agresión o conflicto personal[cite: 53]." },
-        { q: "¿Por qué la delincuencia juvenil se denomina 'termómetro social'?", options: [{text: "A) Porque mide la temperatura de las cárceles", val: "wrong"}, {text: "B) Porque refleja el estado ético, educativo, familiar y de orden público de una sociedad", val: "correct"}, {text: "C) Porque no está penada", val: "wrong"}], exp: "Sus variaciones alertan del grado de degradación y cohesión familiar de la comunidad[cite: 52]." },
-        { q: "En la redacción de informes de incidencias, la regla de oro deontológica es:", options: [{text: "A) Tipificar delitos jurídicos (ej. 'vengo a denunciar un robo con fuerza según el art. 240')", val: "wrong"}, {text: "B) Ser objetivo, describir hechos cronológicos y no tipificar judicialmente los delitos", val: "correct"}, {text: "C) Ocultar los datos de las víctimas", val: "wrong"}], exp: "El vigilante redacta hechos comprobables sin calificar ni tipificar jurídicamente el delito[cite: 54, 55]." },
-        { q: "¿Cómo deben consignarse las horas en los partes diarios de seguridad?", options: [{text: "A) En formato de 24 horas separando horas y minutos con dos puntos (HH:MM)", val: "correct"}, {text: "B) Poniendo 'por la mañana' o 'a la hora de comer'", val: "wrong"}, {text: "C) Solo minutos", val: "wrong"}], exp: "Norma técnica documental: sistema de 24 horas exactas (ej. 03:15 h)[cite: 56]." },
-        { q: "En redacción documental, ¿cuál de las siguientes expresiones contiene una redundancia viciosa?", options: [{text: "A) El vigilante comprobó el cierre perimetral", val: "wrong"}, {text: "B) Subir arriba a la cubierta o salir afuera del edificio", val: "correct"}, {text: "C) El testigo facilitó su documento", val: "wrong"}], exp: "'Subir arriba', 'entrar adentro' o 'testigo presencial' son redundancias a erradicar[cite: 57]." },
-        { q: "¿A quién va destinada la copia del parte diario según el formato tradicional de albarán triplicado?", options: [{text: "A) Solo a la Policía", val: "wrong"}, {text: "B) Una para el cliente, otra para la empresa de seguridad y otra para el vigilante", val: "correct"}, {text: "C) Todas se destruyen al finalizar el turno", val: "wrong"}], exp: "El parte de servicio se expide habitualmente en tres copias reglamentarias[cite: 58]." },
-        { q: "¿En qué consiste la técnica asertiva de 'procesar el cambio'?", options: [{text: "A) Desplazar el foco de la discusión hacia el análisis de lo que está ocurriendo emocionalmente entre ambos", val: "correct"}, {text: "B) Insultar al cliente", val: "wrong"}, {text: "C) Cambiar de vestimenta", val: "wrong"}], exp: "Permite rebajar la hostilidad analizando el tono de la conversación." },
-        { q: "En la comunicación descendente en seguridad (mando a subordinado), la cualidad primordial debe ser:", options: [{text: "A) Claridad, precisión y ausencia de ambigüedad en la orden", val: "correct"}, {text: "B) Ambigüedad para que cada uno decida", val: "wrong"}, {text: "C) Uso de tecnicismos incomprensibles", val: "wrong"}], exp: "Las directrices operativas deben ser diáfanas para evitar fallos de seguridad." },
-        { q: "¿Qué diferencia el estrés positivo (euestrés) del negativo (distrés)?", options: [{text: "A) El euestrés moviliza energía y agudeza adaptativa; el distrés satura, bloquea y desgasta la salud", val: "correct"}, {text: "B) El euestrés provoca infartos", val: "wrong"}, {text: "C) No existe el estrés positivo", val: "wrong"}], exp: "El euestrés aporta lucidez para reaccionar; el distrés desborda la capacidad de control." },
-        { q: "¿Cuál es el tratamiento formal adecuado hacia el receptor en un escrito de incidencias?", options: [{text: "A) Tutear al responsable", val: "wrong"}, {text: "B) De usted ('Le comunico que', 'Le hago saber')", val: "correct"}, {text: "C) Hablar en clave militar cifrada", val: "wrong"}], exp: "Regla documental formal: tratamiento de respeto en tercera persona de cortesía (usted)[cite: 56]." }
-    ];
-
-    let preguntasActualesJuridico = [];
-    let preguntasActualesPsicologia = [];
-
-    // ==========================================
-    // EJERCICIO 1: TABLA MATRIZ PROBABILIDAD x IMPACTO
-    // ==========================================
-    function inicializarFilasPlanRiesgos() {
-        const tbody = document.getElementById("filas-evaluacion-riesgo");
-        tbody.innerHTML = "";
-        for (let i = 1; i <= 5; i++) {
-            tbody.innerHTML += `
-                <tr>
-                    <td><input type="text" id="r-nombre-${i}" placeholder="Ej. Hurto de equipaje..." /></td>
-                    <td><input type="text" id="r-zona-${i}" placeholder="Ej. Sala de espera..." /></td>
-                    <td>
-                        <select id="r-prob-${i}" onchange="recalcularFila(${i})">
-                            <option value="1">1 (Muy baja)</option>
-                            <option value="2">2 (Baja)</option>
-                            <option value="3" selected>3 (Media)</option>
-                            <option value="4">4 (Alta)</option>
-                            <option value="5">5 (Muy alta)</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select id="r-imp-${i}" onchange="recalcularFila(${i})">
-                            <option value="1">1 (Insignif.)</option>
-                            <option value="2">2 (Menor)</option>
-                            <option value="3" selected>3 (Moderado)</option>
-                            <option value="4">4 (Grave)</option>
-                            <option value="5">5 (Muy grave)</option>
-                        </select>
-                    </td>
-                    <td style="text-align:center;"><span id="r-calc-${i}" class="badge-calc medio">9</span></td>
-                    <td><input type="text" id="r-medidas-${i}" placeholder="Ej. Rondas de vigilancia..." /></td>
-                </tr>
-            `;
-        }
-    }
-
-    function recalcularFila(i) {
-        const p = parseInt(document.getElementById(`r-prob-${i}`).value);
-        const imp = parseInt(document.getElementById(`r-imp-${i}`).value);
-        const res = p * imp;
-        const badge = document.getElementById(`r-calc-${i}`);
-        badge.textContent = res;
-        badge.className = "badge-calc";
-        if (res <= 6) badge.classList.add("bajo");
-        else if (res <= 14) badge.classList.add("medio");
-        else badge.classList.add("alto");
-    }
-
-    function auditarPlanRiesgos() {
-        let totalLlenas = 0;
-        let maxPuntuacion = -1;
-        let nombreMaxRiesgo = "";
-
-        for (let i = 1; i <= 5; i++) {
-            const nom = document.getElementById(`r-nombre-${i}`).value.trim();
-            const zon = document.getElementById(`r-zona-${i}`).value.trim();
-            const med = document.getElementById(`r-medidas-${i}`).value.trim();
-            const p = parseInt(document.getElementById(`r-prob-${i}`).value);
-            const imp = parseInt(document.getElementById(`r-imp-${i}`).value);
-            const val = p * imp;
-
-            if (nom.length >= 4 && zon.length >= 3 && med.length >= 6) {
-                totalLlenas++;
-                if (val > maxPuntuacion) {
-                    maxPuntuacion = val;
-                    nombreMaxRiesgo = nom;
-                }
-            }
-        }
-
-        const txtZonas = document.getElementById("eval-zonas-vulnerables").value.trim().toLowerCase();
-        const txtConcl = document.getElementById("eval-conclusion").value.trim().toLowerCase();
-
-        if (totalLlenas < 5) {
-            alert(`Has completado ${totalLlenas} de 5 riesgos en la tabla. Rellena todos los campos con sus medidas para poder auditar el plan.`);
-            return;
-        }
-
-        let nota = 0;
-        let rubricasHtml = "";
-
-        // Rúbrica 1: Tabla de 5 riesgos completa (4.0 pts)
-        nota += 4.0;
-        rubricasHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Matriz de 5 Riesgos (P × I):</strong> <span style="color:#16a34a;">5 riesgos identificados, cuantificados y con medidas preventivas asignadas.</span></div></div>`;
-
-        // Rúbrica 2: Zonas vulnerables justificadas (3.0 pts)
-        const zonasOk = txtZonas.length >= 35 && (txtZonas.includes("anden") || txtZonas.includes("espera") || txtZonas.includes("consigna") || txtZonas.includes("taquilla") || txtZonas.includes("acceso") || txtZonas.includes("hall"));
-        if (zonasOk) {
-            nota += 3.0;
-            rubricasHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Identificación de Zonas Críticas:</strong> <span style="color:#16a34a;">Se justifican correctamente las áreas de mayor exposición física en la estación.</span></div></div>`;
-        } else {
-            rubricasHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Identificación de Zonas Críticas:</strong> <span style="color:#dc2626;">Falta detallar y justificar 3 áreas vulnerables de la estación (ej. andenes, consignas, taquillas).</span></div></div>`;
-        }
-
-        // Rúbrica 3: Conclusión analítica alineada con el cálculo (3.0 pts)
-        const conclOk = txtConcl.length >= 30 && (txtConcl.includes(maxPuntuacion.toString()) || txtConcl.includes("puntuacion") || txtConcl.includes("alta") || txtConcl.includes("prioridad") || txtConcl.includes("esfuerzo"));
-        if (conclOk) {
-            nota += 3.0;
-            rubricasHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Conclusión y Priorización Operativa:</strong> <span style="color:#16a34a;">Conclusión coherente. Se identificó el riesgo crítico (${nombreMaxRiesgo} con ${maxPuntuacion} pts) para enfocar los recursos de seguridad.</span></div></div>`;
-        } else {
-            rubricasHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Conclusión y Priorización Operativa:</strong> <span style="color:#dc2626;">La conclusión debe señalar explícitamente cuál fue el riesgo de mayor puntuación y por qué orienta el servicio.</span></div></div>`;
-        }
-
-        const card = document.getElementById("plan-feedback");
-        document.getElementById("plan-feedback-rubricas").innerHTML = rubricasHtml;
-        const notaEl = document.getElementById("plan-feedback-nota");
-        notaEl.innerHTML = `Puntuación: <strong>${nota.toFixed(1)} / 10</strong>`;
-
-        if (nota >= 5) {
-            notaEl.style.color = "#155724";
-            document.getElementById("plan-feedback-titulo").textContent = "Plan de Seguridad Física - Conforme";
-            card.style.borderColor = "#86efac";
-        } else {
-            notaEl.style.color = "#b91c1c";
-            document.getElementById("plan-feedback-titulo").textContent = "Plan de Seguridad Física - Requiere Ajustes";
-            card.style.borderColor = "#fca5a5";
-        }
-        card.style.display = "block";
-    }
-
-    function cargarEjemploPlanRiesgos() {
-        const ejemplos = [
-            { n: "Hurto al descuido de equipajes y efectos", z: "Salas de espera y cafetería", p: 4, i: 2, m: "Rondas dinámicas preventivas y megafonía disuasoria periódica." },
-            { n: "Conato de agresión al personal de taquillas", z: "Taquillas y atención al cliente", p: 3, i: 3, m: "Botón de pánico conectado a central y mamparas reforzadas." },
-            { n: "Abandono de paquete u objeto sospechoso", z: "Zona de consignas automáticas", p: 2, i: 5, m: "CCTV específico 24h y aplicación del protocolo: Aislar -> Comunicar FFCCSS." },
-            { n: "Acceso no autorizado a vías / andenes", z: "Controles de acceso a andenes", p: 3, i: 4, m: "Torno de validación de billete y presencia de vigilante en punto fijo." },
-            { n: "Altercados o reyertas en horario nocturno", z: "Vestíbulo principal y accesos", p: 3, i: 3, m: "Patrulla conjunta por parejas y coordinación directa con Policía Nacional." }
-        ];
-
-        ejemplos.forEach((item, index) => {
-            const i = index + 1;
-            document.getElementById(`r-nombre-${i}`).value = item.n;
-            document.getElementById(`r-zona-${i}`).value = item.z;
-            document.getElementById(`r-prob-${i}`).value = item.p;
-            document.getElementById(`r-imp-${i}`).value = item.i;
-            document.getElementById(`r-medidas-${i}`).value = item.m;
-            recalcularFila(i);
-        });
-
-        document.getElementById("eval-zonas-vulnerables").value = "1. Andenes de alta velocidad: Por la cercanía a vías electrificadas y riesgo de caída o invasión. 2. Consignas automáticas: Por la vulnerabilidad de depósito de objetos sin control visual. 3. Vestíbulo y taquillas: Por el manejo de efectivo y elevada densidad de viajeros en horas punta.";
-        document.getElementById("eval-conclusion").value = "El riesgo con mayor puntuación crítica resultó ser el abandono de objeto sospechoso en consignas (10 puntos, por impacto 5 muy grave), seguido del acceso no autorizado a vías (12 puntos, P:3 x I:4). El esfuerzo preventivo del servicio debe concentrarse en el control perimetral de andenes y la estricta vigilancia por CCTV de objetos desatendidos.";
-    }
-
-    function limpiarPlanRiesgos() {
-        for (let i = 1; i <= 5; i++) {
-            document.getElementById(`r-nombre-${i}`).value = "";
-            document.getElementById(`r-zona-${i}`).value = "";
-            document.getElementById(`r-prob-${i}`).value = "3";
-            document.getElementById(`r-imp-${i}`).value = "3";
-            document.getElementById(`r-medidas-${i}`).value = "";
-            recalcularFila(i);
-        }
-        document.getElementById("eval-zonas-vulnerables").value = "";
-        document.getElementById("eval-conclusion").value = "";
-        document.getElementById("plan-feedback").style.display = "none";
-    }
-
-    // ==========================================
-    // EJERCICIO 2: MATRIZ DE PELIGRO, AMENAZA Y RIESGO
-    // ==========================================
-    const escenariosMatriz = {
-        "1": {
-            titulo: "Escenario 1: Control de accesos en horario nocturno (Edificio corporativo)",
-            texto: "Durante tu turno de noche en la recepción de un edificio corporativo, observas a través de las cámaras de CCTV que un individuo encapuchado merodea el perímetro exterior, saltándose la primera valla de seguridad con una cizalla (corta-candados) en la mano.",
-            criterios: {
-                peligro: ["valla", "perimetro", "cizalla", "herramienta", "corte", "candado", "vulnerabilidad", "exterior", "acceso"],
-                amenaza: ["individuo", "encapuchado", "intruso", "ladron", "persona", "intrusor", "asaltante"],
-                riesgo: ["probabilidad", "intrusion", "fuerza", "robo", "asalto", "daño", "propiedad", "grave", "impacto", "lesion"],
-                accion: ["camara", "cctv", "monitorizar", "alarma", "protocolo", "policia", "091", "112", "fuerzas", "seguridad", "no exponerse", "distancia"]
-            }
-        },
-        "2": {
-            titulo: "Escenario 2: Patrulla preventiva en Centro Comercial",
-            texto: "Durante una ronda preventiva por los pasillos del centro comercial, detectas que una tubería del techo tiene una fuga continua, lo que ha generado un charco de agua de gran tamaño en una zona de intenso paso de clientes, junto a las escaleras mecánicas.",
-            criterios: {
-                peligro: ["tuberia", "fuga", "gotera", "charco", "agua", "suelo", "mojado", "superficie", "resbaladiz"],
-                amenaza: ["flujo", "clientes", "personas", "usuarios", "transito", "peatones", "distraidos", "aglomeracion"],
-                riesgo: ["caida", "resbalon", "traumatismo", "lesion", "daño", "fractura", "probabilidad", "alto"],
-                accion: ["balizar", "acordonar", "desviar", "mantenimiento", "limpieza", "señalizar", "avisar", "paso", "precaucion"]
-            }
-        }
-    };
-
-    function cargarEscenarioMatriz() {
-        const selVal = document.getElementById("select-escenario").value;
-        const esc = escenariosMatriz[selVal];
-        document.getElementById("desc-escenario").innerHTML = `<strong>${esc.titulo}</strong><br>${esc.texto}`;
-        limpiarMatriz();
-    }
-
-    function analizarMatrizDiagnostico() {
-        const idEsc = document.getElementById("select-escenario").value;
-        const esc = escenariosMatriz[idEsc];
-        
-        const txtPel = document.getElementById("matriz-peligro").value.trim().toLowerCase();
-        const txtAmen = document.getElementById("matriz-amenaza").value.trim().toLowerCase();
-        const txtRiesg = document.getElementById("matriz-riesgo").value.trim().toLowerCase();
-        const txtAcc = document.getElementById("matriz-accion").value.trim().toLowerCase();
-
-        if (!txtPel || !txtAmen || !txtRiesg || !txtAcc) {
-            alert("Completa los 4 campos para realizar la auditoría completa de la matriz.");
-            return;
-        }
-
-        let nota = 0;
-        let itemsHtml = "";
-
-        const matchPel = esc.criterios.peligro.some(k => txtPel.includes(k));
-        if (matchPel && txtPel.length >= 10) {
-            nota += 2.5;
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Peligro:</strong> <span style="color:#16a34a;">Correcto. Identifica la condición física o vulnerabilidad causante del daño potencial.</span></div></div>`;
-        } else {
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Peligro:</strong> <span style="color:#dc2626;">El peligro debe ser el elemento intrínseco o vulnerabilidad (ej. valla vulnerada, cizalla, fuga de agua).</span></div></div>`;
-        }
-
-        const matchAmen = esc.criterios.amenaza.some(k => txtAmen.includes(k));
-        if (matchAmen && txtAmen.length >= 8) {
-            nota += 2.5;
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Amenaza:</strong> <span style="color:#16a34a;">Correcto. Reconoce al actor o factor externo con potencial de materializar el evento.</span></div></div>`;
-        } else {
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Amenaza:</strong> <span style="color:#dc2626;">La amenaza es el factor o actor externo (ej. intruso encapuchado o flujo de peatones).</span></div></div>`;
-        }
-
-        const matchRiesg = esc.criterios.riesgo.some(k => txtRiesg.includes(k));
-        const tieneConceptoProb = txtRiesg.includes("probab") || txtRiesg.includes("alta") || txtRiesg.includes("posibil") || txtRiesg.includes("grave") || txtRiesg.includes("impacto");
-        if (matchRiesg && tieneConceptoProb) {
-            nota += 2.5;
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Riesgo:</strong> <span style="color:#16a34a;">Correcto. Pondera probabilidad e impacto lesivo hacia la instalación o usuarios.</span></div></div>`;
-        } else {
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Riesgo:</strong> <span style="color:#dc2626;">Debe evaluar probabilidad combinada con la gravedad del impacto (ej. alta probabilidad de asalto / traumatismo).</span></div></div>`;
-        }
-
-        const matchAcc = esc.criterios.accion.some(k => txtAcc.includes(k));
-        if (matchAcc && txtAcc.length >= 25) {
-            nota += 2.5;
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Acción de Control:</strong> <span style="color:#16a34a;">Correcto. Aplica medidas inmediatas de autoprotección, acordonamiento y comunicaciones reglamentarias.</span></div></div>`;
-        } else {
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Acción de Control:</strong> <span style="color:#dc2626;">Debe reflejar balizamiento/monitorización, aviso a policía (091/112) o mantenimiento y autoprotección.</span></div></div>`;
-        }
-
-        const fbCard = document.getElementById("matriz-feedback");
-        document.getElementById("matriz-feedback-rubricas").innerHTML = itemsHtml;
-        const notaEl = document.getElementById("matriz-feedback-nota");
-        notaEl.innerHTML = `Puntuación: <strong>${nota.toFixed(1)} / 10</strong>`;
-
-        if (nota >= 5) {
-            notaEl.style.color = "#155724";
-            document.getElementById("matriz-feedback-titulo").textContent = "Diagnóstico Técnico Aprobado";
-            fbCard.style.borderColor = "#86efac";
-        } else {
-            notaEl.style.color = "#b91c1c";
-            document.getElementById("matriz-feedback-titulo").textContent = "Diagnóstico Requiere Revisión Técnica";
-            fbCard.style.borderColor = "#fca5a5";
-        }
-        fbCard.style.display = "block";
-    }
-
-    function limpiarMatriz() {
-        document.getElementById("matriz-peligro").value = "";
-        document.getElementById("matriz-amenaza").value = "";
-        document.getElementById("matriz-riesgo").value = "";
-        document.getElementById("matriz-accion").value = "";
-        document.getElementById("matriz-feedback").style.display = "none";
-    }
-
-    // ==========================================
-    // EJERCICIO 3: AUDITORÍA DE REDACCIÓN DE PARTES
-    // ==========================================
-    function analizarParteServicio() {
-        const texto = document.getElementById("texto-parte").value.trim();
-        const feedbackCard = document.getElementById("parte-feedback");
-        const feedbackRubricas = document.getElementById("parte-feedback-rubricas");
-        const feedbackNota = document.getElementById("parte-feedback-nota");
-        const feedbackSubj = document.getElementById("parte-feedback-subjetividad");
-
-        if (texto.length < 25) {
-            alert("El parte es demasiado breve. Redacta el relato fáctico del servicio.");
-            return;
-        }
-
-        const textoLower = texto.toLowerCase();
-
-        const rubricas = [
-            {
-                nombre: "Identificación profesional (TIP o puesto de guardia)",
-                puntos: 1.5,
-                cumple: /\b(tip|vigilante|vs|puesto|servicio|turno)\b/i.test(textoLower),
-                descOk: "Identificación del vigilante/servicio debidamente reflejada.",
-                descFalla: "Falta consignar la TIP o identificación reglamentaria del actuante."
-            },
-            {
-                nombre: "Referencia temporal exacta (Formato HH:MM y fecha)",
-                puntos: 2.0,
-                cumple: /(\b\d{1,2}:\d{2}\b|\bhoras\b|\b\d{1,2}\/\d{1,2}\b|\bfecha\b)/i.test(textoLower),
-                descOk: "Consigna hora y referencia temporal precisa en sistema 24 h.",
-                descFalla: "Faltan las horas exactas en formato 24 h (ej. 02:40 horas)."
-            },
-            {
-                nombre: "Ubicación espacial concreta",
-                puntos: 1.5,
-                cumple: /\b(muelle|puerta|salida|emergencia|zona|planta|sector|cctv|camara|pasillo)\b/i.test(textoLower),
-                descOk: "Ubicación e instalaciones descritas con precisión.",
-                descFalla: "Se debe concretar con exactitud el lugar físico del suceso (muelles, emergencias)."
-            },
-            {
-                nombre: "Descripción fáctica de la intervención física",
-                puntos: 2.0,
-                cumple: /\b(comprob|inspeccion|person|acud|verific|observ|detect|cerrad|cerrar|forzad|dañ)/i.test(textoLower),
-                descOk: "Constan las acciones operativas y comprobaciones físicas realizadas.",
-                descFalla: "Falta describir las acciones y comprobaciones materiales ejecutadas."
-            },
-            {
-                nombre: "Comunicaciones oficiales de seguridad",
-                puntos: 2.0,
-                cumple: /\b(polic|091|092|112|mossos|guardia civil|cra|central|jefe de seguridad|coordinad|aviso|comunic)/i.test(textoLower),
-                descOk: "Se acredita la comunicación con Central/CRA o Fuerzas de Seguridad.",
-                descFalla: "No consta aviso a la Central Receptora, Mandos o Policía."
-            },
-            {
-                nombre: "Nivel de desarrollo descriptivo",
-                puntos: 1.0,
-                cumple: texto.split(/\s+/).length >= 40,
-                descOk: "Extensión y desglose descriptivo conforme a parte oficial.",
-                descFalla: "Texto escueto; un parte oficial requiere mayor descripción de hechos."
-            }
-        ];
-
-        const palabrasSubjetivas = [
-            "me pareció", "creo que", "sospechoso", "pinta de", "cara de", 
-            "obviamente quería", "seguro que era", "mala pinta", "delincuente", "odio", "me dio miedo"
-        ];
-        
-        let subjetividadesDetectadas = [];
-        palabrasSubjetivas.forEach(term => {
-            if (textoLower.includes(term)) subjetividadesDetectadas.push(`"${term}"`);
-        });
-
-        let nota = 0;
-        let htmlRubricas = "";
-
-        rubricas.forEach(r => {
-            if (r.cumple) {
-                nota += r.puntos;
-                htmlRubricas += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>${r.nombre}:</strong> <span style="color:#16a34a;">${r.descOk}</span></div></div>`;
-            } else {
-                htmlRubricas += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>${r.nombre}:</strong> <span style="color:#dc2626;">${r.descFalla}</span></div></div>`;
-            }
-        });
-
-        let penalizacion = subjetividadesDetectadas.length * 1.5;
-        nota = Math.max(0, nota - penalizacion);
-
-        feedbackRubricas.innerHTML = htmlRubricas;
-        feedbackNota.innerHTML = `Nota: <strong>${nota.toFixed(1)} / 10</strong>`;
-
-        if (subjetividadesDetectadas.length > 0) {
-            feedbackSubj.style.display = "block";
-            feedbackSubj.innerHTML = `
-                ⚠ <strong>Penalización por subjetividad (-${penalizacion.toFixed(1)} pts):</strong><br>
-                Se detectaron juicios de valor u opiniones personales: <em>${subjetividadesDetectadas.join(", ")}</em>.<br>
-                El vigilante debe atenerse a hechos constatables sin calificar intenciones personales.
-            `;
-        } else {
-            feedbackSubj.style.display = "none";
-        }
-
-        if (nota >= 5) {
-            feedbackNota.style.color = "#155724";
-            document.getElementById("parte-feedback-titulo").textContent = "Parte Aprobado - Redacción Conforme";
-            feedbackCard.style.borderColor = "#86efac";
-        } else {
-            feedbackNota.style.color = "#b91c1c";
-            document.getElementById("parte-feedback-titulo").textContent = "Parte Requiere Corrección";
-            feedbackCard.style.borderColor = "#fca5a5";
-        }
-        feedbackCard.style.display = "block";
-    }
-
-    function limpiarParte() {
-        document.getElementById("texto-parte").value = "";
-        document.getElementById("parte-feedback").style.display = "none";
-    }
-
-    // ==========================================
-    // CONTROL GENERAL DE LA PLATAFORMA
-    // ==========================================
-    function actualizarContadores() {
-        const badgeJur = document.getElementById("badge-total-juridico");
-        const badgePsi = document.getElementById("badge-total-psicologia");
-        if (badgeJur) badgeJur.textContent = `${bancoJuridico.length} preguntas`;
-        if (badgePsi) badgePsi.textContent = `${bancoPsicologia.length} preguntas`;
-    }
-
-    function seleccionarAleatorias(banco, cantidad) {
-        let mezclado = [...banco].sort(() => 0.5 - Math.random());
-        return mezclado.slice(0, cantidad);
-    }
-
-    function renderizarTest(tipo) {
-        let container = document.getElementById(`quiz-container-${tipo}`);
-        container.innerHTML = "";
-        let banco = (tipo === 'juridico') ? bancoJuridico : bancoPsicologia;
-        let prefijo = (tipo === 'juridico') ? 'j' : 'p';
-
-        let seleccion = seleccionarAleatorias(banco, 10);
-        if (tipo === 'juridico') preguntasActualesJuridico = seleccion;
-        else preguntasActualesPsicologia = seleccion;
-
-        seleccion.forEach((item, index) => {
-            let numQ = index + 1;
-            let cardHTML = `
-                <div class="question-card" data-q="${prefijo}${numQ}">
-                    <div class="question">${numQ}. ${item.q}</div>
-                    <div class="options">
-            `;
-
-            item.options.forEach((opt) => {
-                cardHTML += `<label><input type="radio" name="${prefijo}${numQ}" value="${opt.val}"> ${opt.text}</label>`;
-            });
-
-            cardHTML += `
-                    </div>
-                    <div class="status-badge" id="badge-${prefijo}${numQ}"></div>
-                    <div class="explanation" id="exp-${prefijo}${numQ}">Explicación: ${item.exp}</div>
-                </div>
-            `;
-            container.innerHTML += cardHTML;
-        });
-
-        document.getElementById(`result-${tipo}`).innerHTML = "";
-        document.getElementById(`result-${tipo}`).style.backgroundColor = "transparent";
-    }
-
-    function iniciarTest(tipo) {
-        renderizarTest(tipo);
-        const sectionEl = document.getElementById(`seccion-${tipo}`);
-        if (sectionEl) sectionEl.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function cambiarSeccion(seccion) {
-        document.querySelectorAll('.test-section').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.btn-section').forEach(el => el.classList.remove('active'));
-        
-        const targetSection = document.getElementById(`seccion-${seccion}`);
-        const targetBtn = document.getElementById(`btn-tab-${seccion}`);
-        
-        if (targetSection) targetSection.classList.add('active');
-        if (targetBtn) targetBtn.classList.add('active');
-
-        if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function calcularResultado(tipo) {
-        let total = 10;
-        let prefix = (tipo === 'juridico') ? 'j' : 'p';
-        let aciertos = 0;
-        let fallos = 0;
-
-        for (let i = 1; i <= total; i++) {
-            const card = document.querySelector(`[data-q="${prefix}${i}"]`);
-            if (!card) continue;
-            const labels = card.querySelectorAll('label');
-            const badge = document.getElementById(`badge-${prefix}${i}`);
-            const explanation = document.getElementById(`exp-${prefix}${i}`);
-            
-            labels.forEach(l => l.classList.remove('correct-answer', 'wrong-answer'));
-
-            const selected = card.querySelector(`input[name="${prefix}${i}"]:checked`);
-            const correctInput = card.querySelector(`input[name="${prefix}${i}"][value="correct"]`);
-
-            if (selected) {
-                if (selected.value === "correct") {
-                    aciertos++;
-                    selected.parentElement.classList.add('correct-answer');
-                    badge.className = "status-badge correct";
-                    badge.innerHTML = "¡Correcto!";
-                } else {
-                    fallos++;
-                    selected.parentElement.classList.add('wrong-answer');
-                    if (correctInput) correctInput.parentElement.classList.add('correct-answer');
-                    badge.className = "status-badge wrong";
-                    badge.innerHTML = "Incorrecto";
-                }
-            } else {
-                fallos++;
-                if (correctInput) correctInput.parentElement.classList.add('correct-answer');
-                badge.className = "status-badge wrong";
-                badge.innerHTML = "No respondida";
-            }
-            
-            badge.style.display = "block";
-            explanation.style.display = "block";
-        }
-
-        let puntosTotales = (aciertos * 1) - (fallos * 0.5);
-        let notaFinal = (puntosTotales / total) * 10;
-        if (notaFinal < 0) notaFinal = 0;
-
-        const resultadoDiv = document.getElementById(`result-${tipo}`);
-        if (notaFinal >= 5) {
-            resultadoDiv.style.backgroundColor = "#d4edda";
-            resultadoDiv.style.color = "#155724";
-            resultadoDiv.innerHTML = `¡Aprobado! Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
-        } else {
-            resultadoDiv.style.backgroundColor = "#f8d7da";
-            resultadoDiv.style.color = "#721c24";
-            resultadoDiv.innerHTML = `Suspenso. Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
-        }
-    }
-
-    window.onload = function() {
-        actualizarContadores();
-        renderizarTest('juridico');
-        renderizarTest('psicologia');
-        cargarEscenarioMatriz();
-        inicializarFilasPlanRiesgos();
-    };
-</script>
-
-</body>
-</html>
+        { q: "En la descripción técnica de personas, ¿por qué es obligatorio seguir un
