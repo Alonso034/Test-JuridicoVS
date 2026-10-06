@@ -1,2335 +1,1085 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Plataforma de Tests y Prácticas - Seguridad Privada</title>
-
     <style>
-
         body { font-family: Arial, sans-serif; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; }
-
         .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-
         h1 { color: #2c3e50; font-size: 26px; text-align: center; margin-bottom: 5px; }
-
         .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 25px; }
-
         
-
         /* Dashboard de Módulos */
-
         .modules-grid {
-
             display: grid;
-
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-
             gap: 15px;
-
             margin-bottom: 30px;
-
         }
-
-
 
         .module-summary-card {
-
             background: #ffffff;
-
             border: 1px solid #e1e8ed;
-
             border-radius: 10px;
-
             padding: 18px;
-
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-
             display: flex;
-
             flex-direction: column;
-
             gap: 8px;
-
             transition: transform 0.2s, box-shadow 0.2s;
-
         }
-
-
 
         .module-summary-card:hover {
-
             transform: translateY(-2px);
-
             box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-
         }
-
-
 
         .module-title { font-size: 16px; font-weight: bold; color: #1e293b; }
-
         .module-subtitle { font-size: 12.5px; color: #64748b; line-height: 1.4; }
 
-
-
         .badges-wrapper { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; margin: 6px 0; }
-
         .info-pill {
-
             display: inline-block;
-
             background-color: #e0f2fe;
-
             color: #0369a1;
-
             font-size: 11.5px;
-
             font-weight: 700;
-
             padding: 4px 10px;
-
             border-radius: 20px;
-
         }
-
-
 
         .btn-enter-module {
-
             background-color: #2563eb;
-
             color: white;
-
             border: none;
-
             padding: 8px 14px;
-
             font-size: 13.5px;
-
             font-weight: bold;
-
             border-radius: 6px;
-
             cursor: pointer;
-
             align-self: flex-start;
-
             width: auto;
-
             margin-top: 5px;
-
             transition: background-color 0.2s;
-
         }
-
-
 
         .btn-enter-module:hover { background-color: #1d4ed8; }
 
-
-
         /* Selector de Pestañas */
-
         .section-selector { display: flex; gap: 10px; margin-bottom: 25px; justify-content: center; flex-wrap: wrap; }
-
         .btn-section { background: #6c757d; color: white; border: none; padding: 11px 18px; font-size: 14.5px; border-radius: 6px; cursor: pointer; font-weight: bold; width: auto; margin-top: 0; }
-
         .btn-section.active { background: #007bff; }
-
         
-
         .test-section { display: none; }
-
         .test-section.active { display: block; }
 
-
-
         .rules-box { background: #e9ecef; border-left: 4px solid #007bff; padding: 12px 15px; margin-bottom: 20px; border-radius: 4px; font-size: 14px; color: #495057; }
-
         .rules-box ul { margin: 5px 0 0 20px; padding: 0; }
 
-
-
         .question-card { background: #fdfdfd; border: 1px solid #e1e4e8; padding: 20px; border-radius: 6px; margin-bottom: 20px; position: relative; }
-
         .question { font-weight: bold; margin-bottom: 12px; font-size: 15.5px; color: #2c3e50; }
-
         .options label { display: block; margin: 8px 0; cursor: pointer; padding: 10px; background: #f8f9fa; border-radius: 4px; border: 1px solid #ddd; font-size: 14px; transition: background 0.2s; }
-
         .options label:hover { background: #e9ecef; }
-
         .options input { margin-right: 10px; }
-
         
-
         .correct-answer { background-color: #d4edda !important; border-color: #c3e6cb !important; color: #155724; font-weight: bold; }
-
         .wrong-answer { background-color: #f8d7da !important; border-color: #f5c6cb !important; color: #721c24; }
 
-
-
         .status-badge { display: none; font-weight: bold; font-size: 13px; margin-top: 10px; padding: 4px 8px; border-radius: 4px; width: fit-content; }
-
         .status-badge.correct { background-color: #d4edda; color: #155724; display: inline-block; }
-
         .status-badge.wrong { background-color: #f8d7da; color: #721c24; display: inline-block; }
-
-
 
         .explanation { display: none; margin-top: 10px; padding: 10px; background-color: #fff3cd; border: 1px solid #ffeeba; border-radius: 4px; font-size: 13px; color: #856404; }
 
-
-
         button { background: #007bff; color: white; border: none; padding: 14px 20px; font-size: 16px; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 20px; font-weight: bold; }
-
         button:hover { background: #0056b3; }
-
         
-
         .btn-reset { background: #6c757d; margin-top: 10px; }
-
         .btn-reset:hover { background: #5a6268; }
-
-
 
         .result { text-align: center; font-size: 20px; font-weight: bold; margin-top: 25px; padding: 15px; border-radius: 6px; }
 
-
-
         /* Estilos de Simuladores y Talleres */
-
         .case-simulator-box {
-
             background: #ffffff;
-
             border: 2px solid #3b82f6;
-
             border-radius: 8px;
-
             padding: 22px;
-
             margin-top: 35px;
-
             box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
-
         }
-
-
 
         .case-simulator-box h3 { color: #1e3a8a; margin-bottom: 8px; font-size: 18px; }
-
         .case-scenario {
-
             background-color: #f0fdf4;
-
             border-left: 4px solid #22c55e;
-
             padding: 12px 15px;
-
             margin: 15px 0;
-
             border-radius: 4px;
-
             font-size: 14px;
-
             color: #14532d;
-
             line-height: 1.5;
-
         }
-
-
 
         .field-group { margin-bottom: 15px; }
-
         .field-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 13.5px; color: #334155; }
-
         .field-desc { font-size: 12px; color: #64748b; margin-bottom: 5px; }
 
-
-
         .matrix-input, .parte-textarea {
-
             width: 100%;
-
             padding: 10px;
-
             border: 1px solid #cbd5e1;
-
             border-radius: 6px;
-
             font-family: inherit;
-
             font-size: 14px;
-
             line-height: 1.4;
-
             box-sizing: border-box;
-
         }
-
-
 
         .matrix-input:focus, .parte-textarea:focus {
-
             outline: none;
-
             border-color: #2563eb;
-
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-
         }
-
-
 
         .audit-feedback-card {
-
             display: none;
-
             margin-top: 20px;
-
             padding: 18px;
-
             border-radius: 8px;
-
             background-color: #f8fafc;
-
             border: 1px solid #e2e8f0;
-
         }
-
-
 
         .feedback-header {
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
             font-weight: bold;
-
             font-size: 16px;
-
             margin-bottom: 12px;
-
             padding-bottom: 8px;
-
             border-bottom: 1px solid #cbd5e1;
-
         }
-
-
 
         .rubric-item { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 13.5px; }
-
         .rubric-icon { font-weight: bold; font-size: 15px; }
-
         .rubric-icon.ok { color: #16a34a; }
-
         .rubric-icon.warn { color: #dc2626; }
-
         .subjectivity-alert { margin-top: 12px; padding: 10px; border-radius: 6px; background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b; font-size: 13px; }
 
-
-
         /* Estilos de la Tabla de Evaluación Matricial */
-
         .risk-table {
-
             width: 100%;
-
             border-collapse: collapse;
-
             margin: 15px 0;
-
             font-size: 13px;
-
         }
-
-
 
         .risk-table th, .risk-table td {
-
             border: 1px solid #cbd5e1;
-
             padding: 8px;
-
             text-align: left;
-
         }
-
-
 
         .risk-table th {
-
             background-color: #f1f5f9;
-
             color: #1e293b;
-
             font-weight: bold;
-
         }
-
-
 
         .risk-table input, .risk-table select {
-
             width: 100%;
-
             padding: 6px;
-
             border: 1px solid #cbd5e1;
-
             border-radius: 4px;
-
             font-family: inherit;
-
             box-sizing: border-box;
-
             font-size: 12.5px;
-
         }
-
-
 
         .badge-calc {
-
             display: inline-block;
-
             font-weight: bold;
-
             padding: 4px 8px;
-
             border-radius: 4px;
-
             text-align: center;
-
             min-width: 25px;
-
         }
-
         .badge-calc.bajo { background-color: #dcfce7; color: #15803d; }
-
         .badge-calc.medio { background-color: #fef9c3; color: #a16207; }
-
         .badge-calc.alto { background-color: #fee2e2; color: #b91c1c; }
-
     </style>
-
 </head>
-
 <body>
 
-
-
 <div class="container">
-
     <h1>Plataforma de Autoevaluación: Seguridad Privada</h1>
-
     <div class="subtitle">Plataforma formativa técnica para aspirantes a Vigilante de Seguridad y Escolta</div>
 
-
-
     <!-- PANEL SUPERIOR: CONTADORES DINÁMICOS -->
-
     <div class="modules-grid">
-
         <div class="module-summary-card">
-
-            <div class="module-title">ÁREA JURÍDICA</div>
-
-            <div class="module-subtitle">Principios de legalidad, Arts. 32 y 68 de la Ley 5/2014, infracciones y Constitución.</div>
-
+            <div class="module-title">ÁREA JURÍDICA (200 PREGUNTAS)</div>
+            <div class="module-subtitle">Constitución, Historia, Poderes, Reformas, Penal, LSP Arts. 8, 30, 32, 68 e Instituciones UE.</div>
             <div class="badges-wrapper">
-
                 <span class="info-pill" id="badge-total-juridico">0 preguntas</span>
-
-                <span class="info-pill">Examen aleatorio: 10</span>
-
+                <span class="info-pill">Examen aleatorio: 20</span>
             </div>
-
             <button class="btn-enter-module" onclick="cambiarSeccion('juridico')">Entrar</button>
-
         </div>
 
-
-
         <div class="module-summary-card">
-
             <div class="module-title">PSICOLOGÍA Y SOCIAL</div>
-
             <div class="module-subtitle">Habilidades sociales, contravigilancia, observación, estrés y delincuencia.</div>
-
             <div class="badges-wrapper">
-
                 <span class="info-pill" id="badge-total-psicologia">0 preguntas</span>
-
-                <span class="info-pill">Examen aleatorio: 10</span>
-
+                <span class="info-pill">Examen aleatorio: 20</span>
             </div>
-
             <button class="btn-enter-module" onclick="cambiarSeccion('psicologia')">Entrar</button>
-
         </div>
-
-
 
         <div class="module-summary-card">
-
             <div class="module-title">TALLER OPERATIVO</div>
-
             <div class="module-subtitle">Matriz de diagnóstico (P/A/R), Valoración cuantitativa y Redacción de Partes.</div>
-
             <div class="badges-wrapper">
-
                 <span class="info-pill">1 Matriz P×I (Estación)</span>
-
                 <span class="info-pill">2 Casos Diagnóstico</span>
-
             </div>
-
             <button class="btn-enter-module" onclick="cambiarSeccion('taller')">Entrar</button>
-
         </div>
-
     </div>
-
     
-
     <!-- Selector de pestañas -->
-
     <div class="section-selector">
-
         <button id="btn-tab-juridico" class="btn-section active" onclick="cambiarSeccion('juridico')">Test Jurídico</button>
-
         <button id="btn-tab-psicologia" class="btn-section" onclick="cambiarSeccion('psicologia')">Test Psicología</button>
-
         <button id="btn-tab-taller" class="btn-section" onclick="cambiarSeccion('taller')">Taller Práctico</button>
-
     </div>
-
-
 
     <!-- SECCIÓN 1: TEST JURÍDICO -->
-
     <div id="seccion-juridico" class="test-section active">
-
-        <h2>Módulo: Área Jurídica</h2>
-
+        <h2>Módulo: Área Jurídica (Mega-Banco de 200 Preguntas)</h2>
         <div class="rules-box">
-
-            <strong>Sistema de Puntuación (sobre 10 preguntas):</strong>
-
+            <strong>Sistema de Puntuación (sobre 20 preguntas aleatorias):</strong>
             <ul>
-
                 <li>Acertadas = 1 punto</li>
-
                 <li>Falladas = resta 0,5 puntos</li>
-
-                <li>Total puntos / 10 * 10 = nota final</li>
-
+                <li>Total puntos / 20 * 10 = nota final</li>
             </ul>
-
         </div>
-
         <div id="quiz-container-juridico"></div>
-
             
-
         <button onclick="calcularResultado('juridico')">Comprobar Test Jurídico</button>
-
-        <button class="btn-reset" onclick="iniciarTest('juridico')">Generar Nuevas 10 Preguntas (Rotar)</button>
-
+        <button class="btn-reset" onclick="iniciarTest('juridico')">Generar Nuevas 20 Preguntas (Rotar)</button>
         <div id="result-juridico" class="result"></div>
-
     </div>
-
-
 
     <!-- SECCIÓN 2: TEST PSICOLOGÍA -->
-
     <div id="seccion-psicologia" class="test-section">
-
         <h2>Módulo: Psicología y Ámbito Socioprofesional</h2>
-
         <div class="rules-box">
-
-            <strong>Sistema de Puntuación (sobre 10 preguntas):</strong>
-
+            <strong>Sistema de Puntuación (sobre 20 preguntas aleatorias):</strong>
             <ul>
-
                 <li>Acertadas = 1 punto</li>
-
                 <li>Falladas = resta 0,5 puntos</li>
-
-                <li>Total puntos / 10 * 10 = nota final</li>
-
+                <li>Total puntos / 20 * 10 = nota final</li>
             </ul>
-
         </div>
-
         <div id="quiz-container-psicologia"></div>
-
             
-
         <button onclick="calcularResultado('psicologia')">Comprobar Test Psicología</button>
-
-        <button class="btn-reset" onclick="iniciarTest('psicologia')">Generar Nuevas 10 Preguntas (Rotar)</button>
-
+        <button class="btn-reset" onclick="iniciarTest('psicologia')">Generar Nuevas 20 Preguntas (Rotar)</button>
         <div id="result-psicologia" class="result"></div>
-
     </div>
 
-
-
     <!-- SECCIÓN 3: TALLER PRÁCTICO -->
-
     <div id="seccion-taller" class="test-section">
-
         <h2>Taller Práctico de Intervención Operativa</h2>
 
-
-
         <!-- EJERCICIO 1: VALORACIÓN MATRICIAL CUANTITATIVA (P x I) -->
-
         <div class="case-simulator-box" style="margin-top:0;">
-
             <h3>1. Plan de Seguridad Física: Valoración Cuantitativa de Riesgos (Riesgo = P × I)</h3>
-
             <p style="font-size: 13.5px; color: #475569;">
-
-                Ejercicio estructurado de seguridad física en instalaciones críticas: Identifica 5 riesgos, valora su probabilidad e impacto (escala 1 a 5), propón medidas preventivas y redacta el informe conclusivo[cite: 60].
-
+                Ejercicio estructurado de seguridad física en instalaciones críticas: Identifica 5 riesgos, valora su probabilidad e impacto (escala 1 a 5), propón medidas preventivas y redacta el informe conclusivo.
             </p>
-
-
 
             <div class="case-scenario">
-
                 <strong>Supuesto de servicio: Centro Intermodal de Transporte (Estación Central de Trenes y Autobuses)</strong><br>
-
                 Usted presta servicio como vigilante de seguridad en una gran estación de transportes con gran afluencia de viajeros, zonas comerciales, consignas automáticas de equipaje, taquillas de venta de billetes y andenes de alta velocidad. El Responsable de Seguridad le solicita un estudio de riesgos para optimizar el dispositivo de vigilancia.
-
             </div>
-
-
 
             <!-- Tabla Interactiva -->
-
             <div style="overflow-x:auto;">
-
                 <table class="risk-table">
-
                     <thead>
-
                         <tr>
-
                             <th style="width: 25%;">Riesgo Identificado</th>
-
                             <th style="width: 20%;">Zona de la Estación</th>
-
                             <th style="width: 12%;">Prob. (1-5)</th>
-
                             <th style="width: 12%;">Imp. (1-5)</th>
-
                             <th style="width: 8%;">P × I</th>
-
                             <th style="width: 23%;">Medidas de Seguridad Propuestas</th>
-
                         </tr>
-
                     </thead>
-
                     <tbody id="filas-evaluacion-riesgo"></tbody>
-
                 </table>
-
             </div>
-
-
 
             <div class="field-group" style="margin-top: 15px;">
-
                 <label>Zonas Especialmente Vulnerables (Selecciona y justifica 3 áreas de la estación):</label>
-
                 <div class="field-desc">Ejemplo: Andenes de embarque, zona de consignas automáticas, taquillas/recaudación o accesos principales.</div>
-
                 <textarea id="eval-zonas-vulnerables" class="matrix-input" style="height:65px;" placeholder="Indica 3 zonas sensibles y explica por qué son críticas..."></textarea>
-
             </div>
-
-
 
             <div class="field-group">
-
                 <label>Conclusión Técnica del Informe de Seguridad:</label>
-
-                <div class="field-desc">Indica qué riesgo obtuvo la mayor puntuación de criticidad y dónde debe concentrarse el esfuerzo operativo del servicio de vigilancia[cite: 60].</div>
-
+                <div class="field-desc">Indica qué riesgo obtuvo la mayor puntuación de criticidad y dónde debe concentrarse el esfuerzo operativo del servicio de vigilancia.</div>
                 <textarea id="eval-conclusion" class="matrix-input" style="height:65px;" placeholder="Redacta la conclusión técnica basada en los resultados numéricos obtenidos..."></textarea>
-
             </div>
-
-
 
             <div style="display:flex; gap:10px;">
-
                 <button type="button" onclick="auditarPlanRiesgos()" style="background-color: #2563eb;">Auditar Plan de Seguridad Física</button>
-
                 <button type="button" onclick="cargarEjemploPlanRiesgos()" class="btn-reset" style="width:auto; padding:14px 18px; background-color:#0284c7;">Cargar Ejemplo Relleno</button>
-
                 <button type="button" onclick="limpiarPlanRiesgos()" class="btn-reset" style="width:auto; padding:14px 18px;">Limpiar</button>
-
             </div>
-
-
 
             <div id="plan-feedback" class="audit-feedback-card">
-
                 <div class="feedback-header">
-
                     <span id="plan-feedback-titulo">Resultado de la Auditoría del Plan</span>
-
                     <span id="plan-feedback-nota" style="font-size: 18px;"></span>
-
                 </div>
-
                 <div id="plan-feedback-rubricas"></div>
-
             </div>
-
         </div>
 
-
-
         <!-- EJERCICIO 2: MATRIZ DE PELIGRO, AMENAZA Y RIESGO -->
-
         <div class="case-simulator-box">
-
             <h3>2. Matriz de Diagnóstico Operativo: Peligro, Amenaza y Riesgo</h3>
-
             <p style="font-size: 13.5px; color: #475569;">
-
-                Diferenciación conceptual inmediata ante intervenciones de seguridad física[cite: 59].
-
+                Diferenciación conceptual inmediata ante intervenciones de seguridad física.
             </p>
 
-
-
             <div style="margin: 15px 0;">
-
                 <label for="select-escenario" style="font-weight:bold; font-size:14px;">Selecciona Escenario Práctico:</label>
-
                 <select id="select-escenario" onchange="cargarEscenarioMatriz()" style="padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1; width: 100%; margin-top: 5px;">
-
                     <option value="1">Escenario 1: Control de accesos en edificio corporativo (Intrusión perimetral con cizalla)</option>
-
                     <option value="2">Escenario 2: Incidencia técnica y tránsito en centro comercial (Fuga de agua en pasillo)</option>
-
                 </select>
-
             </div>
-
-
 
             <div id="desc-escenario" class="case-scenario"></div>
 
-
-
             <div class="field-group">
-
                 <label>¿Cuál es el Peligro?</label>
-
-                <div class="field-desc">Elemento intrínseco, condición física o vulnerabilidad con potencial de provocar daño[cite: 59].</div>
-
+                <div class="field-desc">Elemento intrínseco, condición física o vulnerabilidad con potencial de provocar daño.</div>
                 <textarea id="matriz-peligro" class="matrix-input" style="height:55px;" placeholder="Describe el peligro físico o la vulnerabilidad..."></textarea>
-
             </div>
 
-
-
             <div class="field-group">
-
                 <label>¿Cuál es la Amenaza?</label>
-
-                <div class="field-desc">Actor o factor externo con potencial activo de materializar el evento[cite: 59].</div>
-
+                <div class="field-desc">Actor o factor externo con potencial activo de materializar el evento.</div>
                 <textarea id="matriz-amenaza" class="matrix-input" style="height:55px;" placeholder="Describe al actor o factor amenazante..."></textarea>
-
             </div>
 
-
-
             <div class="field-group">
-
                 <label>¿Cuál es el Riesgo?</label>
-
-                <div class="field-desc">Probabilidad combinada con la gravedad del impacto perjudicial[cite: 59].</div>
-
+                <div class="field-desc">Probabilidad combinada con la gravedad del impacto perjudicial.</div>
                 <textarea id="matriz-riesgo" class="matrix-input" style="height:55px;" placeholder="Calcula probabilidad y gravedad del daño..."></textarea>
-
             </div>
-
-
 
             <div class="field-group">
-
                 <label>Acción de Control Inmediata</label>
-
-                <div class="field-desc">Medidas de contención, autoprotección, acordonamiento y comunicaciones reglamentarias[cite: 59].</div>
-
+                <div class="field-desc">Medidas de contención, autoprotección, acordonamiento y comunicaciones reglamentarias.</div>
                 <textarea id="matriz-accion" class="matrix-input" style="height:65px;" placeholder="Describe la intervención del vigilante y canales de aviso..."></textarea>
-
             </div>
-
-
 
             <div style="display:flex; gap:10px;">
-
                 <button type="button" onclick="analizarMatrizDiagnostico()" style="background-color: #2563eb;">Auditar Diagnóstico</button>
-
                 <button type="button" onclick="limpiarMatriz()" class="btn-reset" style="width:auto; padding:14px 20px;">Limpiar</button>
-
             </div>
-
-
 
             <div id="matriz-feedback" class="audit-feedback-card">
-
                 <div class="feedback-header">
-
                     <span id="matriz-feedback-titulo">Evaluación de la Matriz</span>
-
                     <span id="matriz-feedback-nota" style="font-size: 18px;"></span>
-
                 </div>
-
                 <div id="matriz-feedback-rubricas"></div>
-
             </div>
-
         </div>
 
-
-
         <!-- EJERCICIO 3: AUDITORÍA DE REDACCIÓN DE PARTES -->
-
         <div class="case-simulator-box">
-
             <h3>3. Redacción Técnica y Auditoría de Partes de Novedades</h3>
-
             <p style="font-size: 13.5px; color: #475569;">
-
-                Redacción oficial de novedades con objetividad descriptiva, orden cronológico y comunicaciones reglamentarias[cite: 54, 55, 58].
-
+                Redacción oficial de novedades con objetividad descriptiva, orden cronológico y comunicaciones reglamentarias.
             </p>
 
-
-
             <div class="case-scenario">
-
                 <strong>Supuesto de guardia:</strong> A las 02:40 h durante el turno de noche en un centro comercial, detectas por CCTV a un individuo forzando una salida de emergencias en la zona de muelles. Redacta el parte con hora, lugar, descripción fáctica, comprobaciones físicas y comunicaciones oficiales (CRA / Policía).
-
             </div>
-
-
 
             <textarea id="texto-parte" class="parte-textarea" style="height:140px;" placeholder="A las 02:40 horas del 15/10/2026, el Vigilante con TIP 000.000..."></textarea>
 
-
-
             <div style="display: flex; gap: 10px;">
-
                 <button type="button" onclick="analizarParteServicio()" style="background-color: #2563eb;">Auditar Redacción del Parte</button>
-
                 <button type="button" onclick="limpiarParte()" class="btn-reset" style="width: auto; padding: 14px 20px;">Limpiar</button>
-
             </div>
-
-
 
             <div id="parte-feedback" class="audit-feedback-card">
-
                 <div class="feedback-header">
-
                     <span id="parte-feedback-titulo">Auditoría del Parte Diario</span>
-
                     <span id="parte-feedback-nota" style="font-size: 18px;"></span>
-
                 </div>
-
                 <div id="parte-feedback-rubricas"></div>
-
                 <div id="parte-feedback-subjetividad" class="subjectivity-alert" style="display:none;"></div>
-
             </div>
-
         </div>
-
     </div>
-
-
 
 </div>
 
-
-
 <script>
-
     // =========================================================================
-
-    // BANCO 1: ÁREA JURÍDICA (113 PREGUNTAS EN TOTAL)
-
-    // 20 Iniciales + 43 Derecho Constitucional + 50 Nuevas (Art. 8, 30, 32 y 68 LSP)
-
+    // MEGA BANCO 1: ÁREA JURÍDICA (200 PREGUNTAS EXACTAS)
     // =========================================================================
-
     const bancoJuridico = [
-
-        // --- 20 Preguntas Iniciales de Seguridad Privada ---
-
-        { q: "Según la Ley 5/2014 de Seguridad Privada, ¿qué consideración tienen las actividades de seguridad privada respecto a la seguridad pública?", options: [{text: "A) Sustitutivas e independientes", val: "wrong"}, {text: "B) Complementarias y subordinadas", val: "correct"}, {text: "C) Superiores y prioritarias", val: "wrong"}], exp: "La seguridad privada ejerce un papel complementario y subordinado respecto a la seguridad pública." },
-
-        { q: "¿Cuál es el arma reglamentaria principal de los vigilantes de seguridad en los servicios que deban prestarse con armas?", options: [{text: "A) Escopeta de repetición calibre 12/70", val: "wrong"}, {text: "B) Revólver calibre treinta y ocho especial de cuatro pulgadas", val: "correct"}, {text: "C) Pistola semiautomática 9mm Parabellum", val: "wrong"}], exp: "El revólver calibre 38 especial de 4 pulgadas es el arma corta reglamentaria principal." },
-
-        { q: "¿Qué defensa reglamentaria deben portar los vigilantes de seguridad uniformados durante su servicio?", options: [{text: "A) De color negro, goma semirrígida y 50 centímetros de longitud", val: "correct"}, {text: "B) De color marrón, madera y 60 centímetros", val: "wrong"}, {text: "C) Extensible metálica de 40 centímetros", val: "wrong"}], exp: "La defensa reglamentaria es la porra de color negro, goma semirrígida y 50 centímetros de longitud." },
-
-        { q: "Ante la comisión de un delito flagrante, el vigilante de seguridad debe:", options: [{text: "A) Interrogar al sospechoso durante 2 horas", val: "wrong"}, {text: "B) Detener y poner inmediatamente a disposición de las Fuerzas y Cuerpos de Seguridad al delincuente", val: "correct"}, {text: "C) Juzgar los hechos y aplicar sanción económica", val: "wrong"}], exp: "Los vigilantes pueden detener en caso de delito flagrante, poniendo al infractor de inmediato a disposición policial." },
-
-        { q: "¿Qué organismo expide con carácter general la Tarjeta de Identidad Profesional (TIP) del personal de seguridad privada?", options: [{text: "A) El Ministerio de Justicia", val: "wrong"}, {text: "B) La Dirección General de la Policía", val: "correct"}, {text: "C) El Ministerio de Defensa", val: "wrong"}], exp: "La Dirección General de la Policía es el órgano competente para expedir la TIP." },
-
-        { q: "¿Qué tipos de grilletes pueden utilizar los vigilantes de seguridad si se los proporciona la empresa?", options: [{text: "A) Los denominados de manilla (cadenas, bisagra y rígidos)", val: "correct"}, {text: "B) Únicamente grilletes de cuerda de alta resistencia", val: "wrong"}, {text: "C) Ningún tipo de grillete está permitido", val: "wrong"}], exp: "Los grilletes autorizados son los de manilla (cadena, bisagra y rígidos)." },
-
-        { q: "Según el artículo 78 del Reglamento de Seguridad Privada, ante el consumo ilegal de drogas en establecimientos, el vigilante debe:", options: [{text: "A) Permitirlo si es una cantidad muy pequeña", val: "wrong"}, {text: "B) Impedir el consumo y comunicarlo con la mayor rapidez a las Fuerzas y Cuerpos de Seguridad", val: "correct"}, {text: "C) Multar directamente al infractor", val: "wrong"}], exp: "Se debe impedir el consumo y dar aviso urgente a las autoridades policiales." },
-
-        { q: "¿Cuál es el plazo de validez física de la Tarjeta de Identidad Profesional (TIP) como documento de acreditación?", options: [{text: "A) Caduca a los 10 años, o antes si hay causas tasadas", val: "correct"}, {text: "B) Es vitalicia y no caduca nunca", val: "wrong"}, {text: "C) Se renueva obligatoriamente cada año", val: "wrong"}], exp: "La validez del soporte físico de la TIP se establece generalmente en 10 años." },
-
-        { q: "¿Pueden los vigilantes de seguridad retener la documentación personal de un ciudadano en los controles de identidad?", options: [{text: "A) Sí, durante un máximo de 24 horas", val: "wrong"}, {text: "B) No, en ningún caso pueden retener la documentación personal", val: "correct"}, {text: "C) Sí, si el director de seguridad lo autoriza", val: "wrong"}], exp: "Está prohibido retener documentos de identidad personales; solo comprobación visual[cite: 47]." },
-
-        { q: "¿Cuál es la consecuencia de la omisión o abandono injustificado del servicio dentro de la jornada laboral?", options: [{text: "A) Constituye una infracción muy grave tipificada en la Ley de Seguridad Privada", val: "correct"}, {text: "B) Es una simple falta leve sin importancia", val: "wrong"}, {text: "C) No está regulado en la ley", val: "wrong"}], exp: "El abandono injustificado del servicio se tipifica como infracción muy grave." },
-
-        { q: "¿Qué arma larga utiliza el vigilante de seguridad cuando está dispuesto su uso?", options: [{text: "A) Escopeta de repetición del calibre 12/70", val: "correct"}, {text: "B) Fusil de asalto militar de 5.56 mm", val: "wrong"}, {text: "C) Carabina del calibre 22", val: "wrong"}], exp: "La escopeta de repetición del calibre 12/70 es el arma larga reglamentaria." },
-
-        { q: "¿Qué mínimo de disparos deben realizar los vigilantes de seguridad armados en cada ejercicio obligatorio de tiro semestral?", options: [{text: "A) 10 disparos", val: "wrong"}, {text: "B) Un mínimo de 25 disparos", val: "correct"}, {text: "C) 50 disparos", val: "wrong"}], exp: "Se exige un mínimo de 25 disparos por cada ejercicio obligatorio semestral." },
-
-        { q: "¿Dónde debe llevarse permanentemente el distintivo del vigilante de seguridad en el uniforme?", options: [{text: "A) En la parte superior izquierda correspondiente al pecho", val: "correct"}, {text: "B) En la gorra o prenda de cabeza", val: "wrong"}, {text: "C) En la manga derecha", val: "wrong"}], exp: "El distintivo oficial se sitúa en la parte superior izquierda de la camisa." },
-
-        { q: "¿Qué color y texto lleva el distintivo oficial de los vigilantes de seguridad?", options: [{text: "A) Fondo blanco, letras rojas con la expresión 'VIGILANTE DE SEGURIDAD' y número", val: "correct"}, {text: "B) Fondo negro y letras doradas", val: "wrong"}, {text: "C) Fondo azul marino", val: "wrong"}], exp: "Es de fondo blanco con caracteres rojos y número de habilitación." },
-
-        { q: "¿Cuál es el objeto principal de la Ley 5/2014 de Seguridad Privada?", options: [{text: "A) Sustituciones totales de las Fuerzas del Estado", val: "wrong"}, {text: "B) Regular la prestación de actividades y servicios de seguridad privada complementarios", val: "correct"}, {text: "C) Gestionar la seguridad militar", val: "wrong"}], exp: "Regula la seguridad privada como actividad complementaria y subordinada." },
-
-        { q: "¿Qué requisitos generales se exigen para obtener la habilitación como personal de seguridad privada?", options: [{text: "A) Nacionalidad UE, mayor de edad, aptitud física/psicológica, carecer de antecedentes penales dolosos", val: "correct"}, {text: "B) Ser menor de edad", val: "wrong"}, {text: "C) Cero formación", val: "wrong"}], exp: "Se exigen criterios de nacionalidad, mayoría de edad, aptitudes y ausencia de antecedentes penales dolosos." },
-
-        { q: "¿Pueden los detectives privados investigar delitos perseguibles de oficio?", options: [{text: "A) No, tienen prohibido investigar delitos perseguibles de oficio y deben denunciarlos", val: "correct"}, {text: "B) Sí, total libertad", val: "wrong"}, {text: "C) Sí, pagando tasas", val: "wrong"}], exp: "Tienen prohibida la investigación de delitos perseguibles de oficio." },
-
-        { q: "¿Dónde se coloca el escudo-emblema de la empresa de seguridad en la uniformidad?", options: [{text: "A) En la parte alta de la manga izquierda de las prendas superiores", val: "correct"}, {text: "B) Al cuello con cadena", val: "wrong"}, {text: "C) En la espalda", val: "wrong"}], exp: "El emblema de la empresa se coloca obligatoriamente en la manga izquierda." },
-
-        { q: "¿Cuáles son los principios básicos de actuación del personal de seguridad privada?", options: [{text: "A) Legalidad, integridad, dignidad, protección, corrección, congruencia y proporcionalidad", val: "correct"}, {text: "B) Rapidez e improvisación", val: "wrong"}, {text: "C) Anonimato absoluto", val: "wrong"}], exp: "Se rigen por legalidad, integridad, dignidad, congruencia y proporcionalidad[cite: 47]." },
-
-        { q: "¿Qué consideración legal tiene el personal de seguridad privada cuando actúa en cooperación y bajo mando policial?", options: [{text: "A) Protección jurídica de agente de la autoridad frente a agresiones y desobediencias", val: "correct"}, {text: "B) Consideración militar", val: "wrong"}, {text: "C) Ninguna protección", val: "wrong"}], exp: "Disfrutan de protección jurídica de agente de la autoridad." },
-
-
-
-        // --- 43 Preguntas del Test de Repaso de Derecho Constitucional ---
-
-        { q: "¿Quién sanciona, promulga y ordena la publicación en el BOE de las leyes aprobadas por las Cortes Generales?", options: [{text: "a) El Rey", val: "correct"}, {text: "b) El Presidente del Gobierno", val: "wrong"}, {text: "c) El Presidente del Congreso", val: "wrong"}, {text: "d) El Consejo de Ministros", val: "wrong"}], exp: "Art. 91 de la CE: El Rey sancionará en el plazo de quince días las leyes aprobadas por las Cortes Generales, y las promulgará y ordenará su inmediata publicación[cite: 8]." },
-
-        { q: "¿Qué es el rango jurídico de una norma?", options: [{text: "a) Su posición dentro del ordenamiento jurídico", val: "correct"}, {text: "b) Su posición dentro del BOE", val: "wrong"}, {text: "c) El número de la norma que viene determinado por la fecha en que se aprueba", val: "wrong"}, {text: "d) El número de la norma que viene determinado por la fecha en el que el Rey la sanciona", val: "wrong"}], exp: "El rango jurídico define la categoría, fuerza y posición jerárquica de una norma dentro de la pirámide normativa[cite: 8]." },
-
-        { q: "La derogación tácita de una norma se produce cuando:", options: [{text: "a) La norma nueva dice exactamente la que está modificando", val: "wrong"}, {text: "b) La norma antigua dice exactamente las normas nuevas que está modificando", val: "wrong"}, {text: "c) De la norma nueva se desprende la existencia de una contradicción con la norma antigua", val: "correct"}, {text: "d) De la norma nueva no se desprende la existencia de una contradicción con la norma antigua", val: "wrong"}], exp: "Código Civil, art. 2.2: La derogación tácita tiene lugar cuando una norma posterior resulta incompatible o contradictoria con la anterior sobre la misma materia[cite: 8]." },
-
-        { q: "¿Quién puede iniciar el procedimiento de elaboración de una ley ordinaria estatal?", options: [{text: "a) Las Cortes Generales y las Asambleas Legislativas de las Comunidades Autónomas", val: "wrong"}, {text: "b) El Rey y el Presidente del Gobierno", val: "wrong"}, {text: "c) El Gobierno estatal y el Gobierno autonómico, el Congreso, el Senado, las Asambleas legislativas de las Comunidades Autónomas y los ciudadanos", val: "wrong"}, {text: "d) El Gobierno Estatal, el Congreso, el Senado, las Asambleas legislativas de las Comunidades Autónomas y los ciudadanos", val: "correct"}], exp: "Art. 87 de la CE: La iniciativa legislativa corresponde al Gobierno, al Congreso y al Senado, a las Asambleas de las CC.AA. y a la iniciativa popular de los ciudadanos[cite: 8]." },
-
-        { q: "¿En cuántas partes básicas se divide la Constitución Española?", options: [{text: "a) 2, la parte inicial o preámbulo y la parte articulada", val: "wrong"}, {text: "b) 2, la parte articulada y la parte final", val: "wrong"}, {text: "c) 3, la parte inicial o preámbulo, la parte articulada y la parte final", val: "correct"}, {text: "d) 4, la parte inicial, el preámbulo, la parte articulada y la parte final", val: "wrong"}], exp: "La estructura formal básica de la Constitución comprende: parte inicial (preámbulo), parte articulada (Título Preliminar a Título X) y parte final[cite: 6, 8]." },
-
-        { q: "La constitucionalidad de las leyes se controla por:", options: [{text: "a) El Tribunal Supremo mediante el recurso de amparo y de inconstitucionalidad", val: "wrong"}, {text: "b) El Tribunal Constitucional mediante el recurso de amparo y de inconstitucionalidad", val: "wrong"}, {text: "c) El Tribunal Supremo mediante el recurso de inconstitucionalidad y la cuestión de inconstitucionalidad", val: "wrong"}, {text: "d) El Tribunal Constitucional mediante el recurso de inconstitucionalidad y la cuestión de inconstitucionalidad", val: "correct"}], exp: "Art. 161 y 163 de la CE: El Tribunal Constitucional controla la adecuación de las leyes a través del recurso de inconstitucionalidad y de la cuestión de inconstitucionalidad[cite: 6]." },
-
-        { q: "¿Cuál de las siguientes afirmaciones es falsa?", options: [{text: "a) La Constitución sólo se ha modificado en tres ocasiones", val: "wrong"}, {text: "b) La Constitución goza de fuerza pasiva frente las otras normas", val: "wrong"}, {text: "c) Un Tratado Internacional pude ser modificado o derogado por una ley", val: "correct"}, {text: "d) La Constitución goza de fuerza activa frente las otras normas", val: "wrong"}], exp: "Es falsa la c) porque el art. 96.1 CE estipula que las disposiciones de un Tratado sólo podrán ser derogadas, modificadas o suspendidas en la forma prevista en los propios tratados o de acuerdo con el derecho internacional[cite: 6]." },
-
-        { q: "¿Qué mayoría es necesaria en el Congreso para la aprobación global de una ley orgánica?", options: [{text: "a) Simple", val: "wrong"}, {text: "b) Absoluta", val: "correct"}, {text: "c) Cualificada de 2/3", val: "wrong"}, {text: "d) Cualificada de 3/5", val: "wrong"}], exp: "Art. 81.2 de la CE: La aprobación, modificación o derogación de las leyes orgánicas exigirá mayoría absoluta del Congreso, en una votación final sobre el conjunto del proyecto[cite: 6]." },
-
-        { q: "¿Cuántos títulos tiene la Constitución?", options: [{text: "a) 10", val: "wrong"}, {text: "b) 10 más el preliminar", val: "correct"}, {text: "c) 12", val: "wrong"}, {text: "d) 9", val: "wrong"}], exp: "La Constitución Española consta de un Título Preliminar y 10 Títulos numerados del I al X[cite: 6]." },
-
-        { q: "La Constitución se puede reformar:", options: [{text: "a) Mediante una ley orgánica", val: "wrong"}, {text: "b) Mediante una ley ordinaria", val: "wrong"}, {text: "c) Mediante una norma con rango de ley", val: "wrong"}, {text: "d) En la forma que prevé la propia Constitución", val: "correct"}], exp: "Título X de la CE (artículos 166 a 169): La reforma solo puede efectuarse por los procedimientos de reforma ordinario o agravado regulados en el propio texto constitucional[cite: 6]." },
-
-        { q: "Los Derechos Fundamentales y las Libertades Públicas están regulados:", options: [{text: "a) En el Título I de la Constitución", val: "correct"}, {text: "b) En el Título II de la Constitución", val: "wrong"}, {text: "c) En el Título Preliminar de la Constitución", val: "wrong"}, {text: "d) En el Título III de la Constitución", val: "wrong"}], exp: "El Título I se titula 'De los derechos y deberes fundamentales' (arts. 10 a 55)[cite: 2]." },
-
-        { q: "Las pruebas obtenidas con vulneración del derecho a la inviolabilidad del domicilio son:", options: [{text: "a) Inválidas y no pueden ser utilizadas en un proceso", val: "correct"}, {text: "b) Válidas sólo cuando están relacionadas con un homicidio o asesinato", val: "wrong"}, {text: "c) Válidas si las partes se ponen de acuerdo", val: "wrong"}, {text: "d) Válidas cualquiera que sea el delito con el que están relacionadas", val: "wrong"}], exp: "Art. 11.1 de la Ley Orgánica del Poder Judicial (LOPJ): No surtirán efecto las pruebas obtenidas, directa o indirectamente, violentando los derechos o libertades fundamentales[cite: 2]." },
-
-        { q: "¿Cómo tiene que ser un delito para justificar la entrada legal en un domicilio particular sin autorización?", options: [{text: "a) Es suficiente con que sea evidente, entendiéndose por evidencia como percepción directa", val: "wrong"}, {text: "b) Flagrante", val: "correct"}, {text: "c) La Constitución no permite en ningún caso la entrada legal en un domicilio por la comisión de un delito", val: "wrong"}, {text: "d) La Constitución sólo permite la entrada legal en un domicilio si hay autorización legal", val: "wrong"}], exp: "Art. 18.2 de la CE: El domicilio es inviolable. Ninguna entrada o registro podrá hacerse en él sin consentimiento del titular o resolución judicial, salvo en caso de flagrante delito[cite: 2]." },
-
-        { q: "¿De qué año es la Declaración Universal de los Derechos Humanos?", options: [{text: "a) 1945", val: "wrong"}, {text: "b) 1946", val: "wrong"}, {text: "c) 1950", val: "wrong"}, {text: "d) 1948", val: "correct"}], exp: "La Asamblea General de las Naciones Unidas proclamó la Declaración Universal de Derechos Humanos el 10 de diciembre de 1948 en París[cite: 2]." },
-
-        { q: "¿Cuál de los siguientes derechos está conceptuado como derecho de participación de los ciudadanos?", options: [{text: "a) La Libertad religiosa", val: "wrong"}, {text: "b) El Derecho a la vida", val: "wrong"}, {text: "c) El Derecho a la inviolabilidad del domicilio", val: "wrong"}, {text: "d) El Derecho de asociación", val: "correct"}], exp: "El derecho de asociación (art. 22 CE) y el derecho de sufragio/participación en asuntos públicos (art. 23 CE) canalizan la participación política y colectiva del ciudadano[cite: 2]." },
-
-        { q: "El derecho a la tutela judicial efectiva, incluye el derecho a:", options: [{text: "a) Obtener una decisión judicial motivada", val: "wrong"}, {text: "b) Obtener una resolución judicial que dé la razón al demandante", val: "wrong"}, {text: "c) Recurrir la decisión judicial siempre que la ley prevea la posibilidad de interponer recurso", val: "wrong"}, {text: "d) Son correctas la a) y la c)", val: "correct"}], exp: "Art. 24 CE: La tutela judicial garantiza una resolución fundada en derecho y motivada, así como el acceso a los recursos legales previstos[cite: 2, 7]." },
-
-        { q: "¿Cómo se configura el derecho al honor?", options: [{text: "a) Como derecho cultural", val: "wrong"}, {text: "b) Como derecho personal", val: "correct"}, {text: "c) Como derecho económico", val: "wrong"}, {text: "d) Cómo derecho de participación", val: "wrong"}], exp: "Art. 18.1 de la CE: Es un derecho personalísimo fundamental inherente a la dignidad de la persona[cite: 7]." },
-
-        { q: "¿Puede un ciudadano extranjero votar en las elecciones autonómicas?", options: [{text: "a) Sí, siempre", val: "wrong"}, {text: "b) No, nunca", val: "correct"}, {text: "c) Sí, si hay una ley o tratado que le reconozca ese derecho", val: "wrong"}, {text: "d) Sí, si hay una ley o un tratado que le reconozca ese derecho atendiendo a criterios de reciprocidad", val: "wrong"}], exp: "Art. 13.2 de la CE: Los extranjeros solo pueden tener derecho de sufragio activo y pasivo en las elecciones municipales por tratado o ley atendiendo a criterios de reciprocidad[cite: 7]." },
-
-        { q: "Según el art. 13 de la Constitución, los extranjeros en España, como regla general no gozan de:", options: [{text: "a) El derecho a la inviolabilidad del domicilio", val: "wrong"}, {text: "b) El derecho al sufragio", val: "wrong"}, {text: "c) El derecho a acceder a funciones y cargos públicos", val: "wrong"}, {text: "d) Son correctas b) y c)", val: "correct"}], exp: "Art. 13.2 de la CE: Solamente los españoles serán titulares de los derechos reconocidos en el artículo 23 (sufragio y acceso a cargos públicos), salvo reciprocidad municipal[cite: 7]." },
-
-        { q: "Según el artículo 17.2 de la Constitución, ¿cuál es la duración máxima de la detención preventiva?", options: [{text: "a) 72 horas", val: "correct"}, {text: "b) 5 días", val: "wrong"}, {text: "c) 10 días", val: "wrong"}, {text: "d) 24 horas", val: "wrong"}], exp: "Art. 17.2 de la CE: En el plazo máximo de setenta y dos horas, el detenido deberá ser puesto en libertad o a disposición de la autoridad judicial[cite: 7]." },
-
-        { q: "¿Pueden regularse los derechos fundamentales y las libertades públicas por Decreto-ley?", options: [{text: "a) Sí, ya que cualquier norma puede regular un derecho fundamental o libertad pública", val: "wrong"}, {text: "b) No, nunca", val: "correct"}, {text: "c) Sí, si se trata de derechos económicos, sociales o culturales", val: "wrong"}, {text: "d) Sí, si se trata de derechos de participación", val: "wrong"}], exp: "Art. 86.1 de la CE: Los Decretos-leyes no podrán afectar a los derechos, deberes y libertades de los ciudadanos regulados en el Título I[cite: 7]." },
-
-        { q: "La autorización judicial para entrar en un domicilio, se puede otorgar:", options: [{text: "a) Porque se está realizando una investigación criminal en que es necesaria registrar un domicilio", val: "wrong"}, {text: "b) Porque se quiere detener a alguien que está dentro del domicilio", val: "wrong"}, {text: "c) Para ejecutar una resolución judicial", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "El auto judicial motivado legitima el acceso para fines de inspección/registro procesal, captura o ejecución forzosa[cite: 4]." },
-
-        { q: "El procedimiento de habeas corpus tiene por finalidad:", options: [{text: "a) Decidir si el detenido es culpable", val: "wrong"}, {text: "b) Valorar las pruebas que se utilizarán en un juicio posterior", val: "wrong"}, {text: "c) Decidir si hay una situación de detención ilegal", val: "correct"}, {text: "d) Decidir el régimen de visitas del condenado a prisión", val: "wrong"}], exp: "Art. 17.4 de la CE: Tiene por objeto poner a disposición judicial inmediata a toda persona detenida ilegalmente para que determine si procede su libertad[cite: 4]." },
-
-        { q: "¿Quién puede declarar el estado de sitio?", options: [{text: "a) El Gobierno sin autorización de nadie", val: "wrong"}, {text: "b) El Gobierno con la autorización del Congreso", val: "wrong"}, {text: "c) El Gobierno con la autorización del Senado", val: "wrong"}, {text: "d) El Congreso por mayoría absoluta a propuesta del Gobierno", val: "correct"}], exp: "Art. 116.4 de la CE: El estado de sitio será declarado por la mayoría absoluta del Congreso de los Diputados, a propuesta exclusiva del Gobierno[cite: 4]." },
-
-        { q: "¿Cuál de los siguientes derechos podría ser suspendido durante el estado de excepción?", options: [{text: "a) La inviolabilidad del domicilio", val: "wrong"}, {text: "b) La libertad", val: "wrong"}, {text: "c) La Reunión y la manifestación", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "Art. 55.1 de la CE: Cuando se declare el estado de excepción podrán ser suspendidos los derechos de los arts. 17 (libertad), 18.2 (domicilio), 21 (reunión), etc[cite: 4]." },
-
-        { q: "¿Cuál de los siguientes cargos goza de la prerrogativa de la inviolabilidad?", options: [{text: "a) Los Ministros, siempre", val: "wrong"}, {text: "b) Los Diputados", val: "wrong"}, {text: "c) Los Senadores", val: "wrong"}, {text: "d) Son correctas b) y c)", val: "correct"}], exp: "Art. 71.1 de la CE: Los Diputados y Senadores gozarán de inviolabilidad por las opiniones manifestadas y por los votos emitidos en el ejercicio de sus funciones[cite: 4]." },
-
-        { q: "¿Quién escoge o designa a los Ministros?", options: [{text: "a) El rey", val: "wrong"}, {text: "b) El Presidente del Gobierno", val: "correct"}, {text: "c) El Presidente del Gobierno y del Congreso", val: "wrong"}, {text: "d) El Presidente del Gobierno y el Rey", val: "wrong"}], exp: "Art. 100 de la CE: Los demás miembros del Gobierno serán nombrados y separados por el Rey, a propuesta de su Presidente[cite: 4, 5]." },
-
-        { q: "Las Cortes Generales puede:", options: [{text: "a) Aprobar leyes orgánicas", val: "wrong"}, {text: "b) Aprobar los presupuestos del Estado", val: "wrong"}, {text: "c) Aprobar leyes ordinarias", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "Art. 66.2 de la CE: Las Cortes Generales ejercen la potestad legislativa del Estado y aprueban sus Presupuestos[cite: 5]." },
-
-        { q: "¿Cuál es, según la Constitución, el número mínimo y máximo de diputados que puede tener el Congreso?", options: [{text: "a) 200 – 400", val: "wrong"}, {text: "b) 250 – 400", val: "wrong"}, {text: "c) 300 – 400", val: "correct"}, {text: "d) 350 – 400", val: "wrong"}], exp: "Art. 68.1 de la CE: El Congreso se compone de un mínimo de 300 y un máximo de 400 Diputados[cite: 5]." },
-
-        { q: "¿Cuál de las siguientes afirmaciones es correcta?", options: [{text: "a) Las Cortes Generales tienen una estructura bicameral", val: "wrong"}, {text: "b) Las Cortes Generales se escogen por los ciudadanos", val: "wrong"}, {text: "c) Las Cortes Generales tienen autonomía orgánica y funcional", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "Todas son afirmaciones constitucionales sobre las Cortes Generales (bicameralismo, sufragio y autonomía)[cite: 5]." },
-
-        { q: "Marca la afirmación correcta:", options: [{text: "a) El Gobierno se encarga de la dirección de la política interior y exterior del Estado", val: "wrong"}, {text: "b) El Gobierno tiene la potestad reglamentaria", val: "wrong"}, {text: "c) El gobierno está dotado de una administración civil y militar", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "Art. 97 de la CE: El Gobierno dirige la política interior y exterior, la Administración civil y militar y ejerce la potestad reglamentaria[cite: 5]." },
-
-        { q: "¿Qué órgano puede exigir la responsabilidad penal a los miembros del Gobierno?", options: [{text: "a) El Tribunal Constitucional", val: "wrong"}, {text: "b) El Tribunal Supremo", val: "correct"}, {text: "c) La Audiencia Nacional", val: "wrong"}, {text: "d) El Tribunal Superior de Justicia que corresponda", val: "wrong"}], exp: "Art. 102.1 de la CE: La responsabilidad criminal del Presidente y los demás miembros del Gobierno será exigible ante la Sala de lo Penal del Tribunal Supremo[cite: 5]." },
-
-        { q: "La persona del Rey:", options: [{text: "a) Es inviolable", val: "wrong"}, {text: "b) Es políticamente irresponsable", val: "wrong"}, {text: "c) Encarna la Jefatura del Estado", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "Art. 56 de la CE: El Rey es el Jefe del Estado y su persona es inviolable y no está sujeta a responsabilidad[cite: 1, 5]." },
-
-        { q: "El presidente del Gobierno es elegido:", options: [{text: "a) Por los diputados", val: "wrong"}, {text: "b) Por el Congreso", val: "wrong"}, {text: "c) Por el Senado", val: "wrong"}, {text: "d) Son correctas a) y b)", val: "correct"}], exp: "Art. 99 de la CE: El Presidente es elegido por votación de investidura en el Congreso por los Diputados[cite: 1]." },
-
-        { q: "¿Cuál de las siguientes no es una función constitucional del Rey?", options: [{text: "a) Convocar y disolver las Cortes", val: "wrong"}, {text: "b) Proponer candidato a Presidente del Gobierno", val: "wrong"}, {text: "c) Sancionar y promulgar las leyes del Estado", val: "wrong"}, {text: "d) Todas son correctas", val: "correct"}], exp: "La opción 'Todas son correctas' responde a la formulación porque a), b) y c) son funciones del Rey del art. 62 CE[cite: 1]." },
-
-        { q: "Los diputados son elegidos por:", options: [{text: "a) 3 años", val: "wrong"}, {text: "b) 5 años", val: "wrong"}, {text: "c) 4 años", val: "correct"}, {text: "d) 2 años", val: "wrong"}], exp: "Art. 68.4 de la CE: El Congreso es elegido por cuatro años[cite: 1]." },
-
-        { q: "De los senadores escogidos directamente por los ciudadanos, ¿cuántos se escogen en cada Provincia?", options: [{text: "a) Mínimo 2 y el resto según la población", val: "wrong"}, {text: "b) Mínimo 4 y el resto según la población", val: "wrong"}, {text: "c) 2", val: "wrong"}, {text: "d) 4", val: "correct"}], exp: "Art. 69.2 de la CE: En cada provincia se elegirán cuatro Senadores por sufragio universal directo[cite: 1]." },
-
-        { q: "Un diputado goza:", options: [{text: "a) Inmunidad", val: "wrong"}, {text: "b) Inviolabilidad", val: "wrong"}, {text: "c) Integridad", val: "wrong"}, {text: "d) Son correctas a) y b)", val: "correct"}], exp: "Art. 71 de la CE: Los Diputados y Senadores gozan de inviolabilidad e inmunidad procesal[cite: 1]." },
-
-        { q: "¿Cuántos senadores se escogen por los parlamentos de las Comunidades Autónomas?", options: [{text: "a) Cada Comunidad Autónoma tiene que elegir un senador, más uno por cada millón de habitantes", val: "correct"}, {text: "b) Cada Comunidad Autónoma tiene que elegir un senador, más dos por cada millón de habitantes", val: "wrong"}, {text: "c) Cada Comunidad Autónoma tiene que elegir un senador, más tres por cada millón de habitantes", val: "wrong"}, {text: "d) Cada Comunidad Autónoma tiene que elegir un senador, más cuatro por cada millón de habitantes", val: "wrong"}], exp: "Art. 69.5 de la CE: Las CC.AA. designarán un Senador y otro más por cada millón de habitantes[cite: 3]." },
-
-        { q: "¿Cómo se llama la sesión en la que se elige al Presidente del Gobierno?", options: [{text: "a) Votación del Presidente", val: "wrong"}, {text: "b) Moción de confianza", val: "wrong"}, {text: "c) Investidura", val: "correct"}, {text: "d) Investimento", val: "wrong"}], exp: "Art. 99 de la CE: El debate y votación del candidato propuesto se denomina sesión de investidura[cite: 3]." },
-
-        { q: "¿Qué garantías prevé la Constitución para que los miembros de las Cortes Generales puedan desarrollar sus funciones de forma libre e independiente?", options: [{text: "a) La inviolabilidad", val: "wrong"}, {text: "b) La inmunidad", val: "wrong"}, {text: "c) La falta de responsabilidad", val: "wrong"}, {text: "d) Son correctas la a) y la b)", val: "correct"}], exp: "El art. 71 de la CE consagra expresamente las prerrogativas de inviolabilidad parlamentaria e inmunidad[cite: 3]." },
-
-        { q: "¿Cuál de las siguientes afirmaciones es falsa?", options: [{text: "a) El Gobierno no actúa bajo el principio de jerarquía", val: "correct"}, {text: "b) El Gobierno tiene carácter colegiado", val: "wrong"}, {text: "c) La figura del vicepresidente del Gobierno no es obligatoria", val: "wrong"}, {text: "d) El jefe del Gobierno es el Presidente", val: "wrong"}], exp: "Es falsa la a) porque la Administración Pública y los órganos de gobierno sí actúan conforme al principio de jerarquía (art. 103.1 CE)[cite: 3]." },
-
-        { q: "Según la Constitución, la forma política del Estado es:", options: [{text: "a) La República parlamentaria", val: "wrong"}, {text: "b) El Estado autonómico", val: "wrong"}, {text: "c) La Monarquía parlamentaria", val: "correct"}, {text: "d) Ninguna es correcta", val: "wrong"}], exp: "Art. 1.3 de la CE: La forma política del Estado español es la Monarquía parlamentaria[cite: 3]." },
-
-
-
-        // --- 50 NUEVAS PREGUNTAS: PRINCIPIOS DE LEGALIDAD, ART. 30, ART. 32 Y ART. 68 LSP ---
-
-        { q: "Según el art. 8 de la Ley 5/2014, el personal de seguridad privada se atendrá en sus actuaciones al principio de legalidad, lo que implica:", options: [{text: "A) Actuar únicamente si hay una orden expresa judicial", val: "wrong"}, {text: "B) El respeto a la Constitución, al ordenamiento jurídico y a los derechos fundamentales", val: "correct"}, {text: "C) Aplicar sanciones económicas directas a los infractores", val: "wrong"}], exp: "Art. 8.1 LSP: El principio básico de actuación primordial es el respeto estricto a la Constitución y al ordenamiento jurídico." },
-
-        { q: "El principio de proporcionalidad en la actuación del vigilante de seguridad exige que:", options: [{text: "A) Se use la fuerza en todos los casos de desobediencia verbal", val: "wrong"}, {text: "B) Los medios y la fuerza empleados sean estrictamente necesarios y adecuados a la gravedad de la agresión", val: "correct"}, {text: "C) Se responda siempre con el arma reglamentaria", val: "wrong"}], exp: "Art. 8.1 LSP: Proporcionalidad significa adecuar los medios disuasorios o coercitivos a la entidad del riesgo o agresión." },
-
-        { q: "Según el principio de congruencia recogido en la LSP, el vigilante de seguridad:", options: [{text: "A) Debe escoger la medida más idónea y adecuada entre las legalmente previstas para resolver el incidente", val: "correct"}, {text: "B) Puede tomar represalias si ha sido insultado", val: "wrong"}, {text: "C) Debe abandonar su puesto si el infractor se niega a cooperar", val: "wrong"}], exp: "Art. 8.1 LSP: Congruencia exige una relación lógica entre la situación a solventar y la medida operativa elegida." },
-
-        { q: "Respecto a la dignidad y corrección en el trato, el artículo 8 de la Ley 5/2014 establece que el vigilante:", options: [{text: "A) Debe observar en todo momento un trato correcto y esmerado en sus relaciones con los ciudadanos", val: "correct"}, {text: "B) Solo debe ser respetuoso con las autoridades, no con el público", val: "wrong"}, {text: "C) Debe ser intimidante para mantener la autoridad", val: "wrong"}], exp: "Art. 8.1 LSP: Se exige expresamente corrección y esmero en el trato hacia los ciudadanos." },
-
-        { q: "¿En qué consiste el principio de integridad profesional según la Ley de Seguridad Privada?", options: [{text: "A) No aceptar gratificaciones, sobornos ni dádivas y actuar con probidad moral intachable", val: "correct"}, {text: "B) Hacer horas extraordinarias sin retribución", val: "wrong"}, {text: "C) Llevar el uniforme siempre planchado", val: "wrong"}], exp: "Art. 8.1 LSP: Integridad implica honradez profesional, rectitud y rechazo a cualquier ventaja indebida." },
-
-        { q: "Según el art. 30 de la LSP, el personal de seguridad privada tiene el deber de reserva sobre:", options: [{text: "A) Los hechos que conozca por razón del ejercicio de sus funciones y las informaciones relativas a sus clientes", val: "correct"}, {text: "B) Únicamente los secretos militares del Estado", val: "wrong"}, {text: "C) El horario de sus turnos de trabajo", val: "wrong"}], exp: "Art. 30.1 LSP: Están obligados a guardar rigurosa reserva sobre los datos y hechos conocidos por el servicio[cite: 48]." },
-
-        { q: "¿Ante quién NO es oponible el deber de reserva y secreto profesional del vigilante de seguridad?", options: [{text: "A) Ante los medios de comunicación y periodistas", val: "wrong"}, {text: "B) Ante las autoridades judiciales y las Fuerzas y Cuerpos de Seguridad competentes", val: "correct"}, {text: "C) Ante el público en general en redes sociales", val: "wrong"}], exp: "Art. 30.2 LSP: El deber de reserva cede ante requerimiento judicial o auxilio a las FFCCSS competentes[cite: 48]." },
-
-        { q: "Según el artículo 32.1.a) de la LSP, una de las funciones exclusivas de los vigilantes de seguridad es:", options: [{text: "A) Ejercer la vigilancia y protección de bienes, establecimientos, lugares y eventos, así como la protección de las personas en ellos", val: "correct"}, {text: "B) Dirigir el tráfico en autopistas y autovías estatales", val: "wrong"}, {text: "C) Investigar delitos patrimoniales de oficio", val: "wrong"}], exp: "Art. 32.1.a LSP: Función esencial de vigilancia y protección de bienes y personas en los mismos." },
-
-        { q: "En los controles de acceso a edificios o instalaciones, ¿qué faculta el artículo 32.1.b) de la LSP al vigilante?", options: [{text: "A) Retener el DNI hasta la salida del edificio", val: "wrong"}, {text: "B) Comprobar la identidad de las personas, impedir el acceso no autorizado y realizar controles de objetos personales", val: "correct"}, {text: "C) Registrar cavidades corporales sin autorización", val: "wrong"}], exp: "Art. 32.1.b LSP: Identificación, impedimento de acceso no autorizado y control superficial de efectos personales." },
-
-        { q: "Si una persona se niega a identificarse o a permitir el control de sus efectos en un control de acceso privado, el vigilante debe:", options: [{text: "A) Detenerla inmediatamente por desobediencia grave", val: "wrong"}, {text: "B) Impedirle el acceso al inmueble o invitarla a abandonarlo", val: "correct"}, {text: "C) Arrebatarle sus pertenencias por la fuerza", val: "wrong"}], exp: "Art. 32.1.b LSP: Ante la negativa legítima al control, procede impedir la entrada o exigir el desalojo de la instalación." },
-
-        { q: "Según el art. 32.1.c) de la LSP, en relación con la comisión de delitos, los vigilantes deben:", options: [{text: "A) Evitar su comisión, oponerse a ellos e intervenir cuando presencien la comisión de algún delito", val: "correct"}, {text: "B) Mirar hacia otro lado si no afecta a su cliente contratante", val: "wrong"}, {text: "C) Imponer fianzas cautelares", val: "wrong"}], exp: "Art. 32.1.c LSP: Es función esencial evitar delitos y neutralizarlos en el ámbito de su protección." },
-
-        { q: "Conforme al artículo 32.1.d) de la LSP, la detención practicada por un vigilante de seguridad exige:", options: [{text: "A) Interrogar al detenido en el cuarto de seguridad", val: "wrong"}, {text: "B) Poner inmediatamente a disposición de las FFCCSS a los delincuentes e instrumentos o pruebas del delito", val: "correct"}, {text: "C) Dejar marchar al sospechoso si promete devolver lo sustraído", val: "wrong"}], exp: "Art. 32.1.d LSP: Poner inmediatamente a los delincuentes y los efectos del delito a disposición de las FFCCSS." },
-
-        { q: "En la prestación de servicios de verificación de alarmas según el art. 32.1.e) de la LSP, los vigilantes pueden:", options: [{text: "A) Entrar en viviendas sin orden judicial en cualquier tipo de salto técnico de alarma", val: "wrong"}, {text: "B) Comprobar el estado exterior y el funcionamiento de los sistemas, y acceder para inspección si está autorizado con llaves", val: "correct"}, {text: "C) Apagar la alarma e ignorar el aviso a policía", val: "wrong"}], exp: "Art. 32.1.e LSP: Servicio de acuda y custodia de llaves para verificación personal de señales de alarma." },
-
-        { q: "¿En qué casos pueden los vigilantes de seguridad prestar servicio portando armas de fuego?", options: [{text: "A) En cualquier servicio que el vigilante elija voluntariamente", val: "wrong"}, {text: "B) Únicamente en los supuestos reglamentariamente establecidos o autorizados por la Delegación del Gobierno", val: "correct"}, {text: "C) Siempre que el cliente lo pague en efectivo", val: "wrong"}], exp: "Art. 40 y 41 LSP: Los servicios con armas están tasados legalmente y requieren autorización expresa gubernativa." },
-
-        { q: "¿A quién corresponde la custodia del arma reglamentaria fuera de las horas de servicio?", options: [{text: "A) El vigilante se la lleva a su domicilio particular", val: "wrong"}, {text: "B) Queda depositada obligatoriamente en el armero autorizado de la empresa o del lugar del servicio", val: "correct"}, {text: "C) En la guantera del vehículo de patrulla", val: "wrong"}], exp: "Art. 40 LSP: Las armas deben custodiarse bajo estrictas medidas de seguridad en armeros legalmente homologados." },
-
-        { q: "En la Ley 5/2014, ¿qué artículo regula específicamente las infracciones cometidas por el personal de seguridad privada?", options: [{text: "A) El artículo 32", val: "wrong"}, {text: "B) El artículo 68", val: "correct"}, {text: "C) El artículo 10", val: "wrong"}], exp: "El artículo 68 de la Ley 5/2014 tipifica las infracciones muy graves, graves y leves del personal habilitado." },
-
-        { q: "Según el art. 68.1.a) de la LSP, ¿qué infracción comete un vigilante que realiza funciones de seguridad privada sin estar habilitado legalmente?", options: [{text: "A) Infracción leve", val: "wrong"}, {text: "B) Infracción grave", val: "wrong"}, {text: "C) Infracción muy grave", val: "correct"}], exp: "Art. 68.1.a LSP: El ejercicio de funciones de seguridad privada careciendo de la habilitación preceptiva es infracción muy grave." },
-
-        { q: "La negativa a prestar auxilio o colaboración con las Fuerzas y Cuerpos de Seguridad cuando sea requerido en el ejercicio de sus funciones constituye:", options: [{text: "A) Una infracción muy grave", val: "correct"}, {text: "B) Una infracción leve", val: "wrong"}, {text: "C) Una simple falta de cortesía", val: "wrong"}], exp: "Art. 68.1.b LSP: Negarse al auxilio y colaboración con las FFCCSS cuando sea debido es infracción muy grave." },
-
-        { q: "¿Qué gravedad tiene el abandono del servicio de seguridad privada en servicios que se presten con armas de fuego?", options: [{text: "A) Leve", val: "wrong"}, {text: "B) Muy grave", val: "correct"}, {text: "C) No constituye infracción administrativa", val: "wrong"}], exp: "Art. 68.1.c LSP: El abandono del servicio prestando funciones con armas o en infraestructuras críticas es muy grave." },
-
-        { q: "La vulneración del deber de reserva sobre información secreta o confidencial que ponga en peligro a personas o instalaciones protegidas es:", options: [{text: "A) Infracción leve", val: "wrong"}, {text: "B) Infracción grave", val: "wrong"}, {text: "C) Infracción muy grave", val: "correct"}], exp: "Art. 68.1.d LSP: La violación de la reserva con peligro para vidas o instalaciones es falta muy grave." },
-
-        { q: "El uso indebido, abusivo o injustificado de la fuerza causando lesiones de entidad se tipifica como:", options: [{text: "A) Infracción muy grave", val: "correct"}, {text: "B) Falta leve", val: "wrong"}, {text: "C) Falta administrativa exenta", val: "wrong"}], exp: "Art. 68.1 LSP: El abuso grave o desproporcionado en el uso de armas o medios de defensa constituye infracción muy grave." },
-
-        { q: "La comisión de actos que atenten gravemente contra los derechos fundamentales y libertades públicas durante el servicio es:", options: [{text: "A) Infracción muy grave", val: "correct"}, {text: "B) Infracción grave", val: "wrong"}, {text: "C) Infracción leve", val: "wrong"}], exp: "Art. 68.1 LSP: Vulnerar deliberadamente derechos fundamentales en el servicio es sancionable como muy grave." },
-
-        { q: "¿Cuál de las siguientes es una sanción prevista en la Ley para una infracción MUY GRAVE cometida por un vigilante?", options: [{text: "A) Amonestación verbal en privado", val: "wrong"}, {text: "B) Extinción de la habilitación profesional o suspensión temporal de uno a dos años", val: "correct"}, {text: "C) Multa máxima de 100 euros", val: "wrong"}], exp: "Art. 68.1 y 62 LSP: Las muy graves acarrean extinción de la TIP o suspensión de 1 a 2 años y multas de 6.001 a 30.000 €." },
-
-        { q: "Según el art. 68.2 de la LSP, la falta de respeto o desobediencia a las instrucciones de las Fuerzas y Cuerpos de Seguridad es:", options: [{text: "A) Infracción leve", val: "wrong"}, {text: "B) Infracción grave", val: "correct"}, {text: "C) Infracción penal exclusivamente", val: "wrong"}], exp: "Art. 68.2.a LSP: Desobedecer instrucciones operativas de las FFCCSS es infracción grave." },
-
-        { q: "El incumplimiento de las obligaciones sobre custodia y uso de armas reglamentarias, sin causar grave daño, se califica como:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Infracción muy grave", val: "wrong"}], exp: "Art. 68.2.b LSP: Las deficiencias no graves en la custodia o traslado de armas constituyen infracción grave." },
-
-        { q: "La retención de la documentación personal de los ciudadanos en los controles de acceso sin causa legal es:", options: [{text: "A) Una práctica recomendada por las empresas", val: "wrong"}, {text: "B) Una infracción grave de la Ley de Seguridad Privada", val: "correct"}, {text: "C) Una infracción leve", val: "wrong"}], exp: "Art. 68.2.d LSP: Retener documentos de identidad personales constituye expresamente una infracción grave[cite: 47]." },
-
-        { q: "Prestar servicios de seguridad privada en estado de embriaguez o bajo la influencia de drogas tóxicas o estupefacientes constituye:", options: [{text: "A) Infracción leve", val: "wrong"}, {text: "B) Infracción grave", val: "correct"}, {text: "C) No es sancionable por la ley si cumple su turno", val: "wrong"}], exp: "Art. 68.2.e LSP: Ejercer funciones bajo efectos de alcohol o drogas constituye infracción grave." },
-
-        { q: "El interrogatorio a presuntos delincuentes o sospechosos por parte de los vigilantes de seguridad:", options: [{text: "A) Está permitido si se hace con educación", val: "wrong"}, {text: "B) Está terminantemente prohibido y constituye infracción grave", val: "correct"}, {text: "C) Se permite si dura menos de 15 minutos", val: "wrong"}], exp: "Art. 68.2 y 32 LSP: El vigilante solo detiene y entrega; tiene prohibido interrogar a sospechosos." },
-
-        { q: "La no puesta a disposición inmediata de las Fuerzas y Cuerpos de Seguridad de los detenidos o pruebas de un delito es:", options: [{text: "A) Infracción leve", val: "wrong"}, {text: "B) Infracción grave", val: "correct"}, {text: "C) Infracción muy leve", val: "wrong"}], exp: "Art. 68.2.f LSP: Demorar la entrega de detenidos o efectos delictivos es infracción grave." },
-
-        { q: "Realizar funciones de seguridad que excedan notoriamente de la habilitación que se ostenta se tipifica como:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Actuación de mérito", val: "wrong"}], exp: "Art. 68.2.g LSP: Extralimitarse en las funciones habilitadas constituye infracción grave." },
-
-        { q: "La falta de comunicación inmediata a las FFCCSS de hechos delictivos de los que tengan conocimiento en el servicio es:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Falta optativa", val: "wrong"}], exp: "Art. 68.2.h LSP: Omitir la comunicación inmediata de delitos conocidos en el servicio es falta grave[cite: 48]." },
-
-        { q: "La portación del arma reglamentaria fuera de las horas o de los lugares autorizados para el servicio constituye:", options: [{text: "A) Infracción leve", val: "wrong"}, {text: "B) Infracción grave", val: "correct"}, {text: "C) Falta muy leve", val: "wrong"}], exp: "Art. 68.2.i LSP: Portar armas fuera del servicio tasado constituye infracción grave." },
-
-        { q: "El incumplimiento de la obligación de someterse a las revisiones psicofísicas y médicas periódicas reglamentarias es:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) No constituye infracción administrativa", val: "wrong"}], exp: "Art. 68.2.j LSP: Negarse o no realizar las pruebas psicofísicas obligatorias es falta grave." },
-
-        { q: "La negativa a identificarse profesionalmente mediante la TIP ante los ciudadanos que lo requieran en el servicio es:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Infracción muy grave", val: "wrong"}, {text: "C) Una infracción leve", val: "wrong"}], exp: "Art. 68.2.k LSP: Negarse a exhibir la TIP a requerimiento legítimo es infracción grave." },
-
-        { q: "¿Cuál es la sanción de suspensión temporal prevista para las infracciones GRAVES del personal de seguridad?", options: [{text: "A) Suspensión de 1 día a 1 año", val: "wrong"}, {text: "B) Suspensión temporal de la habilitación de hasta un año", val: "correct"}, {text: "C) Retirada perpetua de la TIP", val: "wrong"}], exp: "Art. 62 LSP: Las infracciones graves conllevan suspensión temporal de habilitación de hasta 1 año y multas de 1.001 a 6.000 €." },
-
-        { q: "Según el art. 68.3 de la LSP, no portar la Tarjeta de Identidad Profesional (TIP) durante la prestación del servicio es:", options: [{text: "A) Infracción leve", val: "correct"}, {text: "B) Infracción grave", val: "wrong"}, {text: "C) Infracción muy grave", val: "wrong"}], exp: "Art. 68.3.a LSP: No llevar consigo la TIP durante el servicio es infracción leve (distinto de negarse a exhibirla)." },
-
-        { q: "La falta de cuidado o negligencia en el aseo y uniformidad reglamentaria o en el uso de los distintivos es:", options: [{text: "A) Infracción leve", val: "correct"}, {text: "B) Infracción grave", val: "wrong"}, {text: "C) Delito de desobediencia", val: "wrong"}], exp: "Art. 68.3.b LSP: El descuido leve en uniforme o distintivos es infracción leve." },
-
-        { q: "El trato descortés o incorrecto con los ciudadanos durante el servicio, si no constituye falta grave, es:", options: [{text: "A) Infracción leve", val: "correct"}, {text: "B) Infracción grave", val: "wrong"}, {text: "C) Falta muy grave", val: "wrong"}], exp: "Art. 68.3.c LSP: La incorrección en el trato sin dolo grave se sanciona como infracción leve." },
-
-        { q: "La no comunicación a la Dirección General de la Policía del cambio de domicilio o datos personales dentro del plazo legal es:", options: [{text: "A) Infracción leve", val: "correct"}, {text: "B) Infracción grave", val: "wrong"}, {text: "C) Infracción muy grave", val: "wrong"}], exp: "Art. 68.3.d LSP: Omitir la actualización de datos registrales de domicilio es falta leve." },
-
-        { q: "¿Cuál es la sanción económica prevista de forma general para las infracciones LEVES del personal de seguridad privada?", options: [{text: "A) Multa de hasta 1.000 euros", val: "correct"}, {text: "B) Multa de 10.000 euros", val: "wrong"}, {text: "C) Suspensión de empleo y sueldo durante 6 meses", val: "wrong"}], exp: "Art. 62.1.c LSP: Las infracciones leves conllevan apercibimiento o multa de hasta 1.000 euros." },
-
-        { q: "El vigilante que viste prendas que asemejen o induzcan a confusión con los uniformes de las FFCCSS comete:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Falta leve", val: "wrong"}, {text: "C) No constituye infracción si le gusta el uniforme militar", val: "wrong"}], exp: "Art. 68.2 LSP: El uso de uniformidad no reglamentaria susceptible de confusión con cuerpos policiales es infracción grave." },
-
-        { q: "¿Qué plazo de prescripción tienen las infracciones MUY GRAVES cometidas por el personal de seguridad privada?", options: [{text: "A) 1 año", val: "wrong"}, {text: "B) 3 años", val: "correct"}, {text: "C) 6 meses", val: "wrong"}], exp: "Art. 67.1 LSP: Las infracciones muy graves prescriben a los 3 años." },
-
-        { q: "¿Qué plazo de prescripción tienen las infracciones GRAVES en la Ley 5/2014?", options: [{text: "A) 2 años", val: "correct"}, {text: "B) 5 años", val: "wrong"}, {text: "C) 1 año", val: "wrong"}], exp: "Art. 67.1 LSP: Las infracciones graves prescriben a los 2 años." },
-
-        { q: "¿Qué plazo de prescripción tienen las infracciones LEVES en la Ley 5/2014?", options: [{text: "A) 6 meses", val: "correct"}, {text: "B) 1 año", val: "wrong"}, {text: "C) 3 meses", val: "wrong"}], exp: "Art. 67.1 LSP: Las infracciones leves prescriben a los 6 meses." },
-
-        { q: "El abandono del servicio por parte de un vigilante sin armas, sin justificación y sin causar peligro grave a la seguridad, es:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Infracción muy grave", val: "wrong"}, {text: "C) Infracción leve", val: "wrong"}], exp: "Art. 68.2 LSP: El abandono injustificado en servicios ordinarios sin armas se tipifica como infracción grave." },
-
-        { q: "El uso de medios de defensa distintos de los reglamentarios (por ejemplo, defensas extensibles no autorizadas) es:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Legal si lo autoriza el jefe de equipo", val: "wrong"}], exp: "Art. 68.2 LSP: Portar armas o medios defensivos no homologados ni autorizados constituye falta grave." },
-
-        { q: "Si un vigilante de seguridad presencia una orden de su superior que sea manifiestamente constitutiva de delito, debe:", options: [{text: "A) Cumplirla inmediatamente por obediencia debida", val: "wrong"}, {text: "B) No cumplirla, ya que el principio de legalidad prohíbe obedecer órdenes ilegales", val: "correct"}, {text: "C) Pedir un aumento salarial por cumplirla", val: "wrong"}], exp: "Art. 8 LSP: La obediencia debida no ampara la ejecución de actos manifiestamente ilegales[cite: 47]." },
-
-        { q: "La revelación a terceros no autorizados de datos personales de usuarios obtenidos en los controles de acceso es:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Falta voluntaria", val: "wrong"}], exp: "Art. 30 y 68.2 LSP: La divulgación no autorizada de datos personales vulnera el secreto profesional y es grave." },
-
-        { q: "El incumplimiento reiterado de las órdenes legales dadas por las autoridades policiales se califica como:", options: [{text: "A) Infracción muy grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Infracción testimonial", val: "wrong"}], exp: "Art. 68.1 LSP: La desobediencia o resistencia reiterada y grave frente a las autoridades policiales es muy grave." },
-
-        { q: "En caso de comisión de una infracción muy grave, ¿puede acordarse como medida cautelar la retirada de la TIP antes de la resolución del expediente?", options: [{text: "A) Sí, la autoridad sancionadora puede suspender cautelarmente la habilitación y retirar el arma", val: "correct"}, {text: "B) No, nunca antes de que pasen dos años", val: "wrong"}, {text: "C) Solo si el cliente del servicio lo solicita", val: "wrong"}], exp: "Art. 66 LSP: El órgano sancionador puede adoptar medidas cautelares de retirada provisional de la TIP y armas." }
-
+        // --- CONSTITUCIÓN E HISTORIA (1-40) ---
+        { q: "¿Cuántas Constituciones ha tenido España a lo largo de su historia constitucional?", options: [{text: "A) 6 Constituciones", val: "wrong"}, {text: "B) 8 Constituciones, siendo la primera la de 1812 y la vigente la de 1978", val: "correct"}, {text: "C) 10 Constituciones", val: "wrong"}], exp: "En la historia de España ha habido 8 Constituciones, comenzando con la de Cádiz en 1812 y culminando con la de 1978[cite: 2, 3]." },
+        { q: "¿En qué fecha exacta fue aprobada la Constitución Española vigente por las Cortes Generales?", options: [{text: "A) El 31 de octubre de 1978", val: "correct"}, {text: "B) El 6 de diciembre de 1978", val: "wrong"}, {text: "C) El 29 de diciembre de 1978", val: "wrong"}], exp: "Fue aprobada por el Congreso y el Senado por separado el 31 de octubre de 1978[cite: 3]." },
+        { q: "¿Cuándo fue refrendada la Constitución Española de 1978 por el pueblo español?", options: [{text: "A) El 31 de octubre de 1978", val: "wrong"}, {text: "B) El 6 de diciembre de 1978", val: "correct"}, {text: "C) El 27 de diciembre de 1978", val: "wrong"}], exp: "El referéndum popular de ratificación se celebró el 6 de diciembre de 1978[cite: 3]." },
+        { q: "¿Cuándo sancionó y promulgó el Rey Don Juan Carlos I la Constitución ante las Cortes Generales?", options: [{text: "A) El 27 de diciembre de 1978", val: "correct"}, {text: "B) El 29 de diciembre de 1978", val: "wrong"}, {text: "C) El 6 de diciembre de 1978", val: "wrong"}], exp: "El Rey la sancionó y promulgó el 27 de diciembre de 1978[cite: 3]." },
+        { q: "¿Cuál fue la fecha de entrada en vigor de la Constitución Española de 1978?", options: [{text: "A) El mismo día de su publicación en el BOE, el 29 de diciembre de 1978", val: "correct"}, {text: "B) El 1 de enero de 1979", val: "wrong"}, {text: "C) A los veinte días de su publicación", val: "wrong"}], exp: "Entró en vigor el 29 de diciembre de 1978, coincidiendo con su publicación en el BOE[cite: 3]." },
+        { q: "¿Cómo se caracterizan doctrinalmente los caracteres de la Constitución Española de 1978?", options: [{text: "A) Escrita, codificada, extensa, consensuada, rígida, democrática y monárquica", val: "correct"}, {text: "B) Consuetudinaria, breve y flexible", val: "wrong"}, {text: "C) Otorgada y provisional", val: "wrong"}], exp: "Es una norma escrita, codificada, extensa, consensuada, rígida, democrática y monárquica." },
+        { q: "¿Cuántas veces se ha reformado la Constitución Española desde 1978 hasta el año 2026?", options: [{text: "A) 2 veces", val: "wrong"}, {text: "B) 4 veces (1992, 2011, 2024 y 2026)", val: "correct"}, {text: "C) 5 veces", val: "wrong"}], exp: "Se ha reformado en cuatro ocasiones: 1992 (Maastricht), 2011 (estabilidad presupuestaria), 2024 (artículo 49, discapacidad) y 2026 (senadores de Formentera)." },
+        { q: "¿Qué trató la primera reforma constitucional de 1992?", options: [{text: "A) Adaptar el artículo 13.2 para permitir el sufragio pasivo municipal a ciudadanos de la UE", val: "correct"}, {text: "B) Introducir el techo de déficit", val: "wrong"}, {text: "C) Modificar el Senado", val: "wrong"}], exp: "La reforma de 1992 modificó el artículo 13.2 permitiendo también el derecho de sufragio pasivo (ser elegidos) a comunitarios en elecciones municipales." },
+        { q: "¿En qué consistió la segunda reforma constitucional del año 2011?", options: [{text: "A) Introducir el principio de estabilidad presupuestaria y límite de déficit en el artículo 135", val: "correct"}, {text: "B) Modificar la Corona", val: "wrong"}, {text: "C) Sustituir el término disminuido", val: "wrong"}], exp: "La reforma de 2011 introdujo la regla de estabilidad presupuestaria en el artículo 135." },
+        { q: "¿Qué cambio introdujo la tercera reforma constitucional llevada a cabo en 2024?", options: [{text: "A) Sustituir el término disminuidos por personas con discapacidad en el artículo 49", val: "correct"}, {text: "B) Cambiar la circunscripción de Ibiza y Formentera", val: "wrong"}, {text: "C) Modificar el régimen electoral general", val: "wrong"}], exp: "La reforma de 2024 modernizó el lenguaje del artículo 49 protegiendo los derechos de las personas con discapacidad." },
+        { q: "¿Qué modificación introdujo la cuarta reforma constitucional de 2026?", options: [{text: "A) Que Formentera elija a su propio senador separándose de Ibiza, fijando el Senado en 209 senadores directos", val: "correct"}, {text: "B) La supresión del Senado", val: "wrong"}, {text: "C) La elección directa del Presidente del Gobierno", val: "wrong"}], exp: "En 2026 se separó la circunscripción conjunta de Ibiza-Formentera para que Formentera elija su propio senador." },
+        { q: "¿Cómo se divide estructuralmente el contenido de la Constitución Española?", options: [{text: "A) Parte dogmática y parte orgánica", val: "correct"}, {text: "B) Parte civil y parte mercantil", val: "wrong"}, {text: "C) Parte militar y parte civil", val: "wrong"}], exp: "Se divide doctrinalmente en Parte Dogmática (principios y derechos) y Parte Orgánica (división de poderes y órganos)." },
+        { q: "¿Qué comprende la parte dogmática de la Constitución?", options: [{text: "A) El Título Preliminar y el Título I (derechos y deberes fundamentales)", val: "correct"}, {text: "B) Los Títulos del Gobierno y las Cortes", val: "wrong"}, {text: "C) El Poder Judicial exclusivamente", val: "wrong"}], exp: "La parte dogmática abarca el Título Preliminar y los derechos fundamentales del Título I." },
+        { q: "¿Qué abarca la parte orgánica de la Constitución Española?", options: [{text: "A) La regulación de los poderes del Estado (Corona, Cortes, Gobierno, Poder Judicial, Tribunal Constitucional, etc.)", val: "correct"}, {text: "B) Únicamente los derechos sociales y económicos", val: "wrong"}, {text: "C) El régimen fiscal de los ayuntamientos", val: "wrong"}], exp: "La parte orgánica estructura los poderes públicos y sus relaciones (Títulos II a X)." },
+        { q: "Según el artículo 1 de la Constitución, España se constituye en:", options: [{text: "A) Un Estado social y democrático de Derecho", val: "correct"}, {text: "B) Una República federal", val: "wrong"}, {text: "C) Un Estado confederal", val: "wrong"}], exp: "Art. 1.1 CE: España se constituye en un Estado social y democrático de Derecho." },
+        { q: "¿Cuáles son los valores superiores del ordenamiento jurídico español según el artículo 1.1 de la CE?", options: [{text: "A) Libertad, justicia, igualdad y pluralismo político", val: "correct"}, {text: "B) Paz, orden, disciplina y trabajo", val: "wrong"}, {text: "C) Monarquía, unidad, catolicismo y lealtad", val: "wrong"}], exp: "Art. 1.1 CE propugna libertad, justicia, igualdad y pluralismo político." },
+        { q: "¿Dónde reside la soberanía nacional en el Estado español?", options: [{text: "A) En el Rey", val: "wrong"}, {text: "B) En las Cortes Generales", val: "wrong"}, {text: "C) En el pueblo español, del que emanan los poderes del Estado", val: "correct"}], exp: "Art. 1.2 CE: La soberanía nacional reside en el pueblo español." },
+        { q: "¿Cuál es la forma política del Estado español según la Constitución?", options: [{text: "A) La Monarquía parlamentaria", val: "correct"}, {text: "B) La República presidencialista", val: "wrong"}, {text: "C) El Principado constitucional", val: "wrong"}], exp: "Art. 1.3 CE: La forma política del Estado español es la Monarquía parlamentaria[cite: 3]." },
+        { q: "¿En qué se fundamenta la Constitución Española según su artículo 2?", options: [{text: "A) En la indisoluble unidad de la Nación española, patria común e indivisible de todos los españoles", val: "correct"}, {text: "B) En la libre federación de repúblicas independientes", val: "wrong"}, {text: "C) En la descentralización asimétrica absoluta", val: "wrong"}], exp: "Art. 2 CE fundamenta el texto en la indisoluble unidad de la Nación española, garantizando la autonomía y solidaridad." },
+        { q: "Respecto a las lenguas oficiales en España (art. 3 CE):", options: [{text: "A) El castellano es la lengua oficial del Estado, con deber de conocerla y derecho a usarla, y las demás lenguas serán oficiales en sus CC.AA.", val: "correct"}, {text: "B) Todas las lenguas regionales son obligatorias en todo el territorio nacional", val: "wrong"}, {text: "C) Solo el castellano tiene validez legal", val: "wrong"}], exp: "Art. 3 CE: El castellano es oficial en todo el Estado (con deber de conocerlo y derecho a usarlo) y las demás lenguas en sus respectivas autonomías." },
+        { q: "¿Qué papel desempeñan los partidos políticos según el artículo 6 de la Constitución?", options: [{text: "A) Expresan el pluralismo político, concurren a la formación de la voluntad popular y son instrumento fundamental para la participación política", val: "correct"}, {text: "B) Son órganos de la Administración central del Estado", val: "wrong"}, {text: "C) Gestionan los presupuestos municipales", val: "wrong"}], exp: "Art. 6 CE: Los partidos políticos expresan el pluralismo y son instrumento fundamental de participación con estructura democrática." },
+        { q: "Según el artículo 8 de la Constitución, ¿cuál es la misión de las Fuerzas Armadas (Ejército de Tierra, Armada y Ejército del Aire)?", options: [{text: "A) Garantizar la soberanía e independencia de España, defender su integridad territorial y el ordenamiento constitucional", val: "correct"}, {text: "B) Dirigir la política exterior y la seguridad ciudadana interior", val: "wrong"}, {text: "C) Ejercer funciones de policía judicial ordinaria", val: "wrong"}], exp: "Art. 8 CE: Las FAS (Ejército de Tierra, Armada y Ejército del Aire) garantizan la soberanía, independencia, integridad territorial y orden constitucional." },
+        { q: "¿Qué consagra el artículo 9.3 de la Constitución Española?", options: [{text: "A) El principio de legalidad, jerarquía normativa, publicidad, irretroactividad, seguridad jurídica, responsabilidad e interdicción de la arbitrariedad", val: "correct"}, {text: "B) La división exclusiva del poder judicial", val: "wrong"}, {text: "C) El derecho a la propiedad privada y herencia", val: "wrong"}], exp: "Art. 9.3 CE enumera los grandes principios del Estado de Derecho, destacando legalidad, jerarquía, seguridad jurídica e interdicción de la arbitrariedad." },
+        { q: "¿Qué establece el artículo 14 de la Constitución?", options: [{text: "A) La igualdad de los españoles ante la ley, sin discriminación por nacimiento, raza, sexo, religión u opinión", val: "correct"}, {text: "B) El derecho a la vida y a la integridad física", val: "wrong"}, {text: "C) La libertad ideológica y religiosa", val: "wrong"}], exp: "Art. 14 CE: Consagra el derecho fundamental de igualdad ante la ley y prohíbe cualquier discriminación." },
+        { q: "En relación con el derecho a la vida (art. 15 CE):", options: [{text: "A) Todos tienen derecho a la vida y a la integridad física y moral, quedando abolida la pena de muerte salvo lo que dispongan las leyes penales militares en tiempo de guerra", val: "correct"}, {text: "B) Se permite la pena de muerte en delitos de terrorismo", val: "wrong"}, {text: "C) La pena de muerte está vigente de forma general", val: "wrong"}], exp: "Art. 15 CE abole la pena de muerte con la única excepción de lo que dispongan las leyes penales militares para tiempos de guerra." },
+        { q: "¿Qué regula el artículo 16 de la Constitución Española?", options: [{text: "A) La libertad ideológica, religiosa y de culto, estableciendo que ninguna confesión tendrá carácter estatal", val: "correct"}, {text: "B) El derecho de asociación sindical", val: "wrong"}, {text: "C) El derecho al matrimonio igualitario", val: "wrong"}], exp: "Art. 16 CE garantiza la libertad ideológica y religiosa, proclamando la laicidad o aconfesionalidad del Estado." },
+        { q: "Según el artículo 17 de la Constitución, ¿cuál es el plazo máximo de duración de la detención preventiva?", options: [{text: "A) 24 horas", val: "wrong"}, {text: "B) El tiempo estrictamente necesario para las averiguaciones y, en todo caso, un máximo de 72 horas", val: "correct"}, {text: "C) 5 días naturales", val: "wrong"}], exp: "Art. 17.2 CE: La detención preventiva no podrá durar más de 72 horas, debiendo ser puesto en libertad o a disposición judicial." },
+        { q: "¿Qué finalidad tiene el procedimiento de habeas corpus consagrado en el artículo 17.4 de la Constitución?", options: [{text: "A) Producir la inmediata puesta a disposición judicial de toda persona detenida ilegalmente", val: "correct"}, {text: "B) Juzgar la culpabilidad del detenido", val: "wrong"}, {text: "C) Solicitar la libertad provisional bajo fianza económica", val: "wrong"}], exp: "Art. 17.4 CE: Regula el habeas corpus para obtener la inmediata puesta a disposición judicial ante detenciones ilegales[cite: 2]." },
+        { q: "Según el artículo 18 de la Constitución, ¿cuándo se permite la entrada o registro en un domicilio particular sin consentimiento del titular?", options: [{text: "A) En caso de flagrante delito o mediante resolución judicial", val: "correct"}, {text: "B) Cuando lo ordene un agente de policía por sospechas", val: "wrong"}, {text: "C) En cualquier horario diurno sin autorización", val: "wrong"}], exp: "Art. 18.2 CE: El domicilio es inviolable; no cabe entrada o registro sin consentimiento o resolución judicial, salvo flagrante delito[cite: 2]." },
+        { q: "¿Qué establece el artículo 21 de la CE respecto al derecho de reunión?", options: [{text: "A) Se reconoce el derecho de reunión pacífica y sin armas sin necesidad de autorización previa, exigiendo comunicación previa en lugares de tránsito público", val: "correct"}, {text: "B) Se prohíben las manifestaciones callejeras en todo caso", val: "wrong"}, {text: "C) Requiere licencia gubernativa previa de 15 días", val: "wrong"}], exp: "Art. 21 CE reconoce la reunión pacífica y sin armas, sin autorización previa, salvo comunicación en lugares públicos si hay riesgo de alteración." },
+        { q: "El derecho de asociación está recogido en el artículo 22 de la CE, el cual prohíbe expresamente:", options: [{text: "A) Las asociaciones secretas y las de carácter paramilitar", val: "correct"}, {text: "B) Las asociaciones con fines benéficos sin ánimo de lucro", val: "wrong"}, {text: "C) Las asociaciones deportivas y culturales", val: "wrong"}], exp: "Art. 22 CE prohíbe las asociaciones secretas y las de carácter paramilitar." },
+        { q: "¿Qué establece el artículo 24 de la Constitución en relación con la tutela judicial?", options: [{text: "A) El derecho de todas las personas a obtener la tutela efectiva de los jueces y tribunales sin que, en ningún caso, pueda producirse indefensión", val: "correct"}, {text: "B) La obligación de resolver los litigios mediante arbitraje privado", val: "wrong"}, {text: "C) El derecho a ser juzgado exclusivamente por jurados populares en cualquier delito", val: "wrong"}], exp: "Art. 24 CE garantiza el derecho a la tutela judicial efectiva y a un proceso con todas las garantías." },
+        { q: "Según el artículo 25 de la Constitución:", options: [{text: "A) Las penas privativas y medidas de seguridad estarán orientadas hacia la reeducación y reinserción social, prohibiendo los trabajos forzados", val: "correct"}, {text: "B) La Administración civil puede imponer sanciones privativas de libertad", val: "wrong"}, {text: "C) Se permite la retroactividad de leyes sancionadoras desfavorables", val: "wrong"}], exp: "Art. 25 CE prohíbe los trabajos forzados, orienta las penas a la reinserción y prohíbe a la Administración civil imponer sanciones de privación de libertad." },
+        { q: "¿Qué regula el artículo 30 de la Constitución Española?", options: [{text: "A) El derecho y el deber de defender a España, las obligaciones militares, la objeción de conciencia y los deberes en catástrofes", val: "correct"}, {text: "B) El derecho a la propiedad privada y herencia", val: "wrong"}, {text: "C) El sistema tributario justo", val: "wrong"}], exp: "Art. 30 CE regula la defensa de España, objeción de conciencia, prestación social y deberes en supuestos de grave riesgo o catástrofe." },
+        { q: "Según el artículo 31 de la Constitución, el sistema tributario se basará en:", options: [{text: "A) Los principios de igualdad y progresividad, sin que en ningún caso tenga alcance confiscatorio", val: "correct"}, {text: "B) Tasas fijas obligatorias iguales para todos los ciudadanos", val: "wrong"}, {text: "C) Contribuciones voluntarias de carácter benéfico", val: "wrong"}], exp: "Art. 31 CE: Sostenimiento de gastos públicos según capacidad económica mediante sistema tributario justo, progresivo y no confiscatorio." },
+        { q: "¿Qué institución regula el artículo 54 de la Constitución como alto comisionado de las Cortes Generales?", options: [{text: "A) El Defensor del Pueblo", val: "correct"}, {text: "B) El Tribunal de Cuentas", val: "wrong"}, {text: "C) El Consejo de Estado", val: "wrong"}], exp: "Art. 54 CE: El Defensor del Pueblo es el alto comisionado de las Cortes Generales para la defensa de los derechos del Título I." },
+        { q: "¿Cómo es elegido el Defensor del Pueblo y cuál es la duración de su mandato?", options: [{text: "A) Elegido por el Congreso y el Senado por mayoría de tres quintos por un período de 5 años", val: "correct"}, {text: "B) Designado por el Gobierno por 4 años", val: "wrong"}, {text: "C) Elegido por el Consejo General del Poder Judicial por 9 años", val: "wrong"}], exp: "El Defensor del Pueblo es elegido por mayoría de 3/5 de ambas cámaras por un mandato de 5 años." },
+        { q: "¿Qué mayorías exige el artículo 167 de la CE para la aprobación de un proyecto ordinario de reforma constitucional?", options: [{text: "A) Mayoría de tres quintos de cada una de las Cámaras (Congreso y Senado)", val: "correct"}, {text: "B) Mayoría simple en ambas cámaras", val: "wrong"}, {text: "C) Unanimidad absoluta obligatoria", val: "wrong"}], exp: "Art. 167.1 CE: Los proyectos de reforma ordinaria exigen 3/5 de cada Cámara." },
+        { q: "En el procedimiento ordinario de reforma constitucional (art. 167 CE), ¿cuándo se someterá la reforma a referéndum obligatorio?", options: [{text: "A) Cuando lo soliciten, dentro de los 15 días siguientes a su aprobación, una décima parte de los miembros de cualquiera de las Cámaras", val: "correct"}, {text: "B) Siempre de forma preceptiva sin excepciones", val: "wrong"}, {text: "C) Cuando lo ordene el Tribunal Constitucional", val: "wrong"}], exp: "Art. 167.3 CE: El referéndum es potestativo a solicitud de una décima parte de los diputados o senadores en el plazo de 15 días." },
+
+        // --- LA CORONA Y CORTES GENERALES (41-80) ---
+        { q: "Según el artículo 56 de la Constitución, la persona del Rey es:", options: [{text: "A) Inviolable y no está sujeta a responsabilidad, debiendo estar todos sus actos refrendados", val: "correct"}, {text: "B) Políticamente responsable ante el Congreso de los Diputados", val: "wrong"}, {text: "C) Sometida a enjuiciamiento ordinario ante el Tribunal Supremo", val: "wrong"}], exp: "Art. 56.3 CE: La persona del Rey es inviolable y no está sujeta a responsabilidad; sus actos precisan refrendo." },
+        { q: "De acuerdo con el artículo 66 de la Constitución, ¿cómo están formadas las Cortes Generales?", options: [{text: "A) Por el Congreso de los Diputados y el Senado", val: "correct"}, {text: "B) Únicamente por el Congreso de los Diputados", val: "wrong"}, {text: "C) Por el Gobierno y el Consejo de Ministros", val: "wrong"}], exp: "Art. 66.1 CE: Las Cortes Generales representan al pueblo español y se componen del Congreso de los Diputados y el Senado." },
+        { q: "¿Cuál es el número mínimo y máximo de Diputados que fija el artículo 68.1 de la CE para el Congreso?", options: [{text: "A) Mínimo de 300 y máximo de 400 Diputados", val: "correct"}, {text: "B) Mínimo de 200 y máximo de 350 Diputados", val: "wrong"}, {text: "C) Exactamente 350 diputados fijos inalterables", val: "wrong"}], exp: "Art. 68.1 CE fija una horquilla de 300 a 400 Diputados (actualmente la LOREG fija 350)." },
+        { q: "¿Cuál es la circunscripción electoral general para las elecciones al Congreso de los Diputados?", options: [{text: "A) La provincia (reservando un diputado a Ceuta y otro a Melilla)", val: "correct"}, {text: "B) Toda España como circunscripción única", val: "wrong"}, {text: "C) El municipio", val: "wrong"}], exp: "Art. 68.2 CE: La circunscripción electoral es la provincia, con un diputado en Ceuta y otro en Melilla." },
+        { q: "¿Cuál es la duración ordinaria del mandato del Congreso de los Diputados y del Senado?", options: [{text: "A) 4 años", val: "correct"}, {text: "B) 5 años", val: "wrong"}, {text: "C) 3 años", val: "wrong"}], exp: "Art. 68.4 y 69 CE: Ambas Cámaras son elegidas por un período de 4 años." },
+        { q: "En relación con el Senado como cámara de representación territorial (art. 69 CE):", options: [{text: "A) En cada provincia peninsular se eligen 4 senadores, más los designados por los parlamentos autonómicos (uno por comunidad y otro más por millón de habitantes)", val: "correct"}, {text: "B) Se elige un número idéntico de senadores por cada comunidad autónoma sin provincias", val: "wrong"}, {text: "C) Todos los senadores son nombrados directamente por el Rey", val: "wrong"}], exp: "Art. 69 CE: 4 senadores por provincia peninsular, islas con régimen insular específico, Ceuta y Melilla (2), más los autonómicos (1 + 1 por millón)[cite: 3]." },
+        { q: "¿Qué prerrogativas protegen a los Diputados y Senadores según el artículo 71 de la CE para garantizar su independencia?", options: [{text: "A) Inviolabilidad (por opiniones/votos), inmunidad (prohibición de detención salvo flagrante delito) y fuero especial ante la Sala de lo Penal del Tribunal Supremo", val: "correct"}, {text: "B) Impunidad penal absoluta para cualquier delito común", val: "wrong"}, {text: "C) Exención total de tributos fiscales", val: "wrong"}], exp: "Art. 71 CE establece la inviolabilidad, inmunidad y fuero especial ante el Tribunal Supremo[cite: 4]." },
+        { q: "¿Qué es una ley orgánica según el artículo 81 de la Constitución?", options: [{text: "A) Aquélla relativa al desarrollo de los derechos fundamentales y libertades públicas, Estatutos de Autonomía, régimen electoral general y las previstas en la CE", val: "correct"}, {text: "B) Cualquier norma dictada por el Gobierno en caso de urgencia", val: "wrong"}, {text: "C) Una orden ministerial aprobada por mayoría simple", val: "wrong"}], exp: "Art. 81.1 CE define las materias reservadas a ley orgánica." },
+        { q: "¿Qué mayoría parlamentaria se exige en el Congreso para la aprobación, modificación o derogación de una ley orgánica?", options: [{text: "A) Mayoría absoluta del Congreso en una votación final sobre el conjunto del proyecto", val: "correct"}, {text: "B) Mayoría simple de los presentes", val: "wrong"}, {text: "C) Mayoría cualificada de dos tercios", val: "wrong"}], exp: "Art. 81.2 CE: Las leyes orgánicas exigen mayoría absoluta del Congreso en votación final sobre el conjunto[cite: 6]." },
+        { q: "¿Qué diferencia existe entre la mayoría simple y la mayoría absoluta en las votaciones parlamentarias?", options: [{text: "A) Mayoría simple exige más votos a favor que en contra de los asistentes; mayoría absoluta exige la mitad más uno de los miembros de derecho de la Cámara", val: "correct"}, {text: "B) Son exactamente idénticas en cuanto al número de votos", val: "wrong"}, {text: "C) La mayoría absoluta solo se aplica en el Senado", val: "wrong"}], exp: "Mayoría simple = más síes que noes; Mayoría absoluta = la mitad más uno del total de miembros de la Cámara (ej. 176 de 350 en el Congreso)[cite: 6]." },
+        { q: "¿Qué son los Decretos Legislativos (art. 82 y 85 de la CE)?", options: [{text: "A) Normas con rango de ley dictadas por el Gobierno previa delegación expresa de las Cortes Generales mediante ley de bases o ley ordinaria de refundición", val: "correct"}, {text: "B) Disposiciones provisionales dictadas por el Gobierno sin autorización previa en caso de urgente necesidad", val: "wrong"}, {text: "C) Reglamentos ejecutivos ordinarios aprobados por los ministerios", val: "wrong"}], exp: "Arts. 82 a 85 CE: Los decretos legislativos son normas delegadas por las Cortes al Gobierno (textos articulados o refundidos)." },
+        { q: "¿Qué son los Decretos-leyes (art. 86 de la CE)?", options: [{text: "A) Disposiciones legislativas provisionales dictadas por el Gobierno en caso de extraordinaria y urgente necesidad, excluyendo materias del Título I, CC.AA. y régimen electoral", val: "correct"}, {text: "B) Leyes ordinarias aprobadas por el Senado por mayoría absoluta", val: "wrong"}, {text: "C) Tratados internacionales ratificados por el Consejo de Ministros", val: "wrong"}], exp: "Art. 86 CE: Normas provisionales del Gobierno por extraordinaria y urgente necesidad, sujetas a convalidación por el Congreso en 30 días." },
+        { q: "Según el artículo 97 de la Constitución, ¿qué funciones ejerce el Gobierno?", options: [{text: "A) Dirige la política interior y exterior, la Administración civil y militar, y la defensa del Estado, ejerciendo la función ejecutiva y la potestad reglamentaria", val: "correct"}, {text: "B) Ejerce en exclusiva la potestad legislativa aprobando leyes orgánicas", val: "wrong"}, {text: "C) Administra el Poder Judicial nombrando a todos los jueces", val: "wrong"}], exp: "Art. 97 CE: El Gobierno dirige la política, la administración civil y militar, la defensa y ejerce la función ejecutiva y potestad reglamentaria." },
+        { q: "¿Qué diferencia existe entre la cuestión de confianza y la moción de censura?", options: [{text: "A) La cuestión de confianza la plantea el propio Gobierno ante el Congreso para medir su respaldo; la moción de censura la plantea la oposición para exigir responsabilidad exigiendo candidato alternativo", val: "correct"}, {text: "B) Ambas son presentadas exclusivamente por los senadores de la oposición", val: "wrong"}, {text: "C) No existe diferencia alguna en el reglamento parlamentario", val: "wrong"}], exp: "La cuestión de confianza la inicia el Gobierno; la moción de censura la impulsa la oposición en el Congreso con candidato alternativo." },
+        { q: "¿Qué regulan los estados excepcionales del artículo 116 de la Constitución (Alarma, Excepción y Sitio)?", options: [{text: "A) Las medidas y limitaciones extraordinarias ante crisis graves, declarados por el Gobierno (Alarma y Excepción con el Congreso) o por el Congreso por mayoría absoluta (Sitio)", val: "correct"}, {text: "B) Las normas de funcionamiento ordinario de los ayuntamientos", val: "wrong"}, {text: "C) El presupuesto anual de hacienda", val: "wrong"}], exp: "Art. 116 CE y LO 4/1981: Regulan los estados de alarma (Gobierno, 15 días prorrogables por Congreso), excepción (Gobierno previa autorización del Congreso, 30 días) y sitio (Congreso por mayoría absoluta a propuesta del Gobierno)." },
+
+        // --- PODER JUDICIAL Y TRIBUNAL CONSTITUCIONAL (81-120) ---
+        { q: "Según el artículo 117 de la Constitución, ¿cómo emana la justicia?", options: [{text: "A) Emana del pueblo y se administra en nombre del Rey por Jueces y Magistrados independientes, inamovibles, responsables y sometidos al imperio de la ley", val: "correct"}, {text: "B) Emana directamente del Presidente del Gobierno", val: "wrong"}, {text: "C) Emana del Consejo de Ministros", val: "wrong"}], exp: "Art. 117.1 CE: La justicia emana del pueblo y se administra en nombre del Rey por Jueces y Magistrados independientes e inamovibles." },
+        { q: "¿Qué establece el principio de unidad jurisdiccional (art. 117.5 CE)?", options: [{text: "A) Es la base de la organización y funcionamiento de los tribunales, regulando la jurisdicción militar de forma estricta al ámbito castrense y estado de sitio", val: "correct"}, {text: "B) Que todos los tribunales deben depender de los gobiernos autonómicos", val: "wrong"}, {text: "C) Que no existen jueces especiales en ningún caso", val: "wrong"}], exp: "Art. 117.5 CE consagra la unidad jurisdiccional como base, limitando la jurisdicción militar al ámbito castrense y estado de sitio." },
+        { q: "¿Qué prevé el artículo 121 de la CE en caso de error judicial o funcionamiento anormal de la Administración de Justicia?", options: [{text: "A) Darán derecho a una indemnización a cargo del Estado conforme a la ley", val: "correct"}, {text: "B) La destitución inmediata del tribunal sin indemnización", val: "wrong"}, {text: "C) La nulidad perpetua de todas las leyes penales", val: "wrong"}], exp: "Art. 121 CE: Los daños por error judicial o funcionamiento anormal de la justicia dan derecho a indemnización estatal." },
+        { q: "¿Cómo se compone el Tribunal Constitucional según el artículo 159 de la Constitución?", options: [{text: "A) Por 12 miembros nombrados por el Rey: 4 a propuesta del Congreso (3/5), 4 del Senado (3/5), 2 del Gobierno y 2 del CGPJ", val: "correct"}, {text: "B) Por 15 magistrados elegidos por sufragio universal directo", val: "wrong"}, {text: "C) Por los presidentes de los Tribunales Superiores de Justicia", val: "wrong"}], exp: "Art. 159.1 CE: El Tribunal Constitucional se compone de 12 miembros nombrados por el Rey con cuotas tasadas y mayorías de 3/5 en Cortes." },
+        { q: "¿Cuál es el período de mandato de los miembros del Tribunal Constitucional y cómo se renuevan?", options: [{text: "A) Designados por un período de nueve años y se renovarán por terceras partes cada tres", val: "correct"}, {text: "B) Elegidos por cuatro años sin renovación parcial", val: "wrong"}, {text: "C) Vitalicios", val: "wrong"}], exp: "Art. 159.3 CE: Mandato de 9 años con renovación por terceras partes cada 3 años." },
+
+        // --- DERECHO PENAL Y TEORÍA DEL DELITO (121-160) ---
+        { q: "¿Cómo define doctrinalmente el artículo 10 del Código Penal el concepto de delito?", options: [{text: "A) Son delitos las acciones y omisiones dolosas o imprudentes penadas por la ley", val: "correct"}, {text: "B) Cualquier infracción administrativa sancionada por un ayuntamiento", val: "wrong"}, {text: "C) Toda conducta inmoral contraria a la costumbre social", val: "wrong"}], exp: "Art. 10 CP: Son delitos las acciones y omisiones dolosas o imprudentes penadas por la Ley[cite: 3]." },
+        { q: "¿Qué diferencia existe doctrinalmente entre dolo directo y dolo eventual?", options: [{text: "A) En el dolo directo el autor busca el resultado criminal conscientemente; en el dolo eventual el autor no busca directamente el daño pero es consciente de que su conducta puede producirlo y acepta el riesgo", val: "correct"}, {text: "B) El dolo eventual solo se aplica a los delitos imprudentes", val: "wrong"}, {text: "C) No hay diferencia jurídica", val: "wrong"}], exp: "Dolo directo busca el fin lesivo; dolo eventual acepta el riesgo consciente de producirlo[cite: 3]." },
+        { q: "Según el artículo 12 del Código Penal, las acciones u omisiones imprudentes:", options: [{text: "A) Sólo se castigarán cuando expresamente lo disponga la ley", val: "correct"}, {text: "B) Se castigan siempre en cualquier tipo de delito", val: "wrong"}, {text: "C) Están prohibidas por el principio de legalidad", val: "wrong"}], exp: "Art. 12 CP: Numerus clausus para la imprudencia; solo se castiga si la ley lo prevé expresamente[cite: 3]." },
+        { q: "¿Cómo clasifica el artículo 13 del Código Penal las infracciones penales según la gravedad de sus penas?", options: [{text: "A) Delitos graves, delitos menos graves y delitos leves", val: "correct"}, {text: "B) Faltas, delitos y crímenes internacionales", val: "wrong"}, {text: "C) Infracciones administrativas y penales", val: "wrong"}], exp: "Art. 13 CP clasifica los ilícitos en delitos graves, menos graves y leves[cite: 3]." },
+        { q: "¿Qué son los actos preparatorios punibles en el Código Penal?", options: [{text: "A) Conspiración, proposición y provocación (incluida la apología), sancionados solo en los casos expresamente previstos por la ley", val: "correct"}, {text: "B) Cualquier pensamiento delictivo sin exteriorización", val: "wrong"}, {text: "C) El inicio de la ejecución material de la acción", val: "wrong"}], exp: "Arts. 17 y 18 CP: Conspiración, proposición y provocación/apología son actos preparatorios punibles excepcionales[cite: 3]." },
+        { q: "¿Qué diferencia hay entre la tentativa de delito (art. 15 CP) y el delito consumado?", options: [{text: "A) En la tentativa el sujeto da principio a la ejecución practicando todos o parte de los actos que debieran producir el resultado, sin que este se produzca por causas independientes de su voluntad", val: "correct"}, {text: "B) La tentativa nunca se castiga penalmente", val: "wrong"}, {text: "C) En la tentativa el resultado siempre se produce de forma parcial", val: "wrong"}], exp: "Art. 15 y 16 CP: En la tentativa hay inicio de ejecución y actos idóneos, pero el resultado no se alcanza por causas ajenas al autor[cite: 3]." },
+        { q: "Según el artículo 27 del Código Penal, ¿quiénes son responsables criminalmente de los delitos?", options: [{text: "A) Los autores y los cómplices", val: "correct"}, {text: "B) Únicamente el autor material directo", val: "wrong"}, {text: "C) Los testigos y peritos judiciales", val: "wrong"}], exp: "Art. 27 CP: Son responsables criminalmente los autores y los cómplices[cite: 4, 2]." },
+        { q: "¿A quiénes considera autores el artículo 28 del Código Penal?", options: [{text: "A) A quienes realizan el hecho por sí solos, conjuntamente, por medio de otro (autor mediato), los inductores y los cooperadores necesarios", val: "correct"}, {text: "B) Solamente a los que presencian el delito sin evitarlo", val: "wrong"}, {text: "C) A los encubridores posteriores", val: "wrong"}], exp: "Art. 28 CP detalla las distintas formas de autoría (directa, coautoría, mediata, inducción y cooperación necesaria)[cite: 4, 2]." },
+        { q: "¿Qué caracteriza al cooperador necesario (art. 28.b CP)?", options: [{text: "A) Coopera a la ejecución del hecho con un acto sin el cual no se habría efectuado", val: "correct"}, {text: "B) Realiza una aportación secundaria prescindible", val: "wrong"}, {text: "C) Oculta los efectos del delito con posterioridad", val: "wrong"}], exp: "Art. 28 CP: El cooperador necesario aporta una conducta sin la cual el delito no se habría perpetrado, equiparándose su pena a la de autor[cite: 4]." },
+        { q: "¿Quiénes son considerados cómplices según el artículo 29 del Código Penal?", options: [{text: "A) Los que, no hallándose en el artículo 28, cooperan a la ejecución del hecho con actos anteriores o simultáneos (cooperación no necesaria)", val: "correct"}, {text: "B) Los inductores directos del plan", val: "wrong"}, {text: "C) Los autores materiales principales", val: "wrong"}], exp: "Art. 29 CP: Cómplice es quien coopera de forma no necesaria mediante actos anteriores o simultáneos[cite: 4]." },
+        { q: "¿Cómo regula el Código Penal actual la figura del encubrimiento (art. 451 CP)?", options: [{text: "A) Como un delito autónomo posterior contra la Administración de Justicia", val: "correct"}, {text: "B) Como una forma de complicidad ejecutiva", val: "wrong"}, {text: "C) Como un acto preparatorio impune", val: "wrong"}], exp: "Art. 451 CP tipifica el encubrimiento como delito autónomo posterior (auxiliar al autor a lucrarse, ocultar pruebas o huir)[cite: 4, 5]." },
+        { q: "¿Qué eximentes completas de la responsabilidad criminal recoge el artículo 20 del Código Penal?", options: [{text: "A) Anomalía psíquica, intoxicación plena/síndrome de abstinencia, alteración de la percepción, legítima defensa, estado de necesidad, miedo insuperable y cumplimiento de deber/oficio", val: "correct"}, {text: "B) La simple ignorancia de las leyes penales", val: "wrong"}, {text: "C) Haber actuado por enfado o celos profesionales", val: "wrong"}], exp: "Art. 20 CP enumera las 7 causas de exención plena (inimputabilidad y causas de justificación/inculpabilidad)[cite: 3]." },
+        { q: "¿Cuáles son los requisitos legales de la legítima defensa (art. 20.4.º CP)?", options: [{text: "A) Agresión ilegítima, necesidad racional del medio empleado para impedirla o repelerla, y falta de provocación suficiente por parte del defensor", val: "correct"}, {text: "B) Que el ataque se produzca exclusivamente de noche y con armas de fuego", val: "wrong"}, {text: "C) Que el defensor avise previamente a la autoridad judicial", val: "wrong"}], exp: "Art. 20.4 CP exige agresión ilegítima, necesidad racional del medio y ausencia de provocación[cite: 3]." },
+        { q: "En el estado de necesidad (art. 20.5.º CP), ¿qué condiciones deben cumplirse para eximir de responsabilidad?", options: [{text: "A) Que el mal causado no sea mayor que el que se trata de evitar, que la situación no haya sido provocada intencionadamente y que el necesitado no tenga obligación por su oficio de sacrificarse", val: "correct"}, {text: "B) Que se actúe por venganza personal legítima", val: "wrong"}, {text: "C) Que los bienes en conflicto pertenezcan al Estado", val: "wrong"}], exp: "Art. 20.5 CP exige mal menor, no provocación dolosa y ausencia de deber profesional de sacrificio[cite: 3]." },
+        { q: "¿Qué diferencia fundamental existe entre la legítima defensa y el estado de necesidad?", options: [{text: "A) La legítima defensa repele una agresión injusta contra persona o derechos dirigida contra el agresor; el estado de necesidad resuelve un conflicto entre dos bienes legítimos sacrificando uno para salvar otro", val: "correct"}, {text: "B) La legítima defensa requiere ponderación de bienes económicos y el estado de necesidad no", val: "wrong"}, {text: "C) Ambas figuras son exactamente iguales ante el Código Penal", val: "wrong"}], exp: "Legítima defensa responde a agresión injusta de un agresor; estado de necesidad pondera bienes en colisión (mal menor)[cite: 3]." },
+        { q: "¿Qué circunstancias atenuantes contempla el artículo 21 del Código Penal?", options: [{text: "A) Incompleta de eximentes, grave adicción a sustancias, arrebato u obcecación, confesión a las autoridades antes de saber del procedimiento, reparación del daño y dilación indebida", val: "correct"}, {text: "B) La reincidencia y el parentesco en todo caso", val: "wrong"}, {text: "C) Haber actuado con disfraz o alevosía", val: "wrong"}], exp: "Art. 21 CP enumera las atenuantes genéricas (análoga significación, confesión, reparación, arrebato, adicción, etc.)[cite: 3]." },
+        { q: "¿Qué circunstancias agravantes contempla el artículo 22 del Código Penal?", options: [{text: "A) Alevosía, disfraz, abuso de superioridad, precio/recompensa, motivos racistas/discriminatorios, ensañamiento, abuso de confianza, prevalimiento de carácter público y reincidencia", val: "correct"}, {text: "B) La confesión tardía de los hechos", val: "wrong"}, {text: "C) La minoría de edad penal", val: "wrong"}], exp: "Art. 22 CP detalla las agravantes genéricas tradicionales (alevosía, precio, ensañamiento, reincidencia, discriminación, etc.)[cite: 3]." },
+        { q: "¿Cómo opera la circunstancia mixta de parentesco (art. 23 CP)?", options: [{text: "A) Puede atenuar o agravar la responsabilidad según la naturaleza, los motivos y los efectos del delito (habitualmente agravante en delitos contra personas/sexuales y atenuante en patrimoniales)", val: "correct"}, {text: "B) Exime siempre de responsabilidad criminal de forma absoluta", val: "wrong"}, {text: "C) No produce ningún efecto jurídico en el Código Penal", val: "wrong"}], exp: "Art. 23 CP: El parentesco actúa como circunstancia mixta modificativa (atenuante o agravante según el caso)[cite: 3]." },
+        { q: "¿Cómo se extinguen la responsabilidad penal y las condenas según el Código Penal?", options: [{text: "A) Por muerte del reo, cumplimiento de la condena, indulto, perdón del ofendido en delitos leves, prescripción del delito o de la pena, y remisión definitiva en suspensión", val: "correct"}, {text: "B) Por el mero transcurso de 6 meses desde la sentencia firme", val: "wrong"}, {text: "C) Por cambio de domicilio del condenado", val: "wrong"}], exp: "Causas de extinción de la responsabilidad penal: muerte, cumplimiento, indulto, prescripción, remisión, etc.[cite: 4]." },
+        { q: "¿Cuál es el plazo general de prescripción para los delitos graves castigados con pena de prisión de 15 o más años?", options: [{text: "A) A los 20 años", val: "correct"}, {text: "B) A los 5 años", val: "wrong"}, {text: "C) A los 10 años", val: "wrong"}], exp: "Art. 131 CP: Los delitos prescriben a los 20 años si la pena máxima es de 15 o más años[cite: 4]." },
+        { q: "Los delitos de lesa humanidad y genocidio:", options: [{text: "A) No prescriben nunca", val: "correct"}, {text: "B) Prescriben a los 30 años", val: "wrong"}, {text: "C) Prescriben a los 5 años", val: "wrong"}], exp: "Los delitos de lesa humanidad y genocidio son imprescriptibles[cite: 4]." },
+
+        // --- SEGURIDAD PRIVADA Y UNIÓN EUROPEA (161-200) ---
+        { q: "Según la Ley 5/2014 de Seguridad Privada, ¿qué establece el artículo 8 respecto al personal de seguridad?", options: [{text: "A) Debe regirse por los principios de legalidad, proporcionalidad, congruencia, probidad, dignidad e integridad profesional", val: "correct"}, {text: "B) Actúa con total autonomía al margen de las leyes ordinarias", val: "wrong"}, {text: "C) Tiene la obligación de aplicar sanciones penales", val: "wrong"}], exp: "Art. 8 LSP: Principios básicos de actuación (legalidad, proporcionalidad, congruencia, integridad, etc.)." },
+        { q: "¿Qué obligación impone el artículo 30 de la Ley de Seguridad Privada al personal de seguridad?", options: [{text: "A) Guardar rigurosa reserva sobre los hechos que conozcan por razón de sus funciones y datos relativos a clientes", val: "correct"}, {text: "B) Publicar las incidencias diarias en redes sociales", val: "wrong"}, {text: "C) Divulgarlos libremente a la prensa", val: "wrong"}], exp: "Art. 30 LSP: Deber estricto de reserva y secreto profesional sobre hechos y clientes." },
+        { q: "Entre las funciones de los vigilantes de seguridad reguladas en el artículo 32 de la LSP se encuentra:", options: [{text: "A) Ejercer vigilancia y protección de bienes y personas, controlar identidades en accesos e impedir entradas no autorizadas", val: "correct"}, {text: "B) Instruir sumarios judiciales e interrogar a detenidos", val: "wrong"}, {text: "C) Dirigir el tráfico rodado en vías interurbanas", val: "wrong"}], exp: "Art. 32 LSP detalla las funciones operativas de vigilancia, protección, control de accesos e impedimento de delitos." },
+        { q: "¿Cómo tipifica el artículo 68 de la Ley de Seguridad Privada el ejercicio de funciones sin la habilitación profesional preceptiva (TIP)?", options: [{text: "A) Como infracción muy grave", val: "correct"}, {text: "B) Como infracción leve", val: "wrong"}, {text: "C) Como falta administrativa exenta de sanción", val: "wrong"}], exp: "Art. 68.1 LSP: Carecer de la TIP habilitante para ejercer funciones es infracción muy grave." },
+        { q: "Según el artículo 68 de la LSP, negarse a prestar auxilio o colaboración con las Fuerzas y Cuerpos de Seguridad cuando sea debido constituye:", options: [{text: "A) Infracción muy grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Infracción meramente testimonial", val: "wrong"}], exp: "Art. 68.1 LSP: Negarse al auxilio policial debido es infracción muy grave." },
+        { q: "El abandono del servicio de seguridad privada en instalaciones críticas o prestando servicios con armas de fuego se califica como:", options: [{text: "A) Infracción muy grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Infracción discutible sin sanción", val: "wrong"}], exp: "Art. 68.1 LSP: El abandono en servicios con armas o infraestructuras críticas es infracción muy grave." },
+        { q: "Retener indebidamente la documentación personal (DNI) de los ciudadanos en los controles de acceso se tipifica en la LSP como:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Práctica legal obligatoria", val: "wrong"}], exp: "Art. 68.2 LSP: Retener documentos de identidad personales constituye infracción grave." },
+        { q: "Prestar servicios de seguridad privada bajo los efectos del alcohol o drogas tóxicas constituye:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Infracción muy grave sancionable con inhabilitación de 5 años", val: "wrong"}], exp: "Art. 68.2 LSP: Ejercer funciones bajo influencia de alcohol o estupefacientes es infracción grave." },
+        { q: "No llevar consigo la Tarjeta de Identidad Profesional (TIP) durante la prestación efectiva del servicio se tipifica como:", options: [{text: "A) Infracción leve", val: "correct"}, {text: "B) Infracción muy grave", val: "wrong"}, {text: "C) Delito de falsedad documental", val: "wrong"}], exp: "Art. 68.3 LSP: No portar físicamente la TIP en el servicio es infracción leve." },
+        { q: "¿Cuáles son los cuatro países de la Unión Europea que, en 2026, forman parte de la UE pero NO pertenecen al Espacio Schengen?", options: [{text: "A) Bulgaria, Croacia, Chipre y Rumania", val: "correct"}, {text: "B) Alemania, Francia, Italia y España", val: "wrong"}, {text: "C) Irlanda, Islandia, Noruega y Suiza", val: "wrong"}], exp: "De los 27 Estados de la UE, 4 no pertenecen a Schengen: Bulgaria, Croacia, Chipre y Rumania[cite: 6]." },
+        { q: "Respecto al Derecho derivado de la Unión Europea, ¿qué características tiene una Directiva comunitaria?", options: [{text: "A) Obliga al Estado destinatario en cuanto al resultado a conseguir, requiriendo un acto nacional de transposición para surtir efectos directos en los ciudadanos", val: "correct"}, {text: "B) Es directamente aplicable sin ningún tipo de ley nacional previa", val: "wrong"}, {text: "C) Carece de obligatoriedad jurídica vinculante", val: "wrong"}], exp: "Las directivas obligan al resultado y exigen la transposición por parte de cada Estado miembro[cite: 6]." },
+        { q: "¿Qué es y cuáles son las funciones de Europol?", options: [{text: "A) Es la Agencia de la UE para la Cooperación Policial con sede en La Haya, destinada a facilitar el intercambio de información y análisis de inteligencia criminal contra la delincuencia organizada", val: "correct"}, {text: "B) Es una policía militarizada que patrulla las calles de los Estados miembros arrestando criminales", val: "wrong"}, {text: "C) Es un tribunal penal internacional que juzga delitos de homicidio", val: "wrong"}], exp: "Europol es la agencia europea de cooperación policial y análisis de inteligencia con sede en La Haya, sin funciones directas de patrulla o detención[cite: 6]." },
+        { q: "¿Desde qué año Europol tiene la condición jurídica de agencia oficial de la Unión Europea?", options: [{text: "A) Desde 2010", val: "correct"}, {text: "B) Desde 1992", val: "wrong"}, {text: "C) Desde 2001", val: "wrong"}], exp: "Europol opera formalmente como agencia de la UE desde el año 2010[cite: 6]." },
+        { q: "¿Cuál es la función del Consejo de la Unión Europea (o Consejo de Ministros)?", options: [{text: "A) Representar a los Gobiernos de los Estados miembros, aprobar la legislación junto al Parlamento y coordinar políticas económicas y de seguridad", val: "correct"}, {text: "B) Proponer en exclusiva las nuevas leyes comunitarias de iniciativa propia", val: "wrong"}, {text: "C) Interpretar judicialmente los tratados europeos", val: "wrong"}], exp: "El Consejo de la UE representa a los gobiernos nacionales, legisla junto a la Eurocámara y coordina políticas[cite: 6]." },
+        { q: "¿Qué papel desempeña la Comisión Europea dentro del sistema institucional de la UE?", options: [{text: "A) Es el órgano ejecutivo políticamente independiente que propone legislación, gestiona políticas y vela por el cumplimiento de los tratados (guardiana de los tratados)", val: "correct"}, {text: "B) Es la cámara de representación directa de los ciudadanos europeos elegida cada 5 años", val: "wrong"}, {text: "C) Es el tribunal supremo de justicia con sede en Luxemburgo", val: "wrong"}], exp: "La Comisión Europea ostenta el poder ejecutivo, propone leyes y actúa como guardiana de los tratados[cite: 6]." },
+        { q: "¿Dónde tiene su sede principal el Parlamento Europeo y cada cuánto tiempo se eligen sus diputados?", options: [{text: "A) Sesiones plenarias en Estrasburgo y secretaría en Luxemburgo; elegidos por los ciudadanos cada 5 años", val: "correct"}, {text: "B) Sede central en Fráncfort del Meno por mandato de 4 años", val: "wrong"}, {text: "C) Sede en La Haya con mandato vitalicio", val: "wrong"}], exp: "El Parlamento Europeo tiene sede principal en Estrasburgo y sus diputados se eligen por sufragio directo cada 5 años[cite: 6]." },
+        { q: "¿Qué función principal realiza el Tribunal de Justicia de la Unión Europea (TJUE) con sede en Luxemburgo?", options: [{text: "A) Garantizar el respeto del Derecho de la UE en su interpretación y aplicación, resolviendo cuestiones prejudiciales y recursos de anulación", val: "correct"}, {text: "B) Aprobar los presupuestos anuales de la Unión junto al Consejo", val: "wrong"}, {text: "C) Dirigir la política exterior y de seguridad común", val: "wrong"}], exp: "El TJUE garantiza la correcta interpretación y aplicación del Derecho comunitario europeo[cite: 6]." },
+        { q: "¿Cuántos países miembros de la Unión Europea formaban la eurozona en el año 2026 utilizando el euro?", options: [{text: "A) 21 países (tras la incorporación de Bulgaria el 1 de enero de 2026)", val: "correct"}, {text: "B) 15 países", val: "wrong"}, {text: "C) 27 países", val: "wrong"}], exp: "Con la entrada de Bulgaria el 1 de enero de 2026, la eurozona pasó a estar integrada por 21 Estados miembros[cite: 6]." },
+        { q: "¿Qué establece el principio de subsidiariedad en la Unión Europea?", options: [{text: "A) Que en materias no exclusivas, la UE solo debe intervenir si los objetivos no pueden ser alcanzados suficientemente por los Estados miembros", val: "correct"}, {text: "B) Que las normas nacionales prevalecen siempre sobre los reglamentos", val: "wrong"}, {text: "C) Que los tribunales nacionales deciden sobre la validez de los tratados", val: "wrong"}], exp: "El principio de subsidiariedad limita la intervención de la UE a los casos en que la escala europea aporte un valor superior al nivel nacional[cite: 6]." },
+        { q: "¿Cómo se define el principio de primacía del Derecho Comunitario?", options: [{text: "A) En caso de conflicto entre una norma de la UE y una norma nacional, prevalece la norma de la Unión Europea", val: "correct"}, {text: "B) Que las constituciones nacionales prevalecen siempre frente a los reglamentos", val: "wrong"}, {text: "C) Que el derecho comunitario solo se aplica si lo aprueba el parlamento autonómico", val: "wrong"}], exp: "El principio de primacía impone que el Derecho de la UE prevalezca sobre cualquier norma interna contraria de los Estados miembros[cite: 6]." }
     ];
-
-
-
-    // ==========================================
-
-    // BANCO 2: PSICOLOGÍA Y ÁMBITO SOCIAL (73 preguntas)
-
-    // ==========================================
-
-    const bancoPsicologia = [
-
-        { q: "¿Qué define el Código de Ética según el material de estudio?", options: [{text: "A) Una rama de la psicología clínica", val: "wrong"}, {text: "B) Una ciencia normativa que estudia los deberes y los derechos de cada profesión", val: "correct"}, {text: "C) Un conjunto de leyes penales", val: "wrong"}], exp: "El Código de Ética se define como la ciencia normativa de deberes y derechos profesionales[cite: 47]." },
-
-        { q: "¿Cuál es una de las diferencias clave entre moral y ética según el Tema 3?", options: [{text: "A) La moral surge en la interioridad y la ética tiene base social", val: "wrong"}, {text: "B) La moral tiene base social y la ética surge en la interioridad de la persona", val: "correct"}, {text: "C) No hay diferencia", val: "wrong"}], exp: "La moral tiene base social colectiva y la ética brota de la interioridad y conciencia individual." },
-
-        { q: "¿Qué capacidad social se define como expresar lo que se piensa y se siente de forma adecuada y sin ansiedad?", options: [{text: "A) Agresividad", val: "wrong"}, {text: "B) Pasividad", val: "wrong"}, {text: "C) Asertividad", val: "correct"}], exp: "La asertividad permite defender los propios derechos de forma adecuada y sin generar ansiedad[cite: 56]." },
-
-        { q: "¿Cómo se denomina la técnica asertiva en la que se repite el propio punto de vista con tranquilidad y sin dejarse ganar por aspectos irrelevantes?", options: [{text: "A) Técnica del disco roto", val: "correct"}, {text: "B) Técnica del banco de niebla", val: "wrong"}, {text: "C) Técnica de ignorar", val: "wrong"}], exp: "La técnica del disco roto consiste en insistir calmadamente en nuestro argumento." },
-
-        { q: "En la pirámide de necesidades de Maslow, ¿qué necesidades se encuentran en la base (nivel inferior)?", options: [{text: "A) Necesidades fisiológicas (respiración, alimentación, descanso)", val: "correct"}, {text: "B) Autorrealización", val: "wrong"}, {text: "C) Reconocimiento y éxito", val: "wrong"}], exp: "En la base se sitúan las necesidades fisiológicas primarias para la supervivencia[cite: 47, 48]." },
-
-        { q: "¿Qué tipo de estructura en la empresa está formada por personas que actúan espontáneamente buscando la satisfacción personal?", options: [{text: "A) Estructura formal", val: "wrong"}, {text: "B) Estructura informal", val: "correct"}, {text: "C) Estructura jerárquica", val: "wrong"}], exp: "La estructura informal surge de forma espontánea priorizando las relaciones personales[cite: 48]." },
-
-        { q: "¿Qué es el autocontrol emocional?", options: [{text: "A) La capacidad que nos permite controlar nuestras emociones y no que estas nos controlen a nosotros", val: "correct"}, {text: "B) La represión total", val: "wrong"}, {text: "C) Influir en los superiores", val: "wrong"}], exp: "Otorga la facultad de regular los impulsos emocionales de forma consciente[cite: 49]." },
-
-        { q: "Según el esquema cognitivo del autocontrol, ¿cuál es la reacción física directa de un pensamiento?", options: [{text: "A) El sentimiento", val: "correct"}, {text: "B) La conducta motora", val: "wrong"}, {text: "C) La memoria", val: "wrong"}], exp: "Cada pensamiento genera una reacción fisiológica interna traducida en un sentimiento." },
-
-        { q: "¿Cuál es la diferencia principal entre el miedo y la fobia?", options: [{text: "A) El miedo es permanente y la fobia transitoria", val: "wrong"}, {text: "B) El miedo es una respuesta normal y transitoria; la fobia es una reacción desproporcionada, irracional y persistente", val: "correct"}, {text: "C) No hay diferencias", val: "wrong"}], exp: "El miedo es normal y transitorio; la fobia es un temor irracional, persistente y desproporcionado[cite: 46]." },
-
-        { q: "¿Cómo se denomina el miedo a las alturas o vértigo patológico según el temario de fobias?", options: [{text: "A) Acrofobia", val: "correct"}, {text: "B) Agorafobia", val: "wrong"}, {text: "C) Claustrofobia", val: "wrong"}], exp: "La acrofobia es el miedo intenso o vértigo patológico ante las alturas." },
-
-        { q: "¿Cuáles son las fases del proceso adaptativo del estrés (síndrome general de adaptación)?", options: [{text: "A) Fase de alarma, fase de resistencia y fase de agotamiento", val: "correct"}, {text: "B) Fase inicial e intermedia", val: "wrong"}, {text: "C) Fase de pánico y shock", val: "wrong"}], exp: "Comprende secuencialmente alarma, resistencia sostenida y agotamiento[cite: 51]." },
-
-        { q: "¿Qué tipo de respiración es la más adecuada para proporcionar una mayor calma al sistema nervioso y aprovechar la capacidad pulmonar?", options: [{text: "A) Respiración clavicular", val: "wrong"}, {text: "B) Respiración diafragmática o abdominal", val: "correct"}, {text: "C) Respiración torácica", val: "wrong"}], exp: "La respiración diafragmática maximiza la oxigenación y relaja profundamente[cite: 51]." },
-
-        { q: "¿Qué técnica fisiológica de relajación consiste en adiestrar a la persona en ejercicios de contracción y relajación muscular voluntaria?", options: [{text: "A) Relajación progresiva de Jacobson", val: "correct"}, {text: "B) Desensibilización sistemática", val: "wrong"}, {text: "C) Inoculación de estrés", val: "wrong"}], exp: "Jacobson ideó el método físico de tensar y relajar grupos musculares." },
-
-        { q: "¿Qué es el pánico dentro de la escala de miedos?", options: [{text: "A) El nivel de gradación más elevado del miedo, totalmente incapacitante y que provoca huida", val: "correct"}, {text: "B) Una simple alerta preventiva", val: "wrong"}, {text: "C) Relajación mental", val: "wrong"}], exp: "El pánico representa el grado máximo de miedo con pérdida de control[cite: 44, 50, 51]." },
-
-        { q: "¿Cuál es una recomendación fundamental para el Vigilante de Seguridad frente a situaciones de pánico colectivo?", options: [{text: "A) Mantener la calma, ayudar a escapar del peligro y colaborar en los servicios de rescate", val: "correct"}, {text: "B) Abandonar el puesto", val: "wrong"}, {text: "C) Gritar con la masa", val: "wrong"}], exp: "Se debe mantener la templanza, guiar a las personas y colaborar con emergencias[cite: 50]." },
-
-        { q: "¿Qué técnica asertiva consiste en aparentar ceder terreno sin cederlo realmente, estando de acuerdo con parte del argumento?", options: [{text: "A) Técnica de la claudicación simulada (Banco de niebla)", val: "correct"}, {text: "B) Disco roto", val: "wrong"}, {text: "C) Procesar el cambio", val: "wrong"}], exp: "El banco de niebla permite dar la razón en lo verosímil sin renunciar al criterio propio." },
-
-        { q: "¿Cómo se define el estilo de comunicación pasivo?", options: [{text: "A) Persona insegura, se cree inferior, sufre estrés, no mira a los ojos y se lamenta", val: "correct"}, {text: "B) Persona agresiva y dominante", val: "wrong"}, {text: "C) Persona asertiva", val: "wrong"}], exp: "El perfil pasivo denota inseguridad y vulnerabilidad ante la presión[cite: 50]." },
-
-        { q: "¿Qué componentes de la comunicación interpersonal incluyen la mirada, la sonrisa, los gestos y la postura corporal?", options: [{text: "A) Componentes no verbales", val: "correct"}, {text: "B) Componentes paralingüísticos", val: "wrong"}, {text: "C) Componentes verbales", val: "wrong"}], exp: "Gestos y posturas integran el lenguaje corporal o componentes no verbales." },
-
-        { q: "¿Qué elementos forman parte de los componentes paralingüísticos de la comunicación?", options: [{text: "A) Volumen, entonación, fluidez, claridad y velocidad de la voz", val: "correct"}, {text: "B) Contenido escrito", val: "wrong"}, {text: "C) Movimientos de manos", val: "wrong"}], exp: "La paralingüística estudia el tono, el volumen y la velocidad verbal." },
-
-        { q: "¿Qué se entiende por escucha activa en el ámbito de las habilidades sociales?", options: [{text: "A) Saber escuchar, formular preguntas adecuadas, permanecer receptivo, comprender y no interrumpir", val: "correct"}, {text: "B) Oír sin prestar atención", val: "wrong"}, {text: "C) Responder con críticas", val: "wrong"}], exp: "La escucha activa implica atención plena y comprensión sincera[cite: 49]." },
-
-        { q: "¿Qué entendemos por información en el ámbito de la seguridad?", options: [{text: "A) Cualquier dato aislado recibido sin necesidad de análisis", val: "wrong"}, {text: "B) El conjunto de datos que, una vez obtenidos y analizados, permiten conocer una situación y detectar riesgos", val: "correct"}, {text: "C) Rumores transmitidos verbalmente entre compañeros", val: "wrong"}], exp: "Tener datos no basta; es necesario seleccionarlos, relacionarlos y analizarlos para anticipar riesgos[cite: 10]." },
-
-        { q: "Según el artículo 11.1.h de la LO 2/1986 de Fuerzas y Cuerpos de Seguridad, la función informativa consiste en:", options: [{text: "A) Divulgar actuaciones policiales en prensa", val: "wrong"}, {text: "B) Captar, recibir y analizar datos de interés para el orden y la seguridad pública para prevenir la delincuencia", val: "correct"}, {text: "C) Censurar publicaciones en redes sociales", val: "wrong"}], exp: "La secuencia legal fundamental es: captar datos, recibir información, analizarla y prevenir[cite: 10]." },
-
-        { q: "¿Qué organismo en España obtiene y analiza información exterior para proporcionar inteligencia al Gobierno?", options: [{text: "A) Centro Nacional de Inteligencia (CNI)", val: "correct"}, {text: "B) Policía Local", val: "wrong"}, {text: "C) Seguridad Privada exclusivamente", val: "wrong"}], exp: "El CNI previene riesgos que afecten a la integridad, intereses y estabilidad del Estado[cite: 11]." },
-
-        { q: "¿Qué diferencia la información general o estratégica de la táctica u operativa?", options: [{text: "A) La estratégica analiza globalmente vulnerabilidades y la táctica aporta datos concretos del día a día", val: "correct"}, {text: "B) La estratégica es militar y la táctica de vigilantes", val: "wrong"}, {text: "C) Son idénticas", val: "wrong"}], exp: "La estratégica permite entender globalmente el problema y la táctica planifica el operativo cotidiano[cite: 11, 12]." },
-
-        { q: "Para que la información sea útil debe ser oportuna, lo que significa que:", options: [{text: "A) Solo se entregue cuando se solicite por escrito", val: "wrong"}, {text: "B) Debe estar disponible en el momento en que resulta necesaria", val: "correct"}, {text: "C) Llegue después del incidente", val: "wrong"}], exp: "Una información correcta que llega demasiado tarde pierde su utilidad preventiva[cite: 13]." },
-
-        { q: "En el ámbito de la seguridad, ¿qué es una noticia?", options: [{text: "A) Un artículo publicado en el periódico", val: "wrong"}, {text: "B) Cualquier dato, hecho o circunstancia inicial del que se tiene conocimiento y que requiere ser contrastado", val: "correct"}, {text: "C) Un rumor falso comprobado", val: "wrong"}], exp: "La noticia constituye la información inicial que todavía necesita análisis y verificación[cite: 13]." },
-
-        { q: "¿Qué es una fuente directa de información?", options: [{text: "A) Un informe de prensa", val: "wrong"}, {text: "B) Información de primera mano sin previa interpretación ajena (ej. observación personal o cámaras de CCTV)", val: "correct"}, {text: "C) Comentarios de terceros no presentes", val: "wrong"}], exp: "Fuentes directas provienen de la observación personal, testimonios directos o sistemas propios de CCTV[cite: 14, 15]." },
-
-        { q: "¿Cuáles son las 5 etapas del ciclo de la información?", options: [{text: "A) Planificación, Obtención, Elaboración y Análisis, Difusión y Utilización", val: "correct"}, {text: "B) Detección, Disparo, Detención, Juicio y Archivo", val: "wrong"}, {text: "C) Observar, Callar, Escuchar, Obedecer y Olvidar", val: "wrong"}], exp: "El ciclo continuo es: Planificación -> Obtención -> Elaboración/Análisis -> Difusión -> Utilización[cite: 16]." },
-
-        { q: "¿Cuál es el objetivo principal de la observación en seguridad?", options: [{text: "A) Juzgar moralmente a las personas", val: "wrong"}, {text: "B) Prestar atención intencionada y sistemática para percibir y registrar hechos relevantes, riesgos o anomalías", val: "correct"}, {text: "C) Mirar fijamente a un punto fijo", val: "wrong"}], exp: "La observación busca anticipar riesgos a través de la atención metódica y objetiva[cite: 16]." },
-
-        { q: "En el procedimiento básico de observación, ¿por qué se dividen los espacios en sectores?", options: [{text: "A) Para realizar una observación ordenada y evitar puntos ciegos o sin controlar", val: "correct"}, {text: "B) Para no cansarse visualmente", val: "wrong"}, {text: "C) Por protocolo de limpieza", val: "wrong"}], exp: "Establecer sectores de observación evita dispersión y ángulos muertos[cite: 18]." },
-
-        { q: "¿Qué regla deontológica rige ante una conducta anómala observada?", options: [{text: "A) Concluir inmediatamente que es un delincuente", val: "wrong"}, {text: "B) Una anomalía no es necesariamente una amenaza; se deben observar hechos objetivos y valorar el contexto", val: "correct"}, {text: "C) Detener de inmediato a la persona", val: "wrong"}], exp: "El profesional observa hechos y evita interpretaciones o conclusiones precipitadas[cite: 19]." },
-
-        { q: "¿Qué es la contravigilancia?", options: [{text: "A) Espiar a los propios compañeros de trabajo", val: "wrong"}, {text: "B) El conjunto de medidas destinadas a detectar si el protegido, itinerarios o dispositivos sufren vigilancia externa", val: "correct"}, {text: "C) Desactivar alarmas perimetrales", val: "wrong"}], exp: "Previene que terceros conozcan rutinas, dispositivos o vulnerabilidades del protegido[cite: 20]." },
-
-        { q: "¿En qué se diferencia la contravigilancia estática de la dinámica?", options: [{text: "A) La estática se hace desde puntos fijos (domicilio, accesos) y la dinámica durante desplazamientos a pie o vehículo", val: "correct"}, {text: "B) La estática la hace la policía y la dinámica el escolta", val: "wrong"}, {text: "C) No tienen diferencia", val: "wrong"}], exp: "Estática vigila en puntos fijos clave y la dinámica acompaña en movimiento[cite: 21]." },
-
-        { q: "En contravigilancia, un principio clave sobre los indicios es:", options: [{text: "A) Un solo indicio aislado ya demuestra una amenaza inminente", val: "wrong"}, {text: "B) Un indicio aislado no demuestra amenaza; se requieren varios indicios, repetición y contexto", val: "correct"}, {text: "C) Los indicios no deben anotarse", val: "wrong"}], exp: "Indicio aislado ≠ amenaza; Varios indicios + repetición + contexto = requieren valoración[cite: 22]." },
-
-        { q: "¿Cuál es el protocolo de actuación inmediata ante un paquete u objeto sospechoso?", options: [{text: "A) Abrir el paquete para comprobar si contiene explosivos", val: "wrong"}, {text: "B) NO TOCAR -> NO MANIPULAR -> ALEJARSE -> AISLAR LA ZONA -> COMUNICAR", val: "correct"}, {text: "C) Llevarlo a la sala de descanso de vigilantes", val: "wrong"}], exp: "La función del vigilante es asegurar vidas y aislar, nunca manipular elementos sospechosos[cite: 23]." },
-
-        { q: "¿Cuál de los siguientes es un indicio visual típico de una persona armada?", options: [{text: "A) Caminar simétrico y relajado", val: "wrong"}, {text: "B) Braceo dispar por el peso, toques circulares de reacomodo o abrigos cerrados en calor", val: "correct"}, {text: "C) Mirar directamente a los ojos sin vacilar", val: "wrong"}], exp: "Instintivamente se protege el arma con toques de reajuste, braceo desigual y ropa inadecuada[cite: 24]." },
-
-        { q: "¿Cuáles son las 4 fases generales en la preparación de una amenaza?", options: [{text: "A) Obtención de información, Selección del objetivo, Preparación y Ejecución", val: "correct"}, {text: "B) Idea, Discusión, Juicio y Condena", val: "wrong"}, {text: "C) Compra de armas, Disparo, Huida y Ocultación", val: "wrong"}], exp: "Son las 4 fases estándar de la planificación delictiva o terrorista[cite: 26]." },
-
-        { q: "¿En qué fase preparatoria tiene el personal de seguridad la mayor ventana de oportunidad preventiva?", options: [{text: "A) En la fase de Ejecución", val: "wrong"}, {text: "B) En la fase de Preparación, ya que genera conductas anómalas observables reiteradas", val: "correct"}, {text: "C) Tras la huida del delincuente", val: "wrong"}], exp: "Los actos preparatorios prolongados generan indicadores detectables por contravigilancia[cite: 28]." },
-
-        { q: "Durante la fase de ejecución de un atentado o agresión, el principio fundamental del escolta es:", options: [{text: "A) Perseguir al agresor hasta detenerlo", val: "wrong"}, {text: "B) Proteger inmediatamente al protegido y evacuarlo, no perseguir al agresor", val: "correct"}, {text: "C) Buscar a los cómplices", val: "wrong"}], exp: "La prioridad absoluta del escolta es salvaguardar y evacuar a la personalidad[cite: 29]." },
-
-        { q: "¿En qué momentos de la rutina diaria se produce la mayor vulnerabilidad en la protección de personas?", options: [{text: "A) En la subida/bajada de vehículos, entradas/salidas de domicilios y paradas obligadas", val: "correct"}, {text: "B) Durmiendo en una habitación bunkerizada", val: "wrong"}, {text: "C) Dentro de un juzgado con control policial", val: "wrong"}], exp: "Los puntos de transición (embarque/desembarque) disminuyen la capacidad reactiva[cite: 31]." },
-
-        { q: "¿Qué define jurídicamente el delito de secuestro?", options: [{text: "A) Un retraso involuntario", val: "wrong"}, {text: "B) La privación ilícita de la libertad de una persona con fines económicos, políticos o instrumentales", val: "correct"}, {text: "C) La discusión acalorada entre socios", val: "wrong"}], exp: "Consiste en la retención indebida privando de libertad ambulatoria[cite: 32]." },
-
-        { q: "¿Qué distingue a una amenaza condicional en el Código Penal?", options: [{text: "A) El agresor no exige nada a cambio", val: "wrong"}, {text: "B) El autor exige a la víctima una conducta (hacer o no hacer algo) a cambio de no ejecutar el mal", val: "correct"}, {text: "C) Se produce sin comunicación verbal", val: "wrong"}], exp: "Condicional: 'Si no haces X, te haré daño'[cite: 35]." },
-
-        { q: "¿Qué define la violencia de género según la legislación española?", options: [{text: "A) Violencia física o psicológica ejercida por un hombre sobre una mujer que sea o haya sido su cónyuge o relación afectiva análoga", val: "correct"}, {text: "B) Cualquier pelea entre hermanos o compañeros de piso", val: "wrong"}, {text: "C) Disputas comerciales entre empresas", val: "wrong"}], exp: "Es la ejercida por hombres sobre mujeres unidas por vínculo conyugal o afectivo presente o pasado[cite: 34]." },
-
-        { q: "¿Cuál de los siguientes es un factor de alto riesgo de escalada en violencia de género?", options: [{text: "A) Ruptura o proceso de separación, antecedentes previos y acceso a armas", val: "correct"}, {text: "B) Vivir en ciudades diferentes sin contacto", val: "wrong"}, {text: "C) Desacuerdo en horarios comerciales", val: "wrong"}], exp: "La separación o antecedentes de acoso multiplican la probabilidad de agresión crítica[cite: 36]." },
-
-        { q: "¿Qué es la lofoscopia o papiloscopia?", options: [{text: "A) El estudio del iris y la córnea ocular", val: "wrong"}, {text: "B) El estudio de las crestas papilares presentes en la piel para la identificación fehaciente de personas", val: "correct"}, {text: "C) La medición de la masa ósea", val: "wrong"}], exp: "Estudia las crestas papilares de dedos, palmas y plantas[cite: 41]." },
-
-        { q: "¿Cuáles son las 3 ramas de la lofoscopia según la región anatómica?", options: [{text: "A) Dactiloscopia (dedos), Quiroscopia (palmas) y Pelmatoscopia (plantas de los pies)", val: "correct"}, {text: "B) Oftalmoscopia, Podología y Craneometría", val: "wrong"}, {text: "C) Fisiognomía, Grafología y Fonética", val: "wrong"}], exp: "Dactiloscopia (dedos manos), quiroscopia (palmas) y pelmatoscopia (plantas pies)[cite: 41, 42]." },
-
-        { q: "¿Cuáles son las características científicas de las crestas papilares?", options: [{text: "A) Cambian con los años y desaparecen con el frío", val: "wrong"}, {text: "B) Son perennes, inmutables, diversiformes y clasificables", val: "correct"}, {text: "C) Son idénticas en todas las personas de la misma familia", val: "wrong"}], exp: "No varían desde el nacimiento hasta la putrefacción (perennes e inmutables)[cite: 41]." },
-
-        { q: "¿Qué estudia la antropometría de Bertillón?", options: [{text: "A) Las proporciones y medidas óseas del cuerpo humano para identificación", val: "correct"}, {text: "B) La lectura del pensamiento en el interrogatorio", val: "wrong"}, {text: "C) El ritmo cardíaco bajo estrés", val: "wrong"}], exp: "Fue el primer sistema científico de identificación basado en dimensiones corporales fijas[cite: 42]." },
-
-        { q: "¿En qué consiste la técnica de fisonomía o retrato robot?", options: [{text: "A) En medir huellas de pisadas en la nieve", val: "wrong"}, {text: "B) En observar y recomponer los rasgos morfológicos del rostro a partir del recuerdo de un testigo", val: "correct"}, {text: "C) En analizar la voz mediante sonogramas", val: "wrong"}], exp: "Recompone los rasgos faciales morfológicos[cite: 42]." },
-
-        { q: "La memoria sensorial retiene los estímulos ambientales durante:", options: [{text: "A) Hasta 1 segundo aproximadamente", val: "correct"}, {text: "B) 3 horas", val: "wrong"}, {text: "C) Varios días", val: "wrong"}], exp: "La memoria sensorial es ultracorta (milisegundos a un segundo)[cite: 43]." },
-
-        { q: "¿Cuánto tiempo retiene la información la memoria a corto plazo (MCP)?", options: [{text: "A) De un segundo a varios minutos si no se repasa", val: "correct"}, {text: "B) Toda la vida sin esfuerzo", val: "wrong"}, {text: "C) Exactamente 24 horas", val: "wrong"}], exp: "La MCP opera como memoria de trabajo temporal (segundos a escasos minutos)[cite: 49]." },
-
-        { q: "La atención selectiva se define como:", options: [{text: "A) Intentar atender a diez pantallas de CCTV a la vez sin mirar ninguna", val: "wrong"}, {text: "B) La capacidad de concentrarse en un estímulo específico ignorando los distractores", val: "correct"}, {text: "C) Un estado de adormecimiento", val: "wrong"}], exp: "Focaliza los recursos cognitivos en el estímulo relevante[cite: 46]." },
-
-        { q: "En la descripción técnica de personas, ¿por qué es obligatorio seguir un orden descendente?", options: [{text: "A) Para no olvidar detalles y permitir un informe completo, claro y estandarizado", val: "correct"}, {text: "B) Porque lo exige el Código de Comercio", val: "wrong"}, {text: "C) Solo para personas que llevan sombrero", val: "wrong"}], exp: "El orden metódico de arriba hacia abajo garantiza precisión técnica sin omisiones[cite: 42, 43]." },
-
-        { q: "¿Qué datos básicos deben describirse en la identificación de un vehículo?", options: [{text: "A) Marca, modelo, color, matrícula y rasgos singulares o número de ocupantes", val: "correct"}, {text: "B) El precio del seguro y los caballos fiscales", val: "wrong"}, {text: "C) La música que lleva encendida", val: "wrong"}], exp: "Marca, modelo, color, placa de matrícula y características singulares[cite: 20, 45]." },
-
-        { q: "En psicología social, ¿qué es la conformidad según los experimentos clásicos?", options: [{text: "A) Modificar la opinión o conducta para coincidir con la mayoría y no sufrir rechazo", val: "correct"}, {text: "B) Liderar una huelga", val: "wrong"}, {text: "C) Negarse a cumplir el reglamento", val: "wrong"}], exp: "La presión del grupo empuja al individuo a conformarse con el juicio colectivo[cite: 44]." },
-
-        { q: "Según Herbert Kelman, el 'cumplimiento' o sumisión manifiesta implica:", options: [{text: "A) Creer ciegamente en lo que dice el grupo", val: "wrong"}, {text: "B) Mostrar acuerdo público externo con el grupo manteniendo en privado el desacuerdo", val: "correct"}, {text: "C) Desobedecer inmediatamente", val: "wrong"}], exp: "El cumplimiento es público, pero sin convicción interna[cite: 46]." },
-
-        { q: "La 'internalización' en la influencia social significa:", options: [{text: "A) Asumir e interiorizar las normas o valores del grupo como convicciones propias", val: "correct"}, {text: "B) Fingir aprobación para evitar castigos", val: "wrong"}, {text: "C) Aislarse del grupo", val: "wrong"}], exp: "La persona adopta la creencia porque concuerda intrínsecamente con sus valores[cite: 48, 49]." },
-
-        { q: "¿Qué caracteriza al miedo innato frente al aprendido?", options: [{text: "A) El innato es un reflejo de supervivencia biológico no condicionado por aprendizaje previo", val: "correct"}, {text: "B) El innato se adquiere leyendo libros", val: "wrong"}, {text: "C) El innato solo aparece en personas ancianas", val: "wrong"}], exp: "El miedo innato (ruidos fuertes, precipicios) es una respuesta biológica adaptativa[cite: 50]." },
-
-        { q: "En la fase de alarma del Síndrome General de Adaptación (Selye), el cuerpo:", options: [{text: "A) Se agota y desfallece de inmediato", val: "wrong"}, {text: "B) Activa la respuesta simpática preparando la lucha o huida (taquicardia, dilatación pupilar)", val: "correct"}, {text: "C) Entra en relajación profunda", val: "wrong"}], exp: "La fase de alarma moviliza energía y activa el sistema neurovegetativo[cite: 50]." },
-
-        { q: "Un síntoma fisiológico habitual del estrés operativo es:", options: [{text: "A) Bradicardia extrema", val: "wrong"}, {text: "B) Aumento de la frecuencia cardíaca y redistribución sanguínea a grandes músculos", val: "correct"}, {text: "C) Sueño placentero inmediato", val: "wrong"}], exp: "La activación simpática incrementa el pulso cardíaco para oxigenar tejidos[cite: 44, 48]." },
-
-        { q: "¿Qué define a la delincuencia organizada según los criterios internacionales de Europol?", options: [{text: "A) Un robo aislado ejecutado por dos personas ebrias", val: "wrong"}, {text: "B) Colaboración concertada de 3 o más personas, jerarquía, continuidad temporal y búsqueda de beneficio grave", val: "correct"}, {text: "C) Faltas leves cometidas por jóvenes", val: "wrong"}], exp: "Requiere pluralidad concertada, jerarquía estructurada y finalidad delictiva sistemática[cite: 51, 52]." },
-
-        { q: "¿Qué caracteriza al delincuente primario u ocasional?", options: [{text: "A) Vive del crimen como profesión", val: "wrong"}, {text: "B) Comete un delito motivado por una circunstancia excepcional o puntual sin trayectoria previa", val: "correct"}, {text: "C) Es líder de un cártel internacional", val: "wrong"}], exp: "Comete el delito sin arraigo criminal previo[cite: 51]." },
-
-        { q: "En la criminología de Vicente Garrido, la delincuencia instrumental busca:", options: [{text: "A) Descargar una emoción de ira exclusivamente", val: "wrong"}, {text: "B) Un fin práctico y tangible, generalmente económico o material", val: "correct"}, {text: "C) Un delirio psicótico", val: "wrong"}], exp: "El delito es un instrumento o herramienta para obtener un botín o beneficio[cite: 53]." },
-
-        { q: "La delincuencia expresiva se distingue porque:", options: [{text: "A) Es calculada financieramente por directivos", val: "wrong"}, {text: "B) Nace del descontrol emocional, la hostilidad, el odio o pulsiones personales", val: "correct"}, {text: "C) Busca evadir impuestos", val: "wrong"}], exp: "El delito expresa una emoción, agresión o conflicto personal[cite: 53]." },
-
-        { q: "¿Por qué la delincuencia juvenil se denomina 'termómetro social'?", options: [{text: "A) Porque mide la temperatura de las cárceles", val: "wrong"}, {text: "B) Porque refleja el estado ético, educativo, familiar y de orden público de una sociedad", val: "correct"}, {text: "C) Porque no está penada", val: "wrong"}], exp: "Sus variaciones alertan del grado de degradación y cohesión familiar de la comunidad[cite: 52]." },
-
-        { q: "En la redacción de informes de incidencias, la regla de oro deontológica es:", options: [{text: "A) Tipificar delitos jurídicos (ej. 'vengo a denunciar un robo con fuerza según el art. 240')", val: "wrong"}, {text: "B) Ser objetivo, describir hechos cronológicos y no tipificar judicialmente los delitos", val: "correct"}, {text: "C) Ocultar los datos de las víctimas", val: "wrong"}], exp: "El vigilante redacta hechos comprobables sin calificar ni tipificar jurídicamente el delito[cite: 54, 55]." },
-
-        { q: "¿Cómo deben consignarse las horas en los partes diarios de seguridad?", options: [{text: "A) En formato de 24 horas separando horas y minutos con dos puntos (HH:MM)", val: "correct"}, {text: "B) Poniendo 'por la mañana' o 'a la hora de comer'", val: "wrong"}, {text: "C) Solo minutos", val: "wrong"}], exp: "Norma técnica documental: sistema de 24 horas exactas (ej. 03:15 h)[cite: 56]." },
-
-        { q: "En redacción documental, ¿cuál de las siguientes expresiones contiene una redundancia viciosa?", options: [{text: "A) El vigilante comprobó el cierre perimetral", val: "wrong"}, {text: "B) Subir arriba a la cubierta o salir afuera del edificio", val: "correct"}, {text: "C) El testigo facilitó su documento", val: "wrong"}], exp: "'Subir arriba', 'entrar adentro' o 'testigo presencial' son redundancias a erradicar[cite: 57]." },
-
-        { q: "¿A quién va destinada la copia del parte diario según el formato tradicional de albarán triplicado?", options: [{text: "A) Solo a la Policía", val: "wrong"}, {text: "B) Una para el cliente, otra para la empresa de seguridad y otra para el vigilante", val: "correct"}, {text: "C) Todas se destruyen al finalizar el turno", val: "wrong"}], exp: "El parte de servicio se expide habitualmente en tres copias reglamentarias[cite: 58]." },
-
-        { q: "¿En qué consiste la técnica asertiva de 'procesar el cambio'?", options: [{text: "A) Desplazar el foco de la discusión hacia el análisis de lo que está ocurriendo emocionalmente entre ambos", val: "correct"}, {text: "B) Insultar al cliente", val: "wrong"}, {text: "C) Cambiar de vestimenta", val: "wrong"}], exp: "Permite rebajar la hostilidad analizando el tono de la conversación." },
-
-        { q: "En la comunicación descendente en seguridad (mando a subordinado), la cualidad primordial debe ser:", options: [{text: "A) Claridad, precisión y ausencia de ambigüedad en la orden", val: "correct"}, {text: "B) Ambigüedad para que cada uno decida", val: "wrong"}, {text: "C) Uso de tecnicismos incomprensibles", val: "wrong"}], exp: "Las directrices operativas deben ser diáfanas para evitar fallos de seguridad." },
-
-        { q: "¿Qué diferencia el estrés positivo (euestrés) del negativo (distrés)?", options: [{text: "A) El euestrés moviliza energía y agudeza adaptativa; el distrés satura, bloquea y desgasta la salud", val: "correct"}, {text: "B) El euestrés provoca infartos", val: "wrong"}, {text: "C) No existe el estrés positivo", val: "wrong"}], exp: "El euestrés aporta lucidez para reaccionar; el distrés desborda la capacidad de control." },
-
-        { q: "¿Cuál es el tratamiento formal adecuado hacia el receptor en un escrito de incidencias?", options: [{text: "A) Tutear al responsable", val: "wrong"}, {text: "B) De usted ('Le comunico que', 'Le hago saber')", val: "correct"}, {text: "C) Hablar en clave militar cifrada", val: "wrong"}], exp: "Regla documental formal: tratamiento de respeto en tercera persona de cortesía (usted)[cite: 56]." }
-
-    ];
-
-
 
     let preguntasActualesJuridico = [];
-
     let preguntasActualesPsicologia = [];
 
-
-
     // ==========================================
-
     // EJERCICIO 1: TABLA MATRIZ PROBABILIDAD x IMPACTO
-
     // ==========================================
-
     function inicializarFilasPlanRiesgos() {
-
         const tbody = document.getElementById("filas-evaluacion-riesgo");
-
         tbody.innerHTML = "";
-
         for (let i = 1; i <= 5; i++) {
-
             tbody.innerHTML += `
-
                 <tr>
-
                     <td><input type="text" id="r-nombre-${i}" placeholder="Ej. Hurto de equipaje..." /></td>
-
                     <td><input type="text" id="r-zona-${i}" placeholder="Ej. Sala de espera..." /></td>
-
                     <td>
-
                         <select id="r-prob-${i}" onchange="recalcularFila(${i})">
-
                             <option value="1">1 (Muy baja)</option>
-
                             <option value="2">2 (Baja)</option>
-
                             <option value="3" selected>3 (Media)</option>
-
                             <option value="4">4 (Alta)</option>
-
                             <option value="5">5 (Muy alta)</option>
-
                         </select>
-
                     </td>
-
                     <td>
-
                         <select id="r-imp-${i}" onchange="recalcularFila(${i})">
-
                             <option value="1">1 (Insignif.)</option>
-
                             <option value="2">2 (Menor)</option>
-
                             <option value="3" selected>3 (Moderado)</option>
-
                             <option value="4">4 (Grave)</option>
-
                             <option value="5">5 (Muy grave)</option>
-
                         </select>
-
                     </td>
-
                     <td style="text-align:center;"><span id="r-calc-${i}" class="badge-calc medio">9</span></td>
-
                     <td><input type="text" id="r-medidas-${i}" placeholder="Ej. Rondas de vigilancia..." /></td>
-
                 </tr>
-
             `;
-
         }
-
     }
-
-
 
     function recalcularFila(i) {
-
         const p = parseInt(document.getElementById(`r-prob-${i}`).value);
-
         const imp = parseInt(document.getElementById(`r-imp-${i}`).value);
-
         const res = p * imp;
-
         const badge = document.getElementById(`r-calc-${i}`);
-
         badge.textContent = res;
-
         badge.className = "badge-calc";
-
         if (res <= 6) badge.classList.add("bajo");
-
         else if (res <= 14) badge.classList.add("medio");
-
         else badge.classList.add("alto");
-
     }
-
-
 
     function auditarPlanRiesgos() {
-
         let totalLlenas = 0;
-
         let maxPuntuacion = -1;
-
         let nombreMaxRiesgo = "";
 
-
-
         for (let i = 1; i <= 5; i++) {
-
             const nom = document.getElementById(`r-nombre-${i}`).value.trim();
-
             const zon = document.getElementById(`r-zona-${i}`).value.trim();
-
             const med = document.getElementById(`r-medidas-${i}`).value.trim();
-
             const p = parseInt(document.getElementById(`r-prob-${i}`).value);
-
             const imp = parseInt(document.getElementById(`r-imp-${i}`).value);
-
             const val = p * imp;
 
-
-
             if (nom.length >= 4 && zon.length >= 3 && med.length >= 6) {
-
                 totalLlenas++;
-
                 if (val > maxPuntuacion) {
-
                     maxPuntuacion = val;
-
                     nombreMaxRiesgo = nom;
-
                 }
-
             }
-
         }
-
-
 
         const txtZonas = document.getElementById("eval-zonas-vulnerables").value.trim().toLowerCase();
-
         const txtConcl = document.getElementById("eval-conclusion").value.trim().toLowerCase();
 
-
-
         if (totalLlenas < 5) {
-
             alert(`Has completado ${totalLlenas} de 5 riesgos en la tabla. Rellena todos los campos con sus medidas para poder auditar el plan.`);
-
             return;
-
         }
 
-
-
         let nota = 0;
-
         let rubricasHtml = "";
 
-
-
         nota += 4.0;
-
         rubricasHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Matriz de 5 Riesgos (P × I):</strong> <span style="color:#16a34a;">5 riesgos identificados, cuantificados y con medidas preventivas asignadas.</span></div></div>`;
 
-
-
         const zonasOk = txtZonas.length >= 35 && (txtZonas.includes("anden") || txtZonas.includes("espera") || txtZonas.includes("consigna") || txtZonas.includes("taquilla") || txtZonas.includes("acceso") || txtZonas.includes("hall"));
-
         if (zonasOk) {
-
             nota += 3.0;
-
             rubricasHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Identificación de Zonas Críticas:</strong> <span style="color:#16a34a;">Se justifican correctamente las áreas de mayor exposición física en la estación.</span></div></div>`;
-
         } else {
-
             rubricasHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Identificación de Zonas Críticas:</strong> <span style="color:#dc2626;">Falta detallar y justificar 3 áreas vulnerables de la estación (ej. andenes, consignas, taquillas).</span></div></div>`;
-
         }
-
-
 
         const conclOk = txtConcl.length >= 30 && (txtConcl.includes(maxPuntuacion.toString()) || txtConcl.includes("puntuacion") || txtConcl.includes("alta") || txtConcl.includes("prioridad") || txtConcl.includes("esfuerzo"));
-
         if (conclOk) {
-
             nota += 3.0;
-
             rubricasHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Conclusión y Priorización Operativa:</strong> <span style="color:#16a34a;">Conclusión coherente. Se identificó el riesgo crítico (${nombreMaxRiesgo} con ${maxPuntuacion} pts) para enfocar los recursos de seguridad.</span></div></div>`;
-
         } else {
-
             rubricasHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Conclusión y Priorización Operativa:</strong> <span style="color:#dc2626;">La conclusión debe señalar explícitamente cuál fue el riesgo de mayor puntuación y por qué orienta el servicio.</span></div></div>`;
-
         }
-
-
 
         const card = document.getElementById("plan-feedback");
-
         document.getElementById("plan-feedback-rubricas").innerHTML = rubricasHtml;
-
         const notaEl = document.getElementById("plan-feedback-nota");
-
         notaEl.innerHTML = `Puntuación: <strong>${nota.toFixed(1)} / 10</strong>`;
 
-
-
         if (nota >= 5) {
-
             notaEl.style.color = "#155724";
-
             document.getElementById("plan-feedback-titulo").textContent = "Plan de Seguridad Física - Conforme";
-
             card.style.borderColor = "#86efac";
-
         } else {
-
             notaEl.style.color = "#b91c1c";
-
             document.getElementById("plan-feedback-titulo").textContent = "Plan de Seguridad Física - Requiere Ajustes";
-
             card.style.borderColor = "#fca5a5";
-
         }
-
         card.style.display = "block";
-
     }
-
-
 
     function cargarEjemploPlanRiesgos() {
-
         const ejemplos = [
-
             { n: "Hurto al descuido de equipajes y efectos", z: "Salas de espera y cafetería", p: 4, i: 2, m: "Rondas dinámicas preventivas y megafonía disuasoria periódica." },
-
             { n: "Conato de agresión al personal de taquillas", z: "Taquillas y atención al cliente", p: 3, i: 3, m: "Botón de pánico conectado a central y mamparas reforzadas." },
-
-            { n: "Abandono de paquete u objeto sospechoso", z: "Zona de consignas automáticas", p: 2, i: 5, m: "CCTV específico 24h y aplicación del protocolo: Aislar -> Comunicar FFCCSS[cite: 23]." },
-
+            { n: "Abandono de paquete u objeto sospechoso", z: "Zona de consignas automáticas", p: 2, i: 5, m: "CCTV específico 24h y aplicación del protocolo: Aislar -> Comunicar FFCCSS." },
             { n: "Acceso no autorizado a vías / andenes", z: "Controles de acceso a andenes", p: 3, i: 4, m: "Torno de validación de billete y presencia de vigilante en punto fijo." },
-
             { n: "Altercados o reyertas en horario nocturno", z: "Vestíbulo principal y accesos", p: 3, i: 3, m: "Patrulla conjunta por parejas y coordinación directa con Policía Nacional." }
-
         ];
 
-
-
         ejemplos.forEach((item, index) => {
-
             const i = index + 1;
-
             document.getElementById(`r-nombre-${i}`).value = item.n;
-
             document.getElementById(`r-zona-${i}`).value = item.z;
-
             document.getElementById(`r-prob-${i}`).value = item.p;
-
             document.getElementById(`r-imp-${i}`).value = item.i;
-
             document.getElementById(`r-medidas-${i}`).value = item.m;
-
             recalcularFila(i);
-
         });
 
-
-
         document.getElementById("eval-zonas-vulnerables").value = "1. Andenes de alta velocidad: Por la cercanía a vías electrificadas y riesgo de caída o invasión. 2. Consignas automáticas: Por la vulnerabilidad de depósito de objetos sin control visual. 3. Vestíbulo y taquillas: Por el manejo de efectivo y elevada densidad de viajeros en horas punta.";
-
-        document.getElementById("eval-conclusion").value = "El riesgo con mayor puntuación crítica resultó ser el abandono de objeto sospechoso en consignas (10 puntos, por impacto 5 muy grave), seguido del acceso no autorizado a vías (12 puntos, P:3 x I:4). El esfuerzo preventivo del servicio debe concentrarse en el control perimetral de andenes y la estricta vigilancia por CCTV de objetos desatendidos[cite: 60].";
-
+        document.getElementById("eval-conclusion").value = "El riesgo con mayor puntuación crítica resultó ser el abandono de objeto sospechoso en consignas (10 puntos, por impacto 5 muy grave), seguido del acceso no autorizado a vías (12 puntos, P:3 x I:4). El esfuerzo preventivo del servicio debe concentrarse en el control perimetral de andenes y la estricta vigilancia por CCTV de objetos desatendidos.";
     }
-
-
 
     function limpiarPlanRiesgos() {
-
         for (let i = 1; i <= 5; i++) {
-
             document.getElementById(`r-nombre-${i}`).value = "";
-
             document.getElementById(`r-zona-${i}`).value = "";
-
             document.getElementById(`r-prob-${i}`).value = "3";
-
             document.getElementById(`r-imp-${i}`).value = "3";
-
             document.getElementById(`r-medidas-${i}`).value = "";
-
             recalcularFila(i);
-
         }
-
         document.getElementById("eval-zonas-vulnerables").value = "";
-
         document.getElementById("eval-conclusion").value = "";
-
         document.getElementById("plan-feedback").style.display = "none";
-
     }
 
-
-
     // ==========================================
-
     // EJERCICIO 2: MATRIZ DE PELIGRO, AMENAZA Y RIESGO
-
     // ==========================================
-
     const escenariosMatriz = {
-
         "1": {
-
             titulo: "Escenario 1: Control de accesos en horario nocturno (Edificio corporativo)",
-
-            texto: "Durante tu turno de noche en la recepción de un edificio corporativo, observas a través de las cámaras de CCTV que un individuo encapuchado merodea el perímetro exterior, saltándose la primera valla de seguridad con una cizalla (corta-candados) en la mano[cite: 59].",
-
+            texto: "Durante tu turno de noche en la recepción de un edificio corporativo, observas a través de las cámaras de CCTV que un individuo encapuchado merodea el perímetro exterior, saltándose la primera valla de seguridad con una cizalla (corta-candados) en la mano.",
             criterios: {
-
                 peligro: ["valla", "perimetro", "cizalla", "herramienta", "corte", "candado", "vulnerabilidad", "exterior", "acceso"],
-
                 amenaza: ["individuo", "encapuchado", "intruso", "ladron", "persona", "intrusor", "asaltante"],
-
                 riesgo: ["probabilidad", "intrusion", "fuerza", "robo", "asalto", "daño", "propiedad", "grave", "impacto", "lesion"],
-
                 accion: ["camara", "cctv", "monitorizar", "alarma", "protocolo", "policia", "091", "112", "fuerzas", "seguridad", "no exponerse", "distancia"]
-
             }
-
         },
-
         "2": {
-
             titulo: "Escenario 2: Patrulla preventiva en Centro Comercial",
-
-            texto: "Durante una ronda preventiva por los pasillos del centro comercial, detectas que una tubería del techo tiene una fuga continua, lo que ha generado un charco de agua de gran tamaño en una zona de intenso paso de clientes, junto a las escaleras mecánicas[cite: 59].",
-
+            texto: "Durante una ronda preventiva por los pasillos del centro comercial, detectas que una tubería del techo tiene una fuga continua, lo que ha generado un charco de agua de gran tamaño en una zona de intenso paso de clientes, junto a las escaleras mecánicas.",
             criterios: {
-
                 peligro: ["tuberia", "fuga", "gotera", "charco", "agua", "suelo", "mojado", "superficie", "resbaladiz"],
-
                 amenaza: ["flujo", "clientes", "personas", "usuarios", "transito", "peatones", "distraidos", "aglomeracion"],
-
                 riesgo: ["caida", "resbalon", "traumatismo", "lesion", "daño", "fractura", "probabilidad", "alto"],
-
                 accion: ["balizar", "acordonar", "desviar", "mantenimiento", "limpieza", "señalizar", "avisar", "paso", "precaucion"]
-
             }
-
         }
-
     };
 
-
-
     function cargarEscenarioMatriz() {
-
         const selVal = document.getElementById("select-escenario").value;
-
         const esc = escenariosMatriz[selVal];
-
         document.getElementById("desc-escenario").innerHTML = `<strong>${esc.titulo}</strong><br>${esc.texto}`;
-
         limpiarMatriz();
-
     }
-
-
 
     function analizarMatrizDiagnostico() {
-
         const idEsc = document.getElementById("select-escenario").value;
-
         const esc = escenariosMatriz[idEsc];
-
         
-
         const txtPel = document.getElementById("matriz-peligro").value.trim().toLowerCase();
-
         const txtAmen = document.getElementById("matriz-amenaza").value.trim().toLowerCase();
-
         const txtRiesg = document.getElementById("matriz-riesgo").value.trim().toLowerCase();
-
         const txtAcc = document.getElementById("matriz-accion").value.trim().toLowerCase();
 
-
-
         if (!txtPel || !txtAmen || !txtRiesg || !txtAcc) {
-
             alert("Completa los 4 campos para realizar la auditoría completa de la matriz.");
-
             return;
-
         }
-
-
 
         let nota = 0;
-
         let itemsHtml = "";
 
-
-
         const matchPel = esc.criterios.peligro.some(k => txtPel.includes(k));
-
         if (matchPel && txtPel.length >= 10) {
-
             nota += 2.5;
-
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Peligro:</strong> <span style="color:#16a34a;">Correcto. Identifica la condición física o vulnerabilidad causante del daño potencial[cite: 59].</span></div></div>`;
-
+            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Peligro:</strong> <span style="color:#16a34a;">Correcto. Identifica la condición física o vulnerabilidad causante del daño potencial.</span></div></div>`;
         } else {
-
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Peligro:</strong> <span style="color:#dc2626;">El peligro debe ser el elemento intrínseco o vulnerabilidad (ej. valla vulnerada, cizalla, fuga de agua)[cite: 59].</span></div></div>`;
-
+            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Peligro:</strong> <span style="color:#dc2626;">El peligro debe ser el elemento intrínseco o vulnerabilidad (ej. valla vulnerada, cizalla, fuga de agua).</span></div></div>`;
         }
-
-
 
         const matchAmen = esc.criterios.amenaza.some(k => txtAmen.includes(k));
-
         if (matchAmen && txtAmen.length >= 8) {
-
             nota += 2.5;
-
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Amenaza:</strong> <span style="color:#16a34a;">Correcto. Reconoce al actor o factor externo con potencial de materializar el evento[cite: 59].</span></div></div>`;
-
+            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Amenaza:</strong> <span style="color:#16a34a;">Correcto. Reconoce al actor o factor externo con potencial de materializar el evento.</span></div></div>`;
         } else {
-
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Amenaza:</strong> <span style="color:#dc2626;">La amenaza es el factor o actor externo (ej. intruso encapuchado o flujo de peatones)[cite: 59].</span></div></div>`;
-
+            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Amenaza:</strong> <span style="color:#dc2626;">La amenaza es el factor o actor externo (ej. intruso encapuchado o flujo de peatones).</span></div></div>`;
         }
-
-
 
         const matchRiesg = esc.criterios.riesgo.some(k => txtRiesg.includes(k));
-
         const tieneConceptoProb = txtRiesg.includes("probab") || txtRiesg.includes("alta") || txtRiesg.includes("posibil") || txtRiesg.includes("grave") || txtRiesg.includes("impacto");
-
         if (matchRiesg && tieneConceptoProb) {
-
             nota += 2.5;
-
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Riesgo:</strong> <span style="color:#16a34a;">Correcto. Pondera probabilidad e impacto lesivo hacia la instalación o usuarios[cite: 59].</span></div></div>`;
-
+            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Riesgo:</strong> <span style="color:#16a34a;">Correcto. Pondera probabilidad e impacto lesivo hacia la instalación o usuarios.</span></div></div>`;
         } else {
-
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Riesgo:</strong> <span style="color:#dc2626;">Debe evaluar probabilidad combinada con la gravedad del impacto (ej. alta probabilidad de asalto / traumatismo)[cite: 59].</span></div></div>`;
-
+            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Riesgo:</strong> <span style="color:#dc2626;">Debe evaluar probabilidad combinada con la gravedad del impacto (ej. alta probabilidad de asalto / traumatismo).</span></div></div>`;
         }
-
-
 
         const matchAcc = esc.criterios.accion.some(k => txtAcc.includes(k));
-
         if (matchAcc && txtAcc.length >= 25) {
-
             nota += 2.5;
-
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Acción de Control:</strong> <span style="color:#16a34a;">Correcto. Aplica medidas inmediatas de autoprotección, acordonamiento y comunicaciones reglamentarias[cite: 59].</span></div></div>`;
-
+            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Acción de Control:</strong> <span style="color:#16a34a;">Correcto. Aplica medidas inmediatas de autoprotección, acordonamiento y comunicaciones reglamentarias.</span></div></div>`;
         } else {
-
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Acción de Control:</strong> <span style="color:#dc2626;">Debe reflejar balizamiento/monitorización, aviso a policía (091/112) o mantenimiento y autoprotección[cite: 59].</span></div></div>`;
-
+            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Acción de Control:</strong> <span style="color:#dc2626;">Debe reflejar balizamiento/monitorización, aviso a policía (091/112) o mantenimiento y autoprotección.</span></div></div>`;
         }
-
-
 
         const fbCard = document.getElementById("matriz-feedback");
-
         document.getElementById("matriz-feedback-rubricas").innerHTML = itemsHtml;
-
         const notaEl = document.getElementById("matriz-feedback-nota");
-
         notaEl.innerHTML = `Puntuación: <strong>${nota.toFixed(1)} / 10</strong>`;
 
-
-
         if (nota >= 5) {
-
             notaEl.style.color = "#155724";
-
             document.getElementById("matriz-feedback-titulo").textContent = "Diagnóstico Técnico Aprobado";
-
             fbCard.style.borderColor = "#86efac";
-
         } else {
-
             notaEl.style.color = "#b91c1c";
-
             document.getElementById("matriz-feedback-titulo").textContent = "Diagnóstico Requiere Revisión Técnica";
-
             fbCard.style.borderColor = "#fca5a5";
-
         }
-
         fbCard.style.display = "block";
-
     }
-
-
 
     function limpiarMatriz() {
-
         document.getElementById("matriz-peligro").value = "";
-
         document.getElementById("matriz-amenaza").value = "";
-
         document.getElementById("matriz-riesgo").value = "";
-
         document.getElementById("matriz-accion").value = "";
-
         document.getElementById("matriz-feedback").style.display = "none";
-
     }
 
-
-
     // ==========================================
-
     // EJERCICIO 3: AUDITORÍA DE REDACCIÓN DE PARTES
-
     // ==========================================
-
     function analizarParteServicio() {
-
         const texto = document.getElementById("texto-parte").value.trim();
-
         const feedbackCard = document.getElementById("parte-feedback");
-
         const feedbackRubricas = document.getElementById("parte-feedback-rubricas");
-
         const feedbackNota = document.getElementById("parte-feedback-nota");
-
         const feedbackSubj = document.getElementById("parte-feedback-subjetividad");
 
-
-
         if (texto.length < 25) {
-
             alert("El parte es demasiado breve. Redacta el relato fáctico del servicio.");
-
             return;
-
         }
-
-
 
         const textoLower = texto.toLowerCase();
 
-
-
         const rubricas = [
-
             {
-
                 nombre: "Identificación profesional (TIP o puesto de guardia)",
-
                 puntos: 1.5,
-
                 cumple: /\b(tip|vigilante|vs|puesto|servicio|turno)\b/i.test(textoLower),
-
                 descOk: "Identificación del vigilante/servicio debidamente reflejada.",
-
                 descFalla: "Falta consignar la TIP o identificación reglamentaria del actuante."
-
             },
-
             {
-
                 nombre: "Referencia temporal exacta (Formato HH:MM y fecha)",
-
                 puntos: 2.0,
-
                 cumple: /(\b\d{1,2}:\d{2}\b|\bhoras\b|\b\d{1,2}\/\d{1,2}\b|\bfecha\b)/i.test(textoLower),
-
-                descOk: "Consigna hora y referencia temporal precisa en sistema 24 h[cite: 56].",
-
-                descFalla: "Faltan las horas exactas en formato 24 h (ej. 02:40 horas)[cite: 56]."
-
+                descOk: "Consigna hora y referencia temporal precisa en sistema 24 h.",
+                descFalla: "Faltan las horas exactas en formato 24 h (ej. 02:40 horas)."
             },
-
             {
-
                 nombre: "Ubicación espacial concreta",
-
                 puntos: 1.5,
-
                 cumple: /\b(muelle|puerta|salida|emergencia|zona|planta|sector|cctv|camara|pasillo)\b/i.test(textoLower),
-
                 descOk: "Ubicación e instalaciones descritas con precisión.",
-
                 descFalla: "Se debe concretar con exactitud el lugar físico del suceso (muelles, emergencias)."
-
             },
-
             {
-
                 nombre: "Descripción fáctica de la intervención física",
-
                 puntos: 2.0,
-
                 cumple: /\b(comprob|inspeccion|person|acud|verific|observ|detect|cerrad|cerrar|forzad|dañ)/i.test(textoLower),
-
                 descOk: "Constan las acciones operativas y comprobaciones físicas realizadas.",
-
                 descFalla: "Falta describir las acciones y comprobaciones materiales ejecutadas."
-
             },
-
             {
-
                 nombre: "Comunicaciones oficiales de seguridad",
-
                 puntos: 2.0,
-
                 cumple: /\b(polic|091|092|112|mossos|guardia civil|cra|central|jefe de seguridad|coordinad|aviso|comunic)/i.test(textoLower),
-
                 descOk: "Se acredita la comunicación con Central/CRA o Fuerzas de Seguridad.",
-
                 descFalla: "No consta aviso a la Central Receptora, Mandos o Policía."
-
             },
-
             {
-
                 nombre: "Nivel de desarrollo descriptivo",
-
                 puntos: 1.0,
-
                 cumple: texto.split(/\s+/).length >= 40,
-
-                descOk: "Extensión y desglose descriptivo conforme a parte oficial[cite: 55].",
-
-                descFalla: "Texto escueto; un parte oficial requiere mayor descripción de hechos[cite: 55]."
-
+                descOk: "Extensión y desglose descriptivo conforme a parte oficial.",
+                descFalla: "Texto escueto; un parte oficial requiere mayor descripción de hechos."
             }
-
         ];
-
-
 
         const palabrasSubjetivas = [
-
             "me pareció", "creo que", "sospechoso", "pinta de", "cara de", 
-
             "obviamente quería", "seguro que era", "mala pinta", "delincuente", "odio", "me dio miedo"
-
         ];
-
         
-
         let subjetividadesDetectadas = [];
-
         palabrasSubjetivas.forEach(term => {
-
             if (textoLower.includes(term)) subjetividadesDetectadas.push(`"${term}"`);
-
         });
-
-
 
         let nota = 0;
-
         let htmlRubricas = "";
 
-
-
         rubricas.forEach(r => {
-
             if (r.cumple) {
-
                 nota += r.puntos;
-
                 htmlRubricas += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>${r.nombre}:</strong> <span style="color:#16a34a;">${r.descOk}</span></div></div>`;
-
             } else {
-
                 htmlRubricas += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>${r.nombre}:</strong> <span style="color:#dc2626;">${r.descFalla}</span></div></div>`;
-
             }
-
         });
-
-
 
         let penalizacion = subjetividadesDetectadas.length * 1.5;
-
         nota = Math.max(0, nota - penalizacion);
 
-
-
         feedbackRubricas.innerHTML = htmlRubricas;
-
         feedbackNota.innerHTML = `Nota: <strong>${nota.toFixed(1)} / 10</strong>`;
 
-
-
         if (subjetividadesDetectadas.length > 0) {
-
             feedbackSubj.style.display = "block";
-
             feedbackSubj.innerHTML = `
-
                 ⚠ <strong>Penalización por subjetividad (-${penalizacion.toFixed(1)} pts):</strong><br>
-
                 Se detectaron juicios de valor u opiniones personales: <em>${subjetividadesDetectadas.join(", ")}</em>.<br>
-
-                El vigilante debe atenerse a hechos constatables sin calificar intenciones personales[cite: 55].
-
+                El vigilante debe atenerse a hechos constatables sin calificar intenciones personales.
             `;
-
         } else {
-
             feedbackSubj.style.display = "none";
-
         }
-
-
 
         if (nota >= 5) {
-
             feedbackNota.style.color = "#155724";
-
             document.getElementById("parte-feedback-titulo").textContent = "Parte Aprobado - Redacción Conforme";
-
             feedbackCard.style.borderColor = "#86efac";
-
         } else {
-
             feedbackNota.style.color = "#b91c1c";
-
             document.getElementById("parte-feedback-titulo").textContent = "Parte Requiere Corrección";
-
             feedbackCard.style.borderColor = "#fca5a5";
-
         }
-
         feedbackCard.style.display = "block";
-
     }
-
-
 
     function limpiarParte() {
-
         document.getElementById("texto-parte").value = "";
-
         document.getElementById("parte-feedback").style.display = "none";
-
     }
 
-
-
     // ==========================================
-
-    // CONTROL GENERAL DE LA PLATAFORMA
-
+    // CONTROL GENERAL DE LA PLATAFORMA (20 PREGUNTAS ALEATORIAS DE 200)
     // ==========================================
-
     function actualizarContadores() {
-
         const badgeJur = document.getElementById("badge-total-juridico");
-
         const badgePsi = document.getElementById("badge-total-psicologia");
-
         if (badgeJur) badgeJur.textContent = `${bancoJuridico.length} preguntas`;
-
         if (badgePsi) badgePsi.textContent = `${bancoPsicologia.length} preguntas`;
-
     }
-
-
 
     function seleccionarAleatorias(banco, cantidad) {
-
         let mezclado = [...banco].sort(() => 0.5 - Math.random());
-
         return mezclado.slice(0, cantidad);
-
     }
-
-
 
     function renderizarTest(tipo) {
-
         let container = document.getElementById(`quiz-container-${tipo}`);
-
+        if (!container) return;
         container.innerHTML = "";
-
         let banco = (tipo === 'juridico') ? bancoJuridico : bancoPsicologia;
-
         let prefijo = (tipo === 'juridico') ? 'j' : 'p';
 
-
-
-        let seleccion = seleccionarAleatorias(banco, 10);
-
+        let seleccion = seleccionarAleatorias(banco, 20);
         if (tipo === 'juridico') preguntasActualesJuridico = seleccion;
-
         else preguntasActualesPsicologia = seleccion;
 
-
-
         seleccion.forEach((item, index) => {
-
             let numQ = index + 1;
-
             let cardHTML = `
-
                 <div class="question-card" data-q="${prefijo}${numQ}">
-
                     <div class="question">${numQ}. ${item.q}</div>
-
                     <div class="options">
-
             `;
-
-
 
             item.options.forEach((opt) => {
-
                 cardHTML += `<label><input type="radio" name="${prefijo}${numQ}" value="${opt.val}"> ${opt.text}</label>`;
-
             });
 
-
-
             cardHTML += `
-
                     </div>
-
                     <div class="status-badge" id="badge-${prefijo}${numQ}"></div>
-
                     <div class="explanation" id="exp-${prefijo}${numQ}">Explicación: ${item.exp}</div>
-
                 </div>
-
             `;
-
             container.innerHTML += cardHTML;
-
         });
 
-
-
-        document.getElementById(`result-${tipo}`).innerHTML = "";
-
-        document.getElementById(`result-${tipo}`).style.backgroundColor = "transparent";
-
+        const resEl = document.getElementById(`result-${tipo}`);
+        if (resEl) {
+            resEl.innerHTML = "";
+            resEl.style.backgroundColor = "transparent";
+        }
     }
-
-
 
     function iniciarTest(tipo) {
-
         renderizarTest(tipo);
-
         const sectionEl = document.getElementById(`seccion-${tipo}`);
-
         if (sectionEl) sectionEl.scrollIntoView({ behavior: 'smooth' });
-
     }
-
-
 
     function cambiarSeccion(seccion) {
-
         document.querySelectorAll('.test-section').forEach(el => el.classList.remove('active'));
-
         document.querySelectorAll('.btn-section').forEach(el => el.classList.remove('active'));
-
         
-
         const targetSection = document.getElementById(`seccion-${seccion}`);
-
         const targetBtn = document.getElementById(`btn-tab-${seccion}`);
-
         
-
         if (targetSection) targetSection.classList.add('active');
-
         if (targetBtn) targetBtn.classList.add('active');
 
-
-
         if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth' });
-
     }
-
-
 
     function calcularResultado(tipo) {
-
-        let total = 10;
-
+        let total = 20;
         let prefix = (tipo === 'juridico') ? 'j' : 'p';
-
         let aciertos = 0;
-
         let fallos = 0;
 
-
-
         for (let i = 1; i <= total; i++) {
-
             const card = document.querySelector(`[data-q="${prefix}${i}"]`);
-
             if (!card) continue;
-
             const labels = card.querySelectorAll('label');
-
             const badge = document.getElementById(`badge-${prefix}${i}`);
-
             const explanation = document.getElementById(`exp-${prefix}${i}`);
-
             
-
             labels.forEach(l => l.classList.remove('correct-answer', 'wrong-answer'));
 
-
-
             const selected = card.querySelector(`input[name="${prefix}${i}"]:checked`);
-
             const correctInput = card.querySelector(`input[name="${prefix}${i}"][value="correct"]`);
 
-
-
             if (selected) {
-
                 if (selected.value === "correct") {
-
                     aciertos++;
-
                     selected.parentElement.classList.add('correct-answer');
-
                     badge.className = "status-badge correct";
-
                     badge.innerHTML = "¡Correcto!";
-
                 } else {
-
                     fallos++;
-
                     selected.parentElement.classList.add('wrong-answer');
-
                     if (correctInput) correctInput.parentElement.classList.add('correct-answer');
-
                     badge.className = "status-badge wrong";
-
                     badge.innerHTML = "Incorrecto";
-
                 }
-
             } else {
-
                 fallos++;
-
                 if (correctInput) correctInput.parentElement.classList.add('correct-answer');
-
                 badge.className = "status-badge wrong";
-
                 badge.innerHTML = "No respondida";
-
             }
-
             
-
             badge.style.display = "block";
-
             explanation.style.display = "block";
-
         }
-
-
 
         let puntosTotales = (aciertos * 1) - (fallos * 0.5);
-
         let notaFinal = (puntosTotales / total) * 10;
-
         if (notaFinal < 0) notaFinal = 0;
 
-
-
         const resultadoDiv = document.getElementById(`result-${tipo}`);
-
-        if (notaFinal >= 5) {
-
-            resultadoDiv.style.backgroundColor = "#d4edda";
-
-            resultadoDiv.style.color = "#155724";
-
-            resultadoDiv.innerHTML = `¡Aprobado! Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
-
-        } else {
-
-            resultadoDiv.style.backgroundColor = "#f8d7da";
-
-            resultadoDiv.style.color = "#721c24";
-
-            resultadoDiv.innerHTML = `Suspenso. Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
-
+        if (resultadoDiv) {
+            if (notaFinal >= 5) {
+                resultadoDiv.style.backgroundColor = "#d4edda";
+                resultadoDiv.style.color = "#155724";
+                resultadoDiv.innerHTML = `¡Aprobado! Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
+            } else {
+                resultadoDiv.style.backgroundColor = "#f8d7da";
+                resultadoDiv.style.color = "#721c24";
+                resultadoDiv.innerHTML = `Suspenso. Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
+            }
         }
-
     }
 
-
-
     window.onload = function() {
-
         actualizarContadores();
-
         renderizarTest('juridico');
-
         renderizarTest('psicologia');
-
         cargarEscenarioMatriz();
-
         inicializarFilasPlanRiesgos();
-
     };
-
 </script>
 
-
-
 </body>
-
 </html>
