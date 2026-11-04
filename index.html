@@ -3,68 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Jurídico Avanzado - Seguridad Privada</title>
+    <title>Simulador de Examen Jurídico Oficial - Nivel Avanzado Oposición</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f8; color: #333; margin: 0; padding: 20px; }
-        .container { max-width: 850px; margin: 0 auto; background: white; padding: 35px; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
-        h1 { color: #1e3a8a; font-size: 28px; text-align: center; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #64748b; font-size: 15px; margin-bottom: 30px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; background: #1e293b; padding: 35px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid #334155; }
+        h1 { color: #38bdf8; font-size: 26px; text-align: center; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        .subtitle { text-align: center; color: #94a3b8; font-size: 14.5px; margin-bottom: 25px; }
         
-        .rules-box { background: #e0f2fe; border-left: 4px solid #0284c7; padding: 15px; margin-bottom: 25px; border-radius: 0 6px 6px 0; font-size: 14.5px; color: #0c4a6e; }
-        .rules-box ul { margin: 8px 0 0 20px; padding: 0; }
+        .rules-box { background: #1e3a8a33; border-left: 4px solid #38bdf8; padding: 16px; margin-bottom: 25px; border-radius: 0 8px 8px 0; font-size: 14px; color: #bae6fd; line-height: 1.5; }
+        .rules-box ul { margin: 6px 0 0 20px; padding: 0; }
 
-        .progress-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; }
-        .progress-text { font-size: 15px; font-weight: bold; color: #334155; }
+        .progress-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #334155; padding-bottom: 12px; }
+        .progress-text { font-size: 15px; font-weight: bold; color: #cbd5e1; }
         
-        .question-card { background: #ffffff; border: 1px solid #e2e8f0; padding: 25px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
-        .question { font-weight: 700; margin-bottom: 15px; font-size: 16px; color: #0f172a; line-height: 1.4; }
-        .options label { display: block; margin: 10px 0; cursor: pointer; padding: 12px; background: #f8fafc; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 14.5px; transition: all 0.2s; }
-        .options label:hover { background: #f1f5f9; border-color: #94a3b8; }
-        .options input { margin-right: 12px; transform: scale(1.1); }
+        .question-card { background: #182234; border: 1px solid #334155; padding: 22px; border-radius: 8px; margin-bottom: 22px; transition: border-color 0.2s; }
+        .question-card:hover { border-color: #475569; }
+        .question { font-weight: 600; margin-bottom: 16px; font-size: 15.5px; color: #f1f5f9; line-height: 1.5; }
+        .options label { display: block; margin: 10px 0; cursor: pointer; padding: 12px 14px; background: #0f172a; border-radius: 6px; border: 1px solid #334155; font-size: 14px; color: #cbd5e1; transition: all 0.2s; }
+        .options label:hover { background: #1e293b; border-color: #64748b; color: #f8fafc; }
+        .options input { margin-right: 12px; transform: scale(1.15); accent-color: #38bdf8; }
         
-        .correct-answer { background-color: #dcfce7 !important; border-color: #86efac !important; color: #166534; font-weight: bold; }
-        .wrong-answer { background-color: #fee2e2 !important; border-color: #fca5a5 !important; color: #991b1b; }
+        .correct-answer { background-color: #064e3b !important; border-color: #10b981 !important; color: #ecfdf5 !important; font-weight: bold; }
+        .wrong-answer { background-color: #7f1d1d !important; border-color: #ef4444 !important; color: #fef2f2 !important; }
 
-        .status-badge { display: none; font-weight: bold; font-size: 13px; margin-top: 15px; padding: 6px 12px; border-radius: 4px; width: fit-content; }
-        .status-badge.correct { background-color: #dcfce7; color: #166534; display: inline-block; }
-        .status-badge.wrong { background-color: #fee2e2; color: #991b1b; display: inline-block; }
+        .status-badge { display: none; font-weight: bold; font-size: 13px; margin-top: 15px; padding: 5px 12px; border-radius: 4px; width: fit-content; text-transform: uppercase; }
+        .status-badge.correct { background-color: #065f46; color: #6ee7b7; display: inline-block; }
+        .status-badge.wrong { background-color: #991b1b; color: #fca5a5; display: inline-block; }
 
-        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; font-size: 14px; color: #92400e; line-height: 1.5; }
+        .explanation { display: none; margin-top: 14px; padding: 14px; background-color: #0c4a6e33; border: 1px solid #0284c7; border-radius: 6px; font-size: 13.5px; color: #bae6fd; line-height: 1.5; }
 
         .btn-group { display: flex; gap: 15px; margin-top: 30px; }
-        button { background: #2563eb; color: white; border: none; padding: 16px 20px; font-size: 16px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; transition: background 0.3s; }
-        button:hover { background: #1d4ed8; }
-        .btn-reset { background: #64748b; }
-        .btn-reset:hover { background: #475569; }
+        button { background: #0284c7; color: white; border: none; padding: 15px 20px; font-size: 15.5px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: bold; transition: background 0.2s; }
+        button:hover { background: #0369a1; }
+        .btn-reset { background: #475569; }
+        .btn-reset:hover { background: #334155; }
 
-        .result { text-align: center; font-size: 22px; font-weight: bold; margin-top: 30px; padding: 20px; border-radius: 8px; }
+        .result { text-align: center; font-size: 20px; font-weight: bold; margin-top: 30px; padding: 20px; border-radius: 8px; display: none; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Test Jurídico Avanzado - Seguridad Privada</h1>
-    <div class="subtitle">Banco de preguntas extraídas de normativa, apuntes y casos jurisprudenciales</div>
+    <h1>Simulador Jurídico de Alta Dificultad</h1>
+    <div class="subtitle">Banco Especializado: Preguntas Complejas, Excepciones y Supuestos de Trampa Técnica</div>
 
     <div class="rules-box">
-        <strong>Sistema de Evaluación Oficial (Simulacro de 10 preguntas):</strong>
+        <strong>Baremos de Corrección Oficial:</strong>
         <ul>
-            <li>Aciertos: +1,00 punto.</li>
-            <li>Fallos: -0,50 puntos.</li>
-            <li>En blanco: 0,00 puntos.</li>
-            <li>Nota requerida para el APTO: 5,00 / 10.</li>
+            <li>Examen aleatorio de 10 preguntas extraídas del banco de alta exigencia.</li>
+            <li>Acierto: +1,00 pto | Error: -0,50 ptos | En blanco: 0,00 ptos.</li>
+            <li>Nota de corte para el APTO: 5,00 sobre 10.</li>
         </ul>
     </div>
     
     <div class="progress-container">
-        <div class="progress-text" id="contador-preguntas">Cargando test...</div>
+        <div class="progress-text" id="contador-preguntas">Preparando simulacro...</div>
     </div>
 
     <div id="quiz-container"></div>
         
     <div class="btn-group">
         <button onclick="calcularResultado()" id="btn-corregir">Corregir Examen</button>
-        <button class="btn-reset" onclick="iniciarTest()">Generar Nuevo Test</button>
+        <button class="btn-reset" onclick="iniciarTest()">Generar Nuevo Examen (10 al azar)</button>
     </div>
     
     <div id="result-box" class="result"></div>
@@ -72,236 +72,387 @@
 
 <script>
     // =========================================================================
-    // MEGA BANCO DE PREGUNTAS (Basado estrictamente en los documentos aportados)
+    // BANCO TÉCNICO DE PREGUNTAS JURÍDICAS (MÁXIMA EXIGENCIA)
     // =========================================================================
     const bancoPreguntas = [
-        // --- CONSTITUCIÓN ESPAÑOLA ---
+        // --- CP: ASESINATO, HOMICIDIO Y PRISIÓN PERMANENTE REVISABLE ---
         {
-            q: "Según la Constitución Española, ¿cuál es el plazo máximo constitucional en el que un detenido preventivo debe ser puesto en libertad o a disposición judicial?",
+            q: "El art. 139.2 del Código Penal establece que cuando en un asesinato concurran más de una de las circunstancias cualificadoras (alevosía, precio, ensañamiento, facilitar/evitar descubrimiento de otro delito):",
             options: [
-                { text: "En el tiempo estrictamente necesario, con un máximo absoluto de 72 horas.", val: "correct" },
-                { text: "Un máximo de 48 horas improrrogables.", val: "wrong" },
-                { text: "Un máximo de 24 horas, salvo en delitos de terrorismo.", val: "wrong" }
+                { text: "Se impondrá la pena de prisión de 15 a 25 años en su mitad superior.", val: "correct" },
+                { text: "Se impondrá de forma imperativa la pena de prisión permanente revisable.", val: "wrong" },
+                { text: "La segunda circunstancia se computa como agravante genérica ordinaria del art. 22 sin elevar a la mitad superior.", val: "wrong" }
             ],
-            exp: "La detención preventiva no podrá durar más del tiempo estrictamente necesario para las averiguaciones, y en todo caso, en el plazo máximo de 72 horas el detenido deberá ser puesto en libertad o a disposición judicial[cite: 11]."
+            exp: "El art. 139.2 CP dispone textualmente: 'cuando en un asesinato concurran más de una de las circunstancias previstas en el apartado anterior, se impondrá la pena en su mitad superior' (es decir, de 20 a 25 años de prisión)."
         },
         {
-            q: "¿Quién tiene la competencia exclusiva para declarar el Estado de Sitio en España?",
+            q: "¿En cuál de los siguientes supuestos específicos el art. 140 del Código Penal NO impone la pena de prisión permanente revisable al reo de asesinato?",
             options: [
-                { text: "El Congreso de los Diputados, por mayoría absoluta a propuesta exclusiva del Gobierno.", val: "correct" },
-                { text: "El Gobierno, mediante Decreto acordado en Consejo de Ministros.", val: "wrong" },
-                { text: "El Rey, con el refrendo del Presidente del Gobierno.", val: "wrong" }
+                { text: "Cuando el asesinato se ejecute mediando deliberadamente ensañamiento y alevosía simultánea sobre un adulto sin discapacidad.", val: "correct" },
+                { text: "Que la víctima sea menor de 16 años o persona especialmente vulnerable por razón de edad, enfermedad o discapacidad.", val: "wrong" },
+                { text: "Que el hecho fuera subsiguiente a un delito contra la libertad sexual que el autor hubiera cometido sobre la víctima.", val: "wrong" }
             ],
-            exp: "El estado de sitio será declarado por la mayoría absoluta del Congreso de los Diputados, a propuesta exclusiva del Gobierno[cite: 11]."
+            exp: "La concurrencia simultánea de alevosía y ensañamiento cualifica el hecho como asesinato agravado del art. 139.2 (pena en mitad superior: 20 a 25 años), pero NO determina prisión permanente revisable salvo que concurra una de las causas tasadas del art. 140 (menor de 16/vulnerable, subsiguiente a delito sexual, crimen organizado o muerte de más de 2 personas)."
         },
         {
-            q: "De acuerdo con el artículo 17 de la Constitución, para producir la inmediata puesta a disposición judicial de toda persona detenida ilegalmente, la ley regulará un procedimiento denominado:",
+            q: "Al condenado a pena de prisión permanente revisable por la muerte de más de dos personas (art. 140.2 CP), ¿qué requisito temporal mínimo de cumplimiento efectivo se le exige para poder acceder a la clasificación en tercer grado penitenciario?",
             options: [
-                { text: "Habeas corpus.", val: "correct" },
-                { text: "Recurso de amparo.", val: "wrong" },
-                { text: "Cuestión de inconstitucionalidad.", val: "wrong" }
+                { text: "Cumplir un mínimo de 20 años de prisión efectiva.", val: "correct" },
+                { text: "Cumplir un mínimo de 15 años de prisión efectiva.", val: "wrong" },
+                { text: "Cumplir la mitad de la pena tasada en 25 años (12 años y medio).", val: "wrong" }
             ],
-            exp: "La ley regulará un procedimiento de «habeas corpus» para producir la inmediata puesta a disposición judicial de toda persona detenida ilegalmente[cite: 11]."
+            exp: "Para el reo de asesinato condenado por la muerte de más de dos personas a prisión permanente revisable, la normativa penal exige cumplir como mínimo 20 años de privación efectiva de libertad para optar al 3.er grado penitenciario."
         },
         {
-            q: "¿Quién es el encargado de elegir al Defensor del Pueblo y cuál es la duración de su mandato?",
+            q: "El homicidio cometido por imprudencia profesional grave (art. 142 CP) conlleva la inhabilitación especial de 3 a 6 años y presenta la siguiente singularidad procesal:",
             options: [
-                { text: "Es elegido por el Congreso de los Diputados y el Senado por mayoría de 3/5, y su mandato dura 5 años.", val: "correct" },
-                { text: "Es elegido por el Rey a propuesta del Presidente del Gobierno, por un mandato de 4 años.", val: "wrong" },
-                { text: "Es designado por el Consejo General del Poder Judicial para un mandato vitalicio.", val: "wrong" }
+                { text: "Sólo será perseguible mediante denuncia expresa de la persona agraviada o de su representante legal.", val: "correct" },
+                { text: "Es perseguible de oficio por la autoridad judicial en todos los casos.", val: "wrong" },
+                { text: "Requiere autorización motivada del Consejo General del Poder Judicial.", val: "wrong" }
             ],
-            exp: "El Defensor del Pueblo es elegido por el Congreso y el Senado por mayoría de tres quintos y su mandato dura cinco años[cite: 11]."
-        },
-        {
-            q: "Con respecto a la estructura de la Constitución, ¿qué partes la componen siguiendo la tradición francesa?",
-            options: [
-                { text: "Una parte dogmática (principios y derechos fundamentales) y una parte orgánica (división de poderes).", val: "correct" },
-                { text: "Una parte material y una parte procesal.", val: "wrong" },
-                { text: "Una parte preliminar, una penal y una administrativa.", val: "wrong" }
-            ],
-            exp: "Su contenido se estructura en una parte dogmática (principios constitucionales y derechos fundamentales) y una parte orgánica (división de poderes del Estado)[cite: 11]."
+            exp: "El art. 142 CP precisa expresamente que en el homicidio cometido por imprudencia profesional 'sólo será perseguible mediante denuncia de la persona agraviada o de su representante legal'."
         },
 
-        // --- DERECHO PENAL Y DEFINICIONES ---
+        // --- CP: EUTANASIA, ABORTO Y LESIONES ---
         {
-            q: "En el Derecho Penal, si un sujeto comete un hecho constitutivo de infracción creyendo lícita su actuación debido a un desconocimiento evitable de la norma prohibitiva, nos encontramos ante un:",
+            q: "Respecto a la prestación de ayuda para morir (Ley Orgánica de regulación de la eutanasia), si el paciente se encuentra consciente, ¿cuántas solicitudes escritas debe formular como mínimo antes del proceso deliberativo?",
             options: [
-                { text: "Error de prohibición vencible, que atenúa la pena en uno o dos grados.", val: "correct" },
-                { text: "Error de tipo invencible, que excluye la responsabilidad criminal.", val: "wrong" },
-                { text: "Error de prohibición invencible, que castiga el hecho como delito imprudente.", val: "wrong" }
+                { text: "Dos solicitudes por escrito separadas por un intervalo mínimo de 15 días.", val: "correct" },
+                { text: "Una única solicitud ratificada ante notario público y dos testigos.", val: "wrong" },
+                { text: "Tres solicitudes escritas separadas por 30 días naturales.", val: "wrong" }
             ],
-            exp: "Si el error de prohibición (desconocimiento de la ilicitud) fuera vencible, se aplicará la pena inferior en uno o dos grados[cite: 12]."
+            exp: "El interesado debe solicitar la eutanasia dos veces por escrito (o soporte fehaciente si está impedido físicamente) separadas por al menos 15 días, confirmando su voluntad hasta 4 veces a lo largo de todo el procedimiento."
         },
         {
-            q: "¿Cómo castiga el Código Penal el error de tipo vencible?",
+            q: "Según la normativa penal sobre el delito de aborto, ¿qué pena corporal se impone a la mujer embarazada que cause su propio aborto o consienta que otro se lo cause fuera de los casos permitidos por la ley (art. 145.2 CP)?",
             options: [
-                { text: "Elimina el dolo, pero subsiste la culpa, por lo que será castigado como delito imprudente si la ley lo contempla.", val: "correct" },
-                { text: "Se exime al sujeto de toda responsabilidad criminal.", val: "wrong" },
-                { text: "Se castiga como delito doloso pero rebajando la pena en un grado.", val: "wrong" }
+                { text: "No conlleva pena de prisión, sino pena de multa de seis a veinticuatro meses.", val: "correct" },
+                { text: "Pena de prisión de uno a tres años e inhabilitación.", val: "wrong" },
+                { text: "Queda exenta de toda sanción penal conforme al art. 146 CP.", val: "wrong" }
             ],
-            exp: "El error de tipo vencible elimina el dolo pero subsiste la culpa, siendo castigado como infracción imprudente[cite: 12]."
+            exp: "El art. 145.2 CP castiga a la mujer que produjere su aborto o consintiere que se lo causen fuera de la ley exclusivamente con pena de multa de 6 a 24 meses (la prisión de 1 a 3 años recae sobre el tercero que lo ejecuta)."
         },
         {
-            q: "Si en un asalto dos sujetos se acercan a un coche para robar, y mientras uno vigila fuera, el otro accede al interior y comete un delito, impidiendo el vigilante exterior que acudan en ayuda de la víctima. Según el Tribunal Supremo, la persona que vigila fuera será considerada:",
+            q: "A tenor del artículo 147.1 del Código Penal, ¿cuál de los siguientes actos facultativos NO tiene consideración de tratamiento médico a efectos de calificar la lesión como delito básico?",
             options: [
-                { text: "Cooperador necesario (Autor).", val: "correct" },
-                { text: "Cómplice (Participación no necesaria).", val: "wrong" },
-                { text: "Encubridor.", val: "wrong" }
+                { text: "La simple vigilancia o el seguimiento facultativo del curso de la lesión.", val: "correct" },
+                { text: "La prescripción de inmovilización traumatológica con escayola durante cuatro semanas.", val: "wrong" },
+                { text: "La sutura quirúrgica de una herida profunda que requiera puntos de aproximación interna.", val: "wrong" }
             ],
-            exp: "Se considera cooperador necesario porque su conducta es imprescindible para la ejecución del delito (impide la intervención de terceros por la fuerza), respondiendo como autor[cite: 13]."
+            exp: "El art. 147.1 CP estipula de forma explícita que 'la simple vigilancia o seguimiento facultativo del curso de la lesión no se considerará tratamiento médico', calificándose en tal caso como delito leve (art. 147.2 CP)."
         },
         {
-            q: "Para que opere la circunstancia eximente de Legítima Defensa, es indispensable que concurran los siguientes requisitos:",
+            q: "Causar a otro por cualquier medio la pérdida o inutilidad de un órgano o miembro NO principal, o una deformidad no grave (art. 150 CP), está castigado con la pena de:",
             options: [
-                { text: "Agresión ilegítima, necesidad racional del medio empleado y falta de provocación suficiente.", val: "correct" },
-                { text: "Peligro inminente, colisión de bienes jurídicos y que el mal causado sea menor que el evitado.", val: "wrong" },
-                { text: "Agresión armada, intervención policial y falta de provocación.", val: "wrong" }
+                { text: "Prisión de 3 a 6 años.", val: "correct" },
+                { text: "Prisión de 6 a 12 años.", val: "wrong" },
+                { text: "Prisión de 2 a 5 años.", val: "wrong" }
             ],
-            exp: "La legítima defensa requiere agresión ilegítima, necesidad racional del medio empleado y falta de provocación suficiente[cite: 12]."
+            exp: "El art. 150 CP castiga la pérdida/inutilidad de miembro NO principal o deformidad con prisión de 3 a 6 años (mientras que si es miembro principal, sentido, deformidad grave o impotencia, el art. 149 CP eleva la pena a prisión de 6 a 12 años)."
         },
         {
-            q: "De acuerdo con el Código Penal, las penas impuestas mediante sentencia firme por delitos de lesa humanidad y genocidio:",
+            q: "En el delito de participación en riña tumultuaria (art. 154 CP), para que la conducta sea típica se exige indispensablemente:",
             options: [
-                { text: "No prescriben nunca.", val: "correct" },
-                { text: "Prescriben a los 30 años.", val: "wrong" },
-                { text: "Prescriben a los 20 años.", val: "wrong" }
+                { text: "Acometimiento recíproco y confuso entre dos o más grupos con utilización de medios o instrumentos peligrosos para la vida o integridad.", val: "correct" },
+                { text: "Que se identifique individualmente al autor material que infirió las lesiones causadas.", val: "wrong" },
+                { text: "Que concurra al menos la muerte consumada o tentativa de homicidio de uno de los intervinientes.", val: "wrong" }
             ],
-            exp: "Los delitos y penas de lesa humanidad y genocidio nunca prescriben[cite: 13]."
-        },
-        {
-            q: "Si un individuo alienta públicamente, mediante la radiodifusión o redes sociales, a la comisión de un delito enalteciendo al autor del mismo de forma directa. Jurídicamente estamos ante:",
-            options: [
-                { text: "Apología, que solo es delictiva si constituye una incitación directa (forma de provocación).", val: "correct" },
-                { text: "Conspiración para delinquir.", val: "wrong" },
-                { text: "Proposición delictiva.", val: "wrong" }
-            ],
-            exp: "La apología es la exposición de ideas que ensalcen el crimen, y sólo será delictiva como forma de provocación si constituye una incitación directa a cometer un delito[cite: 12]."
+            exp: "El art. 154 CP no castiga un resultado lesivo concreto sino la mera participación en una riña tumultuosa entre grupos donde se utilicen armas o instrumentos peligrosos, con riesgo para la integridad física."
         },
 
-        // --- HOMICIDIO, LESIONES Y LIBERTAD SEXUAL ---
+        // --- CP: LIBERTAD SEXUAL Y REFORMAS ---
         {
-            q: "¿En qué circunstancia el Código Penal castiga el Asesinato con la pena de Prisión Permanente Revisable?",
+            q: "Bajo el marco de la LO 10/2022 y LO 4/2023, ¿cuándo se aprecia jurídicamente la modalidad agravada de violación del art. 179 CP con pena de prisión de 6 a 12 años?",
             options: [
-                { text: "Cuando la víctima sea menor de 16 años, persona especialmente vulnerable, o el crimen sea subsiguiente a un delito contra la libertad sexual.", val: "correct" },
-                { text: "Siempre que medie precio, recompensa o promesa.", val: "wrong" },
-                { text: "Únicamente si el asesinato se ha cometido mediante ensañamiento extremo.", val: "wrong" }
+                { text: "Cuando habiendo acceso carnal (vaginal, anal o bucal) o introducción de miembros/objetos, se cometa empleando violencia, intimidación o sobre víctima con voluntad anulada.", val: "correct" },
+                { text: "Cuando el acceso carnal se realice sin violencia ni oposición física evidente.", val: "wrong" },
+                { text: "Únicamente cuando en la violación concurran dos o más autores de forma conjunta.", val: "wrong" }
             ],
-            exp: "El asesinato se castiga con prisión permanente revisable si la víctima es menor de 16 años o vulnerable, o si es subsiguiente a un delito contra la libertad sexual, o por grupo criminal[cite: 10]."
+            exp: "El art. 179.1 CP castiga la violación consentida por vicio o sin anuencia con 4 a 12 años; pero el art. 179.2 CP impone de 6 a 12 años si se comete empleando violencia o intimidación o con la voluntad de la víctima anulada."
         },
         {
-            q: "Con la entrada en vigor de la Ley Orgánica 10/2022 (Ley de 'solo sí es sí'), ¿cómo se califica cualquier acto que atente contra la libertad sexual sin el consentimiento de la víctima, haya o no violencia?",
+            q: "Señala la circunstancia que NO integra la cualificación agravada específica del art. 180 del CP en delitos contra la libertad sexual:",
             options: [
-                { text: "Desaparece el abuso sexual y se equipara todo ataque sin consentimiento al delito de Agresión Sexual.", val: "correct" },
-                { text: "Abuso sexual si no hay violencia, y agresión si existe fuerza.", val: "wrong" },
-                { text: "Acoso sexual agravado.", val: "wrong" }
+                { text: "Que el autor actúe bajo la influencia no plena de bebidas alcohólicas o drogas.", val: "correct" },
+                { text: "Que los hechos se cometan por la actuación conjunta de dos o más personas.", val: "wrong" },
+                { text: "Que el responsable haya anulado la voluntad de la víctima suministrándole fármacos, drogas o sumisión química.", val: "wrong" }
             ],
-            exp: "El delito de abuso sexual desaparece y se equipara con el de agresión sexual; cualquier ataque a la libertad sexual sin consentimiento se considerará agresión sexual[cite: 10]."
-        },
-        {
-            q: "Según el artículo 149 del Código Penal, causar a otra persona la pérdida o inutilidad de un órgano o miembro principal, de un sentido, o la esterilidad, está castigado con:",
-            options: [
-                { text: "Prisión de 6 a 12 años.", val: "correct" },
-                { text: "Prisión de 3 a 6 años.", val: "wrong" },
-                { text: "Prisión de 1 a 3 años.", val: "wrong" }
-            ],
-            exp: "Causar la pérdida o inutilidad de un órgano principal, sentido, esterilidad o grave deformidad se castiga con prisión de 6 a 12 años[cite: 10]."
-        },
-        {
-            q: "¿Cuál es la diferencia entre el delito de lesiones básico (art 147.1) y el delito leve de lesiones (art 147.2)?",
-            options: [
-                { text: "El delito básico requiere objetivamente tratamiento médico o quirúrgico además de la primera asistencia; el leve no lo requiere.", val: "correct" },
-                { text: "El delito básico se comete con armas y el leve mediante agresiones verbales.", val: "wrong" },
-                { text: "El delito básico se persigue de oficio y el leve solo a instancia de parte.", val: "wrong" }
-            ],
-            exp: "El delito de lesiones (art. 147.1) requiere objetivamente, además de primera asistencia, tratamiento médico o quirúrgico[cite: 10]."
+            exp: "El art. 180 enumera taxativamente: coautoría de 2 o más, violencia de extrema gravedad/vejatoria, parentesco/convivencia, uso de armas o anulación de voluntad con fármacos/drogas. El mero consumo de alcohol por el autor no cualifica el delito."
         },
 
-        // --- SEGURIDAD PRIVADA Y DROGAS ---
+        // --- DOGMÁTICA PENAL: ERROR, ITER CRIMINIS Y AUTORÍA ---
         {
-            q: "El abandono o la omisión injustificados del servicio por parte del personal de seguridad privada, dentro de la jornada laboral establecida, constituye una infracción:",
+            q: "Un cazador dispara tras un matorral creyendo que se mueve un jabalí y causa la muerte a otro cazador. Si se demuestra que con un mínimo de prudencia y observación habría comprobado la presencia humana, nos encontramos ante:",
             options: [
-                { text: "Muy grave.", val: "correct" },
-                { text: "Grave.", val: "wrong" },
-                { text: "Leve.", val: "wrong" }
+                { text: "Error de tipo vencible: se excluye el dolo pero subsiste la culpa, castigándose como homicidio imprudente.", val: "correct" },
+                { text: "Error de prohibición vencible: se aplica la pena de homicidio doloso atenuada en uno o dos grados.", val: "wrong" },
+                { text: "Error de tipo invencible: el hecho es impune al excluirse tanto el dolo como la culpa.", val: "wrong" }
             ],
-            exp: "El abandono u omisión injustificados del servicio por parte del personal de seguridad privada está tipificado como infracción muy grave (Art. 58.1.j LSP)[cite: 14]."
+            exp: "El sujeto desconoce el elemento fáctico del tipo (matar a un 'hombre vivo' creyendo que es un animal: error de tipo). Al ser evitable con la diligencia debida es vencible: elimina el dolo pero subsiste la imprudencia (art. 14.1 CP)."
         },
         {
-            q: "Durante la prestación de su servicio, un Vigilante de Seguridad detecta a un individuo consumiendo sustancias estupefacientes en el interior del recinto protegido. ¿Cuál es su obligación legal estricta?",
+            q: "En los delitos que se cometan utilizando medios o soportes mecánicos de difusión (prensa, radio o internet), ¿cómo responde penalmente el escalafón de autores del art. 30 del Código Penal?",
             options: [
-                { text: "Deberá impedir el consumo ilegal en el interior de los locales de su protección, comunicándolo de inmediato a las Fuerzas y Cuerpos de Seguridad para facilitar su identificación.", val: "correct" },
-                { text: "Sancionar económicamente al individuo y expulsarlo sin llamar a la policía.", val: "wrong" },
-                { text: "Detener al individuo por tráfico de drogas e interrogarlo sobre su procedencia.", val: "wrong" }
+                { text: "De forma escalonada, excluyente y subsidiaria, no respondiendo los cómplices ni favorecedores.", val: "correct" },
+                { text: "De forma solidaria y mancomunada entre todos los redactores y directores del medio.", val: "wrong" },
+                { text: "Únicamente responde el administrador legal de la mercantil propietaria del dominio o rotativa.", val: "wrong" }
             ],
-            exp: "El RSP establece que los vigilantes deberán impedir el consumo ilegal de drogas en los establecimientos bajo su protección, comunicándolo a las FFCCSS[cite: 14]."
+            exp: "El art. 30 CP establece que en delitos por medios de difusión no responden cómplices ni favorecedores, y los autores responden escalonada, excluyente y subsidiariamente en el orden fijado legalmente."
         },
         {
-            q: "El arma reglamentaria que emplearán los vigilantes de seguridad en los servicios que deban prestarse con armas de fuego cortas es:",
+            q: "El art. 454 del Código Penal exime de las penas impuestas a los encubridores de sus cónyuges, ascendientes, descendientes o hermanos. ¿Cuál es la ÚNICA excepción legal a este privilegio familiar?",
             options: [
-                { text: "El revólver calibre 38 especial de cuatro pulgadas.", val: "correct" },
-                { text: "Pistola semiautomática de 9 mm Parabellum.", val: "wrong" },
-                { text: "Cualquier arma amparada bajo la licencia tipo C.", val: "wrong" }
+                { text: "El encubrimiento consistente en auxiliar a los autores para que se beneficien del provecho, producto o precio del delito, sin ánimo de lucro propio (art. 451.1º CP).", val: "correct" },
+                { text: "El encubrimiento mediante alteración, ocultación o destrucción de las armas del delito (art. 451.2º CP).", val: "wrong" },
+                { text: "El auxilio prestado a familiares prófugos acusados de delitos de terrorismo o rebelión.", val: "wrong" }
             ],
-            exp: "El arma reglamentaria de los vigilantes de seguridad en servicios con armas es el revólver calibre treinta y ocho especial de cuatro pulgadas[cite: 14]."
+            exp: "El art. 454 CP consagra la excusa absolutoria para parientes 'con la sola excepción de los encubridores que se hallen comprendidos en el supuesto del número 1.º del artículo 451' (favorecimiento real o receptación de provecho)."
+        },
+
+        // --- PENAS Y PRESCRIPCIÓN ---
+        {
+            q: "A tenor del artículo 33 del Código Penal, ¿cuál de las siguientes sanciones tiene la consideración técnica de PENA GRAVE?",
+            options: [
+                { text: "La privación del derecho a la tenencia y porte de armas por tiempo superior a ocho años.", val: "correct" },
+                { text: "La prisión de tres meses hasta cinco años.", val: "wrong" },
+                { text: "La inhabilitación especial para empleo o cargo público por tiempo de cuatro años y medio.", val: "wrong" }
+            ],
+            exp: "Art. 33.2 CP: Son penas graves la prisión superior a 5 años, inhabilitaciones superiores a 5 años, y la privación de conducir o porte de armas por tiempo SUPERIOR a 8 años (de 1 año y 1 día a 8 años es menos grave)."
         },
         {
-            q: "De acuerdo con el Reglamento de Seguridad Privada, los grilletes que utilicen los Vigilantes de Seguridad deben cumplir la siguiente norma:",
+            q: "Conforme al artículo 133 del Código Penal, ¿a qué plazo prescriben las penas de prisión de quince o más años impuestas por sentencia firme sin que excedan de veinte?",
             options: [
-                { text: "Serán de los denominados de manilla, proporcionados por la empresa e indicados por el jefe de seguridad.", val: "correct" },
-                { text: "Deben ser adquiridos obligatoriamente por el propio vigilante.", val: "wrong" },
-                { text: "Están terminantemente prohibidos para el personal de seguridad privada.", val: "wrong" }
+                { text: "A los 25 años.", val: "correct" },
+                { text: "A los 30 años.", val: "wrong" },
+                { text: "A los 20 años.", val: "wrong" }
             ],
-            exp: "Los grilletes serán de los denominados de manilla, proporcionados por la empresa al vigilante, y el jefe de seguridad dispone su uso[cite: 14, 15]."
+            exp: "Prescripción de penas (art. 133 CP): A los 30 años las de prisión > 20 años; a los 25 años las de prisión de 15 o más sin exceder de 20; y a los 20 años las de prisión de 10 a 15 años."
+        },
+
+        // --- SEGURIDAD PRIVADA: INFRACCIONES Y PROCEDIMIENTO ---
+        {
+            q: "Según la Ley 5/2014, ¿qué órgano ostenta la potestad sancionadora en la Administración General del Estado para decretar la EXTINCIÓN de la habilitación profesional de un Vigilante de Seguridad?",
+            options: [
+                { text: "El Ministro del Interior de forma exclusiva.", val: "correct" },
+                { text: "El Secretario de Estado de Seguridad.", val: "wrong" },
+                { text: "El Director General de la Policía.", val: "wrong" }
+            ],
+            exp: "Art. 66.1.a LSP: Corresponde al Ministro del Interior imponer la sanción de extinción de las autorizaciones y habilitaciones. Al Secretario de Estado corresponden las restantes muy graves y al DGP las graves."
         },
         {
-            q: "En controles de acceso, si un ciudadano se niega a exhibir su documentación personal o permitir la comprobación de sus pertenencias, el Vigilante de Seguridad:",
+            q: "¿A qué plazo de prescripción están sometidas las SANCIONES administrativas firmes impuestas por la comisión de infracciones MUY GRAVES en materia de seguridad privada (art. 68 LSP)?",
             options: [
-                { text: "No puede retener la documentación personal, pero está facultado para impedirle el acceso u ordenarle el abandono del inmueble.", val: "correct" },
-                { text: "Debe retener físicamente a la persona hasta que se identifique ante las FFCCSS.", val: "wrong" },
-                { text: "Puede registrarle en contra de su voluntad acogiéndose a la Ley de Seguridad Ciudadana.", val: "wrong" }
+                { text: "A los cuatro años.", val: "correct" },
+                { text: "A los tres años.", val: "wrong" },
+                { text: "A los dos años.", val: "wrong" }
             ],
-            exp: "La negativa a exhibir la identificación o permitir el control faculta al vigilante para impedir el acceso u ordenar el abandono del inmueble, pero nunca retener la documentación[cite: 14]."
+            exp: "¡Atención a la trampa infracción vs sanción! Las infracciones prescriben a los 3 años (muy graves), 2 años (graves) y 6 meses (leves). Pero las SANCIONES ya impuestas prescriben: al año (leves), 2 años (graves) y a los 4 años (muy graves)."
         },
         {
-            q: "La Tarjeta de Identidad Profesional (TIP) del Vigilante de Seguridad es expedida por:",
+            q: "El vigilante de seguridad que retenga la documentación personal de un ciudadano que accede a un recinto incurre en una infracción administrativa tipificada como:",
             options: [
-                { text: "El Director General de la Policía (salvo la de guardas rurales que expide la Guardia Civil).", val: "correct" },
-                { text: "El Ministerio del Interior de forma conjunta con la empresa de seguridad.", val: "wrong" },
-                { text: "El Secretario de Estado de Seguridad.", val: "wrong" }
+                { text: "Infracción grave (art. 58.2.f LSP).", val: "correct" },
+                { text: "Infracción leve de trato desconsiderado.", val: "wrong" },
+                { text: "Infracción muy grave por usurpación de funciones judiciales.", val: "wrong" }
             ],
-            exp: "Las tarjetas de identidad profesional son expedidas por el Director General de la Policía, salvo las de los guardas particulares del campo (Director General de la Guardia Civil)[cite: 14, 15]."
+            exp: "El art. 32 prohíbe retener la documentación personal y el art. 58.2.f tipifica taxativamente 'la retención de la documentación personal' como infracción GRAVE del personal de seguridad."
         },
         {
-            q: "En el marco de la Seguridad Privada, no identificarse profesionalmente cuando fueren requeridos por las Fuerzas y Cuerpos de Seguridad o Autoridad es:",
+            q: "¿Qué plazo máximo de caducidad establece la Ley de Seguridad Privada para la tramitación de un expediente sancionador desde su acuerdo de incoación sin resolución?",
             options: [
-                { text: "Una infracción muy grave.", val: "correct" },
-                { text: "Una infracción grave.", val: "wrong" },
-                { text: "Una infracción leve.", val: "wrong" }
+                { text: "Seis meses.", val: "correct" },
+                { text: "Tres meses.", val: "wrong" },
+                { text: "Un año.", val: "wrong" }
             ],
-            exp: "La negativa a identificarse profesionalmente ante la Autoridad o sus agentes constituye una infracción muy grave (Art. 58.1.g)[cite: 14]."
+            exp: "Art. 69.2 LSP: 'El procedimiento caducará transcurridos seis meses desde su incoación sin que se haya notificado la resolución', computando suspensiones reglamentarias."
+        },
+        {
+            q: "El distintivo ovalado oficial del Vigilante de Seguridad (Orden INT/318/2011) si es de elaboración metálica debe ajustarse rígidamente a:",
+            options: [
+                { text: "Aleación de 65% de cobre y 35% de zinc, fondo blanco, letras/números rojos y fijación por imperdible horizontal.", val: "correct" },
+                { text: "Aluminio anodizado al 100%, fondo dorado y pasador vertical de seguridad.", val: "wrong" },
+                { text: "Chapa de acero esmaltada en azul corporativo con fijación magnética homologada.", val: "wrong" }
+            ],
+            exp: "La Orden INT/318/2011 fija: 8x6 cm, ovalado, fondo blanco, números rojos. En metal: aleación de 65% cobre y 35% zinc, esmalte cerámico y fijación mediante imperdible horizontal."
+        },
+        {
+            q: "En el tiro semestral obligatorio para vigilantes que presten servicio con armas de fuego, ¿cuántos disparos mínimos exige la Orden INT/318/2011 en cada ejercicio?",
+            options: [
+                { text: "Un mínimo de 25 disparos semestrales.", val: "correct" },
+                { text: "Un mínimo de 50 disparos semestrales.", val: "wrong" },
+                { text: "Un mínimo de 15 disparos trimestrales.", val: "wrong" }
+            ],
+            exp: "El art. 21 de la Orden INT/318/2011 establece que se efectuará un mínimo de veinticinco disparos en cada ejercicio obligatorio de tiro semestral con su arma reglamentaria."
+        },
+
+        // --- CONSTITUCIÓN: REFORMA Y ÓRGANOS ---
+        {
+            q: "¿Qué mayoría cualificada y trámite exige el artículo 167 de la Constitución para aprobar un proyecto de reforma constitucional ordinaria?",
+            options: [
+                { text: "Mayoría de tres quintos de cada una de las Cámaras; y referéndum facultativo si lo pide 1/10 de los miembros de cualquier Cámara en 15 días.", val: "correct" },
+                { text: "Mayoría de dos tercios de cada Cámara con disolución inmediata de las Cortes y referéndum obligatorio.", val: "wrong" },
+                { text: "Mayoría absoluta del Congreso ratificada por mayoría simple del Senado sin posibilidad de referéndum.", val: "wrong" }
+            ],
+            exp: "La reforma ordinaria (art. 167 CE) exige 3/5 de cada Cámara. Si una décima parte (1/10) de diputados o senadores lo solicita en el plazo de 15 días tras su aprobación, se somete a referéndum potestativo."
+        },
+        {
+            q: "Conforme al artículo 159 de la Constitución, los 12 magistrados del Tribunal Constitucional se eligen por un periodo de nueve años, renovándose:",
+            options: [
+                { text: "Por terceras partes (cuatro miembros) cada tres años.", val: "correct" },
+                { text: "Por mitades (seis miembros) cada cuatro años y medio.", val: "wrong" },
+                { text: "En su totalidad cada nueve años coincidiendo con las elecciones generales.", val: "wrong" }
+            ],
+            exp: "Art. 159.3 CE: 'Los miembros del Tribunal Constitucional serán designados por un período de nueve años y se renovarán por terceras partes cada tres'."
+        },
+        {
+            q: "¿Quién ostenta la legitimación activa directa para interponer el recurso de amparo constitucional ante el Tribunal Constitucional?",
+            options: [
+                { text: "Toda persona natural o jurídica que invoque un interés legítimo, el Defensor del Pueblo y el Ministerio Fiscal.", val: "correct" },
+                { text: "Únicamente el Presidente del Gobierno y 50 Diputados o Senadores.", val: "wrong" },
+                { text: "Los Colegios de Abogados y los Tribunales Superiores de Justicia autonómicos.", val: "wrong" }
+            ],
+            exp: "Art. 162.1.b CE: Para el recurso de amparo están legitimados: la persona natural o jurídica que invoque interés legítimo, el Defensor del Pueblo y el Ministerio Fiscal."
         },
 
         // --- UNIÓN EUROPEA ---
         {
-            q: "En el ordenamiento jurídico de la Unión Europea, ¿qué característica principal define a un 'Reglamento' frente a una 'Directiva'?",
+            q: "La institución judicial de la Unión Europea compuesta por 27 jueces y 11 abogados generales designados por los Gobiernos por seis años, competente para resolver cuestiones prejudiciales, es:",
             options: [
-                { text: "El Reglamento tiene alcance general y es directamente aplicable en cada Estado miembro sin necesidad de transposición.", val: "correct" },
-                { text: "El Reglamento solo obliga en cuanto al resultado, requiriendo que los Estados lo adapten a su derecho nacional.", val: "wrong" },
-                { text: "El Reglamento es una mera recomendación sin fuerza vinculante.", val: "wrong" }
+                { text: "El Tribunal de Justicia de la Unión Europea (TJUE).", val: "correct" },
+                { text: "El Tribunal General de la Unión Europea.", val: "wrong" },
+                { text: "El Tribunal Europeo de Derechos Humanos (TEDH).", val: "wrong" }
             ],
-            exp: "Un reglamento tiene alcance general, es obligatorio en todas sus partes y directamente aplicable en cada Estado miembro, sin necesidad de transposición[cite: 16]."
+            exp: "El Tribunal de Justicia (órgano superior del TJUE) lo integran 27 jueces y 11 abogados generales; resuelve cuestiones prejudiciales planteadas por tribunales de los Estados miembros."
         },
         {
-            q: "¿Qué institución europea ostenta el poder ejecutivo, propone la legislación y vigila el cumplimiento de los tratados?",
+            q: "¿Qué acto jurídico de la Unión Europea es obligatorio en todos sus elementos pero ÚNICAMENTE para los destinatarios específicos a quienes va dirigido (Estados o particulares)?",
             options: [
-                { text: "La Comisión Europea.", val: "correct" },
-                { text: "El Parlamento Europeo.", val: "wrong" },
-                { text: "El Consejo Europeo.", val: "wrong" }
+                { text: "La Decisión comunitaria.", val: "correct" },
+                { text: "La Directiva europea.", val: "wrong" },
+                { text: "El Dictamen motivado.", val: "wrong" }
             ],
-            exp: "La Comisión Europea tiene el poder ejecutivo, propone la nueva legislación, gestiona el presupuesto y hace cumplir la ley (guardiana de los tratados)[cite: 16]."
-        },
-        {
-            q: "La Agencia de la Unión Europea para la Cooperación Policial (EUROPOL):",
-            options: [
-                { text: "Facilita el intercambio de información y análisis de inteligencia criminal, pero no es una policía que patrulle o realice detenciones.", val: "correct" },
-                { text: "
+            exp: "La Decisión es obligatoria en todos sus elementos para sus destinatarios determinados (sean Estados concretos, empresas o particulares), a diferencia del Reglamento que tiene alcance general y abstracto."
+        }
+    ];
+
+    let preguntasActuales = [];
+
+    function seleccionarAleatorias(banco, cantidad) {
+        let copia = [...banco];
+        copia.sort(() => 0.5 - Math.random());
+        return copia.slice(0, cantidad);
+    }
+
+    function iniciarTest() {
+        const container = document.getElementById('quiz-container');
+        const resBox = document.getElementById('result-box');
+        const btnCorregir = document.getElementById('btn-corregir');
+        
+        container.innerHTML = "";
+        resBox.innerHTML = "";
+        resBox.style.display = "none";
+        btnCorregir.disabled = false;
+        
+        preguntasActuales = seleccionarAleatorias(bancoPreguntas, 10);
+        document.getElementById('contador-preguntas').textContent = `Simulacro Activo: 10 Preguntas Seleccionadas`;
+
+        preguntasActuales.forEach((item, index) => {
+            let numQ = index + 1;
+            let opcionesMezcladas = [...item.options].sort(() => 0.5 - Math.random());
+            
+            let cardHTML = `
+                <div class="question-card" id="card-${numQ}">
+                    <div class="question">${numQ}. ${item.q}</div>
+                    <div class="options">
+            `;
+
+            opcionesMezcladas.forEach((opt) => {
+                cardHTML += `
+                    <label>
+                        <input type="radio" name="q${numQ}" value="${opt.val}">
+                        ${opt.text}
+                    </label>`;
+            });
+
+            cardHTML += `
+                    </div>
+                    <div class="status-badge" id="badge-${numQ}"></div>
+                    <div class="explanation" id="exp-${numQ}"><strong>Fundamentación Técnico-Jurídica:</strong> ${item.exp}</div>
+                </div>
+            `;
+            container.innerHTML += cardHTML;
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function calcularResultado() {
+        let aciertos = 0;
+        let fallos = 0;
+        let blancos = 0;
+        const total = 10;
+
+        for (let i = 1; i <= total; i++) {
+            const card = document.getElementById(`card-${i}`);
+            const labels = card.querySelectorAll('label');
+            const badge = document.getElementById(`badge-${i}`);
+            const exp = document.getElementById(`exp-${i}`);
+            
+            labels.forEach(l => l.classList.remove('correct-answer', 'wrong-answer'));
+
+            const selected = card.querySelector(`input[name="q${i}"]:checked`);
+            const correctInput = card.querySelector(`input[name="q${i}"][value="correct"]`);
+
+            if (selected) {
+                if (selected.value === "correct") {
+                    aciertos++;
+                    selected.parentElement.classList.add('correct-answer');
+                    badge.className = "status-badge correct";
+                    badge.innerHTML = "✓ Correcto";
+                } else {
+                    fallos++;
+                    selected.parentElement.classList.add('wrong-answer');
+                    if (correctInput) correctInput.parentElement.classList.add('correct-answer');
+                    badge.className = "status-badge wrong";
+                    badge.innerHTML = "✗ Error (-0.5)";
+                }
+            } else {
+                blancos++;
+                if (correctInput) correctInput.parentElement.classList.add('correct-answer');
+                badge.className = "status-badge wrong";
+                badge.innerHTML = "⚠ No contestada (0.0)";
+            }
+            
+            badge.style.display = "inline-block";
+            exp.style.display = "block";
+            
+            card.querySelectorAll('input').forEach(inp => inp.disabled = true);
+        }
+
+        let puntos = (aciertos * 1.0) - (fallos * 0.5);
+        if (puntos < 0) puntos = 0;
+        let notaFinal = puntos;
+
+        const resBox = document.getElementById('result-box');
+        resBox.style.display = "block";
+
+        if (notaFinal >= 5) {
+            resBox.style.backgroundColor = "#064e3b";
+            resBox.style.border = "1px solid #10b981";
+            resBox.style.color = "#ecfdf5";
+            resBox.innerHTML = `CALIFICACIÓN: APTO <br><span style="font-size:15px; font-weight:normal;">Aciertos: ${aciertos} | Fallos: ${fallos} (-${(fallos * 0.5).toFixed(1)}) | En blanco: ${blancos}</span> <br><strong style="font-size:24px;">Nota Final: ${notaFinal.toFixed(2)} / 10</strong>`;
+        } else {
+            resBox.style.backgroundColor = "#7f1d1d";
+            resBox.style.border = "1px solid #ef4444";
+            resBox.style.color = "#fef2f2";
+            resBox.innerHTML = `CALIFICACIÓN: NO APTO <br><span style="font-size:15px; font-weight:normal;">Aciertos: ${aciertos} | Fallos: ${fallos} (-${(fallos * 0.5).toFixed(1)}) | En blanco: ${blancos}</span> <br><strong style="font-size:24px;">Nota Final: ${notaFinal.toFixed(2)} / 10</strong>`;
+        }
+
+        document.getElementById('btn-corregir').disabled = true;
+        window.scrollTo({ top: resBox.offsetTop - 40, behavior: 'smooth' });
+    }
+
+    window.onload = iniciarTest;
+</script>
+
+</body>
+</html>
