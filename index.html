@@ -3,1073 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de Tests Avanzados - Área Jurídica (Seguridad Privada)</title>
+    <title>Test Jurídico Avanzado - Seguridad Privada</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; font-size: 26px; text-align: center; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 25px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f8; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 850px; margin: 0 auto; background: white; padding: 35px; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        h1 { color: #1e3a8a; font-size: 28px; text-align: center; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #64748b; font-size: 15px; margin-bottom: 30px; }
         
-        /* Dashboard de Módulos */
-        .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
+        .rules-box { background: #e0f2fe; border-left: 4px solid #0284c7; padding: 15px; margin-bottom: 25px; border-radius: 0 6px 6px 0; font-size: 14.5px; color: #0c4a6e; }
+        .rules-box ul { margin: 8px 0 0 20px; padding: 0; }
 
-        .module-summary-card {
-            background: #ffffff;
-            border: 1px solid #e1e8ed;
-            border-radius: 10px;
-            padding: 18px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .module-summary-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-        }
-
-        .module-title { font-size: 16px; font-weight: bold; color: #1e293b; }
-        .module-subtitle { font-size: 12.5px; color: #64748b; line-height: 1.4; }
-
-        .badges-wrapper { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; margin: 6px 0; }
-        .info-pill {
-            display: inline-block;
-            background-color: #e0f2fe;
-            color: #0369a1;
-            font-size: 11.5px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 20px;
-        }
-
-        .btn-enter-module {
-            background-color: #2563eb;
-            color: white;
-            border: none;
-            padding: 8px 14px;
-            font-size: 13.5px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            align-self: flex-start;
-            width: auto;
-            margin-top: 5px;
-            transition: background-color 0.2s;
-        }
-
-        .btn-enter-module:hover { background-color: #1d4ed8; }
-
-        /* Selector de Pestañas */
-        .section-selector { display: flex; gap: 10px; margin-bottom: 25px; justify-content: center; flex-wrap: wrap; }
-        .btn-section { background: #6c757d; color: white; border: none; padding: 11px 18px; font-size: 14.5px; border-radius: 6px; cursor: pointer; font-weight: bold; width: auto; margin-top: 0; }
-        .btn-section.active { background: #007bff; }
+        .progress-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; }
+        .progress-text { font-size: 15px; font-weight: bold; color: #334155; }
         
-        .test-section { display: none; }
-        .test-section.active { display: block; }
-
-        .rules-box { background: #e9ecef; border-left: 4px solid #007bff; padding: 12px 15px; margin-bottom: 20px; border-radius: 4px; font-size: 14px; color: #495057; }
-        .rules-box ul { margin: 5px 0 0 20px; padding: 0; }
-
-        /* Barra de Progreso Interactiva */
-        .progress-bar-container { background: #e2e8f0; border-radius: 4px; height: 10px; width: 100%; margin-bottom: 20px; overflow: hidden; }
-        .progress-bar-fill { background: #2563eb; height: 100%; width: 0%; transition: width 0.3s ease; }
-        .progress-text { font-size: 13px; color: #475569; margin-bottom: 8px; font-weight: bold; }
-
-        .question-card { background: #fdfdfd; border: 1px solid #e1e4e8; padding: 20px; border-radius: 6px; margin-bottom: 20px; position: relative; }
-        .question { font-weight: bold; margin-bottom: 12px; font-size: 15.5px; color: #2c3e50; }
-        .options label { display: block; margin: 8px 0; cursor: pointer; padding: 10px; background: #f8f9fa; border-radius: 4px; border: 1px solid #ddd; font-size: 14px; transition: background 0.2s; }
-        .options label:hover { background: #e9ecef; }
-        .options input { margin-right: 10px; }
+        .question-card { background: #ffffff; border: 1px solid #e2e8f0; padding: 25px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .question { font-weight: 700; margin-bottom: 15px; font-size: 16px; color: #0f172a; line-height: 1.4; }
+        .options label { display: block; margin: 10px 0; cursor: pointer; padding: 12px; background: #f8fafc; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 14.5px; transition: all 0.2s; }
+        .options label:hover { background: #f1f5f9; border-color: #94a3b8; }
+        .options input { margin-right: 12px; transform: scale(1.1); }
         
-        .correct-answer { background-color: #d4edda !important; border-color: #c3e6cb !important; color: #155724; font-weight: bold; }
-        .wrong-answer { background-color: #f8d7da !important; border-color: #f5c6cb !important; color: #721c24; }
+        .correct-answer { background-color: #dcfce7 !important; border-color: #86efac !important; color: #166534; font-weight: bold; }
+        .wrong-answer { background-color: #fee2e2 !important; border-color: #fca5a5 !important; color: #991b1b; }
 
-        .status-badge { display: none; font-weight: bold; font-size: 13px; margin-top: 10px; padding: 4px 8px; border-radius: 4px; width: fit-content; }
-        .status-badge.correct { background-color: #d4edda; color: #155724; display: inline-block; }
-        .status-badge.wrong { background-color: #f8d7da; color: #721c24; display: inline-block; }
+        .status-badge { display: none; font-weight: bold; font-size: 13px; margin-top: 15px; padding: 6px 12px; border-radius: 4px; width: fit-content; }
+        .status-badge.correct { background-color: #dcfce7; color: #166534; display: inline-block; }
+        .status-badge.wrong { background-color: #fee2e2; color: #991b1b; display: inline-block; }
 
-        .explanation { display: none; margin-top: 10px; padding: 10px; background-color: #fff3cd; border: 1px solid #ffeeba; border-radius: 4px; font-size: 13px; color: #856404; }
+        .explanation { display: none; margin-top: 15px; padding: 15px; background-color: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; font-size: 14px; color: #92400e; line-height: 1.5; }
 
-        button { background: #007bff; color: white; border: none; padding: 14px 20px; font-size: 16px; border-radius: 6px; cursor: pointer; width: 100%; margin-top: 20px; font-weight: bold; }
-        button:hover { background: #0056b3; }
-        
-        .btn-reset { background: #6c757d; margin-top: 10px; }
-        .btn-reset:hover { background: #5a6268; }
+        .btn-group { display: flex; gap: 15px; margin-top: 30px; }
+        button { background: #2563eb; color: white; border: none; padding: 16px 20px; font-size: 16px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; transition: background 0.3s; }
+        button:hover { background: #1d4ed8; }
+        .btn-reset { background: #64748b; }
+        .btn-reset:hover { background: #475569; }
 
-        .result { text-align: center; font-size: 20px; font-weight: bold; margin-top: 25px; padding: 15px; border-radius: 6px; }
-
-        /* Estilos de Simuladores y Talleres */
-        .case-simulator-box {
-            background: #ffffff;
-            border: 2px solid #3b82f6;
-            border-radius: 8px;
-            padding: 22px;
-            margin-top: 35px;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
-        }
-
-        .case-simulator-box h3 { color: #1e3a8a; margin-bottom: 8px; font-size: 18px; }
-        .case-scenario {
-            background-color: #f0fdf4;
-            border-left: 4px solid #22c55e;
-            padding: 12px 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-            font-size: 14px;
-            color: #14532d;
-            line-height: 1.5;
-        }
-
-        .field-group { margin-bottom: 15px; }
-        .field-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 13.5px; color: #334155; }
-        .field-desc { font-size: 12px; color: #64748b; margin-bottom: 5px; }
-
-        .matrix-input, .parte-textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-family: inherit;
-            font-size: 14px;
-            line-height: 1.4;
-            box-sizing: border-box;
-        }
-
-        .matrix-input:focus, .parte-textarea:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-        }
-
-        .audit-feedback-card {
-            display: none;
-            margin-top: 20px;
-            padding: 18px;
-            border-radius: 8px;
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-        }
-
-        .feedback-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #cbd5e1;
-        }
-
-        .rubric-item { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 13.5px; }
-        .rubric-icon { font-weight: bold; font-size: 15px; }
-        .rubric-icon.ok { color: #16a34a; }
-        .rubric-icon.warn { color: #dc2626; }
-        .subjectivity-alert { margin-top: 12px; padding: 10px; border-radius: 6px; background-color: #fef2f2; border: 1px solid #fecaca; color: #991b1b; font-size: 13px; }
-
-        /* Estilos de la Tabla de Evaluación Matricial */
-        .risk-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-            font-size: 13px;
-        }
-
-        .risk-table th, .risk-table td {
-            border: 1px solid #cbd5e1;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .risk-table th {
-            background-color: #f1f5f9;
-            color: #1e293b;
-            font-weight: bold;
-        }
-
-        .risk-table input, .risk-table select {
-            width: 100%;
-            padding: 6px;
-            border: 1px solid #cbd5e1;
-            border-radius: 4px;
-            font-family: inherit;
-            box-sizing: border-box;
-            font-size: 12.5px;
-        }
-
-        .badge-calc {
-            display: inline-block;
-            font-weight: bold;
-            padding: 4px 8px;
-            border-radius: 4px;
-            text-align: center;
-            min-width: 25px;
-        }
-        .badge-calc.bajo { background-color: #dcfce7; color: #15803d; }
-        .badge-calc.medio { background-color: #fef9c3; color: #a16207; }
-        .badge-calc.alto { background-color: #fee2e2; color: #b91c1c; }
+        .result { text-align: center; font-size: 22px; font-weight: bold; margin-top: 30px; padding: 20px; border-radius: 8px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Plataforma de Autoevaluación: Seguridad Privada</h1>
-    <div class="subtitle">Plataforma formativa técnica avanzada - Módulo Jurídico Oposiciones</div>
+    <h1>Test Jurídico Avanzado - Seguridad Privada</h1>
+    <div class="subtitle">Banco de preguntas extraídas de normativa, apuntes y casos jurisprudenciales</div>
 
-    <!-- PANEL SUPERIOR: CONTADORES DINÁMICOS -->
-    <div class="modules-grid">
-        <div class="module-summary-card">
-            <div class="module-title">ÁREA JURÍDICA AVANZADA (200 PREGUNTAS)</div>
-            <div class="module-subtitle">Constitución estricta, Penal avanzado (Homicidio, Asesinato, Lesiones, Aborto, Error, Eximentes), LSP y UE.</div>
-            <div class="badges-wrapper">
-                <span class="info-pill" id="badge-total-juridico">0 preguntas</span>
-                <span class="info-pill">Examen aleatorio: 20</span>
-            </div>
-            <button class="btn-enter-module" onclick="cambiarSeccion('juridico')">Entrar al Test</button>
-        </div>
-
-        <div class="module-summary-card">
-            <div class="module-title">TALLER PRÁCTICO OPERATIVO</div>
-            <div class="module-subtitle">Matriz de diagnóstico (P/A/R), Valoración cuantitativa y Redacción de Partes.</div>
-            <div class="badges-wrapper">
-                <span class="info-pill">1 Matriz P×I (Estación)</span>
-                <span class="info-pill">2 Casos Diagnóstico</span>
-            </div>
-            <button class="btn-enter-module" onclick="cambiarSeccion('taller')">Entrar al Taller</button>
-        </div>
+    <div class="rules-box">
+        <strong>Sistema de Evaluación Oficial (Simulacro de 10 preguntas):</strong>
+        <ul>
+            <li>Aciertos: +1,00 punto.</li>
+            <li>Fallos: -0,50 puntos.</li>
+            <li>En blanco: 0,00 puntos.</li>
+            <li>Nota requerida para el APTO: 5,00 / 10.</li>
+        </ul>
     </div>
     
-    <!-- Selector de pestañas -->
-    <div class="section-selector">
-        <button id="btn-tab-juridico" class="btn-section active" onclick="cambiarSeccion('juridico')">Test Jurídico Avanzado</button>
-        <button id="btn-tab-taller" class="btn-section" onclick="cambiarSeccion('taller')">Taller Práctico</button>
+    <div class="progress-container">
+        <div class="progress-text" id="contador-preguntas">Cargando test...</div>
     </div>
 
-    <!-- SECCIÓN 1: TEST JURÍDICO AVANZADO -->
-    <div id="seccion-juridico" class="test-section active">
-        <h2>Módulo: Área Jurídica (Nivel Oposición - 200 Preguntas Difíciles)</h2>
-        <div class="rules-box">
-            <strong>Sistema de Puntuación Estricto (sobre 20 preguntas aleatorias):</strong>
-            <ul>
-                <li>Acertadas = 1 punto</li>
-                <li>Falladas = resta 0,5 puntos</li>
-                <li>Total puntos / 20 * 10 = nota final (Mínimo 5 para aprobar)</li>
-            </ul>
-        </div>
+    <div id="quiz-container"></div>
         
-        <!-- Indicador de Progreso Interactivo -->
-        <div class="progress-text" id="progress-text-juridico">Preguntas respondidas: 0 de 20 (0%)</div>
-        <div class="progress-bar-container">
-            <div class="progress-bar-fill" id="progress-bar-juridico"></div>
-        </div>
-
-        <div id="quiz-container-juridico"></div>
-            
-        <button onclick="calcularResultado('juridico')">Comprobar Test Jurídico Avanzado</button>
-        <button class="btn-reset" onclick="iniciarTest('juridico')">Generar Nuevas 20 Preguntas (Rotar)</button>
-        <div id="result-juridico" class="result"></div>
+    <div class="btn-group">
+        <button onclick="calcularResultado()" id="btn-corregir">Corregir Examen</button>
+        <button class="btn-reset" onclick="iniciarTest()">Generar Nuevo Test</button>
     </div>
-
-    <!-- SECCIÓN 2: TALLER PRÁCTICO -->
-    <div id="seccion-taller" class="test-section">
-        <h2>Taller Práctico de Intervención Operativa</h2>
-
-        <!-- EJERCICIO 1: VALORACIÓN MATRICIAL CUANTITATIVA (P x I) -->
-        <div class="case-simulator-box" style="margin-top:0;">
-            <h3>1. Plan de Seguridad Física: Valoración Cuantitativa de Riesgos (Riesgo = P × I)</h3>
-            <p style="font-size: 13.5px; color: #475569;">
-                Ejercicio estructurado de seguridad física en instalaciones críticas: Identifica 5 riesgos, valora su probabilidad e impacto (escala 1 a 5), propón medidas preventivas y redacta el informe conclusivo.
-            </p>
-
-            <div class="case-scenario">
-                <strong>Supuesto de servicio: Centro Intermodal de Transporte (Estación Central de Trenes y Autobuses)</strong><br>
-                Usted presta servicio como vigilante de seguridad en una gran estación de transportes con gran afluencia de viajeros, zonas comerciales, consignas automáticas de equipaje, taquillas de venta de billetes y andenes de alta velocidad. El Responsable de Seguridad le solicita un estudio de riesgos para optimizar el dispositivo de vigilancia.
-            </div>
-
-            <!-- Tabla Interactiva -->
-            <div style="overflow-x:auto;">
-                <table class="risk-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 25%;">Riesgo Identificado</th>
-                            <th style="width: 20%;">Zona de la Estación</th>
-                            <th style="width: 12%;">Prob. (1-5)</th>
-                            <th style="width: 12%;">Imp. (1-5)</th>
-                            <th style="width: 8%;">P × I</th>
-                            <th style="width: 23%;">Medidas de Seguridad Propuestas</th>
-                        </tr>
-                    </thead>
-                    <tbody id="filas-evaluacion-riesgo"></tbody>
-                </table>
-            </div>
-
-            <div class="field-group" style="margin-top: 15px;">
-                <label>Zonas Especialmente Vulnerables (Selecciona y justifica 3 áreas de la estación):</label>
-                <div class="field-desc">Ejemplo: Andenes de embarque, zona de consignas automáticas, taquillas/recaudación o accesos principales.</div>
-                <textarea id="eval-zonas-vulnerables" class="matrix-input" style="height:65px;" placeholder="Indica 3 zonas sensibles y explica por qué son críticas..."></textarea>
-            </div>
-
-            <div class="field-group">
-                <label>Conclusión Técnica del Informe de Seguridad:</label>
-                <div class="field-desc">Indica qué riesgo obtuvo la mayor puntuación de criticidad y dónde debe concentrarse el esfuerzo operativo del servicio de vigilancia.</div>
-                <textarea id="eval-conclusion" class="matrix-input" style="height:65px;" placeholder="Redacta la conclusión técnica basada en los resultados numéricos obtenidos..."></textarea>
-            </div>
-
-            <div style="display:flex; gap:10px;">
-                <button type="button" onclick="auditarPlanRiesgos()" style="background-color: #2563eb;">Auditar Plan de Seguridad Física</button>
-                <button type="button" onclick="cargarEjemploPlanRiesgos()" class="btn-reset" style="width:auto; padding:14px 18px; background-color:#0284c7;">Cargar Ejemplo Relleno</button>
-                <button type="button" onclick="limpiarPlanRiesgos()" class="btn-reset" style="width:auto; padding:14px 18px;">Limpiar</button>
-            </div>
-
-            <div id="plan-feedback" class="audit-feedback-card">
-                <div class="feedback-header">
-                    <span id="plan-feedback-titulo">Resultado de la Auditoría del Plan</span>
-                    <span id="plan-feedback-nota" style="font-size: 18px;"></span>
-                </div>
-                <div id="plan-feedback-rubricas"></div>
-            </div>
-        </div>
-
-        <!-- EJERCICIO 2: MATRIZ DE PELIGRO, AMENAZA Y RIESGO -->
-        <div class="case-simulator-box">
-            <h3>2. Matriz de Diagnóstico Operativo: Peligro, Amenaza y Riesgo</h3>
-            <p style="font-size: 13.5px; color: #475569;">
-                Diferenciación conceptual inmediata ante intervenciones de seguridad física.
-            </p>
-
-            <div style="margin: 15px 0;">
-                <label for="select-escenario" style="font-weight:bold; font-size:14px;">Selecciona Escenario Práctico:</label>
-                <select id="select-escenario" onchange="cargarEscenarioMatriz()" style="padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1; width: 100%; margin-top: 5px;">
-                    <option value="1">Escenario 1: Control de accesos en edificio corporativo (Intrusión perimetral con cizalla)</option>
-                    <option value="2">Escenario 2: Incidencia técnica y tránsito en centro comercial (Fuga de agua en pasillo)</option>
-                </select>
-            </div>
-
-            <div id="desc-escenario" class="case-scenario"></div>
-
-            <div class="field-group">
-                <label>¿Cuál es el Peligro?</label>
-                <div class="field-desc">Elemento intrínseco, condición física o vulnerabilidad con potencial de provocar daño.</div>
-                <textarea id="matriz-peligro" class="matrix-input" style="height:55px;" placeholder="Describe el peligro físico o la vulnerabilidad..."></textarea>
-            </div>
-
-            <div class="field-group">
-                <label>¿Cuál es la Amenaza?</label>
-                <div class="field-desc">Actor o factor externo con potencial activo de materializar el evento.</div>
-                <textarea id="matriz-amenaza" class="matrix-input" style="height:55px;" placeholder="Describe al actor o factor amenazante..."></textarea>
-            </div>
-
-            <div class="field-group">
-                <label>¿Cuál es el Riesgo?</label>
-                <div class="field-desc">Probabilidad combinada con la gravedad del impacto perjudicial.</div>
-                <textarea id="matriz-riesgo" class="matrix-input" style="height:55px;" placeholder="Calcula probabilidad y gravedad del daño..."></textarea>
-            </div>
-
-            <div class="field-group">
-                <label>Acción de Control Inmediata</label>
-                <div class="field-desc">Medidas de contención, autoprotección, acordonamiento y comunicaciones reglamentarias.</div>
-                <textarea id="matriz-accion" class="matrix-input" style="height:65px;" placeholder="Describe la intervención del vigilante y canales de aviso..."></textarea>
-            </div>
-
-            <div style="display:flex; gap:10px;">
-                <button type="button" onclick="analizarMatrizDiagnostico()" style="background-color: #2563eb;">Auditar Diagnóstico</button>
-                <button type="button" onclick="limpiarMatriz()" class="btn-reset" style="width:auto; padding:14px 20px;">Limpiar</button>
-            </div>
-
-            <div id="matriz-feedback" class="audit-feedback-card">
-                <div class="feedback-header">
-                    <span id="matriz-feedback-titulo">Evaluación de la Matriz</span>
-                    <span id="matriz-feedback-nota" style="font-size: 18px;"></span>
-                </div>
-                <div id="matriz-feedback-rubricas"></div>
-            </div>
-        </div>
-
-        <!-- EJERCICIO 3: AUDITORÍA DE REDACCIÓN DE PARTES -->
-        <div class="case-simulator-box">
-            <h3>3. Redacción Técnica y Auditoría de Partes de Novedades</h3>
-            <p style="font-size: 13.5px; color: #475569;">
-                Redacción oficial de novedades con objetividad descriptiva, orden cronológico y comunicaciones reglamentarias.
-            </p>
-
-            <div class="case-scenario">
-                <strong>Supuesto de guardia:</strong> A las 02:40 h durante el turno de noche en un centro comercial, detectas por CCTV a un individuo forzando una salida de emergencias en la zona de muelles. Redacta el parte con hora, lugar, descripción fáctica, comprobaciones físicas y comunicaciones oficiales (CRA / Policía).
-            </div>
-
-            <textarea id="texto-parte" class="parte-textarea" style="height:140px;" placeholder="A las 02:40 horas del 15/10/2026, el Vigilante con TIP 000.000..."></textarea>
-
-            <div style="display: flex; gap: 10px;">
-                <button type="button" onclick="analizarParteServicio()" style="background-color: #2563eb;">Auditar Redacción del Parte</button>
-                <button type="button" onclick="limpiarParte()" class="btn-reset" style="width: auto; padding: 14px 20px;">Limpiar</button>
-            </div>
-
-            <div id="parte-feedback" class="audit-feedback-card">
-                <div class="feedback-header">
-                    <span id="parte-feedback-titulo">Auditoría del Parte Diario</span>
-                    <span id="parte-feedback-nota" style="font-size: 18px;"></span>
-                </div>
-                <div id="parte-feedback-rubricas"></div>
-                <div id="parte-feedback-subjetividad" class="subjectivity-alert" style="display:none;"></div>
-            </div>
-        </div>
-    </div>
-
+    
+    <div id="result-box" class="result"></div>
 </div>
 
 <script>
     // =========================================================================
-    // MEGA BANCO 1: ÁREA JURÍDICA AVANZADA (200 PREGUNTAS DE ALTA DIFICULTAD)
+    // MEGA BANCO DE PREGUNTAS (Basado estrictamente en los documentos aportados)
     // =========================================================================
-    const bancoJuridico = [
-        { q: "Conforme a la evolución histórica del constitucionalismo español, ¿qué norma antecedente a la Constitución de 1978 no era propiamente una constitución sino una carta otorgada?", options: [{text: "A) El Estatuto Real de 1834", val: "correct"}, {text: "B) La Constitución de 1812", val: "wrong"}, {text: "C) La Constitución de 1931", val: "wrong"}], exp: "El Estatuto Real de 1834 era una carta otorgada, es decir, una concesión de la Corona por soberana voluntad, no una constitución emanada de la soberanía popular." },
-        { q: "Desde una perspectiva doctrinal y formal, ¿cómo se clasifica la Constitución Española de 1978 en cuanto a su procedimiento de reforma?", options: [{text: "A) Rígida, ya que exige unos procedimientos agravados y complejos en el Título X", val: "correct"}, {text: "B) Flexible, al permitir su modificación mediante leyes ordinarias del Gobierno", val: "wrong"}, {text: "C) Consuetudinaria e imprecisa", val: "wrong"}], exp: "Se clasifica como rígida debido a la complejidad y exigencia de mayorías reforzadas tasadas en su Título X (arts. 167 y 168)." },
-        { q: "¿Qué mayoría exacta exige el artículo 168.1 de la CE (procedimiento agravado de reforma total o de Título Preliminar, Capítulo II Sección 1.ª del Título I, o Título II) para la aprobación del principio de revisión?", options: [{text: "A) Mayoría de dos tercios de cada Cámara", val: "correct"}, {text: "B) Mayoría absoluta del Congreso exclusivamente", val: "wrong"}, {text: "C) Mayoría simple en sesión conjunta", val: "wrong"}], exp: "Art. 168.1 CE: El procedimiento agravado exige la aprobación por mayoría de dos tercios de cada Cámara." },
-        { q: "En el procedimiento agravado de reforma constitucional (art. 168 CE), una vez aprobada la revisión en principio por dos tercios y disueltas las Cámaras:", options: [{text: "A) Las nuevas Cámaras deben ratificar la decisión y aprobar el nuevo texto por mayoría absoluta", val: "wrong"}, {text: "B) Las nuevas Cámaras deben ratificar la decisión, estudiar el nuevo texto y aprobarlo por mayoría de dos tercios de ambas Cámaras, sometiéndose obligatoriamente a referéndum", val: "correct"}, {text: "C) Se promulga directamente sin referéndum si hay acuerdo del Senado", val: "wrong"}], exp: "Art. 168 CE exige la ratificación por las nuevas Cámaras, aprobación por 2/3 del nuevo texto y referéndum obligatorio de ratificación." },
-        { q: "¿En qué año exacto se aprobó la reforma del artículo 135 de la Constitución introduciendo el principio de estabilidad presupuestaria?", options: [{text: "A) En el año 2011", val: "correct"}, {text: "B) En el año 1992", val: "wrong"}, {text: "C) En el año 2024", val: "wrong"}], exp: "La segunda reforma constitucional se produjo en 2011 bajo el gobierno de José Luis Rodríguez Zapatero para consagrar la estabilidad presupuestaria." },
-        { q: "Respecto a la reforma del artículo 49 de la Constitución llevada a cabo en 2024, su objetivo principal fue:", options: [{text: "A) Sustituir el término denigrante 'disminuidos' por 'personas con discapacidad' y actualizar su protección jurídica avanzada", val: "correct"}, {text: "B) Modificar la circunscripción electoral del Senado en Formentera", val: "wrong"}, {text: "C) Permitir el sufragio activo de extranjeros comunitarios en autonómicas", val: "wrong"}], exp: "La reforma de 2024 modernizó el articulado social cambiando 'disminuidos' por 'personas con discapacidad'." },
-        { q: "Conforme a la cuarta reforma de 2026, ¿cómo quedó configurada la representación de las islas Ibiza y Formentera en el Senado?", options: [{text: "A) Se desglosó la circunscripción conjunta para que Formentera elija su propio senador, quedando el Senado en 209 senadores de elección directa", val: "correct"}, {text: "B) Se suprimió la representación insular menor", val: "wrong"}, {text: "C) Se fusionaron con Mallorca", val: "wrong"}], exp: "La reforma de 2026 separó Ibiza-Formentera, asignando senador propio a Formentera y elevando a 209 los senadores de elección directa." },
-        { q: "¿Qué distingue formalmente a la parte dogmática de la parte orgánica de la Constitución Española?", options: [{text: "A) La dogmática fija los principios rectores, valores superiores y los derechos fundamentales; la orgánica regula la división de poderes e instituciones del Estado", val: "correct"}, {text: "B) La dogmática regula los presupuestos generales del Estado y la orgánica los tributos locales", val: "wrong"}, {text: "C) No existe tal distinción en la técnica constitucional francesa", val: "wrong"}], exp: "La parte dogmática abarca el Título Preliminar y Título I (derechos y valores); la orgánica regula la estructura de poderes (Títulos II a X)." },
-        { q: "Según el artículo 9.3 de la CE, ¿qué principio constitucional prohíbe la arbitrariedad y el abuso de poder de los poderes públicos?", options: [{text: "A) La interdicción de la arbitrariedad de los poderes públicos", val: "correct"}, {text: "B) El principio de irretroactividad penal", val: "wrong"}, {text: "C) El principio de publicidad normativa", val: "wrong"}], exp: "Art. 9.3 CE consagra expresamente la interdicción (prohibición legal) de la arbitrariedad de los poderes públicos." },
-        { q: "¿Cuál es el alcance exacto de la irretroactividad garantizada por el artículo 9.3 de la CE?", options: [{text: "A) Prohíbe la irretroactividad de las disposiciones sancionadoras no favorables o restrictivas de derechos individuales", val: "correct"}, {text: "B) Prohíbe de forma absoluta y universal la retroactividad de cualquier norma civil o fiscal", val: "wrong"}, {text: "C) Permite la retroactividad penal si lo aprueba el Consejo de Ministros por Decreto-ley", val: "wrong"}], exp: "Art. 9.3 CE garantiza la irretroactividad de las disposiciones sancionadoras no favorables o restrictivas de derechos individuales." },
-        { q: "En relación con el derecho de asilo y la extradición (art. 13 CE):", options: [{text: "A) Los delitos políticos no se considerarán extraditables, quedando excluidos los actos de terrorismo", val: "correct"}, {text: "B) Se permite la extradición por delitos políticos si existe reciprocidad diplomática", val: "wrong"}, {text: "C) Los extranjeros gozan de los mismos derechos de sufragio pasivo en elecciones generales que los nacionales", val: "wrong"}], exp: "Art. 13.3 CE: No se concederá extradición por delitos políticos, no considerándose tales los actos de terrorismo." },
-        { q: "¿Qué garantía procesal específica prevé el artículo 17.3 de la CE para el detenido?", options: [{text: "A) Derecho a ser informado de forma inmediata y comprensible de sus derechos y razones de detención, prohibición de ser obligado a declarar y asistencia de letrado en diligencias", val: "correct"}, {text: "B) Derecho a mantener un careo inmediato con el juez de guardia sin abogado", val: "wrong"}, {text: "C) Libertad provisional automática a las 12 horas", val: "wrong"}], exp: "Art. 17.3 CE detalla el derecho a información inmediata, derecho a no declarar y asistencia letrada." },
-        { q: "¿Cuál es el plazo constitucional máximo en el que un detenido preventivo debe ser puesto en libertad o a disposición de la autoridad judicial (art. 17.2 CE)?", options: [{text: "A) 72 horas", val: "correct"}, {text: "B) 48 horas", val: "wrong"}, {text: "C) 5 días", val: "wrong"}], exp: "Art. 17.2 CE fija el límite improrrogable de 72 horas para la detención preventiva." },
-        { q: "Respecto al secreto de las comunicaciones (art. 18.3 CE), ¿cuándo puede ser levantado?", options: [{text: "A) Exclusivamente mediante resolución judicial motivada", val: "correct"}, {text: "B) Por orden gubernativa del Ministerio del Interior en estado de alarma", val: "wrong"}, {text: "C) A petición del director de seguridad de una empresa privada", val: "wrong"}], exp: "Art. 18.3 CE garantiza el secreto de las comunicaciones postales, telegráficas y telefónicas, salvo resolución judicial." },
-        { q: "¿En qué supuestos el derecho de asociación (art. 22 CE) determina que las asociaciones sean consideradas ilegales?", options: [{text: "A) Cuando persigan fines o utilicen medios tipificados como delito", val: "correct"}, {text: "B) Cuando no tengan ánimo de lucro mercantil", val: "wrong"}, {text: "C) Cuando superen los mil asociados sin inscribirse en el registro público", val: "wrong"}], exp: "Art. 22.2 CE: Son ilegales las asociaciones que persigan fines o utilicen medios tipificados como delito." },
-        { q: "¿Quién puede decretar la disolución o suspensión motivada de una asociación legalmente constituida (art. 22 CE)?", options: [{text: "A) Únicamente en virtud de resolución judicial motivada", val: "correct"}, {text: "B) El Ministerio del Interior mediante Orden Ministerial", val: "wrong"}, {text: "C) Los gobernadores civiles por motivos de orden público", val: "wrong"}], exp: "Art. 22.4 CE: Las asociaciones sólo podrán ser disueltas o suspendidas en virtud de resolución judicial motivada." },
-        { q: "Conforme al artículo 25.3 de la Constitución:", options: [{text: "A) La Administración civil no podrá imponer sanciones que, directa o subsidiariamente, impliquen privación de libertad", val: "correct"}, {text: "B) Los ayuntamientos pueden dictar arrestos menores por ordenanzas municipales", val: "wrong"}, {text: "C) Las multas coercitivas pueden transformarse en prisión administrativa", val: "wrong"}], exp: "Art. 25.3 CE prohíbe tajantemente a la Administración civil imponer sanciones que impliquen privación de libertad." },
-        { q: "¿Qué establece el artículo 53.1 de la CE respecto a los derechos y libertades reconocidos en el Capítulo Segundo del Título I?",options: [{text: "A) Vinculan a todos los poderes públicos y solo por ley podrá regularse su ejercicio, que deberá respetar su contenido esencial", val: "correct"}, {text: "B) Tienen carácter meramente programático sin vinculación jurídica", val: "wrong"}, {text: "C) Solo pueden ser suspendidos por reglamento del Gobierno", val: "wrong"}], exp: "Art. 53.1 CE: Los derechos vinculan a todos los poderes públicos y su ley reguladora debe respetar su contenido esencial." },
-        { q: "¿Qué recurso ante el Tribunal Constitucional protege los derechos fundamentales de la Sección 1.ª del Capítulo II y del artículo 14?", options: [{text: "A) El recurso de amparo constitucional", val: "correct"}, {text: "B) La cuestión de inconstitucionalidad ordinaria", val: "wrong"}, {text: "C) El recurso de alzada administrativo", val: "wrong"}], exp: "Art. 53.2 CE: Recurso de amparo ante el Tribunal Constitucional para los derechos del art. 14 a 29 y 30.2." },
-        { q: "¿Qué función ejerce el Defensor del Pueblo según el artículo 54 de la CE?", options: [{text: "A) Alto comisionado de las Cortes Generales para la defensa de los derechos del Título I, pudiendo supervisar la actividad de la Administración", val: "correct"}, {text: "B) Órgano superior del Ministerio de Justicia con potestad sancionadora", val: "wrong"}, {text: "C) Presidente nato del Tribunal Supremo", val: "wrong"}], exp: "Art. 54 CE define al Defensor del Pueblo como alto comisionado de las Cortes Generales para supervisar la administración y defender los derechos." },
-
-        // --- CORONA, CORTES Y GOBIERNO (21-60) ---
-        { q: "En el sistema de la Monarquía parlamentaria (art. 56 CE), el Rey ejerce funciones que doctrinalmente se resumen como:", options: [{text: "A) Símbolo de unidad, más alta representación internacional y arbitraje y moderación del funcionamiento regular de las instituciones", val: "correct"}, {text: "B) Dirección efectiva de la política interior y exterior del Estado", val: "wrong"}, {text: "C) Sanción autónoma de decretos sin refrendo ministerial", val: "wrong"}], exp: "Art. 56 CE: El Rey arbitra y modera el funcionamiento regular de las instituciones y asume la más alta representación del Estado." },
-        { q: "¿Cuál de los siguientes actos del Rey NO requiere el refrendo preceptivo del Presidente del Gobierno o Ministros competentes (art. 56.3 y 65.2 CE)?", options: [{text: "A) La distribución de la cantidad global asignada a su Casa para sostenimiento de su familia y la libre elección y nombramiento de sus miembros civiles y militares", val: "correct"}, {text: "B) La disolución de las Cortes Generales y convocatoria de elecciones", val: "wrong"}, {text: "C) El nombramiento de los miembros del Gobierno a propuesta de su Presidente", val: "wrong"}], exp: "Art. 65.2 CE: El Rey distribuye libremente el presupuesto de su Casa y nombra a su personal civil y militar sin refrendo." },
-        { q: "De acuerdo con el artículo 66.3 de la Constitución, las Cortes Generales disfrutan de:", options: [{text: "A) Inviolabilidad parlamentaria institucional", val: "correct"}, {text: "B) Inmunidad procesal penal limitada", val: "wrong"}, {text: "C) Potestad ejecutiva directa sobre la administración", val: "wrong"}], exp: "Art. 66.3 CE: Las Cortes Generales son inviolables." },
-        { q: "¿Cómo se elige a los Diputados del Congreso según el artículo 68.1 de la CE?", options: [{text: "A) Por sufragio universal, libre, igual, directo y secreto", val: "correct"}, {text: "B) Por sufragio censitario indirecto de segundo grado", val: "wrong"}, {text: "C) Mediante designación corporativa de colegios profesionales", val: "wrong"}], exp: "Art. 68.1 CE detalla el sufragio universal, libre, igual, directo y secreto para el Congreso." },
-        { q: "¿Qué municipios tienen asignada representación directa de dos Diputados y dos Senadores en las Cortes Generales?", options: [{text: "A) Ceuta y Melilla", val: "correct"}, {text: "B) Las Palmas de Tenerife y Palma de Mallorca", val: "wrong"}, {text: "C) Gibraltar y Andorra", val: "wrong"}], exp: "Arts. 68.2 y 69.3 CE: Ceuta y Melilla eligen cada una un diputado y dos senadores." },
-        { q: "¿Cuántos Senadores corresponden por cada provincia peninsular en las elecciones generales (art. 69.2 CE)?", options: [{text: "A) Cuatro Senadores", val: "correct"}, {text: "B) Dos Senadores", val: "wrong"}, {text: "C) Un senador por cada 500.000 habitantes", val: "wrong"}], exp: "Art. 69.2 CE: En cada provincia peninsular se eligen cuatro Senadores." },
-        { q: "En relación con las islas mayores (Gran Canaria, Mallorca y Tenerife), ¿cuántos Senadores eligen individualmente cada una de ellas?", options: [{text: "A) Tres Senadores por cada una", val: "correct"}, {text: "B) Cuatro Senadores igual que en península", val: "wrong"}, {text: "C) Uno por cada isla", val: "wrong"}], exp: "Art. 69.3 CE asigna tres senadores a Gran Canaria, Mallorca y Tenerife, y uno a las islas menores o agrupaciones." },
-        { q: "¿Cómo se designan los Senadores autonómicos según el artículo 69.5 de la Constitución?", options: [{text: "A) Las Comunidades Autónomas designarán un Senador y otro más por cada millón de habitantes de su respectivo territorio", val: "correct"}, {text: "B) Son elegidos directamente en urnas por los ciudadanos en circunscripción autonómica única", val: "wrong"}, {text: "C) Son nombrados directamente por el Consejo General del Poder Judicial", val: "wrong"}], exp: "Art. 69.5 CE: Las CC.AA. designan un senador base más uno por cada millón de habitantes a través de sus asambleas legislativas." },
-        { q: "En cuanto a la inviolabilidad parlamentaria (art. 71.1 CE), los Diputados y Senadores:", options: [{text: "A) Gozan de ella por las opiniones manifestadas y los votos emitidos en el ejercicio de sus funciones, manteniéndose incluso después de cesar en su mandato", val: "correct"}, {text: "B) Gozan de ella de forma temporal solo durante las sesiones plenarias", val: "wrong"}, {text: "C) Quedan exentos de cumplir las normas de tráfico en todo el territorio nacional", val: "wrong"}], exp: "Art. 71.1 CE: La inviolabilidad por opiniones y votos es permanente y subsiste tras el cese." },
-        { q: "¿Qué protege la 'inmunidad' parlamentaria reconocida a los miembros de las Cortes Generales (art. 71.2 CE)?", options: [{text: "A) Que durante su mandato no podrán ser detenidos salvo en caso de flagrante delito, requiriéndose la previa autorización (suplicatorio) de la Cámara respectiva para su inculpación o procesamiento", val: "correct"}, {text: "B) Que no pueden ser juzgados por ningún delito bajo ninguna circunstancia", val: "wrong"}, {text: "C) Que sus bienes patrimoniales son inembargables por deudas privadas", val: "wrong"}], exp: "Art. 71.2 CE: Inmunidad frente a detención (salvo flagrante delito) y exigencia de suplicatorio para ser inculpados o procesados." },
-        { q: "Si un Diputado es sorprendido cometiendo un delito flagrante:", options: [{text: "A) Puede ser detenido inmediatamente, dando cuenta a la Cámara respectiva", val: "correct"}, {text: "B) No puede ser detenido bajo ningún concepto gracias a la inmunidad absoluta", val: "wrong"}, {text: "C) Solo puede ser detenido si lo autoriza el Rey", val: "wrong"}], exp: "Art. 71.2 CE exceptúa de la inmunidad el caso de flagrante delito, permitiendo la detención inmediata con comunicación a la Cámara." },
-        { q: "¿Qué mayoría se exige en el Congreso de los Diputados para otorgar la autorización en un suplicatorio penal solicitado contra un parlamentario?", options: [{text: "A) Mayoría simple", val: "correct"}, {text: "B) Mayoría absoluta de 3/5", val: "wrong"}, {text: "C) Unanimidad de los portavoces", val: "wrong"}], exp: "El reglamento de las Cámaras establece que la concesión o denegación del suplicatorio se decide por mayoría simple en votación secreta." },
-        { q: "¿Qué órgano jurisdiccional es el único competente para inculpar, procesar y juzgar a los Diputados y Senadores en el orden penal?", options: [{text: "A) La Sala de lo Penal del Tribunal Supremo", val: "correct"}, {text: "B) La Audiencia Nacional", val: "wrong"}, {text: "C) El Tribunal Constitucional", val: "wrong"}], exp: "Art. 71.3 CE: Las causas contra diputados y senadores son competencia de la Sala de lo Penal del Tribunal Supremo (fuero especial)." },
-        { q: "Según el artículo 81.1 de la CE, ¿cuál de las siguientes materias está reservada específicamente a Ley Orgánica?", options: [{text: "A) El régimen electoral general y el desarrollo de los derechos fundamentales y libertades públicas", val: "correct"}, {text: "B) La fijación de los impuestos especiales de hidrocarburos", val: "wrong"}, {text: "C) La regulación mercantil de las sociedades anónimas", val: "wrong"}], exp: "Art. 81.1 CE reserva ley orgánica para derechos fundamentales, estatutos de autonomía y régimen electoral general." },
-        { q: "En caso de discrepancia en la tramitación legislativa entre el Congreso y el Senado, el texto aprobado por el Congreso puede ser vetado por el Senado mediante:", options: [{text: "A) Mayoría absoluta del Senado", val: "correct"}, {text: "B) Mayoría simple de los senadores presentes", val: "wrong"}, {text: "C) Decreto del Presidente del Senado", val: "wrong"}], exp: "Art. 90.2 CE: El Senado puede vetar un proyecto por mayoría absoluta, veto que el Congreso puede levantar por mayoría absoluta o simple transcurridos dos meses." },
-        { q: "¿Cómo puede el Congreso de los Diputados levantar el veto impuesto por el Senado a un proyecto de ley ordinaria?", options: [{text: "A) Por mayoría absoluta en una nueva votación, o por mayoría simple una vez transcurridos dos meses desde la interposición del veto", val: "correct"}, {text: "B) Únicamente por unanimidad de todos los grupos", val: "wrong"}, {text: "C) No puede levantar el veto si el Senado se opone firmemente", val: "wrong"}], exp: "Art. 90.2 CE regula la superación del veto del Senado por el Congreso (mayoría absoluta inmediata o simple a los dos meses)." },
-        { q: "Según el artículo 99 de la Constitución, propuesto un candidato a Presidente del Gobierno por el Rey, ¿qué mayoría necesita en primera votación de investidura?", options: [{text: "A) Mayoría absoluta del Congreso de los Diputados", val: "correct"}, {text: "B) Mayoría simple de los diputados presentes", val: "wrong"}, {text: "C) Dos tercios de la Cámara", val: "wrong"}], exp: "Art. 99.3 CE: Se requiere mayoría absoluta en primera votación; si no se alcanza, se procede a segunda votación 48 horas después por mayoría simple." },
-        { q: "Si en la segunda votación de investidura (art. 99 CE) tampoco se alcanza la mayoría simple:", options: [{text: "A) Se tramitarán sucesivas propuestas en la forma prevista en la Constitución, disolviéndose las Cámaras si pasan dos meses desde la primera votación convocando nuevas elecciones por el Rey con el refrendo del Presidente del Congreso", val: "correct"}, {text: "B) El candidato del partido más votado es proclamado automáticamente", val: "wrong"}, {text: "C) El Rey asume temporalmente la jefatura del gobierno", val: "wrong"}], exp: "Art. 99.5 CE: Si transcurren dos meses desde la primera votación de investidura sin candidato elegido, el Rey disuelve ambas Cámaras y convoca elecciones con el refrendo del Presidente del Congreso." },
-        { q: "¿Cómo se regula la presentación y exigencia de una moción de censura contra el Gobierno (art. 113 CE)?", options: [{text: "A) Debe ser propuesta al menos por la décima parte de los Diputados, incluir un candidato alternativo a la Presidencia y se votará tras un período de enfriamiento de cinco días desde su presentación", val: "correct"}, {text: "B) Puede ser presentada por cualquier senador en cualquier momento por mayoría simple", val: "wrong"}, {text: "C) Requiere la firma del Presidente del Senado y aprobación por el Consejo de Estado", val: "wrong"}], exp: "Art. 113 CE y Reglamento del Congreso: Moción de censura constructiva (1/10 de diputados, candidato alternativo, 5 días de plazo mínimo)." },
-        { q: "¿Qué mayoría se requiere en el Congreso de los Diputados para que una moción de censura sea aprobada y caiga el Gobierno?", options: [{text: "A) Mayoría absoluta del Congreso de los Diputados", val: "correct"}, {text: "B) Mayoría simple de los diputados asistentes", val: "wrong"}, {text: "C) Mayoría de dos tercios de la cámara", val: "wrong"}], exp: "Art. 113.2 CE: La moción de censura debe ser adoptada por la mayoría absoluta del Congreso de los Diputados." },
-
-        // --- PODER JUDICIAL Y TRIBUNAL CONSTITUCIONAL (61-90) ---
-        { q: "¿Qué principio fundamental establece el artículo 117.2 de la CE para salvaguardar la independencia de los jueces?", options: [{text: "A) El principio de inamovilidad (no podrán ser separados, suspendidos, trasladados ni jubilados sino por causas legales)", val: "correct"}, {text: "B) Su dependencia directa del Ministerio de Justicia en el ámbito disciplinario", val: "wrong"}, {text: "C) La elección de todos los jueces por sufragio universal cada 4 años", val: "wrong"}], exp: "Art. 117.2 CE consagra la inamovilidad como garantía esencial de la independencia judicial." },
-        { q: "De acuerdo con el artículo 122 de la Constitución, ¿qué órgano es el gobierno autónomo del Poder Judicial?", options: [{text: "A) El Consejo General del Poder Judicial (CGPJ)", val: "correct"}, {text: "B) El Tribunal Supremo", val: "wrong"}, {text: "C) La Fiscalía General del Estado", val: "wrong"}], exp: "Art. 122.2 CE: El Consejo General del Poder Judicial es el órgano de gobierno del mismo." },
-        { q: "¿Qué tribunal es el órgano jurisdiccional superior en todos los órdenes (civil, penal, contencioso-administrativo y social) en España (art. 123 CE)?", options: [{text: "A) El Tribunal Supremo", val: "correct"}, {text: "B) El Tribunal Constitucional", val: "wrong"}, {text: "C) La Audiencia Nacional", val: "wrong"}], exp: "Art. 123.1 CE: El Tribunal Supremo, con jurisdicción en toda España, es el órgano jurisdiccional superior en todos los órdenes." },
-        { q: "¿Cuál es la naturaleza jurídica exacta del Tribunal Constitucional según la Constitución y su ley orgánica?", options: [{text: "A) Es el supremo intérprete de la Constitución, independiente de los demás órganos constitucionales y configurado como un órgano jurisdiccional especializado", val: "correct"}, {text: "B) Es la sala penal superior integrada dentro del Tribunal Supremo", val: "wrong"}, {text: "C) Es un organismo consultivo del Gobierno sin sentencias vinculantes", val: "wrong"}], exp: "Art. 1.1 LOTC y CE: El Tribunal Constitucional es el supremo intérprete de la Constitución, independiente y con carácter jurisdiccional." },
-        { q: "¿Quién nombra formalmente a los 12 magistrados que componen el Tribunal Constitucional (art. 159 CE)?", options: [{text: "A) El Rey", val: "correct"}, {text: "B) El Presidente del Gobierno por decreto", val: "wrong"}, {text: "C) El Pleno del Congreso de los Diputados", val: "wrong"}], exp: "Art. 159.1 CE: Los 12 miembros del Tribunal Constitucional son nombrados por el Rey." },
-        { q: "Para ser nombrado miembro del Tribunal Constitucional, ¿qué requisitos profesionales exige el artículo 159.2 de la CE?", options: [{text: "A) Magistrados y Fiscales, Profesores de Universidad, funcionarios públicos y Abogados, todos ellos juristas de reconocida competencia con más de quince años de ejercicio profesional", val: "correct"}, {text: "B) Cualquier ciudadano mayor de edad con titulación universitaria general", val: "wrong"}, {text: "C) Haber ejercido como diputado o senador durante al menos 8 años", val: "wrong"}], exp: "Art. 159.2 CE exige juristas de reconocida competencia (magistrados, fiscales, profesores, funcionarios o abogados) con más de 15 años de ejercicio." },
-        { q: "¿Cuál es el régimen de incompatibilidades de los magistrados del Tribunal Constitucional (art. 159.4 CE)?", options: [{text: "A) Es incompatible con todo mandato representativo, cargos políticos/administrativos, funciones directivas en partidos o sindicatos, carreras judicial y fiscal, y cualquier actividad profesional o mercantil", val: "correct"}, {text: "B) Permite simultanear la docencia universitaria con cargos ejecutivos en partidos políticos", val: "wrong"}, {text: "C) No tienen ninguna incompatibilidad si lo autoriza el CGPJ", val: "wrong"}], exp: "Art. 159.4 CE establece un régimen muy estricto de incompatibilidades políticas, profesionales y mercantiles." },
-        { q: "¿Quién está legitimado para interponer el recurso de inconstitucionalidad contra leyes y normas con rango de ley (art. 162.1.a CE)?", options: [{text: "A) El Presidente del Gobierno, el Defensor del Pueblo, 50 Diputados, 50 Senadores, y los órganos colegiados ejecutivos y asambleas de las CC.AA.", val: "correct"}, {text: "B) Cualquier ciudadano particular mediante acción popular", val: "wrong"}, {text: "C) Los jueces de instrucción ordinarios de oficio", val: "wrong"}], exp: "Art. 162.1.a CE detalla la legitimación estricta para el recurso de inconstitucionalidad (Presidente, Defensor, 50 diputados/senadores y CC.AA.)." },
-        { q: "¿Qué es la cuestión de inconstitucionalidad regulada en el artículo 163 de la CE?", options: [{text: "A) El mecanismo por el cual un juez o tribunal, al considerar en un proceso que una norma con rango de ley aplicable puede ser contraria a la Constitución, plantea la duda ante el Tribunal Constitucional", val: "correct"}, {text: "B) Una demanda popular presentada por particulares contra sentencias firmes", val: "wrong"}, {text: "C) Un veto del Senado contra leyes autonómicas", val: "wrong"}], exp: "Art. 163 CE: Planteamiento judicial de inconstitucionalidad de una norma aplicable al caso litigioso." },
-
-        // --- DERECHO PENAL AVANZADO (91-140) ---
-        { q: "¿Qué penas principales contempla el artículo 138 del Código Penal para el delito básico de homicidio?", options: [{text: "A) Prisión de diez a quince años", val: "correct"}, {text: "B) Prisión de cinco a diez años", val: "wrong"}, {text: "C) Prisión permanente revisable", val: "wrong"}], exp: "Art. 138.1 CP: El homicidio simple se castiga con pena de prisión de 10 a 15 años." },
-        { q: "Conforme al artículo 139 del Código Penal, si en un asesinato concurren más de una de las circunstancias cualificadas (alevosía, precio, ensañamiento, etc.):", options: [{text: "A) Se impondrá la pena correspondiente en su mitad superior", val: "correct"}, {text: "B) Se duplicará automáticamente la pena de prisión permanente revisable", val: "wrong"}, {text: "C) Se rebajará la pena en un grado por concurso medial", val: "wrong"}], exp: "Art. 139.2 CP: Cuando concurra más de una circunstancia agravante específica de asesinato, la pena se impondrá en su mitad superior." },
-        { q: "¿En qué supuestos tasados el artículo 140 del Código Penal castiga el asesinato con la pena de prisión permanente revisable?", options: [{text: "A) Víctima menor de 16 años o especialmente vulnerable, asesinato subsiguiente a delito contra la libertad sexual, cometido por miembro de grupo u organización criminal, o multihomicidio (más de dos personas)", val: "correct"}, {text: "B) En cualquier asesinato cometido con alevosía simple nocturna", val: "wrong"}, {text: "C) Cuando concurran dos circunstancias de precio o recompensa", val: "wrong"}], exp: "Art. 140 CP detalla los supuestos de prisión permanente revisable para el asesinato (vulnerabilidad extrema, vinculado a libertad sexual, crimen organizado o múltiple)." },
-        { q: "Respecto al homicidio imprudente del artículo 142 del Código Penal:", options: [{text: "A) Se castiga la imprudencia grave con prisión de 1 a 4 años, y si se comete con vehículo a motor o arma de fuego, lleva aparejada la privación del permiso de conducir o porte de armas de 1 a 6 años", val: "correct"}, {text: "B) Se castiga la imprudencia leve de forma genérica con penas de prisión de hasta 2 años", val: "wrong"}, {text: "C) No conlleva accesoria de privación de armas en ningún caso", val: "wrong"}], exp: "Art. 142 CP: Imprudencia grave (1 a 4 años de prisión) con penas accesorias de privación de conducir o porte de armas (1 a 6 años)." },
-        { q: "¿Cómo tipifica y castiga el Código Penal la inducción y cooperación al suicidio (art. 143 CP)?", options: [{text: "A) Castiga la inducción (4-8 años), la cooperación necesaria (2-5 años), la ejecución directa por otro a petición de la víctima (6-10 años) y la eutanasia activa bajo los marcos de la ley orgánica específica", val: "correct"}, {text: "B) El suicidio y su tentativa están castigados con penas de multa leves para el propio autor", val: "wrong"}, {text: "C) La cooperación al suicidio está exenta de pena en cualquier circunstancia", val: "wrong"}], exp: "Art. 143 CP castiga la inducción, la cooperación necesaria y la cooperación ejecutiva hasta la muerte a petición de la víctima." },
-        { q: "En el delito de lesiones (art. 147.1 CP), ¿qué diferencia jurídica existe entre el delito básico y el delito leve de lesiones (art. 147.2 CP)?", options: [{text: "A) El delito básico exige objetivamente para su sanidad, además de la primera asistencia facultativa, tratamiento médico o quirúrgico; el delito leve no lo requiere o constituye lesión menor sin tratamiento", val: "correct"}, {text: "B) El delito leve conlleva penas obligatorias de prisión superior a un año", val: "wrong"}, {text: "C) El delito básico se persigue únicamente mediante denuncia privada de parte", val: "wrong"}], exp: "Art. 147.1 CP (delito) exige tratamiento médico/quirúrgico; 147.2 CP (delito leve) sanciona lesiones que no precisan dicho tratamiento." },
-        { q: "Conforme a los tipos agravados de lesiones del artículo 148 del CP, ¿cuándo se aplica la pena de prisión de 2 a 5 años?", options: [{text: "A) Si se usan medios o formas peligrosas para la vida/salud, mediando alevosía/ensañamiento, si la víctima es menor de 12 años, o si es cónyuge/persona con análoga relación de afectividad", val: "correct"}, {text: "B) Únicamente cuando se cause la pérdida de un miembro principal del cuerpo", val: "wrong"}, {text: "C) En cualquier riña tumultuaria sin armas", val: "wrong"}], exp: "Art. 148 CP enumera las agravaciones específicas del delito de lesiones (armas, alevosía, menores de 12 años, violencia de género/familiar)." },
-        { q: "¿Cómo castiga el Código Penal la pérdida o inutilidad de un órgano o miembro principal, o de un sentido, o la impotencia o grave deformidad (art. 149.1 CP)?", options: [{text: "A) Con pena de prisión de seis a doce años", val: "correct"}, {text: "B) Con pena de prisión de tres a seis años", val: "wrong"}, {text: "C) Con multa de 6 a 12 meses", val: "wrong"}], exp: "Art. 149.1 CP tipifica las lesiones más graves (miembro principal, sentido, esterilidad, grave deformidad) con prisión de 6 a 12 años." },
-        { q: "A diferencia del artículo 149, el artículo 150 del Código Penal sanciona con prisión de 3 a 6 años:", options: [{text: "A) La pérdida o inutilidad de un órgano o miembro NO principal, o la deformidad no grave", val: "correct"}, {text: "B) La mutilación genital en todas sus formas", val: "wrong"}, {text: "C) El delito leve de maltrato de obra sin lesión", val: "wrong"}], exp: "Art. 150 CP: Pérdida de miembro no principal o deformidad simple (prisión de 3 a 6 años)." },
-        { q: "En los delitos de lesiones, ¿qué efecto produce que medie el consentimiento válido, libre, espontáneo y expreso del ofendido (art. 155 CP)?", options: [{text: "A) Se impondrá la pena inferior en uno o dos grados (no siendo válido el consentimiento de menores o incapaces)", val: "correct"}, {text: "B) Exime totalmente de responsabilidad penal al autor", val: "wrong"}, {text: "C) Convierte el delito en una infracción administrativa leve", val: "wrong"}], exp: "Art. 155 CP: El consentimiento válido del ofendido atenúa la pena en uno o dos grados (invalido en menores o incapaces)." },
-        { q: "¿Qué sanciona el delito de participación en riña tumultuaria (art. 154 CP)?", options: [{text: "A) La mera participación en un enfrentamiento tumultuario de al menos dos grupos utilizando medios o instrumentos peligrosos para la vida o integridad física", val: "correct"}, {text: "B) Las lesiones individuales causadas en reyertas privadas de dos personas sin armas", val: "wrong"}, {text: "C) La falta de asistencia a un herido en accidente de tráfico", val: "wrong"}], exp: "Art. 154 CP castiga la participación en riña tumultuaria con armas o instrumentos peligrosos, con independencia de quién causara el resultado lesivo concreto." },
-        { q: "Conforme a la Ley Orgánica 10/2022 y reformas posteriores en materia de delitos contra la libertad sexual:", options: [{text: "A) Desaparece la distinción entre abuso y agresión sexual, quedando unificado todo ataque sin consentimiento bajo el concepto de agresión sexual", val: "correct"}, {text: "B) Se eliminan las penas de prisión para los delitos sexuales sin violencia", val: "wrong"}, {text: "C) El consentimiento deja de ser un elemento típico del delito", val: "wrong"}], exp: "La reforma unificó abusos y agresiones bajo la denominación única de agresión sexual, definiendo el consentimiento en positivo." },
-        { q: "Dentro de los delitos contra la libertad sexual, ¿cuándo se tipifica específicamente el delito de violación (art. 179 CP)?", options: [{text: "A) Cuando la agresión sexual consista en acceso carnal por vía vaginal, anal o bucal, o introducción de miembros corporales u objetos por las dos primeras vías", val: "correct"}, {text: "B) Únicamente si concurren más de cuatro personas", val: "wrong"}, {text: "C) Si se comete a través de internet o soportes digitales", val: "wrong"}], exp: "Art. 179 CP: La violación concurre cuando hay acceso carnal (vaginal, anal, bucal) o introducción de miembros/objetos por vía vaginal o anal." },
-        { q: "En relación con el error en Derecho Penal (art. 14 CP), ¿cómo se diferencia el error de tipo del error de prohibición?", options: [{text: "A) El error de tipo recae sobre los elementos de hecho constitutivos del delito (elimina el dolo); el error de prohibición recae sobre la ilicitud del hecho (cree que actúa lícitamente)", val: "correct"}, {text: "B) El error de tipo siempre se castiga con prisión permanente y el de prohibición es impune", val: "wrong"}, {text: "C) Son conceptos idénticos en la dogmática penal moderna", val: "wrong"}], exp: "Art. 14 CP: Error de tipo afecta al conocimiento de los hechos constitutivos; error de prohibición afecta al conocimiento de que el acto está prohibido (antijuridicidad)." },
-        { q: "Si el error de tipo es calificado por el tribunal como vencible:", options: [{text: "A) La infracción será castigada, en su caso, como imprudente (si el delito admite modalidad culposa)", val: "correct"}, {text: "B) Queda totalmente exento de responsabilidad criminal igual que el invencible", val: "wrong"}, {text: "C) Se incrementa la pena en la mitad superior por dolo eventual", val: "wrong"}], exp: "Art. 14.1 CP: El error de tipo vencible elimina el dolo pero subsiste la culpa, castigándose como imprudente si está tipificado." },
-        { q: "¿Qué establece el artículo 14.3 del CP en relación con el error de prohibición invencible y vencible?", options: [{text: "A) El error de prohibición invencible excluye la responsabilidad criminal; si es vencible, se aplica la pena inferior en uno o dos grados", val: "correct"}, {text: "B) El error de prohibición vencible se castiga siempre como delito doloso consumado", val: "wrong"}, {text: "C) El desconocimiento absoluto de las leyes exime de su cumplimiento en todos los órdenes penales", val: "wrong"}], exp: "Art. 14.3 CP: Prohibición invencible exime de pena; prohibición vencible aplica rebaja de uno o dos grados." },
-        { q: "En el ámbito de las causas de inimputabilidad (art. 20.1 y 20.2 CP), la intoxicación plena por consumo de alcohol o drogas:", options: [{text: "A) Exime de responsabilidad si no ha sido buscada con el propósito de cometer el delito ni se debió prever su comisión, o si se halla bajo síndrome de abstinencia que impida comprender la ilicitud", val: "correct"}, {text: "B) Constituye siempre una circunstancia agravante por embriaguez voluntaria", val: "wrong"}, {text: "C) No produce ningún efecto sobre la culpabilidad penal", val: "wrong"}], exp: "Art. 20.2 CP exime si la intoxicación plena o síndrome de abstinencia no fue buscada dolosamente para delinquir." },
-        { q: "Respecto a la eximente de cumplimiento de un deber o ejercicio legítimo de un derecho, oficio o cargo (art. 20.7.º CP), el uso de la fuerza y armas por agentes o personal autorizado exige:", options: [{text: "A) Necesidad de la medida, proporcionalidad en la intensidad lesiva y encontrarse en el estricto cumplimiento de las funciones propias del cargo", val: "correct"}, {text: "B) Discrecionalidad absoluta sin sujeción a límites legales", val: "wrong"}, {text: "C) Empleo inmediato de armas de fuego ante cualquier resistencia verbal", val: "wrong"}], exp: "Art. 20.7 CP y principios internacionales: El uso de la fuerza requiere necesidad, oportunidad, congruencia y proporcionalidad estricta." },
-        { q: "¿Cuál es el plazo de prescripción para las penas graves impuestas por sentencia firme superior a 20 años de prisión (art. 133 CP)?", options: [{text: "A) A los 30 años", val: "correct"}, {text: "B) A los 15 años", val: "wrong"}, {text: "C) A los 5 años", val: "wrong"}], exp: "Art. 133.1 CP: Las penas impuestas por sentencia firme prescriben a los 30 años si son de prisión por más de 20 años." },
-        { q: "Las penas impuestas por delitos de terrorismo o lesa humanidad:", options: [{text: "A) No prescriben jamás (imprescriptibles)", val: "correct"}, {text: "B) Prescriben a los 25 años", val: "wrong"}, {text: "C) Prescriben a los 10 años", val: "wrong"}], exp: "Las condenas por terrorismo o lesa humanidad son imprescriptibles conforme al Código Penal." },
-
-        // --- SEGURIDAD PRIVADA Y UNIÓN EUROPEA (141-200) ---
-        { q: "Según la Ley 5/2014 de Seguridad Privada, ¿cómo se define la naturaleza jurídica de las actividades de seguridad privada?", options: [{text: "A) Complementarias y subordinadas respecto a la seguridad pública", val: "correct"}, {text: "B) Sustitutivas e independientes del Estado", val: "wrong"}, {text: "C) Superiores en rango a las Fuerzas y Cuerpos de Seguridad", val: "wrong"}], exp: "La Ley 5/2014 establece el carácter complementario y subordinado de la seguridad privada frente a la seguridad pública." },
-        { q: "En relación con los principios básicos de actuación del personal de seguridad privada (art. 8 LSP), el principio de congruencia implica:", options: [{text: "A) Escoger la medida más idónea y adecuada entre las legalmente previstas para resolver la incidencia con el menor perjuicio", val: "correct"}, {text: "B) Responder con la máxima violencia disponible ante cualquier insulto", val: "wrong"}, {text: "C) Actuar al margen de las instrucciones de las Fuerzas de Seguridad", val: "wrong"}], exp: "Art. 8.1 LSP: Congruencia exige la adecuación lógica y mesurada de la medida operativa adoptada." },
-        { q: "¿Qué establece el artículo 30 de la Ley de Seguridad Privada sobre el secreto profesional?", options: [{text: "A) Obligación de guardar rigurosa reserva sobre los hechos y datos conocidos por razón del ejercicio de sus funciones", val: "correct"}, {text: "B) Facultad de publicar informes de clientes en redes sociales profesionales", val: "wrong"}, {text: "C) Prohibición absoluta de declarar ante tribunales judiciales", val: "wrong"}], exp: "Art. 30 LSP impone el deber estricto de reserva profesional sobre la información obtenida por razón del servicio." },
-        { q: "Conforme al artículo 32.1.b) de la Ley de Seguridad Privada, en los controles de acceso a inmuebles, los vigilantes pueden:", options: [{text: "A) Comprobar la identidad, impedir accesos no autorizados y realizar controles superficiales de efectos personales o vehículos", val: "correct"}, {text: "B) Retener el DNI de los ciudadanos durante toda la jornada laboral", val: "wrong"}, {text: "C) Practicar registros corporales integrales e íntimos de los visitantes", val: "wrong"}], exp: "Art. 32.1.b LSP faculta la comprobación de identidad, impedimento de accesos y controles superficiales de efectos (prohibido retener DNI)." },
-        { q: "¿Qué infracción administrativa comete el personal de seguridad privada que realiza funciones careciendo de la TIP habilitante (art. 68 LSP)?", options: [{text: "A) Infracción muy grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Infracción grave", val: "wrong"}], exp: "Art. 68.1 LSP tipifica como infracción muy grave el ejercicio de funciones careciendo de habilitación." },
-        { q: "El abandono injustificado del servicio de seguridad en infraestructuras críticas o prestando servicios con armas de fuego se sanciona como:", options: [{text: "A) Infracción muy grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Falta disciplinaria interna sin trascendencia legal", val: "wrong"}], exp: "Art. 68.1 LSP: El abandono de servicios con armas o infraestructuras críticas es infracción muy grave." },
-        { q: "Según el artículo 68.2 de la LSP, negarse a identificarse profesionalmente mediante la TIP ante los ciudadanos que lo soliciten en el servicio constituye:", options: [{text: "A) Infracción grave", val: "correct"}, {text: "B) Infracción leve", val: "wrong"}, {text: "C) Infracción muy grave", val: "wrong"}], exp: "Art. 68.2 LSP: Negarse a exhibir la TIP a requerimiento legítimo constituye infracción grave." },
-        { q: "¿Qué plazo de prescripción tienen las infracciones MUY GRAVES cometidas por el personal de seguridad privada (art. 67 LSP)?", options: [{text: "A) Tres años", val: "correct"}, {text: "B) Un año", val: "wrong"}, {text: "C) Seis meses", val: "wrong"}], exp: "Art. 67.1 LSP: Las infracciones muy graves prescriben a los 3 años; las graves a los 2 años; y las leves a los 6 meses." },
-        { q: "En el marco de la Unión Europea, ¿qué efectos jurídicos produce un 'Reglamento Comunitario' (art. 288 TFUE)?", options: [{text: "A) Tiene alcance general, es obligatorio en todos sus elementos y directamente aplicable en cada Estado miembro sin necesidad de ley de transposición", val: "correct"}, {text: "B) Requiere obligatoriamente un decreto ley nacional para tener validez jurídica", val: "wrong"}, {text: "C) Carece de fuerza vinculante directa para los ciudadanos", val: "wrong"}], exp: "El reglamento europeo es directamente aplicable y obligatorio en todos sus elementos en cada Estado miembro." },
-        { q: "¿Cuál es la función primordial de la agencia europea EUROPOL con sede en La Haya?", options: [{text: "A) Apoyar a las autoridades policiales de los Estados miembros en la prevención y combate contra la delincuencia organizada grave y el terrorismo mediante intercambio de inteligencia", val: "correct"}, {text: "B) Patrullar directamente las fronteras exteriores de los países miembros con agentes armados propios", val: "wrong"}, {text: "C) Juzgar y condenar a los criminales internacionales en tribunales propios", val: "wrong"}], exp: "Europol es la agencia de cooperación policial de la UE destinada al intercambio de información e inteligencia, sin competencias de ejecución directa." },
-        { q: "¿Qué órgano institucional de la Unión Europea representa directamente a los ciudadanos de los Estados miembros y es elegido cada 5 años?", options: [{text: "A) El Parlamento Europeo (Eurocámara)", val: "correct"}, {text: "B) El Consejo de la Unión Europea", val: "wrong"}, {text: "C) El Consejo Europeo", val: "wrong"}], exp: "El Parlamento Europeo representa directamente a los ciudadanos de la UE y se elige por sufragio directo cada 5 años." },
-        { q: "¿Qué institución de la UE representa a los Gobiernos de los Estados miembros y comparte el poder legislativo y presupuestario con el Parlamento?", options: [{text: "A) El Consejo de la Unión Europea (o Consejo de Ministros)", val: "correct"}, {text: "B) La Comisión Europea", val: "wrong"}, {text: "C) El Tribunal de Cuentas", val: "wrong"}], exp: "El Consejo de la Unión Europea reúne a los ministros nacionales y ejerce la codecisión legislativa junto al Parlamento." },
-        { q: "¿Qué papel institucional cumple la Comisión Europea?", options: [{text: "A) Órgano ejecutivo independiente que ostenta el monopolio de iniciativa legislativa y actúa como guardiana de los tratados", val: "correct"}, {text: "B) Tribunal supremo encargado de resolver conflictos prejudiciales entre estados", val: "wrong"}, {text: "C) Cumbre de Jefes de Estado que fija las directrices políticas generales", val: "wrong"}], exp: "La Comisión Europea es el ejecutivo comunitario, detenta la iniciativa legislativa y vigila el cumplimiento del derecho europeo." },
-        { q: "Respecto al Espacio Schengen en 2026, ¿cuál de los siguientes países pertenecientes a la UE NO forma parte plena de dicho espacio de libre circulación sin controles fronterizos?", options: [{text: "A) Chipre", val: "correct"}, {text: "B) España", val: "wrong"}, {text: "C) Alemania", val: "wrong"}], exp: "Chipre es Estado miembro de la UE pero permanece excluido temporalmente del espacio Schengen (junto a Irlanda en normas específicas)." },
-        { q: "El principio de primacía del Derecho de la Unión Europea implica que:", options: [{text: "A) En caso de colisión o incompatibilidad, las normas comunitarias prevalecen sobre cualquier disposición del derecho interno de los Estados miembros, incluidas sus constituciones", val: "correct"}, {text: "B) Las leyes nacionales posteriores derogan siempre a los reglamentos europeos anteriores", val: "wrong"}, {text: "C) Los tribunales nacionales pueden anular un reglamento europeo si contradice una ordenanza municipal", val: "wrong"}], exp: "Jurisprudencia del TJUE: La primacía impone que el Derecho de la UE prevalezca frente a cualquier norma nacional interna incompatible." },
-        { q: "¿Cuántos países integraban la eurozona a 1 de enero de 2026 tras la adopción oficial de la moneda única por parte de Bulgaria?", options: [{text: "A) 21 países", val: "correct"}, {text: "B) 19 países", val: "wrong"}, {text: "C) 27 países", val: "wrong"}], exp: "Con la incorporación de Bulgaria el 1 de enero de 2026, la eurozona pasó a contar con 21 Estados miembros." },
-        { q: "En el derecho penal español, el principio 'nullum crimen, nulla poena sine lege previa et scripta' se vincula directamente con:", options: [{text: "A) El principio de legalidad penal (art. 1 y 2 del Código Penal)", val: "correct"}, {text: "B) El principio de oportunidad fiscal", val: "wrong"}, {text: "C) El principio de culpabilidad objetiva", val: "wrong"}], exp: "El principio de legalidad exige ley previa, escrita y estricta para considerar una conducta delito o sancionarla." },
-        { q: "¿Qué diferencia existe entre un delito consumado y una tentativa inacabada?", options: [{text: "A) En la tentativa inacabada el sujeto omite parte de los actos de ejecución por causas ajenas a su voluntad; en el consumado se han perfeccionado todos los elementos del tipo penal", val: "correct"}, {text: "B) La tentativa inacabada está exenta de pena en el derecho español", val: "wrong"}, {text: "C) Ambas se castigan con la pena exacta del delito consumado sin rebaja", val: "wrong"}], exp: "La tentativa (tanto acabada como inacabada) se castiga generalmente rebajando la pena en uno o dos grados respecto al delito consumado." },
-        { q: "Si un cooperador necesario realiza una aportación anterior o simultánea al delito sin la cual este no se habría producido, ¿cómo se castiga su participación (art. 28 CP)?", options: [{text: "A) Se le imponen las mismas penas señaladas por la ley a los autores del delito", val: "correct"}, {text: "B) Se le aplica la pena inferior en dos grados propia de los cómplices", val: "wrong"}, {text: "C) Queda exento de responsabilidad penal si no estuvo presente en el lugar de los hechos", val: "wrong"}], exp: "Art. 28 CP: Los cooperadores necesarios son castigados con la misma pena prevista para los autores materiales." },
-        { q: "¿Qué efectos procesales y penales produce la circunstancia atenuante de confesión (art. 21.4.ª CP)?", options: [{text: "A) Haber procedido el culpable, antes de conocer que el procedimiento judicial se dirige contra él, a confesar la infracción a las autoridades", val: "correct"}, {text: "B) Confesar el delito en el juicio oral ante el juez de lo penal", val: "wrong"}, {text: "C) Entregar el botín tras ser detenido por las Fuerzas de Seguridad", val: "wrong"}], exp: "Art. 21.4ª CP exige como requisito temporal ineludible que la confesión se produzca antes de que el autor sepa que la justicia le investiga." }
-    ];
-
-    // ==========================================
-    // CONTROL GENERAL Y ACTUALIZACIÓN DE PROGRESO
-    // ==========================================
-    function actualizarContadores() {
-        const badgeJur = document.getElementById("badge-total-juridico");
-        if (badgeJur) badgeJur.textContent = `${bancoJuridico.length} preguntas`;
-    }
-
-    function seleccionarAleatorias(banco, cantidad) {
-        let mezclado = [...banco].sort(() => 0.5 - Math.random());
-        return mezclado.slice(0, cantidad);
-    }
-
-    function actualizarProgreso(tipo) {
-        let prefix = 'j';
-        let total = 20;
-        let respondidas = 0;
-
-        for (let i = 1; i <= total; i++) {
-            const card = document.querySelector(`[data-q="${prefix}${i}"]`);
-            if (card && card.querySelector(`input[name="${prefix}${i}"]:checked`)) {
-                respondidas++;
-            }
-        }
-
-        let porcentaje = Math.round((respondidas / total) * 100);
-        const textEl = document.getElementById(`progress-text-${tipo}`);
-        const barEl = document.getElementById(`progress-bar-${tipo}`);
-
-        if (textEl) textEl.textContent = `Preguntas respondidas: ${respondidas} de ${total} (${porcentaje}%)`;
-        if (barEl) barEl.style.width = `${porcentaje}%`;
-    }
-
-    function renderizarTest(tipo) {
-        let container = document.getElementById(`quiz-container-${tipo}`);
-        if (!container) return;
-        container.innerHTML = "";
-        let banco = bancoJuridico;
-        let prefijo = 'j';
-
-        let seleccion = seleccionarAleatorias(banco, 20);
-        preguntasActualesJuridico = seleccion;
-
-        seleccion.forEach((item, index) => {
-            let numQ = index + 1;
-            let cardHTML = `
-                <div class="question-card" data-q="${prefijo}${numQ}">
-                    <div class="question">${numQ}. ${item.q}</div>
-                    <div class="options">
-            `;
-
-            item.options.forEach((opt) => {
-                cardHTML += `<label><input type="radio" name="${prefijo}${numQ}" value="${opt.val}" onchange="actualizarProgreso('${tipo}')"> ${opt.text}</label>`;
-            });
-
-            cardHTML += `
-                    </div>
-                    <div class="status-badge" id="badge-${prefijo}${numQ}"></div>
-                    <div class="explanation" id="exp-${prefijo}${numQ}"><strong>Explicación jurídica:</strong> ${item.exp}</div>
-                </div>
-            `;
-            container.innerHTML += cardHTML;
-        });
-
-        const resEl = document.getElementById(`result-${tipo}`);
-        if (resEl) {
-            resEl.innerHTML = "";
-            resEl.style.backgroundColor = "transparent";
-        }
-        actualizarProgreso(tipo);
-    }
-
-    function iniciarTest(tipo) {
-        renderizarTest(tipo);
-        const sectionEl = document.getElementById(`seccion-${tipo}`);
-        if (sectionEl) sectionEl.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function cambiarSeccion(seccion) {
-        document.querySelectorAll('.test-section').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.btn-section').forEach(el => el.classList.remove('active'));
-        
-        const targetSection = document.getElementById(`seccion-${seccion}`);
-        const targetBtn = document.getElementById(`btn-tab-${seccion}`);
-        
-        if (targetSection) targetSection.classList.add('active');
-        if (targetBtn) targetBtn.classList.add('active');
-
-        if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function calcularResultado(tipo) {
-        let total = 20;
-        let prefix = 'j';
-        let aciertos = 0;
-        let fallos = 0;
-
-        for (let i = 1; i <= total; i++) {
-            const card = document.querySelector(`[data-q="${prefix}${i}"]`);
-            if (!card) continue;
-            const labels = card.querySelectorAll('label');
-            const badge = document.getElementById(`badge-${prefix}${i}`);
-            const explanation = document.getElementById(`exp-${prefix}${i}`);
-            
-            labels.forEach(l => l.classList.remove('correct-answer', 'wrong-answer'));
-
-            const selected = card.querySelector(`input[name="${prefix}${i}"]:checked`);
-            const correctInput = card.querySelector(`input[name="${prefix}${i}"][value="correct"]`);
-
-            if (selected) {
-                if (selected.value === "correct") {
-                    aciertos++;
-                    selected.parentElement.classList.add('correct-answer');
-                    badge.className = "status-badge correct";
-                    badge.innerHTML = "¡Correcto!";
-                } else {
-                    fallos++;
-                    selected.parentElement.classList.add('wrong-answer');
-                    if (correctInput) correctInput.parentElement.classList.add('correct-answer');
-                    badge.className = "status-badge wrong";
-                    badge.innerHTML = "Incorrecto";
-                }
-            } else {
-                fallos++;
-                if (correctInput) correctInput.parentElement.classList.add('correct-answer');
-                badge.className = "status-badge wrong";
-                badge.innerHTML = "No respondida";
-            }
-            
-            badge.style.display = "block";
-            explanation.style.display = "block";
-        }
-
-        let puntosTotales = (aciertos * 1) - (fallos * 0.5);
-        let notaFinal = (puntosTotales / total) * 10;
-        if (notaFinal < 0) notaFinal = 0;
-
-        const resultadoDiv = document.getElementById(`result-${tipo}`);
-        if (resultadoDiv) {
-            if (notaFinal >= 5) {
-                resultadoDiv.style.backgroundColor = "#d4edda";
-                resultadoDiv.style.color = "#155724";
-                resultadoDiv.innerHTML = `¡Aprobado! Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación penalizada: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
-            } else {
-                resultadoDiv.style.backgroundColor = "#f8d7da";
-                resultadoDiv.style.color = "#721c24";
-                resultadoDiv.innerHTML = `Suspenso. Aciertos: ${aciertos} | Fallos: ${fallos} | Puntuación penalizada: ${puntosTotales.toFixed(1)} <br><strong>Nota final: ${notaFinal.toFixed(2)} / 10</strong>`;
-            }
-        }
-    }
-
-    // ==========================================
-    // EJERCICIO 1: TABLA MATRIZ PROBABILIDAD x IMPACTO
-    // ==========================================
-    function inicializarFilasPlanRiesgos() {
-        const tbody = document.getElementById("filas-evaluacion-riesgo");
-        if (!tbody) return;
-        tbody.innerHTML = "";
-        for (let i = 1; i <= 5; i++) {
-            tbody.innerHTML += `
-                <tr>
-                    <td><input type="text" id="r-nombre-${i}" placeholder="Ej. Hurto de equipaje..." /></td>
-                    <td><input type="text" id="r-zona-${i}" placeholder="Ej. Sala de espera..." /></td>
-                    <td>
-                        <select id="r-prob-${i}" onchange="recalcularFila(${i})">
-                            <option value="1">1 (Muy baja)</option>
-                            <option value="2">2 (Baja)</option>
-                            <option value="3" selected>3 (Media)</option>
-                            <option value="4">4 (Alta)</option>
-                            <option value="5">5 (Muy alta)</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select id="r-imp-${i}" onchange="recalcularFila(${i})">
-                            <option value="1">1 (Insignif.)</option>
-                            <option value="2">2 (Menor)</option>
-                            <option value="3" selected>3 (Moderado)</option>
-                            <option value="4">4 (Grave)</option>
-                            <option value="5">5 (Muy grave)</option>
-                        </select>
-                    </td>
-                    <td style="text-align:center;"><span id="r-calc-${i}" class="badge-calc medio">9</span></td>
-                    <td><input type="text" id="r-medidas-${i}" placeholder="Ej. Rondas de vigilancia..." /></td>
-                </tr>
-            `;
-        }
-    }
-
-    function recalcularFila(i) {
-        const p = parseInt(document.getElementById(`r-prob-${i}`).value);
-        const imp = parseInt(document.getElementById(`r-imp-${i}`).value);
-        const res = p * imp;
-        const badge = document.getElementById(`r-calc-${i}`);
-        badge.textContent = res;
-        badge.className = "badge-calc";
-        if (res <= 6) badge.classList.add("bajo");
-        else if (res <= 14) badge.classList.add("medio");
-        else badge.classList.add("alto");
-    }
-
-    function auditarPlanRiesgos() {
-        let totalLlenas = 0;
-        let maxPuntuacion = -1;
-        let nombreMaxRiesgo = "";
-
-        for (let i = 1; i <= 5; i++) {
-            const nom = document.getElementById(`r-nombre-${i}`).value.trim();
-            const zon = document.getElementById(`r-zona-${i}`).value.trim();
-            const med = document.getElementById(`r-medidas-${i}`).value.trim();
-            const p = parseInt(document.getElementById(`r-prob-${i}`).value);
-            const imp = parseInt(document.getElementById(`r-imp-${i}`).value);
-            const val = p * imp;
-
-            if (nom.length >= 4 && zon.length >= 3 && med.length >= 6) {
-                totalLlenas++;
-                if (val > maxPuntuacion) {
-                    maxPuntuacion = val;
-                    nombreMaxRiesgo = nom;
-                }
-            }
-        }
-
-        const txtZonas = document.getElementById("eval-zonas-vulnerables").value.trim().toLowerCase();
-        const txtConcl = document.getElementById("eval-conclusion").value.trim().toLowerCase();
-
-        if (totalLlenas < 5) {
-            alert(`Has completado ${totalLlenas} de 5 riesgos en la tabla. Rellena todos los campos con sus medidas para poder auditar el plan.`);
-            return;
-        }
-
-        let nota = 0;
-        let rubricasHtml = "";
-
-        nota += 4.0;
-        rubricasHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Matriz de 5 Riesgos (P × I):</strong> <span style="color:#16a34a;">5 riesgos identificados, cuantificados y con medidas preventivas asignadas.</span></div></div>`;
-
-        const zonasOk = txtZonas.length >= 35 && (txtZonas.includes("anden") || txtZonas.includes("espera") || txtZonas.includes("consigna") || txtZonas.includes("taquilla") || txtZonas.includes("acceso") || txtZonas.includes("hall"));
-        if (zonasOk) {
-            nota += 3.0;
-            rubricasHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Identificación de Zonas Críticas:</strong> <span style="color:#16a34a;">Se justifican correctamente las áreas de mayor exposición física en la estación.</span></div></div>`;
-        } else {
-            rubricasHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Identificación de Zonas Críticas:</strong> <span style="color:#dc2626;">Falta detallar y justificar 3 áreas vulnerables de la estación (ej. andenes, consignas, taquillas).</span></div></div>`;
-        }
-
-        const conclOk = txtConcl.length >= 30 && (txtConcl.includes(maxPuntuacion.toString()) || txtConcl.includes("puntuacion") || txtConcl.includes("alta") || txtConcl.includes("prioridad") || txtConcl.includes("esfuerzo"));
-        if (conclOk) {
-            nota += 3.0;
-            rubricasHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Conclusión y Priorización Operativa:</strong> <span style="color:#16a34a;">Conclusión coherente. Se identificó el riesgo crítico (${nombreMaxRiesgo} con ${maxPuntuacion} pts) para enfocar los recursos de seguridad.</span></div></div>`;
-        } else {
-            rubricasHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Conclusión y Priorización Operativa:</strong> <span style="color:#dc2626;">La conclusión debe señalar explícitamente cuál fue el riesgo de mayor puntuación y por qué orienta el servicio.</span></div></div>`;
-        }
-
-        const card = document.getElementById("plan-feedback");
-        document.getElementById("plan-feedback-rubricas").innerHTML = rubricasHtml;
-        const notaEl = document.getElementById("plan-feedback-nota");
-        notaEl.innerHTML = `Puntuación: <strong>${nota.toFixed(1)} / 10</strong>`;
-
-        if (nota >= 5) {
-            notaEl.style.color = "#155724";
-            document.getElementById("plan-feedback-titulo").textContent = "Plan de Seguridad Física - Conforme";
-            card.style.borderColor = "#86efac";
-        } else {
-            notaEl.style.color = "#b91c1c";
-            document.getElementById("plan-feedback-titulo").textContent = "Plan de Seguridad Física - Requiere Ajustes";
-            card.style.borderColor = "#fca5a5";
-        }
-        card.style.display = "block";
-    }
-
-    function cargarEjemploPlanRiesgos() {
-        const ejemplos = [
-            { n: "Hurto al descuido de equipajes y efectos", z: "Salas de espera y cafetería", p: 4, i: 2, m: "Rondas dinámicas preventivas y megafonía disuasoria periódica." },
-            { n: "Conato de agresión al personal de taquillas", z: "Taquillas y atención al cliente", p: 3, i: 3, m: "Botón de pánico conectado a central y mamparas reforzadas." },
-            { n: "Abandono de paquete u objeto sospechoso", z: "Zona de consignas automáticas", p: 2, i: 5, m: "CCTV específico 24h y aplicación del protocolo: Aislar -> Comunicar FFCCSS." },
-            { n: "Acceso no autorizado a vías / andenes", z: "Controles de acceso a andenes", p: 3, i: 4, m: "Torno de validación de billete y presencia de vigilante en punto fijo." },
-            { n: "Altercados o reyertas en horario nocturno", z: "Vestíbulo principal y accesos", p: 3, i: 3, m: "Patrulla conjunta por parejas y coordinación directa con Policía Nacional." }
-        ];
-
-        ejemplos.forEach((item, index) => {
-            const i = index + 1;
-            document.getElementById(`r-nombre-${i}`).value = item.n;
-            document.getElementById(`r-zona-${i}`).value = item.z;
-            document.getElementById(`r-prob-${i}`).value = item.p;
-            document.getElementById(`r-imp-${i}`).value = item.i;
-            document.getElementById(`r-medidas-${i}`).value = item.m;
-            recalcularFila(i);
-        });
-
-        document.getElementById("eval-zonas-vulnerables").value = "1. Andenes de alta velocidad: Por la cercanía a vías electrificadas y riesgo de caída o invasión. 2. Consignas automáticas: Por la vulnerabilidad de depósito de objetos sin control visual. 3. Vestíbulo y taquillas: Por el manejo de efectivo y elevada densidad de viajeros en horas punta.";
-        document.getElementById("eval-conclusion").value = "El riesgo con mayor puntuación crítica resultó ser el abandono de objeto sospechoso en consignas (10 puntos, por impacto 5 muy grave), seguido del acceso no autorizado a vías (12 puntos, P:3 x I:4). El esfuerzo preventivo del servicio debe concentrarse en el control perimetral de andenes y la estricta vigilancia por CCTV de objetos desatendidos.";
-    }
-
-    function limpiarPlanRiesgos() {
-        for (let i = 1; i <= 5; i++) {
-            document.getElementById(`r-nombre-${i}`).value = "";
-            document.getElementById(`r-zona-${i}`).value = "";
-            document.getElementById(`r-prob-${i}`).value = "3";
-            document.getElementById(`r-imp-${i}`).value = "3";
-            document.getElementById(`r-medidas-${i}`).value = "";
-            recalcularFila(i);
-        }
-        document.getElementById("eval-zonas-vulnerables").value = "";
-        document.getElementById("eval-conclusion").value = "";
-        document.getElementById("plan-feedback").style.display = "none";
-    }
-
-    // ==========================================
-    // EJERCICIO 2: MATRIZ DE PELIGRO, AMENAZA Y RIESGO
-    // ==========================================
-    const escenariosMatriz = {
-        "1": {
-            titulo: "Escenario 1: Control de accesos en horario nocturno (Edificio corporativo)",
-            texto: "Durante tu turno de noche en la recepción de un edificio corporativo, observas a través de las cámaras de CCTV que un individuo encapuchado merodea el perímetro exterior, saltándose la primera valla de seguridad con una cizalla (corta-candados) en la mano.",
-            criterios: {
-                peligro: ["valla", "perimetro", "cizalla", "herramienta", "corte", "candado", "vulnerabilidad", "exterior", "acceso"],
-                amenaza: ["individuo", "encapuchado", "intruso", "ladron", "persona", "intrusor", "asaltante"],
-                riesgo: ["probabilidad", "intrusion", "fuerza", "robo", "asalto", "daño", "propiedad", "grave", "impacto", "lesion"],
-                accion: ["camara", "cctv", "monitorizar", "alarma", "protocolo", "policia", "091", "112", "fuerzas", "seguridad", "no exponerse", "distancia"]
-            }
+    const bancoPreguntas = [
+        // --- CONSTITUCIÓN ESPAÑOLA ---
+        {
+            q: "Según la Constitución Española, ¿cuál es el plazo máximo constitucional en el que un detenido preventivo debe ser puesto en libertad o a disposición judicial?",
+            options: [
+                { text: "En el tiempo estrictamente necesario, con un máximo absoluto de 72 horas.", val: "correct" },
+                { text: "Un máximo de 48 horas improrrogables.", val: "wrong" },
+                { text: "Un máximo de 24 horas, salvo en delitos de terrorismo.", val: "wrong" }
+            ],
+            exp: "La detención preventiva no podrá durar más del tiempo estrictamente necesario para las averiguaciones, y en todo caso, en el plazo máximo de 72 horas el detenido deberá ser puesto en libertad o a disposición judicial[cite: 11]."
         },
-        "2": {
-            titulo: "Escenario 2: Patrulla preventiva en Centro Comercial",
-            texto: "Durante una ronda preventiva por los pasillos del centro comercial, detectas que una tubería del techo tiene una fuga continua, lo que ha generado un charco de agua de gran tamaño en una zona de intenso paso de clientes, junto a las escaleras mecánicas.",
-            criterios: {
-                peligro: ["tuberia", "fuga", "gotera", "charco", "agua", "suelo", "mojado", "superficie", "resbaladiz"],
-                amenaza: ["flujo", "clientes", "personas", "usuarios", "transito", "peatones", "distraidos", "aglomeracion"],
-                riesgo: ["caida", "resbalon", "traumatismo", "lesion", "daño", "fractura", "probabilidad", "alto"],
-                accion: ["balizar", "acordonar", "desviar", "mantenimiento", "limpieza", "señalizar", "avisar", "paso", "precaucion"]
-            }
-        }
-    };
+        {
+            q: "¿Quién tiene la competencia exclusiva para declarar el Estado de Sitio en España?",
+            options: [
+                { text: "El Congreso de los Diputados, por mayoría absoluta a propuesta exclusiva del Gobierno.", val: "correct" },
+                { text: "El Gobierno, mediante Decreto acordado en Consejo de Ministros.", val: "wrong" },
+                { text: "El Rey, con el refrendo del Presidente del Gobierno.", val: "wrong" }
+            ],
+            exp: "El estado de sitio será declarado por la mayoría absoluta del Congreso de los Diputados, a propuesta exclusiva del Gobierno[cite: 11]."
+        },
+        {
+            q: "De acuerdo con el artículo 17 de la Constitución, para producir la inmediata puesta a disposición judicial de toda persona detenida ilegalmente, la ley regulará un procedimiento denominado:",
+            options: [
+                { text: "Habeas corpus.", val: "correct" },
+                { text: "Recurso de amparo.", val: "wrong" },
+                { text: "Cuestión de inconstitucionalidad.", val: "wrong" }
+            ],
+            exp: "La ley regulará un procedimiento de «habeas corpus» para producir la inmediata puesta a disposición judicial de toda persona detenida ilegalmente[cite: 11]."
+        },
+        {
+            q: "¿Quién es el encargado de elegir al Defensor del Pueblo y cuál es la duración de su mandato?",
+            options: [
+                { text: "Es elegido por el Congreso de los Diputados y el Senado por mayoría de 3/5, y su mandato dura 5 años.", val: "correct" },
+                { text: "Es elegido por el Rey a propuesta del Presidente del Gobierno, por un mandato de 4 años.", val: "wrong" },
+                { text: "Es designado por el Consejo General del Poder Judicial para un mandato vitalicio.", val: "wrong" }
+            ],
+            exp: "El Defensor del Pueblo es elegido por el Congreso y el Senado por mayoría de tres quintos y su mandato dura cinco años[cite: 11]."
+        },
+        {
+            q: "Con respecto a la estructura de la Constitución, ¿qué partes la componen siguiendo la tradición francesa?",
+            options: [
+                { text: "Una parte dogmática (principios y derechos fundamentales) y una parte orgánica (división de poderes).", val: "correct" },
+                { text: "Una parte material y una parte procesal.", val: "wrong" },
+                { text: "Una parte preliminar, una penal y una administrativa.", val: "wrong" }
+            ],
+            exp: "Su contenido se estructura en una parte dogmática (principios constitucionales y derechos fundamentales) y una parte orgánica (división de poderes del Estado)[cite: 11]."
+        },
 
-    function cargarEscenarioMatriz() {
-        const selVal = document.getElementById("select-escenario").value;
-        const esc = escenariosMatriz[selVal];
-        const descEl = document.getElementById("desc-escenario");
-        if (descEl) descEl.innerHTML = `<strong>${esc.titulo}</strong><br>${esc.texto}`;
-        limpiarMatriz();
-    }
+        // --- DERECHO PENAL Y DEFINICIONES ---
+        {
+            q: "En el Derecho Penal, si un sujeto comete un hecho constitutivo de infracción creyendo lícita su actuación debido a un desconocimiento evitable de la norma prohibitiva, nos encontramos ante un:",
+            options: [
+                { text: "Error de prohibición vencible, que atenúa la pena en uno o dos grados.", val: "correct" },
+                { text: "Error de tipo invencible, que excluye la responsabilidad criminal.", val: "wrong" },
+                { text: "Error de prohibición invencible, que castiga el hecho como delito imprudente.", val: "wrong" }
+            ],
+            exp: "Si el error de prohibición (desconocimiento de la ilicitud) fuera vencible, se aplicará la pena inferior en uno o dos grados[cite: 12]."
+        },
+        {
+            q: "¿Cómo castiga el Código Penal el error de tipo vencible?",
+            options: [
+                { text: "Elimina el dolo, pero subsiste la culpa, por lo que será castigado como delito imprudente si la ley lo contempla.", val: "correct" },
+                { text: "Se exime al sujeto de toda responsabilidad criminal.", val: "wrong" },
+                { text: "Se castiga como delito doloso pero rebajando la pena en un grado.", val: "wrong" }
+            ],
+            exp: "El error de tipo vencible elimina el dolo pero subsiste la culpa, siendo castigado como infracción imprudente[cite: 12]."
+        },
+        {
+            q: "Si en un asalto dos sujetos se acercan a un coche para robar, y mientras uno vigila fuera, el otro accede al interior y comete un delito, impidiendo el vigilante exterior que acudan en ayuda de la víctima. Según el Tribunal Supremo, la persona que vigila fuera será considerada:",
+            options: [
+                { text: "Cooperador necesario (Autor).", val: "correct" },
+                { text: "Cómplice (Participación no necesaria).", val: "wrong" },
+                { text: "Encubridor.", val: "wrong" }
+            ],
+            exp: "Se considera cooperador necesario porque su conducta es imprescindible para la ejecución del delito (impide la intervención de terceros por la fuerza), respondiendo como autor[cite: 13]."
+        },
+        {
+            q: "Para que opere la circunstancia eximente de Legítima Defensa, es indispensable que concurran los siguientes requisitos:",
+            options: [
+                { text: "Agresión ilegítima, necesidad racional del medio empleado y falta de provocación suficiente.", val: "correct" },
+                { text: "Peligro inminente, colisión de bienes jurídicos y que el mal causado sea menor que el evitado.", val: "wrong" },
+                { text: "Agresión armada, intervención policial y falta de provocación.", val: "wrong" }
+            ],
+            exp: "La legítima defensa requiere agresión ilegítima, necesidad racional del medio empleado y falta de provocación suficiente[cite: 12]."
+        },
+        {
+            q: "De acuerdo con el Código Penal, las penas impuestas mediante sentencia firme por delitos de lesa humanidad y genocidio:",
+            options: [
+                { text: "No prescriben nunca.", val: "correct" },
+                { text: "Prescriben a los 30 años.", val: "wrong" },
+                { text: "Prescriben a los 20 años.", val: "wrong" }
+            ],
+            exp: "Los delitos y penas de lesa humanidad y genocidio nunca prescriben[cite: 13]."
+        },
+        {
+            q: "Si un individuo alienta públicamente, mediante la radiodifusión o redes sociales, a la comisión de un delito enalteciendo al autor del mismo de forma directa. Jurídicamente estamos ante:",
+            options: [
+                { text: "Apología, que solo es delictiva si constituye una incitación directa (forma de provocación).", val: "correct" },
+                { text: "Conspiración para delinquir.", val: "wrong" },
+                { text: "Proposición delictiva.", val: "wrong" }
+            ],
+            exp: "La apología es la exposición de ideas que ensalcen el crimen, y sólo será delictiva como forma de provocación si constituye una incitación directa a cometer un delito[cite: 12]."
+        },
 
-    function analizarMatrizDiagnostico() {
-        const idEsc = document.getElementById("select-escenario").value;
-        const esc = escenariosMatriz[idEsc];
-        
-        const txtPel = document.getElementById("matriz-peligro").value.trim().toLowerCase();
-        const txtAmen = document.getElementById("matriz-amenaza").value.trim().toLowerCase();
-        const txtRiesg = document.getElementById("matriz-riesgo").value.trim().toLowerCase();
-        const txtAcc = document.getElementById("matriz-accion").value.trim().toLowerCase();
+        // --- HOMICIDIO, LESIONES Y LIBERTAD SEXUAL ---
+        {
+            q: "¿En qué circunstancia el Código Penal castiga el Asesinato con la pena de Prisión Permanente Revisable?",
+            options: [
+                { text: "Cuando la víctima sea menor de 16 años, persona especialmente vulnerable, o el crimen sea subsiguiente a un delito contra la libertad sexual.", val: "correct" },
+                { text: "Siempre que medie precio, recompensa o promesa.", val: "wrong" },
+                { text: "Únicamente si el asesinato se ha cometido mediante ensañamiento extremo.", val: "wrong" }
+            ],
+            exp: "El asesinato se castiga con prisión permanente revisable si la víctima es menor de 16 años o vulnerable, o si es subsiguiente a un delito contra la libertad sexual, o por grupo criminal[cite: 10]."
+        },
+        {
+            q: "Con la entrada en vigor de la Ley Orgánica 10/2022 (Ley de 'solo sí es sí'), ¿cómo se califica cualquier acto que atente contra la libertad sexual sin el consentimiento de la víctima, haya o no violencia?",
+            options: [
+                { text: "Desaparece el abuso sexual y se equipara todo ataque sin consentimiento al delito de Agresión Sexual.", val: "correct" },
+                { text: "Abuso sexual si no hay violencia, y agresión si existe fuerza.", val: "wrong" },
+                { text: "Acoso sexual agravado.", val: "wrong" }
+            ],
+            exp: "El delito de abuso sexual desaparece y se equipara con el de agresión sexual; cualquier ataque a la libertad sexual sin consentimiento se considerará agresión sexual[cite: 10]."
+        },
+        {
+            q: "Según el artículo 149 del Código Penal, causar a otra persona la pérdida o inutilidad de un órgano o miembro principal, de un sentido, o la esterilidad, está castigado con:",
+            options: [
+                { text: "Prisión de 6 a 12 años.", val: "correct" },
+                { text: "Prisión de 3 a 6 años.", val: "wrong" },
+                { text: "Prisión de 1 a 3 años.", val: "wrong" }
+            ],
+            exp: "Causar la pérdida o inutilidad de un órgano principal, sentido, esterilidad o grave deformidad se castiga con prisión de 6 a 12 años[cite: 10]."
+        },
+        {
+            q: "¿Cuál es la diferencia entre el delito de lesiones básico (art 147.1) y el delito leve de lesiones (art 147.2)?",
+            options: [
+                { text: "El delito básico requiere objetivamente tratamiento médico o quirúrgico además de la primera asistencia; el leve no lo requiere.", val: "correct" },
+                { text: "El delito básico se comete con armas y el leve mediante agresiones verbales.", val: "wrong" },
+                { text: "El delito básico se persigue de oficio y el leve solo a instancia de parte.", val: "wrong" }
+            ],
+            exp: "El delito de lesiones (art. 147.1) requiere objetivamente, además de primera asistencia, tratamiento médico o quirúrgico[cite: 10]."
+        },
 
-        if (!txtPel || !txtAmen || !txtRiesg || !txtAcc) {
-            alert("Completa los 4 campos para realizar la auditoría completa de la matriz.");
-            return;
-        }
+        // --- SEGURIDAD PRIVADA Y DROGAS ---
+        {
+            q: "El abandono o la omisión injustificados del servicio por parte del personal de seguridad privada, dentro de la jornada laboral establecida, constituye una infracción:",
+            options: [
+                { text: "Muy grave.", val: "correct" },
+                { text: "Grave.", val: "wrong" },
+                { text: "Leve.", val: "wrong" }
+            ],
+            exp: "El abandono u omisión injustificados del servicio por parte del personal de seguridad privada está tipificado como infracción muy grave (Art. 58.1.j LSP)[cite: 14]."
+        },
+        {
+            q: "Durante la prestación de su servicio, un Vigilante de Seguridad detecta a un individuo consumiendo sustancias estupefacientes en el interior del recinto protegido. ¿Cuál es su obligación legal estricta?",
+            options: [
+                { text: "Deberá impedir el consumo ilegal en el interior de los locales de su protección, comunicándolo de inmediato a las Fuerzas y Cuerpos de Seguridad para facilitar su identificación.", val: "correct" },
+                { text: "Sancionar económicamente al individuo y expulsarlo sin llamar a la policía.", val: "wrong" },
+                { text: "Detener al individuo por tráfico de drogas e interrogarlo sobre su procedencia.", val: "wrong" }
+            ],
+            exp: "El RSP establece que los vigilantes deberán impedir el consumo ilegal de drogas en los establecimientos bajo su protección, comunicándolo a las FFCCSS[cite: 14]."
+        },
+        {
+            q: "El arma reglamentaria que emplearán los vigilantes de seguridad en los servicios que deban prestarse con armas de fuego cortas es:",
+            options: [
+                { text: "El revólver calibre 38 especial de cuatro pulgadas.", val: "correct" },
+                { text: "Pistola semiautomática de 9 mm Parabellum.", val: "wrong" },
+                { text: "Cualquier arma amparada bajo la licencia tipo C.", val: "wrong" }
+            ],
+            exp: "El arma reglamentaria de los vigilantes de seguridad en servicios con armas es el revólver calibre treinta y ocho especial de cuatro pulgadas[cite: 14]."
+        },
+        {
+            q: "De acuerdo con el Reglamento de Seguridad Privada, los grilletes que utilicen los Vigilantes de Seguridad deben cumplir la siguiente norma:",
+            options: [
+                { text: "Serán de los denominados de manilla, proporcionados por la empresa e indicados por el jefe de seguridad.", val: "correct" },
+                { text: "Deben ser adquiridos obligatoriamente por el propio vigilante.", val: "wrong" },
+                { text: "Están terminantemente prohibidos para el personal de seguridad privada.", val: "wrong" }
+            ],
+            exp: "Los grilletes serán de los denominados de manilla, proporcionados por la empresa al vigilante, y el jefe de seguridad dispone su uso[cite: 14, 15]."
+        },
+        {
+            q: "En controles de acceso, si un ciudadano se niega a exhibir su documentación personal o permitir la comprobación de sus pertenencias, el Vigilante de Seguridad:",
+            options: [
+                { text: "No puede retener la documentación personal, pero está facultado para impedirle el acceso u ordenarle el abandono del inmueble.", val: "correct" },
+                { text: "Debe retener físicamente a la persona hasta que se identifique ante las FFCCSS.", val: "wrong" },
+                { text: "Puede registrarle en contra de su voluntad acogiéndose a la Ley de Seguridad Ciudadana.", val: "wrong" }
+            ],
+            exp: "La negativa a exhibir la identificación o permitir el control faculta al vigilante para impedir el acceso u ordenar el abandono del inmueble, pero nunca retener la documentación[cite: 14]."
+        },
+        {
+            q: "La Tarjeta de Identidad Profesional (TIP) del Vigilante de Seguridad es expedida por:",
+            options: [
+                { text: "El Director General de la Policía (salvo la de guardas rurales que expide la Guardia Civil).", val: "correct" },
+                { text: "El Ministerio del Interior de forma conjunta con la empresa de seguridad.", val: "wrong" },
+                { text: "El Secretario de Estado de Seguridad.", val: "wrong" }
+            ],
+            exp: "Las tarjetas de identidad profesional son expedidas por el Director General de la Policía, salvo las de los guardas particulares del campo (Director General de la Guardia Civil)[cite: 14, 15]."
+        },
+        {
+            q: "En el marco de la Seguridad Privada, no identificarse profesionalmente cuando fueren requeridos por las Fuerzas y Cuerpos de Seguridad o Autoridad es:",
+            options: [
+                { text: "Una infracción muy grave.", val: "correct" },
+                { text: "Una infracción grave.", val: "wrong" },
+                { text: "Una infracción leve.", val: "wrong" }
+            ],
+            exp: "La negativa a identificarse profesionalmente ante la Autoridad o sus agentes constituye una infracción muy grave (Art. 58.1.g)[cite: 14]."
+        },
 
-        let nota = 0;
-        let itemsHtml = "";
-
-        const matchPel = esc.criterios.peligro.some(k => txtPel.includes(k));
-        if (matchPel && txtPel.length >= 10) {
-            nota += 2.5;
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Peligro:</strong> <span style="color:#16a34a;">Correcto. Identifica la condición física o vulnerabilidad causante del daño potencial.</span></div></div>`;
-        } else {
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Peligro:</strong> <span style="color:#dc2626;">El peligro debe ser el elemento intrínseco o vulnerabilidad (ej. valla vulnerada, cizalla, fuga de agua).</span></div></div>`;
-        }
-
-        const matchAmen = esc.criterios.amenaza.some(k => txtAmen.includes(k));
-        if (matchAmen && txtAmen.length >= 8) {
-            nota += 2.5;
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Amenaza:</strong> <span style="color:#16a34a;">Correcto. Reconoce al actor o factor externo con potencial de materializar el evento.</span></div></div>`;
-        } else {
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Amenaza:</strong> <span style="color:#dc2626;">La amenaza es el factor o actor externo (ej. intruso encapuchado o flujo de peatones).</span></div></div>`;
-        }
-
-        const matchRiesg = esc.criterios.riesgo.some(k => txtRiesg.includes(k));
-        const tieneConceptoProb = txtRiesg.includes("probab") || txtRiesg.includes("alta") || txtRiesg.includes("posibil") || txtRiesg.includes("grave") || txtRiesg.includes("impacto");
-        if (matchRiesg && tieneConceptoProb) {
-            nota += 2.5;
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Riesgo:</strong> <span style="color:#16a34a;">Correcto. Pondera probabilidad e impacto lesivo hacia la instalación o usuarios.</span></div></div>`;
-        } else {
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Riesgo:</strong> <span style="color:#dc2626;">Debe evaluar probabilidad combinada con la gravedad del impacto (ej. alta probabilidad de asalto / traumatismo).</span></div></div>`;
-        }
-
-        const matchAcc = esc.criterios.accion.some(k => txtAcc.includes(k));
-        if (matchAcc && txtAcc.length >= 25) {
-            nota += 2.5;
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>Acción de Control:</strong> <span style="color:#16a34a;">Correcto. Aplica medidas inmediatas de autoprotección, acordonamiento y comunicaciones reglamentarias.</span></div></div>`;
-        } else {
-            itemsHtml += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>Acción de Control:</strong> <span style="color:#dc2626;">Debe reflejar balizamiento/monitorización, aviso a policía (091/112) o mantenimiento y autoprotección.</span></div></div>`;
-        }
-
-        const fbCard = document.getElementById("matriz-feedback");
-        document.getElementById("matriz-feedback-rubricas").innerHTML = itemsHtml;
-        const notaEl = document.getElementById("matriz-feedback-nota");
-        notaEl.innerHTML = `Puntuación: <strong>${nota.toFixed(1)} / 10</strong>`;
-
-        if (nota >= 5) {
-            notaEl.style.color = "#155724";
-            document.getElementById("matriz-feedback-titulo").textContent = "Diagnóstico Técnico Aprobado";
-            fbCard.style.borderColor = "#86efac";
-        } else {
-            notaEl.style.color = "#b91c1c";
-            document.getElementById("matriz-feedback-titulo").textContent = "Diagnóstico Requiere Revisión Técnica";
-            fbCard.style.borderColor = "#fca5a5";
-        }
-        fbCard.style.display = "block";
-    }
-
-    function limpiarMatriz() {
-        document.getElementById("matriz-peligro").value = "";
-        document.getElementById("matriz-amenaza").value = "";
-        document.getElementById("matriz-riesgo").value = "";
-        document.getElementById("matriz-accion").value = "";
-        document.getElementById("matriz-feedback").style.display = "none";
-    }
-
-    // ==========================================
-    // EJERCICIO 3: AUDITORÍA DE REDACCIÓN DE PARTES
-    // ==========================================
-    function analizarParteServicio() {
-        const texto = document.getElementById("texto-parte").value.trim();
-        const feedbackCard = document.getElementById("parte-feedback");
-        const feedbackRubricas = document.getElementById("parte-feedback-rubricas");
-        const feedbackNota = document.getElementById("parte-feedback-nota");
-        const feedbackSubj = document.getElementById("parte-feedback-subjetividad");
-
-        if (texto.length < 25) {
-            alert("El parte es demasiado breve. Redacta el relato fáctico del servicio.");
-            return;
-        }
-
-        const textoLower = texto.toLowerCase();
-
-        const rubricas = [
-            {
-                nombre: "Identificación profesional (TIP o puesto de guardia)",
-                puntos: 1.5,
-                cumple: /\b(tip|vigilante|vs|puesto|servicio|turno)\b/i.test(textoLower),
-                descOk: "Identificación del vigilante/servicio debidamente reflejada.",
-                descFalla: "Falta consignar la TIP o identificación reglamentaria del actuante."
-            },
-            {
-                nombre: "Referencia temporal exacta (Formato HH:MM y fecha)",
-                puntos: 2.0,
-                cumple: /(\b\d{1,2}:\d{2}\b|\bhoras\b|\b\d{1,2}\/\d{1,2}\b|\bfecha\b)/i.test(textoLower),
-                descOk: "Consigna hora y referencia temporal precisa en sistema 24 h.",
-                descFalla: "Faltan las horas exactas en formato 24 h (ej. 02:40 horas)."
-            },
-            {
-                nombre: "Ubicación espacial concreta",
-                puntos: 1.5,
-                cumple: /\b(muelle|puerta|salida|emergencia|zona|planta|sector|cctv|camara|pasillo)\b/i.test(textoLower),
-                descOk: "Ubicación e instalaciones descritas con precisión.",
-                descFalla: "Se debe concretar con exactitud el lugar físico del suceso (muelles, emergencias)."
-            },
-            {
-                nombre: "Descripción fáctica de la intervención física",
-                puntos: 2.0,
-                cumple: /\b(comprob|inspeccion|person|acud|verific|observ|detect|cerrad|cerrar|forzad|dañ)/i.test(textoLower),
-                descOk: "Constan las acciones operativas y comprobaciones físicas realizadas.",
-                descFalla: "Falta describir las acciones y comprobaciones materiales ejecutadas."
-            },
-            {
-                nombre: "Comunicaciones oficiales de seguridad",
-                puntos: 2.0,
-                cumple: /\b(polic|091|092|112|mossos|guardia civil|cra|central|jefe de seguridad|coordinad|aviso|comunic)/i.test(textoLower),
-                descOk: "Se acredita la comunicación con Central/CRA o Fuerzas de Seguridad.",
-                descFalla: "No consta aviso a la Central Receptora, Mandos o Policía."
-            },
-            {
-                nombre: "Nivel de desarrollo descriptivo",
-                puntos: 1.0,
-                cumple: texto.split(/\s+/).length >= 40,
-                descOk: "Extensión y desglose descriptivo conforme a parte oficial.",
-                descFalla: "Texto escueto; un parte oficial requiere mayor descripción de hechos."
-            }
-        ];
-
-        const palabrasSubjetivas = [
-            "me pareció", "creo que", "sospechoso", "pinta de", "cara de", 
-            "obviamente quería", "seguro que era", "mala pinta", "delincuente", "odio", "me dio miedo"
-        ];
-        
-        let subjetividadesDetectadas = [];
-        palabrasSubjetivas.forEach(term => {
-            if (textoLower.includes(term)) subjetividadesDetectadas.push(`"${term}"`);
-        });
-
-        let nota = 0;
-        let htmlRubricas = "";
-
-        rubricas.forEach(r => {
-            if (r.cumple) {
-                nota += r.puntos;
-                htmlRubricas += `<div class="rubric-item"><span class="rubric-icon ok">✓</span><div><strong>${r.nombre}:</strong> <span style="color:#16a34a;">${r.descOk}</span></div></div>`;
-            } else {
-                htmlRubricas += `<div class="rubric-item"><span class="rubric-icon warn">✗</span><div><strong>${r.nombre}:</strong> <span style="color:#dc2626;">${r.descFalla}</span></div></div>`;
-            }
-        });
-
-        let penalizacion = subjetividadesDetectadas.length * 1.5;
-        nota = Math.max(0, nota - penalizacion);
-
-        feedbackRubricas.innerHTML = htmlRubricas;
-        feedbackNota.innerHTML = `Nota: <strong>${nota.toFixed(1)} / 10</strong>`;
-
-        if (subjetividadesDetectadas.length > 0) {
-            feedbackSubj.style.display = "block";
-            feedbackSubj.innerHTML = `
-                ⚠ <strong>Penalización por subjetividad (-${penalizacion.toFixed(1)} pts):</strong><br>
-                Se detectaron juicios de valor u opiniones personales: <em>${subjetividadesDetectadas.join(", ")}</em>.<br>
-                El vigilante debe atenerse a hechos constatables sin calificar intenciones personales.
-            `;
-        } else {
-            feedbackSubj.style.display = "none";
-        }
-
-        if (nota >= 5) {
-            feedbackNota.style.color = "#155724";
-            document.getElementById("parte-feedback-titulo").textContent = "Parte Aprobado - Redacción Conforme";
-            feedbackCard.style.borderColor = "#86efac";
-        } else {
-            feedbackNota.style.color = "#b91c1c";
-            document.getElementById("parte-feedback-titulo").textContent = "Parte Requiere Corrección";
-            feedbackCard.style.borderColor = "#fca5a5";
-        }
-        feedbackCard.style.display = "block";
-    }
-
-    function limpiarParte() {
-        document.getElementById("texto-parte").value = "";
-        document.getElementById("parte-feedback").style.display = "none";
-    }
-
-    // ==========================================
-    // CONTROL GENERAL Y ACTUALIZACIÓN DE PROGRESO
-    // ==========================================
-    window.onload = function() {
-        actualizarContadores();
-        renderizarTest('juridico');
-        cargarEscenarioMatriz();
-        inicializarFilasPlanRiesgos();
-    };
-</script>
-
-</body>
-</html>
+        // --- UNIÓN EUROPEA ---
+        {
+            q: "En el ordenamiento jurídico de la Unión Europea, ¿qué característica principal define a un 'Reglamento' frente a una 'Directiva'?",
+            options: [
+                { text: "El Reglamento tiene alcance general y es directamente aplicable en cada Estado miembro sin necesidad de transposición.", val: "correct" },
+                { text: "El Reglamento solo obliga en cuanto al resultado, requiriendo que los Estados lo adapten a su derecho nacional.", val: "wrong" },
+                { text: "El Reglamento es una mera recomendación sin fuerza vinculante.", val: "wrong" }
+            ],
+            exp: "Un reglamento tiene alcance general, es obligatorio en todas sus partes y directamente aplicable en cada Estado miembro, sin necesidad de transposición[cite: 16]."
+        },
+        {
+            q: "¿Qué institución europea ostenta el poder ejecutivo, propone la legislación y vigila el cumplimiento de los tratados?",
+            options: [
+                { text: "La Comisión Europea.", val: "correct" },
+                { text: "El Parlamento Europeo.", val: "wrong" },
+                { text: "El Consejo Europeo.", val: "wrong" }
+            ],
+            exp: "La Comisión Europea tiene el poder ejecutivo, propone la nueva legislación, gestiona el presupuesto y hace cumplir la ley (guardiana de los tratados)[cite: 16]."
+        },
+        {
+            q: "La Agencia de la Unión Europea para la Cooperación Policial (EUROPOL):",
+            options: [
+                { text: "Facilita el intercambio de información y análisis de inteligencia criminal, pero no es una policía que patrulle o realice detenciones.", val: "correct" },
+                { text: "
