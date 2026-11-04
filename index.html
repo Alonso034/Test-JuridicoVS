@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Examen Jurídico Oficial - Nivel Avanzado Oposición</title>
+    <title>Simulador de Examen Jurídico Oficial - Seguridad Privada</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 20px; }
         .container { max-width: 900px; margin: 0 auto; background: #1e293b; padding: 35px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid #334155; }
@@ -46,12 +46,12 @@
 
 <div class="container">
     <h1>Simulador Jurídico de Alta Dificultad</h1>
-    <div class="subtitle">Banco Especializado: Sin repeticiones por sesión | Rotación Inteligente</div>
+    <div class="subtitle">Banco Completo de 50 Preguntas | Rotación Continua sin Repetición</div>
 
     <div class="rules-box">
-        <strong>Baremos de Corrección Oficial:</strong>
+        <strong>Baremos Oficiales de Corrección:</strong>
         <ul>
-            <li>Exámenes aleatorios de 10 preguntas extraídas sin repetir hasta agotar el banco.</li>
+            <li>Exámenes aleatorios de 10 preguntas extraídas en rondas sin repetir (5 tandas completas).</li>
             <li>Acierto: +1,00 pto | Error: -0,50 ptos | En blanco: 0,00 ptos.</li>
             <li>Nota de corte para el APTO: 5,00 sobre 10.</li>
         </ul>
@@ -74,363 +74,566 @@
 
 <script>
     // =========================================================================
-    // BANCO TÉCNICO DE PREGUNTAS JURÍDICAS
+    // BANCO DE 50 PREGUNTAS TÉCNICAS (TOTALMENTE ALINEADAS CON EL TEMARIO)
     // =========================================================================
     const bancoPreguntas = [
-        // --- ARTÍCULO 520 LECRIM: DERECHOS DEL DETENIDO ---
+        // --- GRUPO 1: LECRIM Y DERECHOS DEL DETENIDO (Art. 520) ---
         {
             id: 1,
-            q: "Conforme al artículo 520.1 y 520.2 de la LECRIM, ¿cuál es la duración máxima improrrogable de la detención preventiva policial antes de poner al detenido en libertad o a disposición judicial?",
+            q: "Conforme al artículo 520.1 y 520.2 de la LECRIM, ¿cuál es la duración máxima improrrogable de la detención preventiva policial ordinaria?",
             options: [
                 { text: "El tiempo estrictamente necesario para la averiguación de los hechos, con un límite máximo absoluto de 72 horas.", val: "correct" },
-                { text: "24 horas en delitos comunes y 48 horas si concurren indicios de criminalidad organizada.", val: "wrong" },
+                { text: "24 horas en faltas o delitos leves y 48 horas en delitos graves.", val: "wrong" },
                 { text: "48 horas, salvo prórroga expresa otorgada por el Ministerio Fiscal.", val: "wrong" }
             ],
-            exp: "El art. 520.1 LECRIM establece que la detención no durará más del tiempo estrictamente necesario para las averiguaciones y, en todo caso, en el plazo máximo de 72 horas deberá ser puesto en libertad o a disposición de la autoridad judicial."
+            exp: "El art. 520.1 LECRIM establece que la detención no durará más del tiempo estrictamente necesario y, en todo caso, en el plazo máximo de 72 horas el detenido debe ser puesto en libertad o a disposición judicial."
         },
         {
             id: 2,
-            q: "En el catálogo de derechos del detenido regulados en el artículo 520.2 de la LECRIM, señala cuál de las siguientes opciones constituye un derecho obligatorio reconocido:",
+            q: "En el catálogo de derechos procesales del art. 520.2 de la LECRIM, ¿qué facultad le asiste al detenido en dependencias policiales?",
             options: [
-                { text: "Derecho a no declarar si no quiere, a no contestar alguna o algunas de las preguntas que le formulen, y a no declarar contra sí mismo y a no confesarse culpable.", val: "correct" },
-                { text: "Derecho a elegir libremente prestar declaración sin presencia de letrado en delitos contra el patrimonio.", val: "wrong" },
-                { text: "Derecho a exigir un careo inmediato con los testigos presenciales en la propia sede policial.", val: "wrong" }
+                { text: "Derecho a guardar silencio no declarando si no quiere, a no contestar preguntas y a no declarar contra sí mismo ni confesarse culpable.", val: "correct" },
+                { text: "Derecho a prestar declaración formal sin presencia letrada si renuncia de forma verbal.", val: "wrong" },
+                { text: "Derecho a exigir un careo inmediato con la víctima en el atestado policial.", val: "wrong" }
             ],
-            exp: "El art. 520.2 LECRIM garantiza el derecho a guardar silencio, a no declarar contra sí mismo, a no confesarse culpable, a ser asistido por abogado, y a que se ponga en conocimiento de un familiar o persona designada el hecho de la detención."
+            exp: "El art. 520.2 garantiza no declarar contra sí mismo, no confesarse culpable, asistencia letrada y comunicación inmediata con persona de su elección."
         },
         {
             id: 3,
-            q: "A tenor del art. 520.2.c de la LECRIM, si la persona privada de libertad fuera extranjera, ¿qué derecho específico ostenta de forma preceptiva?",
+            q: "A tenor del art. 520.2.c de la LECRIM, si la persona detenida tiene nacionalidad extranjera, ¿qué derecho debe hacérsele saber?",
             options: [
                 { text: "Derecho a que se comunique la detención y el lugar de custodia a la oficina consular de su país, y a comunicarse y mantener correspondencia con ella.", val: "correct" },
-                { text: "Derecho a la suspensión automática de las diligencias policiales hasta la personación física del cónsul.", val: "wrong" },
-                { text: "Derecho a que el atestado policial se redacte obligatoriamente en su lengua materna.", val: "wrong" }
+                { text: "Derecho a la suspensión provisional del atestado policial hasta la llegada del cónsul.", val: "wrong" },
+                { text: "Derecho a ser repatriado antes de formular cargos penales.", val: "wrong" }
             ],
-            exp: "El art. 520.2.c LECRIM recoge el derecho a que se informe a la oficina consular del país del detenido extranjero y a ser visitado por sus autoridades consulares."
+            exp: "El art. 520.2.c reconoce expresamente el derecho a que se notifique la detención a la oficina consular del país de origen y a comunicarse con ella."
         },
 
-        // --- ARTÍCULO 85 RSP: DEFENSA REGLAMENTARIA DEL VIGILANTE ---
+        // --- GRUPO 2: REGLAMENTO DE SEGURIDAD PRIVADA (Art. 85 y Dotación) ---
         {
             id: 4,
-            q: "El artículo 85 del Reglamento de Seguridad Privada (RD 2364/1994) regula el porte de la defensa reglamentaria por los Vigilantes de Seguridad. ¿En cuál de los siguientes servicios está EXCLUIDO portar la defensa?",
+            q: "El artículo 85 del Reglamento de Seguridad Privada (RD 2364/1994) regula el porte de la defensa reglamentaria. ¿En cuál de los siguientes servicios queda EXCLUIDO portar la defensa?",
             options: [
                 { text: "En los servicios de transporte y distribución de monedas, billetes, títulos-valores, objetos valiosos o peligrosos y explosivos.", val: "correct" },
-                { text: "En servicios nocturnos en polígonos industriales y urbanizaciones aisladas.", val: "wrong" },
-                { text: "En el control de accesos a grandes centros comerciales e hipermercados.", val: "wrong" }
+                { text: "En polígonos industriales y urbanizaciones delimitadas durante el horario nocturno.", val: "wrong" },
+                { text: "En el control de accesos e inspección perimetral de edificios comerciales.", val: "wrong" }
             ],
-            exp: "El art. 85.1 del RSP (y art. 26 de la Orden INT/318/2011) dictamina que los vigilantes portarán la defensa en la prestación de su servicio 'salvo cuando se trate de la protección del transporte y distribución de monedas y billetes, títulos-valores, objetos valiosos o peligrosos y explosivos'[cite: 11, 14]."
+            exp: "El art. 85.1 RSP (y Orden INT/318/2011) dicta que los vigilantes portarán defensa salvo en transporte y distribución de monedas, billetes, valores, objetos valiosos/peligrosos y explosivos."
         },
         {
             id: 5,
-            q: "Según el marco del art. 85 del RSP y la Orden INT/318/2011, las características técnicas reglamentarias de la defensa del Vigilante de Seguridad son:",
+            q: "Según el marco del art. 85 del RSP y la Orden INT/318/2011, ¿cuáles son las características técnicas de la defensa de dotación del Vigilante?",
             options: [
                 { text: "De color negro, de goma semirrígida y de 50 centímetros de longitud.", val: "correct" },
-                { text: "Bastón extensible de acero templado de 65 centímetros con funda rotatoria.", val: "wrong" },
-                { text: "De fibra de vidrio rígida, color negro y longitud máxima de 40 centímetros.", val: "wrong" }
+                { text: "Bastón extensible de acero templado con empuñadura de 65 centímetros.", val: "wrong" },
+                { text: "De polímero rígido negro y longitud máxima de 40 centímetros.", val: "wrong" }
             ],
-            exp: "La defensa reglamentaria del vigilante de seguridad es de color negro, de goma semirrígida y de 50 centímetros de longitud[cite: 11, 14]. Las defensas extensibles o de materiales distintos requieren autorización expresa previa[cite: 11]."
+            exp: "La defensa de dotación oficial es de color negro, de goma semirrígida y de 50 cm de longitud[cite: 11, 14]."
         },
 
-        // --- LEY 17/2015 DEL SISTEMA NACIONAL DE PROTECCIÓN CIVIL ---
+        // --- GRUPO 3: PROTECCIÓN CIVIL (Ley 17/2015) Y PARQUES NACIONALES (Ley 30/2014) ---
         {
             id: 6,
-            q: "Conforme a la Ley 17/2015 del Sistema Nacional de Protección Civil, ¿cuál es el deber fundamental que recae sobre los ciudadanos mayores de edad ante situaciones de emergencia o catástrofe?",
+            q: "La Ley 17/2015 del Sistema Nacional de Protección Civil establece en su art. 7 que los ciudadanos mayores de edad tienen:",
             options: [
-                { text: "El deber legal de colaborar, personal y materialmente, en las tareas de protección civil siguiendo las órdenes de las autoridades competentes.", val: "correct" },
-                { text: "Exclusivamente el deber moral de avisar telefónicamente a los servicios del 112.", val: "wrong" },
-                { text: "Ninguno, ya que la gestión y auxilio es competencia exclusiva y excluyente de los cuerpos de seguridad públicos.", val: "wrong" }
+                { text: "El deber legal de colaborar personal y materialmente en la protección civil a requerimiento de la autoridad competente.", val: "correct" },
+                { text: "La facultad voluntaria no sancionable de prestar colaboración vecinal.", val: "wrong" },
+                { text: "El deber exclusivo de comunicar telefónicamente cualquier conato al 112.", val: "wrong" }
             ],
-            exp: "El art. 7 de la Ley 17/2015 establece que los ciudadanos están sujetos a la obligación de colaborar, personal y materialmente, en los servicios de protección civil cuando sean requeridos por la autoridad competente."
+            exp: "El art. 7 de la Ley 17/2015 estipula la obligación y deber de colaboración personal y material ante emergencias y catástrofes."
         },
         {
             id: 7,
-            q: "En el marco de la Ley 17/2015, ¿qué instrumento técnico obligatorio deben implantar los centros, establecimientos y dependencias que generen situaciones de riesgo o vulnerabilidad?",
+            q: "En el marco de la Ley 17/2015, los establecimientos que generen situaciones de riesgo o especial vulnerabilidad están obligados a:",
             options: [
-                { text: "Un Plan de Autoprotección que prevea la organización, medios y protocolos ante emergencias y evacuación.", val: "correct" },
-                { text: "Un contrato preceptivo de seguro a todo riesgo con el Consorcio de Compensación de Seguros.", val: "wrong" },
-                { text: "Una dotación permanente de vigilantes con armamento de fuego largo.", val: "wrong" }
+                { text: "Disponer de un Plan de Autoprotección que defina organización, recursos y procedimientos de emergencia.", val: "correct" },
+                { text: "Contratar servicios de vigilancia privada con arma de fuego larga en todos los casos.", val: "wrong" },
+                { text: "Adscribir un retén de bomberos propio dependiente del ayuntamiento.", val: "wrong" }
             ],
-            exp: "El art. 7.bis de la Ley 17/2015 y la Norma Básica de Autoprotección exigen la elaboración de Planes de Autoprotección en actividades e instalaciones susceptibles de originar emergencias para prevenir y controlar riesgos."
+            exp: "La Ley 17/2015 vincula los centros con riesgo relevante a la elaboración e implantación obligatoria de Planes de Autoprotección."
         },
-
-        // --- LEY 30/2014 DE PARQUES NACIONALES ---
         {
             id: 8,
-            q: "De acuerdo con la Ley 30/2014 de Parques Nacionales, ¿cuál es el régimen jurídico aplicable a las actividades incompatibles con la conservación en el interior del parque?",
+            q: "De acuerdo con el art. 7 de la Ley 30/2014 de Parques Nacionales, ¿cuál de las siguientes actividades queda prohibida de forma general por incompatibilidad?",
             options: [
-                { text: "Queda prohibido con carácter general el aprovechamiento de recursos naturales con fines comerciales, la pesca deportiva, la caza y la tala con fines comerciales.", val: "correct" },
-                { text: "Se permite la explotación cinegética y maderera siempre que cuente con licencia municipal.", val: "wrong" },
-                { text: "Solo se prohíbe la entrada de vehículos a motor no matriculados en la Unión Europea.", val: "wrong" }
+                { text: "La pesca y caza deportiva o comercial, así como los aprovechamientos comerciales de recursos madereros o hídricos.", val: "correct" },
+                { text: "El tránsito a pie de grupos escolares y senderismo regulado por pistas.", val: "wrong" },
+                { text: "El estudio científico y ambiental previamente autorizado.", val: "wrong" }
             ],
-            exp: "El art. 7 de la Ley 30/2014 consagra la incompatibilidad con los fines del Parque Nacional de los aprovechamientos comerciales de recursos naturales, prohibiéndose la caza deportiva, la pesca deportiva y comercial, y las talas de madera comerciales."
+            exp: "La Ley 30/2014 prohíbe taxativamente la caza y pesca deportiva y comercial, y cualquier aprovechamiento comercial de recursos naturales."
         },
         {
             id: 9,
-            q: "En el marco de la Ley 30/2014 de Parques Nacionales, el personal que desempeña funciones de vigilancia, inspección y policía medioambiental en estos espacios:",
+            q: "El personal encargado de la vigilancia e inspección en el ámbito de la Ley 30/2014 de Parques Nacionales ostenta:",
             options: [
-                { text: "Ostenta el carácter de agente de la autoridad en el ejercicio de sus funciones inspectoras y sancionadoras.", val: "correct" },
-                { text: "Actúa únicamente como personal auxiliar sin presunción de veracidad ni condición de autoridad.", val: "wrong" },
-                { text: "Depende exclusivamente del Ministerio de Defensa y del Seprona.", val: "wrong" }
+                { text: "El carácter de agente de la autoridad en el ejercicio estricto de sus funciones de inspección y policía medioambiental.", val: "correct" },
+                { text: "La consideración de mero auxiliar técnico sin presunción de veracidad.", val: "wrong" },
+                { text: "Competencia de mando directo sobre las Fuerzas y Cuerpos de Seguridad del Estado.", val: "wrong" }
             ],
-            exp: "Los guardería y técnicos facultados en la vigilancia e inspección ambiental de los Parques Nacionales tienen la consideración legal de agentes de la autoridad al levantar actas y formular denuncias."
+            exp: "El personal de inspección y vigilancia medioambiental en Parques Nacionales actúa formalmente con la condición legal de agente de la autoridad."
         },
 
-        // --- ASESINATO, HOMICIDIO Y PRISIÓN PERMANENTE REVISABLE ---
+        // --- GRUPO 4: ASESINATO Y HOMICIDIO (Arts. 138 a 143 CP) ---
         {
             id: 10,
-            q: "El art. 139.2 del Código Penal establece que cuando en un asesinato concurran más de una de las circunstancias cualificadoras (alevosía, precio, ensañamiento, facilitar/evitar descubrimiento de otro delito):",
+            q: "El Código Penal (art. 138) castiga el delito básico de homicidio doloso con la pena de:",
             options: [
-                { text: "Se impondrá la pena de prisión de 15 a 25 años en su mitad superior.", val: "correct" },
-                { text: "Se impondrá de forma imperativa la pena de prisión permanente revisable.", val: "wrong" },
-                { text: "La segunda circunstancia se computa como agravante genérica ordinaria del art. 22 sin elevar a la mitad superior.", val: "wrong" }
+                { text: "Prisión de 10 a 15 años.", val: "correct" },
+                { text: "Prisión de 15 a 25 años.", val: "wrong" },
+                { text: "Prisión de 5 a 10 años.", val: "wrong" }
             ],
-            exp: "El art. 139.2 CP dispone textualmente: 'cuando en un asesinato concurran más de una de las circunstancias previstas en el apartado anterior, se impondrá la pena en su mitad superior' (de 20 a 25 años de prisión)[cite: 7]."
+            exp: "Art. 138.1 CP: El que matare a otro será castigado, como reo de homicidio, con la pena de prisión de diez a quince años."
         },
         {
             id: 11,
-            q: "¿En cuál de los siguientes supuestos el art. 140 del Código Penal NO impone la pena de prisión permanente revisable al reo de asesinato?",
+            q: "El art. 139 del Código Penal tipifica el asesinato con pena de 15 a 25 años al matar mediando alguna de cuatro circunstancias. Señala la errónea:",
             options: [
-                { text: "Cuando el asesinato se ejecute mediando deliberadamente ensañamiento y alevosía simultánea sobre un adulto sin discapacidad.", val: "correct" },
-                { text: "Que la víctima sea menor de 16 años o persona especialmente vulnerable por razón de edad, enfermedad o discapacidad.", val: "wrong" },
-                { text: "Que el hecho fuera subsiguiente a un delito contra la libertad sexual que el autor hubiera cometido sobre la víctima.", val: "wrong" }
+                { text: "Con nocturnidad y despoblado en todo caso.", val: "correct" },
+                { text: "Con alevosía.", val: "wrong" },
+                { text: "Por precio, recompensa o promesa.", val: "wrong" }
             ],
-            exp: "La concurrencia de alevosía y ensañamiento cualifica el hecho como asesinato agravado del art. 139.2 (20 a 25 años)[cite: 7], pero NO determina prisión permanente revisable salvo que concurra una de las causas tasadas del art. 140[cite: 7]."
+            exp: "Las 4 circunstancias de asesinato son: alevosía, precio/recompensa/promesa, ensañamiento, y facilitar o evitar que se descubra otro delito (la nocturnidad es agravante genérica, no cualifica asesinato por sí sola)."
         },
         {
             id: 12,
-            q: "Al condenado a pena de prisión permanente revisable por la muerte de más de dos personas (art. 140.2 CP), ¿qué requisito temporal mínimo de cumplimiento efectivo se le exige para poder acceder al tercer grado penitenciario?",
+            q: "Si en un asesinato concurre más de una circunstancia del art. 139.1 CP, la pena aplicable según el art. 139.2 es:",
             options: [
-                { text: "Cumplir un mínimo de 20 años de prisión efectiva.", val: "correct" },
-                { text: "Cumplir un mínimo de 15 años de prisión efectiva.", val: "wrong" },
-                { text: "Cumplir la mitad de la pena tasada en 25 años (12 años y medio).", val: "wrong" }
+                { text: "Pena de prisión de 15 a 25 años en su mitad superior (de 20 a 25 años).", val: "correct" },
+                { text: "Pena de prisión permanente revisable en todo caso.", val: "wrong" },
+                { text: "Prisión de 15 años rebajada en un grado por concurso ideal.", val: "wrong" }
             ],
-            exp: "Para el reo de asesinato condenado por la muerte de más de dos personas a prisión permanente revisable, la normativa penal exige cumplir como mínimo 20 años de privación efectiva de libertad para optar al 3.er grado penitenciario[cite: 7]."
+            exp: "Art. 139.2 CP: 'cuando en un asesinato concurran más de una de las circunstancias previstas... se impondrá la pena en su mitad superior'."
         },
         {
             id: 13,
-            q: "El homicidio cometido por imprudencia profesional grave (art. 142 CP) conlleva inhabilitación especial de 3 a 6 años y presenta la siguiente singularidad procesal:",
+            q: "A tenor del art. 140 CP, ¿cuál de los siguientes asesinatos se castiga con pena de PRISIÓN PERMANENTE REVISABLE?",
             options: [
-                { text: "Sólo será perseguible mediante denuncia expresa de la persona agraviada o de su representante legal.", val: "correct" },
-                { text: "Es perseguible de oficio por la autoridad judicial en todos los casos.", val: "wrong" },
-                { text: "Requiere autorización motivada del Consejo General del Poder Judicial.", val: "wrong" }
+                { text: "El cometido contra persona menor de 16 años o persona especialmente vulnerable.", val: "correct" },
+                { text: "El cometido con alevosía y ensañamiento simultáneo sobre víctima adulta sin vulnerabilidad.", val: "wrong" },
+                { text: "El perpetrado a cambio de una suma monetaria acreditada judicialmente.", val: "wrong" }
             ],
-            exp: "El art. 142 CP precisa expresamente que en el homicidio cometido por imprudencia profesional 'sólo será perseguible mediante denuncia de la persona agraviada o de su representante legal'[cite: 7]."
+            exp: "Art. 140.1.1ª CP: Se impondrá prisión permanente revisable cuando la víctima sea menor de dieciséis años o especialmente vulnerable[cite: 7]."
         },
-
-        // --- DOGMÁTICA PENAL: ERROR, ITER CRIMINIS Y AUTORÍA ---
         {
             id: 14,
-            q: "Un cazador dispara tras un matorral creyendo que se mueve un jabalí y causa la muerte a otro cazador. Si se demuestra que con un mínimo de prudencia y observación habría comprobado la presencia humana, nos encontramos ante:",
+            q: "El art. 140.2 CP impone la pena de prisión permanente revisable al reo de asesinato que hubiera sido condenado por:",
             options: [
-                { text: "Error de tipo vencible: se excluye el dolo pero subsiste la culpa, castigándose como homicidio imprudente.", val: "correct" },
-                { text: "Error de prohibición vencible: se aplica la pena de homicidio doloso atenuada en uno o dos grados.", val: "wrong" },
-                { text: "Error de tipo invencible: el hecho es impune al excluirse tanto el dolo como la culpa.", val: "wrong" }
+                { text: "La muerte de más de dos personas.", val: "correct" },
+                { text: "La muerte de dos personas con alevosía.", val: "wrong" },
+                { text: "Cualquier delito en grado de tentativa reiterada contra la Corona.", val: "wrong" }
             ],
-            exp: "El sujeto desconoce el elemento fáctico del tipo (matar a un 'hombre vivo' creyendo que es un animal: error de tipo)[cite: 7, 9]. Al ser evitable con la diligencia debida es vencible: elimina el dolo pero subsiste la imprudencia (art. 14.1 CP)[cite: 9]."
+            exp: "Art. 140.2 CP: Al reo de asesinato condenado por la muerte de más de dos personas se le impondrá pena de prisión permanente revisable[cite: 7]."
         },
         {
             id: 15,
-            q: "En los delitos que se cometan utilizando medios o soportes mecánicos de difusión (prensa, radio o internet), ¿cómo responde penalmente el escalafón de autores del art. 30 del Código Penal?",
+            q: "El homicidio cometido por imprudencia profesional grave (art. 142 CP) conlleva inhabilitación de 3 a 6 años y procesalmente:",
             options: [
-                { text: "De forma escalonada, excluyente y subsidiaria, no respondiendo los cómplices ni favorecedores.", val: "correct" },
-                { text: "De forma solidaria y mancomunada entre todos los redactores y directores del medio.", val: "wrong" },
-                { text: "Únicamente responde el administrador legal de la mercantil propietaria del dominio o rotativa.", val: "wrong" }
+                { text: "Sólo es perseguible mediante previa denuncia de la persona agraviada o su representante legal.", val: "correct" },
+                { text: "Es perseguible de oficio de manera incondicional.", val: "wrong" },
+                { text: "Exige querella firmada por el Ministerio Fiscal.", val: "wrong" }
             ],
-            exp: "El art. 30 CP establece que en delitos por medios de difusión no responden cómplices ni favorecedores, y los autores responden escalonada, excluyente y subsidiariamente en el orden fijado legalmente[cite: 10]."
+            exp: "El art. 142 CP exige taxativamente que el homicidio por imprudencia profesional solo sea perseguible mediante denuncia expresa del perjudicado o tutor[cite: 7]."
         },
         {
             id: 16,
-            q: "El art. 454 del Código Penal exime de las penas impuestas a los encubridores de sus cónyuges, ascendientes, descendientes o hermanos. ¿Cuál es la ÚNICA excepción legal a este privilegio familiar?",
+            q: "¿Cómo tipifica el art. 143 del Código Penal la inducción al suicidio?",
             options: [
-                { text: "El encubrimiento consistente en auxiliar a los autores para que se beneficien del provecho, producto o precio del delito, sin ánimo de lucro propio (art. 451.1º CP).", val: "correct" },
-                { text: "El encubrimiento mediante alteración, ocultación o destrucción de las armas del delito (art. 451.2º CP).", val: "wrong" },
-                { text: "El auxilio prestado a familiares prófugos acusados de delitos de terrorismo o rebelión.", val: "wrong" }
+                { text: "Con pena de prisión de cuatro a ocho años.", val: "correct" },
+                { text: "Con prisión de diez a quince años como homicidio doloso.", val: "wrong" },
+                { text: "No está tipificada penalmente.", val: "wrong" }
             ],
-            exp: "El art. 454 CP consagra la excusa absolutoria para parientes 'con la sola excepción de los encubridores que se hallen comprendidos en el supuesto del número 1.º del artículo 451' (favorecimiento real o receptación de provecho)[cite: 10]."
+            exp: "Art. 143.1 CP: El que induzca al suicidio de otro será castigado con la pena de prisión de cuatro a ocho años[cite: 7]."
         },
-
-        // --- PENAS Y PRESCRIPCIÓN ---
         {
             id: 17,
-            q: "A tenor del artículo 33 del Código Penal, ¿cuál de las siguientes sanciones tiene la consideración técnica de PENA GRAVE?",
+            q: "Si la cooperación al suicidio de una persona llega hasta el punto de ejecutar la muerte (homicidio-suicidio consentido, art. 143.3 CP), la pena es:",
             options: [
-                { text: "La privación del derecho a la tenencia y porte de armas por tiempo superior a ocho años.", val: "correct" },
-                { text: "La prisión de tres meses hasta cinco años.", val: "wrong" },
-                { text: "La inhabilitación especial para empleo o cargo público por tiempo de cuatro años y medio.", val: "wrong" }
+                { text: "Prisión de seis a diez años.", val: "correct" },
+                { text: "Prisión de dos a cinco años.", val: "wrong" },
+                { text: "Prisión permanente revisable.", val: "wrong" }
             ],
-            exp: "Art. 33.2 CP: Son penas graves la prisión superior a 5 años, inhabilitaciones superiores a 5 años, y la privación de conducir o porte de armas por tiempo SUPERIOR a 8 años (de 1 año y 1 día a 8 años es menos grave)[cite: 9]."
-        },
-        {
-            id: 18,
-            q: "Conforme al artículo 133 del Código Penal, ¿a qué plazo prescriben las penas de prisión de quince o más años impuestas por sentencia firme sin que excedan de veinte?",
-            options: [
-                { text: "A los 25 años.", val: "correct" },
-                { text: "A los 30 años.", val: "wrong" },
-                { text: "A los 20 años.", val: "wrong" }
-            ],
-            exp: "Prescripción de penas (art. 133 CP): A los 30 años las de prisión > 20 años; a los 25 años las de prisión de 15 o más sin exceder de 20; y a los 20 años las de prisión de 10 a 15 años[cite: 10]."
+            exp: "Art. 143.3 CP: 'Será castigado con la pena de prisión de seis a diez años, si la cooperación llegara hasta el punto de ejecutar la muerte'[cite: 7]."
         },
 
-        // --- SEGURIDAD PRIVADA: INFRACCIONES Y PROCEDIMIENTO ---
+        // --- GRUPO 5: DELITO DE LESIONES (Arts. 147 a 155 CP) ---
+        {
+            id: 18,
+            q: "El delito básico de lesiones del art. 147.1 CP (prisión de 3 meses a 3 años) exige para la sanidad, además de primera asistencia:",
+            options: [
+                { text: "Tratamiento médico o quirúrgico objetivo, sin que la simple vigilancia o seguimiento cuente como tal.", val: "correct" },
+                { text: "Baja laboral superior a 15 días naturales.", val: "wrong" },
+                { text: "Únicamente la prescripción de analgésicos menores sin seguimiento.", val: "wrong" }
+            ],
+            exp: "Art. 147.1 CP: Exige objetivamente tratamiento médico o quirúrgico; la simple vigilancia o seguimiento no tiene dicha consideración[cite: 7]."
+        },
         {
             id: 19,
-            q: "Según la Ley 5/2014, ¿qué órgano ostenta la potestad sancionadora en la Administración General del Estado para decretar la EXTINCIÓN de la habilitación profesional de un Vigilante de Seguridad?",
+            q: "El delito leve de lesiones del art. 147.2 CP sanciona las lesiones que no requieran tratamiento facultativo posterior con pena de:",
             options: [
-                { text: "El Ministro del Interior de forma exclusiva.", val: "correct" },
-                { text: "El Secretario de Estado de Seguridad.", val: "wrong" },
-                { text: "El Director General de la Policía.", val: "wrong" }
+                { text: "Multa de uno a tres meses.", val: "correct" },
+                { text: "Prisión de tres a seis meses.", val: "wrong" },
+                { text: "Trabajos en beneficio de la comunidad de 30 a 90 días.", val: "wrong" }
             ],
-            exp: "Art. 66.1.a LSP: Corresponde al Ministro del Interior imponer la sanción de extinción de las autorizaciones y habilitaciones[cite: 11]. Al Secretario de Estado corresponden las restantes muy graves y al DGP las graves[cite: 11]."
+            exp: "Art. 147.2 CP: Se castiga con la pena de multa de uno a tres meses como delito leve de lesiones[cite: 7]."
         },
         {
             id: 20,
-            q: "¿A qué plazo de prescripción están sometidas las SANCIONES administrativas firmes impuestas por la comisión de infracciones MUY GRAVES en materia de seguridad privada (art. 68 LSP)?",
+            q: "A tenor del art. 149 CP, causar a otro la pérdida o inutilidad de un órgano principal, sentido, impotencia o deformidad grave se castiga con:",
+            options: [
+                { text: "Prisión de seis a doce años.", val: "correct" },
+                { text: "Prisión de tres a seis años.", val: "wrong" },
+                { text: "Prisión de dos a cinco años.", val: "wrong" }
+            ],
+            exp: "Art. 149.1 CP: Tipifica la pérdida/inutilidad de miembro principal, sentido, esterilidad o grave deformidad con prisión de 6 a 12 años[cite: 7]."
+        },
+        {
+            id: 21,
+            q: "A diferencia del art. 149, el art. 150 del Código Penal sanciona la pérdida o inutilidad de órgano o miembro NO principal con pena de:",
+            options: [
+                { text: "Prisión de tres a seis años.", val: "correct" },
+                { text: "Prisión de seis a doce años.", val: "wrong" },
+                { text: "Multa de doce a veinticuatro meses.", val: "wrong" }
+            ],
+            exp: "Art. 150 CP: Pérdida o inutilidad de un miembro NO principal o deformidad no grave se castiga con prisión de 3 a 6 años[cite: 7]."
+        },
+        {
+            id: 22,
+            q: "En los delitos de lesiones, si ha mediado el consentimiento válido, libre, espontáneo y expreso del ofendido (art. 155 CP):",
+            options: [
+                { text: "Se impondrá la pena inferior en uno o dos grados, careciendo de validez el consentimiento de menores o personas con discapacidad.", val: "correct" },
+                { text: "La conducta resulta completamente atípica e impune.", val: "wrong" },
+                { text: "Se conmuta automáticamente la pena por una sanción administrativa leve.", val: "wrong" }
+            ],
+            exp: "Art. 155 CP: El consentimiento válido atenúa la pena en uno o dos grados; nunca es válido el de un menor o incapaz[cite: 7]."
+        },
+
+        // --- GRUPO 6: LIBERTAD SEXUAL (LO 10/2022 y LO 4/2023) ---
+        {
+            id: 23,
+            q: "Tras la entrada en vigor de la LO 10/2022 de garantía integral de la libertad sexual, el delito de abuso sexual:",
+            options: [
+                { text: "Desaparece como figura autónoma y se equipara todo acto no consentido al delito de Agresión Sexual.", val: "correct" },
+                { text: "Pasa a ser considerado una infracción administrativa grave de seguridad ciudadana.", val: "wrong" },
+                { text: "Se mantiene exclusivamente para agresiones cometidas sin intimidación.", val: "wrong" }
+            ],
+            exp: "La LO 10/2022 suprime la distinción tradicional entre abuso y agresión, unificando todo ataque contra la libertad sexual sin consentimiento como agresión sexual[cite: 7]."
+        },
+        {
+            q: "De acuerdo con el art. 179 CP, ¿cuándo se califica la agresión sexual como delito de VIOLACIÓN?",
+            id: 24,
+            options: [
+                { text: "Cuando consista en acceso carnal por vía vaginal, anal o bucal, o introducción de miembros corporales u objetos por alguna de las dos primeras vías.", val: "correct" },
+                { text: "Únicamente cuando se cometa mediando violencia física con armas blancas.", val: "wrong" },
+                { text: "Cuando participen tres o más personas de común acuerdo.", val: "wrong" }
+            ],
+            exp: "Art. 179.1 CP: La agresión sexual será castigada como reo de violación cuando concurra acceso carnal o penetración por las vías descritas[cite: 7]."
+        },
+        {
+            id: 25,
+            q: "¿Cómo define la ley penal vigente el CONSENTIMIENTO en los delitos contra la libertad sexual?",
+            options: [
+                { text: "Sólo cuando se haya manifestado libremente mediante actos que expresen de manera clara la voluntad de la persona.", val: "correct" },
+                { text: "Siempre que la víctima no ofrezca resistencia física activa y continuada.", val: "wrong" },
+                { text: "Cuando no conste oposición verbal expresa en los momentos iniciales.", val: "wrong" }
+            ],
+            exp: "El marco normativo formula el consentimiento en positivo: exige actos que, atendiendo al caso, expresen de forma clara la voluntad libre[cite: 7]."
+        },
+
+        // --- GRUPO 7: DOGMÁTICA PENAL (Tipicidad, Error e Inimputabilidad) ---
+        {
+            id: 26,
+            q: "En la teoría jurídica del delito, la descripción legal y precisa de una conducta punible en el Código Penal responde al elemento de:",
+            options: [
+                { text: "Tipicidad.", val: "correct" },
+                { text: "Antijuridicidad formal.", val: "wrong" },
+                { text: "Culpabilidad subjetiva.", val: "wrong" }
+            ],
+            exp: "Tipicidad es la adecuación exacta de un hecho de la realidad a la descripción abstracta contenida en una norma penal positiva."
+        },
+        {
+            id: 27,
+            q: "El 'Error de Tipo' del artículo 14.1 del Código Penal recae sobre:",
+            options: [
+                { text: "Los elementos objetivos de hecho que constituyen la infracción penal.", val: "correct" },
+                { text: "La creencia subjetiva de que una norma legal no está vigente.", val: "wrong" },
+                { text: "La cuantía económica asignada a la sanción penal de multa.", val: "wrong" }
+            ],
+            exp: "El error de tipo recae sobre los hechos constitutivos del tipo penal (desconoce qué está haciendo en el plano fáctico)[cite: 9]."
+        },
+        {
+            id: 28,
+            q: "Si el error de prohibición es valorado por el órgano juzgador como INVENCIBLE, su efecto jurídico directo es:",
+            options: [
+                { text: "Excluye totalmente la responsabilidad criminal.", val: "correct" },
+                { text: "Rebaja la pena en un grado como delito culposo.", val: "wrong" },
+                { text: "Aplica la atenuante muy cualificada de confesión judicial.", val: "wrong" }
+            ],
+            exp: "Art. 14.3 CP: El error invencible sobre la ilicitud del hecho constitutivo de la infracción excluye la responsabilidad criminal[cite: 9]."
+        },
+        {
+            id: 29,
+            q: "Si el error sobre la ilicitud del hecho (error de prohibición) resultase VENCIBLE por el sujeto:",
+            options: [
+                { text: "Se aplicará la pena inferior en uno o dos grados.", val: "correct" },
+                { text: "Se castiga como delito imprudente si está previsto en la ley.", val: "wrong" },
+                { text: "Se incrementa la pena en su mitad superior.", val: "wrong" }
+            ],
+            exp: "Art. 14.3 CP: Si el error de prohibición fuera vencible, se aplicará la pena inferior en uno o dos grados[cite: 9]."
+        },
+        {
+            id: 30,
+            q: "¿Qué diferencia dogmática separa a la Legítima Defensa del Estado de Necesidad?",
+            options: [
+                { text: "La legítima defensa presupone una agresión ilegítima injusta; el estado de necesidad parte de un conflicto de intereses sin requerir ataque humano previo.", val: "correct" },
+                { text: "La legítima defensa solo protege el patrimonio mercantil.", val: "wrong" },
+                { text: "El estado de necesidad exige que el agresor porte armas de fuego de repetición.", val: "wrong" }
+            ],
+            exp: "La legítima defensa es una reacción frente a una agresión ilegítima humana previa; en el estado de necesidad colisionan bienes sin necesidad de un ataque agresor[cite: 9]."
+        },
+
+        // --- GRUPO 8: PARTICIPACIÓN PENAL Y PRESCRIPCIÓN ---
+        {
+            id: 31,
+            q: "Según el art. 28 del Código Penal, son considerados autores penalmente los cooperadores necesarios porque:",
+            options: [
+                { text: "Cooperan a la ejecución del hecho con un acto sin el cual no se habría efectuado.", val: "correct" },
+                { text: "Prestan un auxilio secundario con actos anteriores o simultáneos prescindibles.", val: "wrong" },
+                { text: "Ocultan los efectos materiales del delito con posterioridad a su consumación.", val: "wrong" }
+            ],
+            exp: "Art. 28 CP: Se equiparan a los autores materiales a quienes cooperan a la ejecución del hecho con un acto sin el cual no se habría efectuado."
+        },
+        {
+            id: 32,
+            q: "El delito autónomo de Encubrimiento regulado en el art. 451 del Código Penal exige como requisito ineludible:",
+            options: [
+                { text: "Intervenir con posterioridad a la ejecución del delito sin haber intervenido en él como autor ni cómplice.", val: "correct" },
+                { text: "Haber acordado la distribución del botín antes del inicio de los actos ejecutivos.", val: "wrong" },
+                { text: "Cobrar una retribución económica previa fijada contractualmente.", val: "wrong" }
+            ],
+            exp: "Art. 451 CP: Sanciona al que con conocimiento de un delito, sin intervenir como autor ni cómplice, interviene con posterioridad a su ejecución[cite: 10]."
+        },
+        {
+            id: 33,
+            q: "Los delitos de lesa humanidad y genocidio en el Derecho Penal español:",
+            options: [
+                { text: "No prescriben nunca (son imprescriptibles).", val: "correct" },
+                { text: "Prescriben a los 30 años desde su comisión.", val: "wrong" },
+                { text: "Prescriben a los 20 años de firmeza procesal.", val: "wrong" }
+            ],
+            exp: "Tanto los delitos como las penas por genocidio y lesa humanidad son imprescriptibles en la legislación penal española[cite: 10]."
+        },
+        {
+            id: 34,
+            q: "A tenor del art. 131 del Código Penal, un delito cuya pena máxima fijada en la ley sea de prisión de quince o más años prescribe:",
+            options: [
+                { text: "A los 20 años.", val: "correct" },
+                { text: "A los 15 años.", val: "wrong" },
+                { text: "A los 30 años.", val: "wrong" }
+            ],
+            exp: "Art. 131.1 CP: Los delitos prescriben a los 20 años cuando la pena máxima señalada al delito sea prisión de 15 o más años[cite: 10]."
+        },
+        {
+            id: 35,
+            q: "Las penas de prisión impuestas por sentencia firme por tiempo de quince o más años sin exceder de veinte (art. 133 CP) prescriben:",
+            options: [
+                { text: "A los 25 años.", val: "correct" },
+                { text: "A los 20 años.", val: "wrong" },
+                { text: "A los 30 años.", val: "wrong" }
+            ],
+            exp: "Art. 133.1 CP: Las penas de prisión de 15 o más sin exceder de 20 prescriben a los 25 años[cite: 10]."
+        },
+
+        // --- GRUPO 9: LEY DE SEGURIDAD PRIVADA 5/2014 (Habilitación, Funciones y Armas) ---
+        {
+            id: 36,
+            q: "El art. 26.1 de la Ley 5/2014 fija las profesiones habilitadas de seguridad privada. ¿Cuál de las siguientes figuras requiere PREVIAMENTE estar habilitado como Vigilante de Seguridad?",
+            options: [
+                { text: "El Vigilante de Explosivos.", val: "correct" },
+                { text: "El Escolta Privado.", val: "wrong" },
+                { text: "El Director de Seguridad.", val: "wrong" }
+            ],
+            exp: "Art. 26.2 LSP: 'Para habilitarse como vigilante de explosivos será necesario haber obtenido previamente la habilitación como vigilante de seguridad'."
+        },
+        {
+            id: 37,
+            q: "¿A qué órgano del Estado corresponde con carácter general la expedición y habilitación de las TIP de vigilantes, escoltas y detectives?",
+            options: [
+                { text: "A la Dirección General de la Policía.", val: "correct" },
+                { text: "A la Dirección General de la Guardia Civil.", val: "wrong" },
+                { text: "A las Delegaciones del Gobierno en cada Comunidad Autónoma.", val: "wrong" }
+            ],
+            exp: "Art. 27.3 LSP: La habilitación de todo el personal corresponde a la DGP, excepto la de los guardas rurales y especialidades que corresponde a la Guardia Civil[cite: 11]."
+        },
+        {
+            id: 38,
+            q: "La Tarjeta de Identidad Profesional (TIP) del Vigilante de Seguridad, como soporte físico documental, caduca:",
+            options: [
+                { text: "A los 10 años desde su expedición.", val: "correct" },
+                { text: "A los 5 años en todos los casos.", val: "wrong" },
+                { text: "No tiene fecha de caducidad física mientras no se cancelen antecedentes.", val: "wrong" }
+            ],
+            exp: "La TIP caduca a los diez años desde su expedición formal, procediendo su renovación reglamentaria[cite: 11]."
+        },
+        {
+            id: 39,
+            q: "De acuerdo con el art. 32 de la Ley 5/2014, ante la negativa de un particular a permitir el control de sus efectos en un acceso, el Vigilante puede:",
+            options: [
+                { text: "Impedir el acceso u ordenar el abandono del inmueble, sin retener en ningún caso el documento de identidad.", val: "correct" },
+                { text: "Retener la documentación personal hasta que acuda la dotación policial comisionada.", val: "wrong" },
+                { text: "Practicar un cacheo forzoso sin necesidad de consentimiento expreso.", val: "wrong" }
+            ],
+            exp: "El vigilante puede impedir el acceso u ordenar el desalojo, pero tiene terminantemente prohibido retener la documentación personal[cite: 11]."
+        },
+        {
+            id: 40,
+            q: "¿Qué arma corta de fuego es la reglamentaria de dotación para el vigilante de seguridad en los servicios armados?",
+            options: [
+                { text: "Revólver calibre 38 especial de cuatro pulgadas.", val: "correct" },
+                { text: "Pistola semiautomática de 9 milímetros parabellum.", val: "wrong" },
+                { text: "Pistola calibre 22 LR de competición defensiva.", val: "wrong" }
+            ],
+            exp: "El arma corta reglamentaria es el revólver calibre 38 especial de 4 pulgadas (y escopeta de repetición calibre 12/70 en armas largas)[cite: 11]."
+        },
+        {
+            id: 41,
+            q: "En relación con los grilletes reglamentarios, el Reglamento de Seguridad Privada dictamina que:",
+            options: [
+                { text: "Serán de los denominados de manilla, debiendo proporcionarlos en dotación la empresa contratante.", val: "correct" },
+                { text: "Son herramientas de propiedad exclusiva del vigilante adquiridas privadamente.", val: "wrong" },
+                { text: "Queda prohibido su empleo en cualquier servicio con o sin armas.", val: "wrong" }
+            ],
+            exp: "Los grilletes deben ser de manilla (cadena, bisagra o rígidos) y forman parte de la dotación provista por la empresa de seguridad[cite: 11]."
+        },
+
+        // --- GRUPO 10: RÉGIMEN SANCIONADOR DE SEGURIDAD PRIVADA (Arts. 58 a 68 LSP) ---
+        {
+            id: 42,
+            q: "La no identificación profesional en el ejercicio de funciones cuando fueren requeridos para ello por los CIUDADANOS constituye:",
+            options: [
+                { text: "Infracción grave (art. 58.2.e LSP).", val: "correct" },
+                { text: "Infracción muy grave.", val: "wrong" },
+                { text: "Infracción leve de régimen interno.", val: "wrong" }
+            ],
+            exp: "Negarse a identificar ante ciudadanos es infracción GRAVE (art. 58.2.e); mientras que negarse a identificar ante la AUTORIDAD o sus agentes es MUY GRAVE (art. 58.1.g)[cite: 11]."
+        },
+        {
+            id: 43,
+            q: "La negativa a prestar auxilio o colaboración a las Fuerzas y Cuerpos de Seguridad en la investigación y persecución de delitos se tipifica como:",
+            options: [
+                { text: "Infracción muy grave (art. 58.1.e LSP).", val: "correct" },
+                { text: "Infracción grave.", val: "wrong" },
+                { text: "Infracción leve del servicio.", val: "wrong" }
+            ],
+            exp: "La negativa injustificada a prestar auxilio o colaboración a las Fuerzas y Cuerpos de Seguridad constituye infracción MUY GRAVE[cite: 11]."
+        },
+        {
+            id: 44,
+            q: "A tenor del art. 68 de la Ley 5/2014, las SANCIONES administrativas firmes impuestas por infracciones muy graves prescriben:",
             options: [
                 { text: "A los cuatro años.", val: "correct" },
                 { text: "A los tres años.", val: "wrong" },
                 { text: "A los dos años.", val: "wrong" }
             ],
-            exp: "Las infracciones prescriben a los 3 años (muy graves), 2 años (graves) y 6 meses (leves). Pero las SANCIONES firmes ya impuestas prescriben: al año (leves), 2 años (graves) y a los 4 años (muy graves)[cite: 11]."
+            exp: "Las infracciones prescriben a los 3 años (muy graves), pero las SANCIONES firmes muy graves prescriben a los 4 años[cite: 11]."
         },
         {
-            id: 21,
-            q: "El vigilante de seguridad que retenga la documentación personal de un ciudadano que accede a un recinto incurre en una infracción administrativa tipificada como:",
-            options: [
-                { text: "Infracción grave (art. 58.2.f LSP).", val: "correct" },
-                { text: "Infracción leve de trato desconsiderado.", val: "wrong" },
-                { text: "Infracción muy grave por usurpación de funciones judiciales.", val: "wrong" }
-            ],
-            exp: "El art. 32 prohíbe retener la documentación personal[cite: 11] y el art. 58.2.f tipifica taxativamente 'la retención de la documentación personal' como infracción GRAVE del personal de seguridad[cite: 11]."
-        },
-        {
-            id: 22,
-            q: "¿Qué plazo máximo de caducidad establece la Ley de Seguridad Privada para la tramitación de un expediente sancionador desde su acuerdo de incoación sin resolución?",
+            id: 45,
+            q: "El plazo legal de caducidad de los procedimientos sancionadores en seguridad privada desde su incoación sin resolución notificada es de:",
             options: [
                 { text: "Seis meses.", val: "correct" },
                 { text: "Tres meses.", val: "wrong" },
-                { text: "Un año.", val: "wrong" }
+                { text: "Un año natural.", val: "wrong" }
             ],
-            exp: "Art. 69.2 LSP: 'El procedimiento caducará transcurridos seis meses desde su incoación sin que se haya notificado la resolución', computando suspensiones reglamentarias[cite: 11]."
-        },
-        {
-            id: 23,
-            q: "El distintivo ovalado oficial del Vigilante de Seguridad (Orden INT/318/2011) si es de elaboración metálica debe ajustarse rígidamente a:",
-            options: [
-                { text: "Aleación de 65% de cobre y 35% de zinc, fondo blanco, letras/números rojos y fijación por imperdible horizontal.", val: "correct" },
-                { text: "Aluminio anodizado al 100%, fondo dorado y pasador vertical de seguridad.", val: "wrong" },
-                { text: "Chapa de acero esmaltada en azul corporativo con fijación magnética homologada.", val: "wrong" }
-            ],
-            exp: "La Orden INT/318/2011 fija: 8x6 cm, ovalado, fondo blanco, números rojos[cite: 11]. En metal: aleación de 65% cobre y 35% zinc, esmalte cerámico y fijación mediante imperdible horizontal[cite: 11]."
-        },
-        {
-            id: 24,
-            q: "En el tiro semestral obligatorio para vigilantes que presten servicio con armas de fuego, ¿cuántos disparos mínimos exige la Orden INT/318/2011 en cada ejercicio?",
-            options: [
-                { text: "Un mínimo de 25 disparos semestrales.", val: "correct" },
-                { text: "Un mínimo de 50 disparos semestrales.", val: "wrong" },
-                { text: "Un mínimo de 15 disparos trimestrales.", val: "wrong" }
-            ],
-            exp: "El art. 21 de la Orden INT/318/2011 establece que se efectuará un mínimo de veinticinco disparos en cada ejercicio obligatorio de tiro semestral con su arma reglamentaria[cite: 11]."
+            exp: "Art. 69.2 LSP: El procedimiento caducará transcurridos seis meses desde su incoación sin resolución expresa[cite: 11]."
         },
 
-        // --- CONSTITUCIÓN: REFORMA Y ÓRGANOS ---
+        // --- GRUPO 11: CONSTITUCIÓN ESPAÑOLA (Corona, Cortes, Órganos y Reforma) ---
         {
-            id: 25,
-            q: "¿Qué mayoría cualificada y trámite exige el artículo 167 de la Constitución para aprobar un proyecto de reforma constitucional ordinaria?",
+            id: 46,
+            q: "¿Cuál de los siguientes actos regios del Jefe del Estado NO precisa de refrendo ministerial según el art. 65.2 de la CE?",
             options: [
-                { text: "Mayoría de tres quintos de cada una de las Cámaras; y referéndum facultativo si lo pide 1/10 de los miembros de cualquier Cámara en 15 días.", val: "correct" },
-                { text: "Mayoría de dos tercios de cada Cámara con disolución inmediata de las Cortes y referéndum obligatorio.", val: "wrong" },
-                { text: "Mayoría absoluta del Congreso ratificada por mayoría simple del Senado sin posibilidad de referéndum.", val: "wrong" }
+                { text: "Nombrar y relevar libremente a los miembros civiles y militares de su Casa y distribuir la cantidad global presupuestaria.", val: "correct" },
+                { text: "Convocar y disolver formalmente las Cortes Generales a propuesta del Presidente del Gobierno.", val: "wrong" },
+                { text: "Sancionar y promulgar solemnemente las Leyes Orgánicas aprobadas por el Congreso.", val: "wrong" }
             ],
-            exp: "La reforma ordinaria (art. 167 CE) exige 3/5 de cada Cámara[cite: 8]. Si una décima parte (1/10) de diputados o senadores lo solicita en el plazo de 15 días tras su aprobación, se somete a referéndum potestativo[cite: 8]."
+            exp: "Art. 65.2 CE: El Rey nombra y releva libremente al personal de su Casa y distribuye libremente la partida presupuestaria sin refrendo[cite: 11]."
         },
         {
-            id: 26,
-            q: "Conforme al artículo 159 de la Constitución, los 12 magistrados del Tribunal Constitucional se eligen por un periodo de nueve años, renovándose:",
+            id: 47,
+            q: "El Título X de la Constitución articula la reforma constitucional. El procedimiento agravado (art. 168 CE) exige en su fase de aprobación de principio:",
             options: [
-                { text: "Por terceras partes (cuatro miembros) cada tres años.", val: "correct" },
-                { text: "Por mitades (seis miembros) cada cuatro años y medio.", val: "wrong" },
-                { text: "En su totalidad cada nueve años coincidiendo con las elecciones generales.", val: "wrong" }
+                { text: "Mayoría de dos tercios de cada Cámara, disolución inmediata de las Cortes y referéndum obligatorio tras la ratificación de las nuevas Cámaras.", val: "correct" },
+                { text: "Mayoría de tres quintos de cada Cámara y referéndum si lo pide un décimo de parlamentarios.", val: "wrong" },
+                { text: "Mayoría absoluta del Congreso en sesión única convocada al efecto.", val: "wrong" }
             ],
-            exp: "Art. 159.3 CE: 'Los miembros del Tribunal Constitucional serán designados por un período de nueve años y se renovarán por terceras partes cada tres'[cite: 8]."
+            exp: "El procedimiento agravado (art. 168 CE) exige 2/3 de cada Cámara, disolución de Cortes, ratificación por 2/3 de las nuevas Cámaras y referéndum de ratificación imperativo."
         },
         {
-            id: 27,
-            q: "¿Quién ostenta la legitimación activa directa para interponer el recurso de amparo constitucional ante el Tribunal Constitucional?",
+            id: 48,
+            q: "¿Quién ostenta legitimación procesal activa para interponer un Recurso de Inconstitucionalidad ante el Tribunal Constitucional?",
             options: [
-                { text: "Toda persona natural o jurídica que invoque un interés legítimo, el Defensor del Pueblo y el Ministerio Fiscal.", val: "correct" },
-                { text: "Únicamente el Presidente del Gobierno y 50 Diputados o Senadores.", val: "wrong" },
-                { text: "Los Colegios de Abogados y los Tribunales Superiores de Justicia autonómicos.", val: "wrong" }
+                { text: "El Presidente del Gobierno, el Defensor del Pueblo, 50 Diputados, 50 Senadores y órganos colegiados de las CCAA.", val: "correct" },
+                { text: "Cualquier ciudadano particular que alegue interés procesal directo.", val: "wrong" },
+                { text: "Exclusivamente los Colegios Oficiales de Abogados y Procuradores de España.", val: "wrong" }
             ],
-            exp: "Art. 162.1.b CE: Para el recurso de amparo están legitimados: la persona natural o jurídica que invoque interés legítimo, el Defensor del Pueblo y el Ministerio Fiscal."
+            exp: "Art. 162.1.a CE: Legitimados: Presidente del Gobierno, Defensor del Pueblo, 50 Diputados, 50 Senadores y asambleas/ejecutivos de las CCAA."
         },
 
-        // --- UNIÓN EUROPEA ---
+        // --- GRUPO 12: UNIÓN EUROPEA E INSTITUCIONES ---
         {
-            id: 28,
-            q: "La institución judicial de la Unión Europea compuesta por 27 jueces y 11 abogados generales designados por los Gobiernos por seis años, competente para resolver cuestiones prejudiciales, es:",
+            id: 49,
+            q: "En el Derecho Comunitario Europeo, ¿qué rasgo distingue jurídicamente al Reglamento frente a la Directiva?",
             options: [
-                { text: "El Tribunal de Justicia de la Unión Europea (TJUE).", val: "correct" },
-                { text: "El Tribunal General de la Unión Europea.", val: "wrong" },
-                { text: "El Tribunal Europeo de Derechos Humanos (TEDH).", val: "wrong" }
+                { text: "El Reglamento tiene alcance general, es obligatorio en todas sus partes y directamente aplicable en cada Estado miembro sin transposición previa.", val: "correct" },
+                { text: "El Reglamento solo vincula a los Gobiernos en cuanto al objetivo final que debe transponerse a normas internas.", val: "wrong" },
+                { text: "El Reglamento es un informe consultivo de carácter optativo.", val: "wrong" }
             ],
-            exp: "El Tribunal de Justicia (órgano superior del TJUE) lo integran 27 jueces y 11 abogados generales; resuelve cuestiones prejudiciales planteadas por tribunales de los Estados miembros[cite: 13]."
+            exp: "El Reglamento comunitario es obligatorio en todos sus términos y produce aplicación directa sin ley nacional de adaptación."
         },
         {
-            id: 29,
-            q: "¿Qué acto jurídico de la Unión Europea es obligatorio en todos sus elementos pero ÚNICAMENTE para los destinatarios específicos a quienes va dirigido (Estados o particulares)?",
+            id: 50,
+            q: "La Agencia de la Unión Europea para la Cooperación Policial (EUROPOL) tiene su sede oficial en:",
             options: [
-                { text: "La Decisión comunitaria.", val: "correct" },
-                { text: "La Directiva europea.", val: "wrong" },
-                { text: "El Dictamen motivado.", val: "wrong" }
+                { text: "La Haya (Países Bajos).", val: "correct" },
+                { text: "Bruselas (Bélgica).", val: "wrong" },
+                { text: "Estrasburgo (Francia).", val: "wrong" }
             ],
-            exp: "La Decisión es obligatoria en todos sus elementos para sus destinatarios determinados (sean Estados concretos, empresas o particulares), a diferencia del Reglamento que tiene alcance general y abstracto[cite: 13]."
-        },
-        {
-            id: 30,
-            q: "Según los Principios Básicos de las Naciones Unidas (Resolución 1986/10) aplicables al personal de seguridad privada, el empleo de las armas de fuego debe limitarse a:",
-            options: [
-                { text: "Circunstancias extremas, en particular la defensa de la vida humana o defensa contra lesiones graves.", val: "correct" },
-                { text: "Cualquier delito contra el patrimonio que supere los 400 euros de perjuicio.", val: "wrong" },
-                { text: "Evitar la huida de cualquier sospechoso que desobedezca la orden de alto.", val: "wrong" }
-            ],
-            exp: "La resolución de la ONU establece que el empleo de armas de fuego se limitará a circunstancias extremas de defensa de la vida o prevención de lesiones graves, nunca para detener la mera huida sin peligro grave[cite: 9]."
+            exp: "Europol tiene su sede en La Haya (Países Bajos) y su función es el análisis de inteligencia y cooperación operativa[cite: 13]."
         }
     ];
 
     // =========================================================================
-    // GESTOR DE ROTACIÓN SIN REPETICIÓN (BARAJA DE PREGUNTAS PENDIENTES)
+    // LÓGICA DE ROTACIÓN DE 10 PREGUNTAS SIN REPETIR
     // =========================================================================
-    let preguntasPendientes = [];
-    let preguntasActuales = [];
+    let bolsaPendientes = [];
+    let examenActual = [];
 
-    function inicializarOPurgarBolsa() {
-        if (!preguntasPendientes || preguntasPendientes.length === 0) {
-            preguntasPendientes = [...bancoPreguntas];
-            // Barajar inicialmente la bolsa completa
-            preguntasPendientes.sort(() => 0.5 - Math.random());
+    function verificarBolsa() {
+        if (!bolsaPendientes || bolsaPendientes.length === 0) {
+            // Clonamos el banco de 50 preguntas
+            bolsaPendientes = [...bancoPreguntas];
+            // Mezclamos la baraja aleatoriamente
+            bolsaPendientes.sort(() => 0.5 - Math.random());
         }
     }
 
-    function extraerSinRepetir(cantidad) {
-        let seleccion = [];
-        
+    function extraerPreguntas(cantidad) {
+        let lote = [];
         for (let i = 0; i < cantidad; i++) {
-            if (preguntasPendientes.length === 0) {
-                // Si se agotan todas las preguntas del banco, se reinicia la bolsa
-                alert("¡Has visto todas las preguntas del banco! Se reinicia la bolsa completa para una nueva vuelta.");
-                preguntasPendientes = [...bancoPreguntas];
-                preguntasPendientes.sort(() => 0.5 - Math.random());
+            if (bolsaPendientes.length === 0) {
+                alert("¡Has completado las 50 preguntas del banco sin repetir! Se reinicia la bolsa completa.");
+                bolsaPendientes = [...bancoPreguntas];
+                bolsaPendientes.sort(() => 0.5 - Math.random());
             }
-            seleccion.push(preguntasPendientes.pop());
+            lote.push(bolsaPendientes.pop());
         }
-        return seleccion;
+        return lote;
     }
 
-    function actualizarContadorPendientes() {
+    function actualizarIndicador() {
         const el = document.getElementById('estado-banco');
         if (el) {
-            el.textContent = `Pendientes en el banco: ${preguntasPendientes.length} de ${bancoPreguntas.length}`;
+            el.textContent = `Pendientes en reserva: ${bolsaPendientes.length} de ${bancoPreguntas.length}`;
         }
     }
 
@@ -444,16 +647,13 @@
         resBox.style.display = "none";
         btnCorregir.disabled = false;
 
-        inicializarOPurgarBolsa();
-        actualizarContadorPendientes();
-        
-        // Extraer 10 preguntas NUNCA antes vistas en la ronda actual
-        preguntasActuales = extraerSinRepetir(10);
-        actualizarContadorPendientes();
+        verificarBolsa();
+        examenActual = extraerPreguntas(10);
+        actualizarIndicador();
 
-        document.getElementById('contador-preguntas').textContent = `Simulacro Activo: 10 Preguntas (Nuevas sin repetir)`;
+        document.getElementById('contador-preguntas').textContent = `Simulacro Activo: 10 Preguntas Seleccionadas`;
 
-        preguntasActuales.forEach((item, index) => {
+        examenActual.forEach((item, index) => {
             let numQ = index + 1;
             let opcionesMezcladas = [...item.options].sort(() => 0.5 - Math.random());
             
@@ -474,7 +674,7 @@
             cardHTML += `
                     </div>
                     <div class="status-badge" id="badge-${numQ}"></div>
-                    <div class="explanation" id="exp-${numQ}"><strong>Fundamentación Técnico-Jurídica:</strong> ${item.exp}</div>
+                    <div class="explanation" id="exp-${numQ}"><strong>Fundamentación Jurídica Oficial:</strong> ${item.exp}</div>
                 </div>
             `;
             container.innerHTML += cardHTML;
@@ -504,19 +704,19 @@
                     aciertos++;
                     selected.parentElement.classList.add('correct-answer');
                     badge.className = "status-badge correct";
-                    badge.innerHTML = "✓ Correcto";
+                    badge.innerHTML = "✓ Correcto (+1.0)";
                 } else {
                     fallos++;
                     selected.parentElement.classList.add('wrong-answer');
                     if (correctInput) correctInput.parentElement.classList.add('correct-answer');
                     badge.className = "status-badge wrong";
-                    badge.innerHTML = "✗ Error (-0.5)";
+                    badge.innerHTML = "✗ Incorrecto (-0.5)";
                 }
             } else {
                 blancos++;
                 if (correctInput) correctInput.parentElement.classList.add('correct-answer');
                 badge.className = "status-badge wrong";
-                badge.innerHTML = "⚠ No contestada (0.0)";
+                badge.innerHTML = "⚠ Sin responder (0.0)";
             }
             
             badge.style.display = "inline-block";
